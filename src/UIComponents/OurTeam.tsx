@@ -8,6 +8,7 @@ import Vishal_Verma from "../assets/TeamMemberPics/Vishal_Verma.png"
 import Manish_Dhubkarya from "../assets/TeamMemberPics/Manish_Dhubkarya.jpg"
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif"
 import Footer from "./Footer";
+import { OurTeamStyles as styles } from "../UIComponentCSS/OurTeamCss";
 interface TeamMember {
     name: string;
     designation: string;
@@ -26,21 +27,21 @@ const OurTeam = () => {
 
     ]
     return (
-        <div className="flex flex-col mb-10 items-center gap-y-20 inter-custom justify-center">
+        <div className={styles.container}>
             <NavigationComponent />
             {/* Header */}
-            <div className="w-full mt-35 flex justify-evenly p-6">
-                <div className="flex w-full flex-col items-start">
-                    <div className="w-full justify-evenly items-center flex">
-                        <div className="w-[342px] h-[342px] bg-white rounded-full mb-7"> </div>
-                        <div className="">
-                            <div className="text-[40px] space-x-3 font-bold flex">
-                                <span className="capitalize">turning</span>
-                                <span className="text-[#8AFF84] uppercase">visions</span>
-                                <span className="lowercase">INTO</span>
-                                <span className="text-[#1B7BFF]">REALITY</span>
+            <div className={styles.main}>
+                <div className={styles.header}>
+                    <div className={styles.header2}>
+                        <div className={styles.companyHeadBack}> </div>
+                        <div>
+                            <div className={styles.mainText}>
+                                <span className={styles.turningText}>turning</span>
+                                <span className={styles.visionsText}>visions</span>
+                                <span className={styles.infoText}>INTO</span>
+                                <span className={styles.realityText}>REALITY</span>
                             </div>
-                            <div className="mt-10 text-[18px] font-medium leading-snug">
+                            <div className={styles.aboutPara}>
                                 We are present in the industry since 2021 and have<br />
                                 delivered our clients with top notch quality work and<br />
                                 services.
@@ -49,54 +50,54 @@ const OurTeam = () => {
                         </div>
 
                     </div>
-                    <div className="text-[32px] leading-snug ml-40 roboto-regular">
-                        <div className="font-normal">Himanshu Verma</div>
-                        <div className="font-medium capitalize">Chief Executive Officer</div>
+                    <div className={styles.headMain}>
+                        <div className={styles.headName}>Himanshu Verma</div>
+                        <div className={styles.headDesignation}>Chief Executive Officer</div>
                     </div>
                 </div>
 
 
             </div>
             {/* Team Members */}
-            <div className="grid w-[77%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-12 justify-items-center">
+            <div className={styles.teamMemberContainer}>
                 {TeamData.map((team, index) => (
-                    <div key={index} className="w-auto flex flex-col items-center">
+                    <div key={index} className={styles.teamMemberMain}>
                         {!team.pic ? (
-                            <div className="w-[216px] h-[265px] bg-white rounded-[5px]" />
+                            <div className={styles.notTeamPic} />
                         ) : (
                             <img
-                                className="w-[216px] h-[265px] rounded-[5px] object-cover"
+                                className={styles.teamPic}
                                 src={team.pic}
                                 alt={team.name}
                             />
                         )}
-                        <div className="text-center leading-tight mt-6 text-[20px]">
-                            <div className="font-normal">{team.name}</div>
-                            <div className="font-medium w-full">{team.designation}</div>
+                        <div className={styles.teamMemberDetails}>
+                            <div className={styles.teamMemberName}>{team.name}</div>
+                            <div className={styles.teamMemberDesignation}>{team.designation}</div>
                         </div>
                     </div>
                 ))}
             </div>
             {/* Bottom Banner */}
-            <div className="w-full justify-center flex flex-col items-center">
+            <div className={styles.bottomBannerContainer}>
                 <div
                     style={{ backgroundImage: `url(${TeamBanner})` }}
-                    className="bg-cover roboto-regular flex-col bg-center w-full flex gap-y-0 items-center justify-center h-[60vh] min-h-[350px] max-h-[456px] "
+                    className={styles.bannerBackMain}
                 >
-                    <div className="text-white mb-7 text-center px-4 text-2xl sm:text-3xl md:text-[64px] font-extrabold leading-tight dm-sans-regular">
+                    <div className={styles.beAPartText}>
                         Be a part of the team !
                     </div>
-                    <div className="text-[20px] mb-7">
+                    <div className={styles.exploreNewPossibilities}>
                         Explore new possibilities with us everyday. Create your mark on future with us.
                     </div>
-                    <div className="bg-gradient-to-r text-black px-14 py-2 rounded-xl cursor-pointer text-lg sm:text-[20px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold">
+                    <div className={styles.joinUsText}>
                         Join Us
                     </div>
                 </div>
                 {/* Footer */}
-                <div className="w-full flex border-t-3 border-[#8AFF84] mt-0 flex-col items-center md:items-center">
+                <div className={styles.border}>
                 </div>
-                <div className=" w-[83%] flex flex-col">
+                <div className={styles.footer}>
                     <Footer />
                 </div>
             </div>

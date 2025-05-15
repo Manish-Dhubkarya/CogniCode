@@ -1,3 +1,4 @@
+import { ScrollingFooterStyles as styles } from "../UIComponentCSS/ScrollingFooterCss";
 function ScrollingFooter() {
     const marqueeStyle = {
       whiteSpace: "nowrap",
@@ -22,7 +23,7 @@ function ScrollingFooter() {
           {repeatedText.map((text, index) => (
             <div
             key={index}
-            className="inline-block mr-35 md:text-[96px] sm:text-[80px] text-[70px] font-bold text-transparent bg-clip-text"
+            className={styles.container}
             style={{
               backgroundImage: "linear-gradient(180deg, #8AFF84 0%, #C0F9BD 50.5%, #1B7BFF 100%)",
               WebkitBackgroundClip: "text", // important!
