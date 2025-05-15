@@ -1,0 +1,61 @@
+#root {
+  max-width: 1280px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: white;
+}
+.bg-custom-gradient {
+  background: linear-gradient(
+    to bottom,
+    #000000 -20%,
+    #063872 50%,
+    #000000 120%
+  );
+}
+.bg-custom-gradient-navigation {
+  background: linear-gradient(
+    to bottom,
+    #000000 0%,   /* Start with black at the top */
+    #000f1f 60%,  /* Black continues till 50% */
+    #011a39 120%  /* Blue gradually blends in from 50% to 100% */
+  );
+}
+
+
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
