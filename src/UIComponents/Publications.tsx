@@ -69,14 +69,14 @@ const Publications: React.FC = () => {
   const [isXS, setIsXS] = useState(false); // ≤480px
   const [isSM, setIsSM] = useState(false); // ≤768px
   const [isMD, setIsMD] = useState(false); // ≤1024px
-  const [isLG, setIsLG] = useState(false); // ≤1440px
+  // const [isLG, setIsLG] = useState(false); // ≤1440px
 
   useEffect(() => {
     const updateScreenSize = () => {
       setIsXS(window.innerWidth <= 480);
       setIsSM(window.innerWidth <= 768);
       setIsMD(window.innerWidth <= 1024);
-      setIsLG(window.innerWidth <= 1440);
+      // setIsLG(window.innerWidth <= 1440);
     };
 
     updateScreenSize();
@@ -210,14 +210,14 @@ const Publications: React.FC = () => {
     setSelectedRows(newSelectedRows);
   };
 
-  const handleSelectAll = () => {
-    if (selectedRows.size === paginatedData.length) {
-      setSelectedRows(new Set());
-    } else {
-      const newSelectedRows = new Set(paginatedData.map((row) => row.id));
-      setSelectedRows(newSelectedRows);
-    }
-  };
+  // const handleSelectAll = () => {
+  //   if (selectedRows.size === paginatedData.length) {
+  //     setSelectedRows(new Set());
+  //   } else {
+  //     const newSelectedRows = new Set(paginatedData.map((row) => row.id));
+  //     setSelectedRows(newSelectedRows);
+  //   }
+  // };
 
   return (
     <div className={styles.container}>
