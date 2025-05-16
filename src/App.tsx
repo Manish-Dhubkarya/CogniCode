@@ -33,7 +33,7 @@ function App() {
           "SCI Article Writing Service"
         ]
   return (
-    <Router basename='/cognicode'>
+    <Router basename="/CogniCode_Website">
       <div className="min-h-screen overflow-hidden select-none relative w-screen overflow-x-hidden bg-custom-gradient">
         <div className='z-5 absolute translate-x-1/2 overflow-x-hidden saira-stencil-one-regular  text-[#9fafc0] right-0 uppercase md:text-[200px] opacity-20 text-[60px] tracking-[2.5rem]  md:tracking-[4.5rem] md:top-270 top-180 overflow-hidden rotate-270'>
         cognicode
