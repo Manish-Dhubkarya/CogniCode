@@ -1,5 +1,13 @@
-<!-- public/404.html -->
-<script>
-  const redirectTo = location.pathname.replace('/CogniCode_Website', '');
-  location.replace('/CogniCode_Website' + '/index.html?redirect=' + redirectTo);
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting...</title>
+  <script>
+    // Redirect to index.html and preserve the path after basename
+    var path = location.pathname.replace(/^\/CogniCode_Website/, '');
+    location.replace('/CogniCode_Website/index.html' + path + location.search + location.hash);
+  </script>
+</head>
+<body></body>
+</html>
