@@ -2,8 +2,9 @@
   "name": "package.json",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "homepage": "https://manish-dhubkarya.github.io/CogniCode_Website",
+  "type": "module",
+  
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
