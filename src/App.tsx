@@ -8,6 +8,7 @@ import Conferences from './UIComponents/Conferences';
 import AboutUs from './UIComponents/AboutUs';
 import OurServices from './UIComponents/OurServices';
 import Home from './UIComponents/Home';
+import ChatSupportMainScreen from './Models/ChatSupportModel/ChatSupportMainScreen';
 function App() {
   const ThesisWritingServices = [
     "Data Mining Thesis Writing Service",
@@ -51,6 +52,9 @@ function App() {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/services" element={<OurServices />} />
         </Routes>
+                <div onClick={(e)=>e.stopPropagation()} className="mb-7 z-[1000] right-5 -top-5 fixed">
+        <ChatSupportMainScreen/>
+        </div>
       </div>
     </Router>
   )
