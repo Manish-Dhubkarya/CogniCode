@@ -7,7 +7,6 @@ export const contactUsStyles = {
     "bg-gradient-to-r text-black roboto-regular px-14 py-2 rounded-xl cursor-pointer text-lg sm:text-[20px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold",
   bannerText:
     "text-white text-center px-4 text-2xl sm:text-3xl md:text-[36px] font-extrabold leading-tight dm-sans-regular",
-
   connectWrapper: "flex dm-sans-regular items-center justify-center w-full md:mt-20 mt-10 px-4",
   connectInner: "w-full md:max-w-[70%] max-w-[90%] flex flex-col gap-y-10 items-center",
   connectHeading: "font-extrabold text-2xl mb-10 sm:text-3xl md:text-[32px] text-center tracking-tight",
