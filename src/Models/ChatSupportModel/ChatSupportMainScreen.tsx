@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
-import { BiSupport } from "react-icons/bi";
 import { ImCross } from "react-icons/im";
 import ChatSupport from "./ChatSupport";
 
