@@ -39,7 +39,7 @@ function App() {
         <div className='z-5 absolute translate-x-1/2 overflow-x-hidden saira-stencil-one-regular  text-[#9fafc0] right-0 uppercase md:text-[200px] opacity-20 text-[60px] tracking-[2.5rem]  md:tracking-[4.5rem] md:top-270 top-180 overflow-hidden rotate-270'>
           cognicode
         </div>
-        <div className='px-6 py-1 bg-[#131313] cursor-pointer roboto-regular2 font-normal md:text-[20px] text-[15px] rounded-t-[10px] fixed right-4 md:top-100 top-50 translate-x-1/2 z-50 rotate-270'>Contact Us</div>
+        {/* <div className='px-6 py-1 bg-[#131313] cursor-pointer roboto-regular2 font-normal md:text-[20px] text-[15px] rounded-t-[10px] fixed right-4 md:top-100 top-50 translate-x-1/2 z-50 rotate-270'>Contact Us</div> */}
         <Routes>
           <Route path="/landing" element={<Home />} />
           <Route path="/contactus" element={<ContactUs />} />
@@ -52,9 +52,9 @@ function App() {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/services" element={<OurServices />} />
         </Routes>
-                <div onClick={(e)=>e.stopPropagation()} className="mb-7 z-[1000] right-5 -top-5 fixed">
+                {/* <div onClick={(e)=>e.stopPropagation()} className="mb-7 z-[1000] right-5 -top-5 fixed">
         <ChatSupportMainScreen/>
-        </div>
+        </div> */}
       </div>
     </Router>
   )
