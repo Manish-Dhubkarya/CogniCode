@@ -232,7 +232,6 @@ const Publications: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
-  const [pendingFilters, setPendingFilters] = useState<Filters>(filters);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
   // Handle window resize
@@ -280,7 +279,6 @@ const Publications: React.FC = () => {
     }
 
     // Apply other filters
-    // Note: openAccess and timeframe are placeholders; implement if needed
     if (!filtersToApply.noMinimum) {
       if (filtersToApply.minCitations) {
         const minCitations = parseInt(filtersToApply.minCitations);
@@ -311,51 +309,12 @@ const Publications: React.FC = () => {
     setFilters(filtersToApply);
     setCurrentPage(1);
     setSelectedRows(new Set());
-    // if (!(is2XL || is3XL)) setIsFilterOpen(false);
   };
 
-  // Update table data on search or filter change
+  // Update table data on search change
   useEffect(() => {
-    applyFilters(pendingFilters, searchQuery);
-  }, [searchQuery, pendingFilters]);
-
-  const clearFilters = () => {
-    const resetFilters: Filters = {
-      openAccess: false,
-      timeframe: false,
-      minCitations: "",
-      minDocuments: "",
-      highestPercentile: false,
-      noMinimum: false,
-      quartile1: false,
-      quartile2: false,
-      quartile3: false,
-      quartile4: false,
-    };
-    setPendingFilters(resetFilters);
-    setSearchQuery("");
-    applyFilters(resetFilters, "");
-  };
-
-  const handleFilterChange = (filterName: keyof Filters, value: any) => {
-    setPendingFilters((prev) => {
-      const newFilters = { ...prev, [filterName]: value };
-      if (filterName === "noMinimum" && value) {
-        newFilters.minCitations = "";
-        newFilters.minDocuments = "";
-      }
-      if (filterName === "highestPercentile" && value) {
-        newFilters.quartile1 = false;
-        newFilters.quartile2 = false;
-        newFilters.quartile3 = false;
-        newFilters.quartile4 = false;
-      }
-      if (["quartile1", "quartile2", "quartile3", "quartile4"].includes(filterName) && value) {
-        newFilters.highestPercentile = false;
-      }
-      return newFilters;
-    });
-  };
+    applyFilters(filters, searchQuery);
+  }, [searchQuery, filters]);
 
   // Pagination
   const paginatedData = tableData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -390,157 +349,243 @@ const Publications: React.FC = () => {
   };
 
   // Filter Panel Content
-  const FilterPanelContent = () => (
-    <>
-      <div className={`flex font-semibold justify-between flex-col text-black items-start ${isXL || is2XL || is3XL ? "" : "mt-5"} mb-4 px-4`}>
-        <div className={`flex items-center justify-between w-full tracking-tight ${isXXS || isXS || isSM ? "text-[10px]" : isSM || isMD ? "text-[12px]" : isLG || isXL ? "text-[12px]" : "text-[16px]"}`}>
-          Filter refine list
-          {isXXS || isXS || isSM || isMD || isLG ? (
-            <IoMdCloseCircle size={20} color="#ff5e36" onClick={() => setIsFilterOpen(false)} />
-          ) : null}
-        </div>
-        <div className={`space-x-4 ${isXXS || isXS || isSM ? "text-[10px]" : isSM || isMD ? "text-[12px]" : isLG || isXL ? "text-[12px]" : "text-[16px]"} items-center mt-2 flex`}>
-          <div
-            className={`${isXXS || isXS || isSM ? "px-2 py-1 rounded-[5px]" : "px-5 py-2 rounded-[10px]"} cursor-pointer hover:border-[1px] hover:border-[#8AFF84] border-[1px] border-purple-500 hover:text-blue-500`}
-            onClick={() => applyFilters(pendingFilters)}
-          >
-            Apply
+  const FilterPanelContent = ({ applyFilters }: { applyFilters: (filters: Filters, search?: string) => void }) => {
+    const [pendingFilters, setPendingFilters] = useState<Filters>(filters);
+
+    // Sync pendingFilters with parent filters
+    useEffect(() => {
+      setPendingFilters(filters);
+    }, [filters]);
+
+    const clearFilters = () => {
+      const resetFilters: Filters = {
+        openAccess: false,
+        timeframe: false,
+        minCitations: "",
+        minDocuments: "",
+        highestPercentile: false,
+        noMinimum: false,
+        quartile1: false,
+        quartile2: false,
+        quartile3: false,
+        quartile4: false,
+      };
+      setPendingFilters(resetFilters);
+      setSearchQuery("");
+      applyFilters(resetFilters, "");
+    };
+
+    const handleFilterChange = (filterName: keyof Filters, value: any) => {
+      setPendingFilters((prev) => {
+        const newFilters = { ...prev, [filterName]: value };
+        let shouldAutoApply = false;
+
+        // Handle checkbox unchecking
+        if (typeof value === "boolean" && !value) {
+          shouldAutoApply = true;
+        }
+
+        // Handle input clearing
+        if (filterName === "minCitations" || filterName === "minDocuments") {
+          if (value === "") {
+            shouldAutoApply = true;
+          }
+        }
+
+        // Handle noMinimum and clear inputs
+        if (filterName === "noMinimum" && value) {
+          newFilters.minCitations = "";
+          newFilters.minDocuments = "";
+          shouldAutoApply = true; // Auto-apply when checking noMinimum
+        }
+
+        // Handle highestPercentile and clear quartiles
+        if (filterName === "highestPercentile" && value) {
+          newFilters.quartile1 = false;
+          newFilters.quartile2 = false;
+          newFilters.quartile3 = false;
+          newFilters.quartile4 = false;
+        }
+
+        // Handle quartiles and clear highestPercentile
+        if (["quartile1", "quartile2", "quartile3", "quartile4"].includes(filterName) && value) {
+          newFilters.highestPercentile = false;
+        }
+
+        // Apply filters automatically for unchecking or clearing
+        if (shouldAutoApply) {
+          applyFilters(newFilters);
+        }
+
+        return newFilters;
+      });
+    };
+
+    return (
+      <>
+        <div className={`flex font-semibold justify-between flex-col text-black items-start ${isXL || is2XL || is3XL ? "" : "mt-5"} mb-4 px-4`}>
+          <div className={`flex items-center justify-between w-full tracking-tight ${isXXS || isXS || isSM ? "text-[10px]" : isSM || isMD ? "text-[12px]" : isLG || isXL ? "text-[12px]" : "text-[16px]"}`}>
+            Filter refine list
+            {isXXS || isXS || isSM || isMD || isLG ? (
+              <IoMdCloseCircle size={20} color="#ff5e36" onClick={() => setIsFilterOpen(false)} />
+            ) : null}
           </div>
-          <span>/</span>
-          <div
-            className={`${isXXS || isXS || isSM ? "px-2 py-1 rounded-[5px]" : "px-5 rounded-[10px] py-2"} cursor-pointer hover:border-[1px] hover:border-[#8AFF84] border-[1px] border-purple-500 hover:text-blue-500`}
-            onClick={clearFilters}
-          >
-            Clear filters
+          <div className={`space-x-4 ${isXXS || isXS || isSM ? "text-[10px]" : isSM || isMD ? "text-[12px]" : isLG || isXL ? "text-[12px]" : "text-[16px]"} items-center mt-2 flex`}>
+            <div
+              className={`${isXXS || isXS || isSM ? "px-2 py-1 rounded-[5px]" : "px-5 py-2 rounded-[10px]"} cursor-pointer hover:border-[1px] hover:border-[#8AFF84] border-[1px] border-purple-500 hover:text-blue-500`}
+              onClick={() => applyFilters(pendingFilters)}
+            >
+              Apply
+            </div>
+            <span>/</span>
+            <div
+              className={`${isXXS || isXS || isSM ? "px-2 py-1 rounded-[5px]" : "px-5 rounded-[10px] py-2"} cursor-pointer hover:border-[1px] hover:border-[#8AFF84] border-[1px] border-purple-500 hover:text-blue-500`}
+              onClick={clearFilters}
+            >
+              Clear filters
+            </div>
           </div>
         </div>
-      </div>
-      <div className={`${isXXS || isXS || isSM ? "space-y-3" : isMD || isLG ? "space-y-4" : "space-y-7"} bg-custom-gradient p-5 rounded-[10px]`}>
-        <div>
-          <label className="flex items-start text-start space-x-6">
-            <input
-              type="checkbox"
-              checked={pendingFilters.openAccess}
-              onChange={() => handleFilterChange("openAccess", !pendingFilters.openAccess)}
-              className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
-            />
-            <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Display only Open Access journals</span>
-          </label>
-        </div>
-        <div>
-          <label className="flex items-start text-start space-x-6">
-            <input
-              type="checkbox"
-              checked={pendingFilters.timeframe}
-              onChange={() => handleFilterChange("timeframe", !pendingFilters.timeframe)}
-              className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
-            />
-            <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Counts for 4-year timeframe</span>
-          </label>
-        </div>
-        <div>
-          <label className="flex items-start text-start space-x-6">
-            <input
-              type="checkbox"
-              checked={pendingFilters.noMinimum}
-              onChange={() => handleFilterChange("noMinimum", !pendingFilters.noMinimum)}
-              className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
-            />
-            <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>No minimum selected</span>
-          </label>
-        </div>
-        {!pendingFilters.noMinimum && (
-          <>
-            <div>
-              <label className="flex items-start text-start space-x-6">
-                <input
-                  type="checkbox"
-                  checked={pendingFilters.minCitations !== ""}
-                  onChange={() => handleFilterChange("minCitations", pendingFilters.minCitations ? "" : "0")}
-                  className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
-                />
-                <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Enter number for minimum citations</span>
-              </label>
-              {pendingFilters.minCitations !== "" && (
-                <input
-                  type="number"
-                  value={pendingFilters.minCitations}
-                  onChange={(e) => {e.stopPropagation(), handleFilterChange("minCitations", e.target.value)}}
-                  className={`mt-1 w-full p-1 text-black rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}
-                />
-              )}
-            </div>
-            <div>
-              <label className="flex items-start text-start space-x-6">
-                <input
-                  type="checkbox"
-                  checked={pendingFilters.minDocuments !== ""}
-                  onChange={() => handleFilterChange("minDocuments", pendingFilters.minDocuments ? "" : "0")}
-                  className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
-                />
-                <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Enter number for minimum documents</span>
-              </label>
-              {pendingFilters.minDocuments !== "" && (
-                <input
-                  type="number"
-                  value={pendingFilters.minDocuments}
-                  onChange={(e) => {e.stopPropagation(), handleFilterChange("minDocuments", e.target.value)}}
-                  className={`mt-1 w-full p-1 text-black rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}
-                />
-              )}
-            </div>
-          </>
-        )}
-        <div>
-          <label className="flex items-start text-start space-x-6">
-            <span className={`${isXXS || isXS ? "text-[12px]" : isSM ? "text-[13px]" : "text-[15px]"} font-semibold`}>Show titles in top 10 percent</span>
-          </label>
-          <label className="flex items-start text-start space-x-6 mt-2">
-                     </label>
-          {!pendingFilters.highestPercentile && (
-            <div className={`mt-4 ${isXXS || isXS || isSM ? "space-y-3" : isMD || isLG ? "space-y-4" : "space-y-7"}`}>
-              <label className="flex items-start text-start space-x-6">
-                <input
-                  type="checkbox"
-                  checked={pendingFilters.quartile1}
-                  onChange={() => handleFilterChange("quartile1", !pendingFilters.quartile1)}
-                  className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
-                />
-                <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>1st quartile</span>
-              </label>
-              <label className="flex items-start text-start space-x-6">
-                <input
-                  type="checkbox"
-                  checked={pendingFilters.quartile2}
-                  onChange={() => handleFilterChange("quartile2", !pendingFilters.quartile2)}
-                  className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
-                />
-                <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>2nd quartile</span>
-              </label>
-              <label className="flex items-start text-start space-x-6">
-                <input
-                  type="checkbox"
-                  checked={pendingFilters.quartile3}
-                  onChange={() => handleFilterChange("quartile3", !pendingFilters.quartile3)}
-                  className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
-                />
-                <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>3rd quartile</span>
-              </label>
-              <label className="flex items-start text-start space-x-6">
-                <input
-                  type="checkbox"
-                  checked={pendingFilters.quartile4}
-                  onChange={() => handleFilterChange("quartile4", !pendingFilters.quartile4)}
-                  className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
-                />
-                <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>4th quartile</span>
-              </label>
-            </div>
+        <div className={`${isXXS || isXS || isSM ? "space-y-3" : isMD || isLG ? "space-y-4" : "space-y-7"} bg-custom-gradient p-5 rounded-[10px]`}>
+          <div>
+            <label className="flex items-start text-start space-x-6">
+              <input
+                type="checkbox"
+                checked={pendingFilters.openAccess}
+                onChange={() => handleFilterChange("openAccess", !pendingFilters.openAccess)}
+                className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
+              />
+              <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Display only Open Access journals</span>
+            </label>
+          </div>
+          <div>
+            <label className="flex items-start text-start space-x-6">
+              <input
+                type="checkbox"
+                checked={pendingFilters.timeframe}
+                onChange={() => handleFilterChange("timeframe", !pendingFilters.timeframe)}
+                className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
+              />
+              <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Counts for 4-year timeframe</span>
+            </label>
+          </div>
+          <div>
+            <label className="flex items-start text-start space-x-6">
+              <input
+                type="checkbox"
+                checked={pendingFilters.noMinimum}
+                onChange={() => handleFilterChange("noMinimum", !pendingFilters.noMinimum)}
+                className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
+              />
+              <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>No minimum selected</span>
+            </label>
+          </div>
+          {!pendingFilters.noMinimum && (
+            <>
+              <div>
+                <label className="flex items-start text-start space-x-6">
+                  <input
+                    type="checkbox"
+                    checked={pendingFilters.minCitations !== ""}
+                    onChange={() => handleFilterChange("minCitations", pendingFilters.minCitations ? "" : "0")}
+                    className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
+                  />
+                  <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Enter number for minimum citations</span>
+                </label>
+                {pendingFilters.minCitations !== "" && (
+                  <input
+                    type="number"
+                    value={pendingFilters.minCitations}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      handleFilterChange("minCitations", e.target.value);
+                    }}
+                    className={`mt-1 w-full p-1 text-black rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}
+                  />
+                )}
+              </div>
+              <div>
+                <label className="flex items-start text-start space-x-6">
+                  <input
+                    type="checkbox"
+                    checked={pendingFilters.minDocuments !== ""}
+                    onChange={() => handleFilterChange("minDocuments", pendingFilters.minDocuments ? "" : "0")}
+                    className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
+                  />
+                  <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Enter number for minimum documents</span>
+                </label>
+                {pendingFilters.minDocuments !== "" && (
+                  <input
+                    type="number"
+                    value={pendingFilters.minDocuments}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      handleFilterChange("minDocuments", e.target.value);
+                    }}
+                    className={`mt-1 w-full p-1 text-black rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}
+                  />
+                )}
+              </div>
+            </>
           )}
+          <div>
+            <label className="flex items-start text-start space-x-6">
+              <span className={`${isXXS || isXS ? "text-[12px]" : isSM ? "text-[13px]" : "text-[15px]"} font-semibold`}>Show titles in top 10 percent</span>
+            </label>
+            <label className="flex items-start text-start space-x-6 mt-2">
+              <input
+                type="checkbox"
+                checked={pendingFilters.highestPercentile}
+                onChange={() => handleFilterChange("highestPercentile", !pendingFilters.highestPercentile)}
+                className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
+              />
+              <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Top 10%</span>
+            </label>
+            {!pendingFilters.highestPercentile && (
+              <div className={`mt-4 ${isXXS || isXS || isSM ? "space-y-3" : isMD || isLG ? "space-y-4" : "space-y-7"}`}>
+                <label className="flex items-start text-start space-x-6">
+                  <input
+                    type="checkbox"
+                    checked={pendingFilters.quartile1}
+                    onChange={() => handleFilterChange("quartile1", !pendingFilters.quartile1)}
+                    className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
+                  />
+                  <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>1st quartile</span>
+                </label>
+                <label className="flex items-start text-start space-x-6">
+                  <input
+                    type="checkbox"
+                    checked={pendingFilters.quartile2}
+                    onChange={() => handleFilterChange("quartile2", !pendingFilters.quartile2)}
+                    className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
+                  />
+                  <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>2nd quartile</span>
+                </label>
+                <label className="flex items-start text-start space-x-6">
+                  <input
+                    type="checkbox"
+                    checked={pendingFilters.quartile3}
+                    onChange={() => handleFilterChange("quartile3", !pendingFilters.quartile3)}
+                    className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
+                  />
+                  <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>3rd quartile</span>
+                </label>
+                <label className="flex items-start text-start space-x-6">
+                  <input
+                    type="checkbox"
+                    checked={pendingFilters.quartile4}
+                    onChange={() => handleFilterChange("quartile4", !pendingFilters.quartile4)}
+                    className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
+                  />
+                  <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>4th quartile</span>
+                </label>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  };
 
   // Calculate minimum table width
   const getTableMinWidth = () => {
@@ -557,7 +602,7 @@ const Publications: React.FC = () => {
         <div className={`relative flex ${isXXS || isXS || isSM || isMD || isLG ? "flex-col" : "flex-row"} gap-6 w-full`}>
           {(isXL || is2XL || is3XL) && (
             <div className="z-10 flex-shrink-0 flex-col h-fit pt-5 w-[300px] text-[12px]">
-              <FilterPanelContent />
+              <FilterPanelContent applyFilters={applyFilters} />
             </div>
           )}
           {(isXXS || isXS || isSM || isMD || isLG) && (
@@ -584,7 +629,7 @@ const Publications: React.FC = () => {
               <div
                 className={`flex-shrink-0 flex-col h-fit px-4 py-5 bg-white shadow-lg absolute -top-10 -left-5 rounded-[5px] transform transition-transform duration-300 ease-in-out ${isFilterOpen ? "translate-x-0" : "-translate-x-full"} ${isXXS ? "w-[240px]" : isXS ? "w-[240px]" : isSM ? "w-[290px]" : isMD ? "w-[320px]" : "w-[320px]"}`}
               >
-                <FilterPanelContent />
+                <FilterPanelContent applyFilters={applyFilters} />
               </div>
             </>
           )}
@@ -719,17 +764,17 @@ const Publications: React.FC = () => {
           className={`bg-cover roboto-regular bg-center w-full flex flex-col gap-y-0 items-center justify-center ${isXXS || isXS || isSM ? "h-[28vh]" : isMD || isLG ? "h-[35vh]" : isXL ? "h-[50vh]" : "h-[60vh]"}`}
         >
           <div
-            className={`text-white ${isXXS || isSM || isXS ? "mb-2 text-[20px]" : isMD ? "mb-4 text-[30px]" : isLG ? "mb-5 text-[40px]" : "mb-7 text-[64px]"} text-center px-4 font-extrabold leading-tight dm-sans-regular`}
+            className={`text-white ${isXXS || isXS || isSM ? "mb-2 text-[20px]" : isMD ? "mb-4 text-[30px]" : isLG ? "mb-5 text-[40px]" : "mb-7 text-[64px]"} text-center px-4 font-extrabold leading-tight dm-sans-regular`}
           >
-            Want to create FUTURE ?
+            Want to create FUTURE?
           </div>
           <div
-            className={`text-center px-2 ${isXXS || isSM || isXS ? "mb-2" : isMD ? "mb-4" : isLG ? "mb-5" : "mb-7"} ${isXXS ? "text-[12px]" : isXS ? "text-[14px]" : isSM ? "text-[12px]" : isMD ? "text-[14px]" : isLG ? "text-[17px]" : isXL ? "text-[19px]" : "text-[20px]"}`}
+            className={`text-center px-2 ${isXXS || isXS || isSM ? "mb-2" : isMD ? "mb-4" : isLG ? "mb-5" : "mb-7"} ${isXXS ? "text-[12px]" : isXS ? "text-[14px]" : isSM ? "text-[12px]" : isMD ? "text-[14px]" : isLG ? "text-[17px]" : isXL ? "text-[19px]" : "text-[20px]"}`}
           >
             Explore new possibilities with us everyday. Create your mark on future with us.
           </div>
           <div
-            className={`bg-gradient-to-r text-black ${isXXS || isXS ? "px-4 py-0.5 text-[10px]" : isSM ? "px-6 py-1 text-[12px]" : isMD ? "px-8 py-1 text-[14px]" : isLG ? "px-10 py-1.5 text-[16px]" : "px-14 py-2 text-lg sm:text-[20px]"} rounded-xl cursor-pointer mt-3 shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+            className={`bg-gradient-to-r text-black ${isXXS || isXS ? "px-4 py-0.5 text-[10px]" : isSM ? "px-6 py-1 text-[14px]" : isMD ? "px-8 py-1 text-[14px]" : isLG ? "px-10 py-1.5 text-[16px]" : "px-14 py-2 text-lg sm:text-[20px]"} rounded-xl cursor-pointer mt-3 shadow-[0px_4px_16px_rgba(138,255,132,0.2),0px_4px_16px_rgba(44,107,193,0.2)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
           >
             Join Us
           </div>
