@@ -30,11 +30,10 @@ interface Filters {
   quartile4: boolean;
 }
 
-// Define table data separately
 const TABLE_DATA: Publication[] = [
   {
     id: 1,
-    sourceTitle: "Journal ",
+    sourceTitle: "Journal of Advanced Medicine",
     citeScore: 12.5,
     percentile: 95,
     citations: 780432,
@@ -170,7 +169,7 @@ const TABLE_DATA: Publication[] = [
   {
     id: 16,
     sourceTitle: "Pharmacology Reviews",
-    citeScore: 7.5,
+    citeScore: 7.2,
     percentile: 82,
     citations: 410321,
     documents: 90,
@@ -215,7 +214,7 @@ const TABLE_DATA: Publication[] = [
 ];
 
 const Publications: React.FC = () => {
-  const [filters, setFilters] = React.useState<Filters>({
+  const [filters, setFilters] = useState<Filters>({
     openAccess: false,
     timeframe: false,
     minCitations: "",
@@ -228,6 +227,15 @@ const Publications: React.FC = () => {
     quartile4: false,
   });
   const [width, setWidth] = useState(window.innerWidth);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [tableData, setTableData] = useState<Publication[]>(TABLE_DATA);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+  const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
+  const [pendingFilters, setPendingFilters] = useState<Filters>(filters);
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+
+  // Handle window resize
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -258,60 +266,58 @@ const Publications: React.FC = () => {
     { key: "citedPercentage", label: "Cited", width: `${isXXS || isXS || isSM ? "min-w-[60px] w-[60px]" : isMD || isLG ? "min-w-[80px] w-[80px]" : "min-w-[100px] w-[100px]"}` },
   ];
 
-  const [searchQuery, setSearchQuery] = React.useState<string>("");
-  const [tableData, setTableData] = React.useState<Publication[]>(TABLE_DATA);
-  const [currentPage, setCurrentPage] = React.useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = React.useState<number>(10);
-  const [selectedRows, setSelectedRows] = React.useState<Set<number>>(new Set());
-  const [pendingFilters, setPendingFilters] = React.useState<Filters>(filters);
-  const [isFilterOpen, setIsFilterOpen] = React.useState<boolean>(false);
-
-  const applyFilters = () => {
+  // Apply filters
+  const applyFilters = (filtersToApply: Filters, search: string = searchQuery) => {
     let filteredData = [...TABLE_DATA];
 
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
+    // Apply search filter
+    if (search) {
       filteredData = filteredData.filter((row) =>
-        Object.values(row).some((value) => String(value).toLowerCase().includes(query))
+        Object.values(row).some((value) =>
+          String(value).toLowerCase().includes(search.toLowerCase())
+        )
       );
     }
 
-    if (pendingFilters.minCitations !== "" && !pendingFilters.noMinimum) {
-      const minCitations = parseInt(pendingFilters.minCitations) || 0;
-      filteredData = filteredData.filter((row) => row.citations >= minCitations);
+    // Apply other filters
+    // Note: openAccess and timeframe are placeholders; implement if needed
+    if (!filtersToApply.noMinimum) {
+      if (filtersToApply.minCitations) {
+        const minCitations = parseInt(filtersToApply.minCitations);
+        if (!isNaN(minCitations) && minCitations >= 0) {
+          filteredData = filteredData.filter((row) => row.citations >= minCitations);
+        }
+      }
+      if (filtersToApply.minDocuments) {
+        const minDocuments = parseInt(filtersToApply.minDocuments);
+        if (!isNaN(minDocuments) && minDocuments >= 0) {
+          filteredData = filteredData.filter((row) => row.documents >= minDocuments);
+        }
+      }
     }
 
-    if (pendingFilters.minDocuments !== "" && !pendingFilters.noMinimum) {
-      const minDocuments = parseInt(pendingFilters.minDocuments) || 0;
-      filteredData = filteredData.filter((row) => row.documents >= minDocuments);
-    }
-
-    if (pendingFilters.highestPercentile) {
+    if (filtersToApply.highestPercentile) {
       filteredData = filteredData.filter((row) => row.percentile >= 90);
-    } else if (
-      pendingFilters.quartile1 ||
-      pendingFilters.quartile2 ||
-      pendingFilters.quartile3 ||
-      pendingFilters.quartile4
-    ) {
+    } else if (filtersToApply.quartile1 || filtersToApply.quartile2 || filtersToApply.quartile3 || filtersToApply.quartile4) {
       const selectedQuartiles: number[] = [];
-      if (pendingFilters.quartile1) selectedQuartiles.push(1);
-      if (pendingFilters.quartile2) selectedQuartiles.push(2);
-      if (pendingFilters.quartile3) selectedQuartiles.push(3);
-      if (pendingFilters.quartile4) selectedQuartiles.push(4);
-
-      filteredData = filteredData.filter((row) => {
-        const quartile = Math.ceil(row.percentile / 25);
-        return selectedQuartiles.includes(quartile);
-      });
+      if (filtersToApply.quartile1) selectedQuartiles.push(1);
+      if (filtersToApply.quartile2) selectedQuartiles.push(2);
+      if (filtersToApply.quartile3) selectedQuartiles.push(3);
+      if (filtersToApply.quartile4) selectedQuartiles.push(4);
+      filteredData = filteredData.filter((row) => selectedQuartiles.includes(Math.ceil(row.percentile / 25)));
     }
 
-    setFilters(pendingFilters);
     setTableData(filteredData);
+    setFilters(filtersToApply);
     setCurrentPage(1);
     setSelectedRows(new Set());
-    if (!(is2XL || is3XL)) setIsFilterOpen(false);
+    // if (!(is2XL || is3XL)) setIsFilterOpen(false);
   };
+
+  // Update table data on search or filter change
+  useEffect(() => {
+    applyFilters(pendingFilters, searchQuery);
+  }, [searchQuery, pendingFilters]);
 
   const clearFilters = () => {
     const resetFilters: Filters = {
@@ -327,37 +333,32 @@ const Publications: React.FC = () => {
       quartile4: false,
     };
     setPendingFilters(resetFilters);
-    setFilters(resetFilters);
     setSearchQuery("");
-    setTableData(TABLE_DATA);
-    setCurrentPage(1);
-    setSelectedRows(new Set());
-    if (!(is2XL || is3XL)) setIsFilterOpen(false);
+    applyFilters(resetFilters, "");
   };
 
-  const handleFilterChange = (filterName: keyof Filters, value: boolean | string) => {
-    setPendingFilters((prev) => ({
-      ...prev,
-      [filterName]: value,
-      ...(filterName === "noMinimum" && value ? { minCitations: "", minDocuments: "" } : {}),
-      ...(filterName === "highestPercentile" && value
-        ? { quartile1: false, quartile2: false, quartile3: false, quartile4: false }
-        : {}),
-      ...((filterName === "quartile1" ||
-          filterName === "quartile2" ||
-          filterName === "quartile3" ||
-          filterName === "quartile4") &&
-        value
-        ? { highestPercentile: false }
-        : {}),
-    }));
+  const handleFilterChange = (filterName: keyof Filters, value: any) => {
+    setPendingFilters((prev) => {
+      const newFilters = { ...prev, [filterName]: value };
+      if (filterName === "noMinimum" && value) {
+        newFilters.minCitations = "";
+        newFilters.minDocuments = "";
+      }
+      if (filterName === "highestPercentile" && value) {
+        newFilters.quartile1 = false;
+        newFilters.quartile2 = false;
+        newFilters.quartile3 = false;
+        newFilters.quartile4 = false;
+      }
+      if (["quartile1", "quartile2", "quartile3", "quartile4"].includes(filterName) && value) {
+        newFilters.highestPercentile = false;
+      }
+      return newFilters;
+    });
   };
 
-  const paginatedData = tableData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
+  // Pagination
+  const paginatedData = tableData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
   const totalPages = Math.ceil(tableData.length / itemsPerPage);
 
   const handlePageChange = (page: number) => {
@@ -368,48 +369,53 @@ const Publications: React.FC = () => {
   };
 
   const handleItemsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setItemsPerPage(parseInt(e.target.value));
-    setCurrentPage(1);
-    setSelectedRows(new Set());
+    const value = parseInt(e.target.value);
+    if (!isNaN(value)) {
+      setItemsPerPage(value);
+      setCurrentPage(1);
+      setSelectedRows(new Set());
+    }
   };
 
   const handleRowSelect = (id: number) => {
-    const newSelectedRows = new Set(selectedRows);
-    if (newSelectedRows.has(id)) {
-      newSelectedRows.delete(id);
-    } else {
-      newSelectedRows.add(id);
-    }
-    setSelectedRows(newSelectedRows);
+    setSelectedRows((prev) => {
+      const newSelectedRows = new Set(prev);
+      if (newSelectedRows.has(id)) {
+        newSelectedRows.delete(id);
+      } else {
+        newSelectedRows.add(id);
+      }
+      return newSelectedRows;
+    });
   };
 
-  // Common Filter Panel Content
+  // Filter Panel Content
   const FilterPanelContent = () => (
     <>
-      <div className={`flex font-semibold justify-between flex-col text-black items-start ${isXL || is2XL || is3XL?"":"mt-5"} mb-4 px-4`}>
-        <div className={`flex items-center justify-between w-full tracking-tight ${isXXS || isXS || isSM ?"text-[10px]": isSM || isMD?"text-[12px]":isLG || isXL?"text-[12px]":"text-[16px]"}`}>Filter refine list
-          {/* filter Close */}
-          {isXXS || isXS || isSM || isMD || isLG ?
-           <IoMdCloseCircle size={20} color="#ff5e36" onClick={()=>setIsFilterOpen(false)} />:<></>}
+      <div className={`flex font-semibold justify-between flex-col text-black items-start ${isXL || is2XL || is3XL ? "" : "mt-5"} mb-4 px-4`}>
+        <div className={`flex items-center justify-between w-full tracking-tight ${isXXS || isXS || isSM ? "text-[10px]" : isSM || isMD ? "text-[12px]" : isLG || isXL ? "text-[12px]" : "text-[16px]"}`}>
+          Filter refine list
+          {isXXS || isXS || isSM || isMD || isLG ? (
+            <IoMdCloseCircle size={20} color="#ff5e36" onClick={() => setIsFilterOpen(false)} />
+          ) : null}
         </div>
-       
-        <div className={`space-x-4 ${isXXS || isXS || isSM ?"text-[10px]": isSM || isMD?"text-[12px]":isLG || isXL?"text-[12px]":"text-[16px]"} items-center mt-2 flex`}>
+        <div className={`space-x-4 ${isXXS || isXS || isSM ? "text-[10px]" : isSM || isMD ? "text-[12px]" : isLG || isXL ? "text-[12px]" : "text-[16px]"} items-center mt-2 flex`}>
           <div
-            className={` ${isXXS || isXS || isSM? "px-2 py-1 rounded-[5px]":"px-5 py-2  rounded-[10px]"}  cursor-pointer hover:border-[1px] hover:border-[#8AFF84] border-[1px] border-purple-500 hover:text-blue-500`}
-            onClick={applyFilters}
+            className={`${isXXS || isXS || isSM ? "px-2 py-1 rounded-[5px]" : "px-5 py-2 rounded-[10px]"} cursor-pointer hover:border-[1px] hover:border-[#8AFF84] border-[1px] border-purple-500 hover:text-blue-500`}
+            onClick={() => applyFilters(pendingFilters)}
           >
             Apply
           </div>
           <span>/</span>
           <div
-            className={`${isXXS || isXS || isSM? "px-2 py-1 rounded-[5px]":"px-5 rounded-[10px] py-2"}  cursor-pointer hover:border-[1px] hover:border-[#8AFF84] border-[1px] border-purple-500 hover:text-blue-500`}
+            className={`${isXXS || isXS || isSM ? "px-2 py-1 rounded-[5px]" : "px-5 rounded-[10px] py-2"} cursor-pointer hover:border-[1px] hover:border-[#8AFF84] border-[1px] border-purple-500 hover:text-blue-500`}
             onClick={clearFilters}
           >
             Clear filters
           </div>
         </div>
       </div>
-      <div className="space-y-7 bg-custom-gradient p-5 rounded-[10px]">
+      <div className={`${isXXS || isXS || isSM ? "space-y-3" : isMD || isLG ? "space-y-4" : "space-y-7"} bg-custom-gradient p-5 rounded-[10px]`}>
         <div>
           <label className="flex items-start text-start space-x-6">
             <input
@@ -450,9 +456,7 @@ const Publications: React.FC = () => {
                 <input
                   type="checkbox"
                   checked={pendingFilters.minCitations !== ""}
-                  onChange={() =>
-                    handleFilterChange("minCitations", pendingFilters.minCitations ? "" : "0")
-                  }
+                  onChange={() => handleFilterChange("minCitations", pendingFilters.minCitations ? "" : "0")}
                   className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
                 />
                 <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Enter number for minimum citations</span>
@@ -461,7 +465,7 @@ const Publications: React.FC = () => {
                 <input
                   type="number"
                   value={pendingFilters.minCitations}
-                  onChange={(e) => handleFilterChange("minCitations", e.target.value)}
+                  onChange={(e) => {e.stopPropagation(), handleFilterChange("minCitations", e.target.value)}}
                   className={`mt-1 w-full p-1 text-black rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}
                 />
               )}
@@ -471,9 +475,7 @@ const Publications: React.FC = () => {
                 <input
                   type="checkbox"
                   checked={pendingFilters.minDocuments !== ""}
-                  onChange={() =>
-                    handleFilterChange("minDocuments", pendingFilters.minDocuments ? "" : "0")
-                  }
+                  onChange={() => handleFilterChange("minDocuments", pendingFilters.minDocuments ? "" : "0")}
                   className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
                 />
                 <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Enter number for minimum documents</span>
@@ -482,7 +484,7 @@ const Publications: React.FC = () => {
                 <input
                   type="number"
                   value={pendingFilters.minDocuments}
-                  onChange={(e) => handleFilterChange("minDocuments", e.target.value)}
+                  onChange={(e) => {e.stopPropagation(), handleFilterChange("minDocuments", e.target.value)}}
                   className={`mt-1 w-full p-1 text-black rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}
                 />
               )}
@@ -491,16 +493,12 @@ const Publications: React.FC = () => {
         )}
         <div>
           <label className="flex items-start text-start space-x-6">
-            <input
-              type="checkbox"
-              checked={pendingFilters.highestPercentile}
-              onChange={() => handleFilterChange("highestPercentile", !pendingFilters.highestPercentile)}
-              className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
-            />
-            <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Show titles in top 10 percent</span>
+            <span className={`${isXXS || isXS ? "text-[12px]" : isSM ? "text-[13px]" : "text-[15px]"} font-semibold`}>Show titles in top 10 percent</span>
           </label>
+          <label className="flex items-start text-start space-x-6 mt-2">
+                     </label>
           {!pendingFilters.highestPercentile && (
-            <div className="mt-4 space-y-1">
+            <div className={`mt-4 ${isXXS || isXS || isSM ? "space-y-3" : isMD || isLG ? "space-y-4" : "space-y-7"}`}>
               <label className="flex items-start text-start space-x-6">
                 <input
                   type="checkbox"
@@ -544,90 +542,77 @@ const Publications: React.FC = () => {
     </>
   );
 
-  // Calculate minimum table width based on column widths for MD and LG
+  // Calculate minimum table width
   const getTableMinWidth = () => {
-    const columnWidths = TABLE_COLUMNS.map(col => {
+    return TABLE_COLUMNS.reduce((sum, col) => {
       const widthStr = col.width.match(/min-w-\[(\d+)px\]/)?.[1];
-      return parseInt(widthStr || "0");
-    });
-    const totalWidth = columnWidths.reduce((sum, width) => sum + width, 0) + 15; // Add 15px for checkbox column
-    return totalWidth;
+      return sum + (parseInt(widthStr || "0"));
+    }, 15); // Add 15px for checkbox
   };
 
   return (
     <div className="flex flex-col min-h-screen mt-15 mb-10 font-sans libre-franklin">
       <NavigationComponent />
-      <div className={`flex bg-gray-100 flex-col py-5 px-5 w-full max-w-[1600px] mx-auto`}>
-        {/* Main Content Layout */}
+      <div className="flex bg-gray-100 flex-col py-5 px-5 w-full max-w-[1600px] mx-auto">
         <div className={`relative flex ${isXXS || isXS || isSM || isMD || isLG ? "flex-col" : "flex-row"} gap-6 w-full`}>
-          {/* Filter Panel for Big Screens (2XL and above) */}
           {(isXL || is2XL || is3XL) && (
             <div className="z-10 flex-shrink-0 flex-col h-fit pt-5 w-[300px] text-[12px]">
               <FilterPanelContent />
             </div>
           )}
-
-          {/* Filter Toggle Icon and Drawer for Small Screens (LG and below) */}
           {(isXXS || isXS || isSM || isMD || isLG) && (
             <>
-              <div className={`flex ${isXXS || isXS|| isSM || isMD?"w-full": isLG?"w-[90%]":""}  items-center justify-between mb-4 gap-4`}>
-               <IoFilter className="ml-5" onClick={()=>setIsFilterOpen(!isFilterOpen)} color="#3664ff" /> 
-                <div className={`${isXXS || isXS ? "w-[60%]" : isSM ? "w-[70%]" : isMD ? "w-[75%]" : isLG ? "w-[80%]" : "w-[50%]"} flex-1`}>
-                  <label htmlFor="search" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+              <div className={`flex ${isXXS || isXS || isSM || isMD ? "w-full" : "w-[90%]"} items-center justify-between mb-4 gap-4`}>
+                <IoFilter className="ml-5" onClick={() => setIsFilterOpen(!isFilterOpen)} color="#3664ff" />
+                <div className={`${isXXS || isXS ? "w-[60%]" : isSM ? "w-[70%]" : isMD ? "w-[75%]" : "w-[80%]"} flex-1`}>
+                  <label htmlFor="search-small" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 right-2 flex items-center pr-3 pointer-events-none">
                       <img src={SearchIcon} alt="Search" className={`${isXXS || isXS ? "w-4 h-4" : "w-5 h-5"}`} />
                     </div>
                     <input
                       type="search"
-                      id="search"
+                      id="search-small"
                       placeholder="Search"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className={`block w-full p-2 pl-5 pr-10 text-gray-900 border border-[#1B7BFF] rounded-[5px] bg-gray-50 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${isXXS || isXS ? "text-xs" : isSM ? "text-sm" : "text-base"}`}
+                      className={`block w-full p-2 pl-5 pr-15 text-gray-900 border border-[#1B7BFF] rounded-[5px] bg-gray-50 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${isXXS || isXS ? "text-xs" : isSM ? "text-sm" : "text-base"}`}
                     />
                   </div>
                 </div>
               </div>
               <div
-                className={`flex-shrink-0 flex-col h-fit px-4 py-5 bg-white shadow-lg absolute -top-10 -left-5 rounded-[5px] transform transition-transform duration-300 ease-in-out ${isFilterOpen ? "translate-x-0" : "-translate-x-full"} ${isXXS ? "w-[240px]" : isXS ? "w-[240px]" : isSM ? "w-[290px]" : isMD ? "w-[320px]" : isLG ? "w-[320px]" : isXL ? "w-[310px]" : ""}`}
+                className={`flex-shrink-0 flex-col h-fit px-4 py-5 bg-white shadow-lg absolute -top-10 -left-5 rounded-[5px] transform transition-transform duration-300 ease-in-out ${isFilterOpen ? "translate-x-0" : "-translate-x-full"} ${isXXS ? "w-[240px]" : isXS ? "w-[240px]" : isSM ? "w-[290px]" : isMD ? "w-[320px]" : "w-[320px]"}`}
               >
                 <FilterPanelContent />
               </div>
             </>
           )}
-
-          {/* Table Section */}
           <div className={`flex-1 scrollbar-none ${isXXS || isXS || isSM || isMD || isLG ? "pt-0" : "pt-5"} overflow-x-auto`}>
-            {/* Search Container for XL and above */}
             {(isXL || is2XL || is3XL) && (
               <div className="flex justify-center mb-4">
                 <div className={`${isXL ? "w-[60%]" : "w-[50%]"}`}>
-                  <label htmlFor="search" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+                  <label htmlFor="search-large" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 right-2 flex items-center pr-3 pointer-events-none">
                       <img src={SearchIcon} alt="Search" className="w-5 h-5" />
                     </div>
                     <input
                       type="search"
-                      id="search"
+                      id="search-large"
                       placeholder="Search"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className={`block w-full p-2 pl-5 pr-10 text-gray-900 border border-[#1B7BFF] rounded-[5px] bg-gray-50 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base`}
+                      className={`block w-full p-2 pl-5 pr-15 text-gray-900 border border-[#1B7BFF] rounded-[5px] bg-gray-50 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base`}
                     />
                   </div>
                 </div>
               </div>
             )}
-
-            {/* Custom Div-based Table */}
             <div className="w-full">
               <div className={`${isXXS ? "min-w-[200px]" : isXS ? "min-w-[300px]" : isSM ? "min-w-[500px]" : isMD ? `min-w-[${getTableMinWidth()}px]` : isLG ? `min-w-[${getTableMinWidth()}px]` : isXL ? "min-w-[800px]" : "min-w-[1000px]"}`}>
                 <CustomStyle />
-                {/* Header Row */}
                 <div className="custom-row custom-header flex bg-gray-200 py-3 px-8">
-                  {/* <div className="min-w-[15px] flex items-center"></div> */}
                   {TABLE_COLUMNS.map((column, index) => (
                     <div
                       key={index}
@@ -637,11 +622,9 @@ const Publications: React.FC = () => {
                     </div>
                   ))}
                 </div>
-
-                {/* Data Rows */}
                 {paginatedData.length > 0 ? (
                   paginatedData.map((row, i) => (
-                    <div key={row.id} className={`custom-row-content w-fit flex text-black ${i === 0 ? "" : ""} pb-3 px-4`}>
+                    <div key={`${row.id}-${i}`} className={`custom-row-content w-fit flex text-black ${i === 0 ? "" : ""} pb-3 px-4`}>
                       <div className="border-b flex pt-5 pb-3 border-[#1B7BFF] w-full">
                         <div className="min-w-[15px] flex items-center">
                           <input
@@ -677,78 +660,76 @@ const Publications: React.FC = () => {
                 )}
               </div>
             </div>
-   </div>
+          </div>
         </div>
-            {/* Pagination Section */}
-            <div className="w-full flex justify-end">
-            <div className={` ${isXL?"w-[60%]":isXXS || isXS || isSM || isMD || isLG?"w-[100%]": " w-[70%]"}  flex ${isXXS || isXS  ?"flex-col":"flex-row"} justify-between items-center mt-6 flex px-4`}>
-              <div className="flex items-center space-x-2">
-                <span className={`text-black dm-sans-regular ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : isMD ? "text-[12px]" : isLG ? "text-[13px]" : "text-[14px]"}`}>
-                  Rows per page:
-                </span>
-                <select
-                  value={itemsPerPage}
-                  onChange={handleItemsPerPageChange}
-                  className={`border border-gray-300 text-black rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500 dm-sans-regular ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : isMD ? "text-[12px]" : isLG ? "text-[13px]" : "text-[14px]"}`}
-                >
-                  <option value={5}>5</option>
-                  <option value={10}>10</option>
-                  <option value={15}>15</option>
-                  <option value={20}>20</option>
-                </select>
-              </div>
-              <div className={`flex ${isXXS || isXS || isSM || isMD?"mr-5":"mr-30"} items-center space-x-4`}>
-                {isXXS || isXS || isSM?
-                                  <IoIosArrowBack className={`${currentPage === 1?"text-[#ff4200]":"text-blue-700"}  ${isXXS || isXS ? "text-[12px]" : isSM ? "text-[14px]" : "text-[16px]"}`} onClick={() => handlePageChange(currentPage - 1)}/>
-                                  :
-                                  <div
+        <div className="w-full flex justify-end">
+          <div className={`${isXL ? "w-[60%]" : isXXS || isXS || isSM || isMD || isLG ? "w-[100%]" : "w-[70%]"} flex ${isXXS || isXS ? "flex-col" : "flex-row"} justify-between items-center mt-6 px-4`}>
+            <div className="flex items-center space-x-2">
+              <span className={`text-black dm-sans-regular ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : isMD ? "text-[12px]" : isLG ? "text-[13px]" : "text-[14px]"}`}>
+                Rows per page:
+              </span>
+              <select
+                value={itemsPerPage}
+                onChange={handleItemsPerPageChange}
+                className={`border border-gray-300 text-black rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500 dm-sans-regular ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : isMD ? "text-[12px]" : isLG ? "text-[13px]" : "text-[14px]"}`}
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={15}>15</option>
+                <option value={20}>20</option>
+              </select>
+            </div>
+            <div className={`flex ${isXXS || isXS || isSM || isMD ? "mr-5" : "mr-30"} items-center space-x-4`}>
+              {isXXS || isXS || isSM ? (
+                <IoIosArrowBack
+                  className={`${currentPage === 1 ? "text-[#ff4200]" : "text-blue-700 cursor-pointer"} ${isXXS || isXS ? "text-[12px]" : isSM ? "text-[14px]" : "text-[16px]"}`}
+                  onClick={currentPage > 1 ? () => handlePageChange(currentPage - 1) : undefined}
+                />
+              ) : (
+                <div
                   className={`p-2 rounded-full ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:text-[#ff4200] hover:bg-[#d1fdff] hover:border-purple-500"} border-[1px] border-gray-400 text-blue-700`}
-                  onClick={() => handlePageChange(currentPage - 1)}
+                  onClick={currentPage > 1 ? () => handlePageChange(currentPage - 1) : undefined}
                 >
-                  <IoIosArrowBack onClick={() => handlePageChange(currentPage - 1)}/>
+                  <IoIosArrowBack />
                 </div>
-}
-                <span className={`text-black dm-sans-regular ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : isMD ? "text-[12px]" : isLG ? "text-[13px]" : "text-[14px]"}`}>
-                  Page {currentPage} of {totalPages}
-                </span>
-                {isXXS || isXS || isSM?
-                
-                  <IoIosArrowForward  onClick={() => handlePageChange(currentPage + 1)} className={`${currentPage === totalPages?"text-[#ff4200]":"text-blue-700"} ${isXXS || isXS ? "text-[12px]" : isSM ? "text-[14px]" : "text-[16px]"}`} />
-:
-<div
-                  // className={`p-2 rounded-full ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:text-[#ff4200] hover:bg-[#d1fdff] hover:border-purple-500"} border-[1px] border-gray-400 text-blue-700`}
-
+              )}
+              <span className={`text-black dm-sans-regular ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : isMD ? "text-[12px]" : isLG ? "text-[13px]" : "text-[14px]"}`}>
+                Page {currentPage} of {totalPages}
+              </span>
+              {isXXS || isXS || isSM ? (
+                <IoIosArrowForward
+                  className={`${currentPage === totalPages ? "text-[#ff4200]" : "text-blue-700 cursor-pointer"} ${isXXS || isXS ? "text-[12px]" : isSM ? "text-[14px]" : "text-[16px]"}`}
+                  onClick={currentPage < totalPages ? () => handlePageChange(currentPage + 1) : undefined}
+                />
+              ) : (
+                <div
                   className={`p-2 rounded-full ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:text-[#ff4200] hover:bg-[#d1fdff] hover:border-purple-500"} border-[1px] border-gray-400 text-blue-700`}
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  // disabled={currentPage === totalPages}
+                  onClick={currentPage < totalPages ? () => handlePageChange(currentPage + 1) : undefined}
                 >
-                  <IoIosArrowForward  onClick={() => handlePageChange(currentPage + 1)} className={` ${isXXS || isXS ? "text-[12px]" : isSM ? "text-[14px]" : "text-[16px]"}`} />
+                  <IoIosArrowForward />
                 </div>
-                }
-              </div>
+              )}
             </div>
-            </div>
-       
+          </div>
+        </div>
       </div>
-
-      {/* Bottom Section */}
       <div className="w-full flex flex-col items-center">
         <div
           style={{ backgroundImage: `url(${TeamBanner})` }}
-          className={`bg-cover roboto-regular bg-center w-full flex flex-col gap-y-0 items-center justify-center ${isXXS || isXS || isSM?"h-[28vh]":isMD || isLG?"h-[35vh]": isXL?"h-[50vh]": "h-[60vh]"}  `}
+          className={`bg-cover roboto-regular bg-center w-full flex flex-col gap-y-0 items-center justify-center ${isXXS || isXS || isSM ? "h-[28vh]" : isMD || isLG ? "h-[35vh]" : isXL ? "h-[50vh]" : "h-[60vh]"}`}
         >
           <div
-            className={`text-white ${isXXS || isSM|| isXS?"mb-2 text-[20px]":isMD?"mb-4 text-[30px]": isLG?"mb-5 text-[40px]":"mb-7 text-[64px]"}  text-center px-4 font-extrabold leading-tight dm-sans-regular`}
+            className={`text-white ${isXXS || isSM || isXS ? "mb-2 text-[20px]" : isMD ? "mb-4 text-[30px]" : isLG ? "mb-5 text-[40px]" : "mb-7 text-[64px]"} text-center px-4 font-extrabold leading-tight dm-sans-regular`}
           >
             Want to create FUTURE ?
           </div>
           <div
-            className={`text-center px-2 ${isXXS || isSM|| isXS?"mb-2":isMD?"mb-4": isLG?"mb-5":"mb-7"} ${isXXS ? "text-[12px]" : isXS ? "text-[14px]" : isSM ? "text-[12px]" : isMD ? "text-[14px]": isLG?"text-[17px]" : isXL ? "text-[19px]" : "text-[20px]"}`}
+            className={`text-center px-2 ${isXXS || isSM || isXS ? "mb-2" : isMD ? "mb-4" : isLG ? "mb-5" : "mb-7"} ${isXXS ? "text-[12px]" : isXS ? "text-[14px]" : isSM ? "text-[12px]" : isMD ? "text-[14px]" : isLG ? "text-[17px]" : isXL ? "text-[19px]" : "text-[20px]"}`}
           >
             Explore new possibilities with us everyday. Create your mark on future with us.
           </div>
           <div
-            className={`bg-gradient-to-r text-black ${isXXS || isXS ? 'px-4 py-0.5 text-[10px]' : isSM ? 'px-6 py-1 text-[12px]' : isMD ? 'px-8 py-1 text-[14px]' : isLG ? 'px-10 py-1.5 text-[16px]' : 'px-14 py-2 text-lg sm:text-[20px]'} rounded-xl cursor-pointer mt-3 shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+            className={`bg-gradient-to-r text-black ${isXXS || isXS ? "px-4 py-0.5 text-[10px]" : isSM ? "px-6 py-1 text-[12px]" : isMD ? "px-8 py-1 text-[14px]" : isLG ? "px-10 py-1.5 text-[16px]" : "px-14 py-2 text-lg sm:text-[20px]"} rounded-xl cursor-pointer mt-3 shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
           >
             Join Us
           </div>
