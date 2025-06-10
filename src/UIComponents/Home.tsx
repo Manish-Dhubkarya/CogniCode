@@ -399,12 +399,12 @@ className={`
         className={`${isXXS || isXS || isSM ? "mt-10":isMD?"mt-12":"mt-40"} w-full`}
       >
         <div
-          style={{
-            backgroundImage: `url(${TeamBanner})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
+style={{
+  backgroundImage: `url(${TeamBanner}), linear-gradient(180deg, #8AFF84 0%, #97BBCB 45.5%, #004EB9 100%)`,
+  backgroundSize: "cover, cover", // Specify for both image and gradient
+  backgroundPosition: "center, center", // Specify for both
+  backgroundRepeat: "no-repeat, no-repeat", // Specify for both
+}}
           // className={styles.teamBannerMain2}
           className={`roboto-regular flex-col w-full flex sm:gap-y-0.5 md:gap-y-3 lg:gap-y-5 items-center justify-center ${isXXS || isXS ? 'h-[28vh] min-h-[160px] max-h-[220px]' : isSM ? 'h-[30vh] min-h-[180px] max-h-[260px]' : isMD ? 'h-[35vh] min-h-[220px] max-h-[320px]' : isLG ? 'h-[45vh] min-h-[280px] max-h-[380px]' : 'h-[60vh] min-h-[360px] max-h-[456px]'} pb-4 bg-cover bg-center`}
         >

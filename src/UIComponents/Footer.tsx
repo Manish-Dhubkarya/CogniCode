@@ -182,7 +182,7 @@ function Footer() {
             {/* Quick Links */}
             <div className="flex flex-col">
               <h3
-                className={`font-semibold ${isXXS || isXS ? 'text-[14px] mb-2' : 'text-[24px] mb-4' }`}
+                className={`font-semibold ${isXXS || isXS ? 'text-[14px] mb-2' : isXL?"text-[20px] mb-3": 'text-[24px] mb-4' }`}
               >
                 Quick Links
               </h3>
@@ -190,7 +190,7 @@ function Footer() {
                 <a
                   key={index}
                   href="#"
-                  className={`block ${isXXS || isXS ? 'text-[12px] mb-1' :'text-[20px] leading-tight mb-2'} hover:text-[#8AFF84] transition-colors duration-200`}
+                  className={`block ${isXXS || isXS ? 'text-[12px] mb-1' :isXL?"text-[18px]": 'text-[20px] leading-tight mb-2'} hover:text-[#8AFF84] transition-colors duration-200`}
                 >
                   {item}
                 </a>
@@ -200,20 +200,21 @@ function Footer() {
             {/* Meet Us */}
             <div className="flex flex-col">
               <h3
-                className={`font-semibold ${isXXS || isXS ? 'text-[14px] mb-2' : 'text-[24px] mb-4'}`}
+              // yaa
+                className={`font-semibold ${isXXS || isXS ? 'text-[14px] mb-2' : isXL?"text-[20px] mb-3": 'text-[24px] mb-4'}`}
               >
                 Meet us :
               </h3>
               {MeetUs.map((item, index) => (
                 <p
                   key={index}
-                  className={`${isXXS || isXS ? 'text-[12px] mb-1' : 'text-[24px] mb-2'}`}
+                  className={`${isXXS || isXS ? 'text-[12px] mb-1' :isXL?"text-[20px] mb-3": 'text-[24px] mb-2'}`}
                 >
                   {item}
                 </p>
               ))}
               <h3
-                className={`${isXXS || isXS ? 'text-[12px] mt-3 mb-2' : 'text-[20px] mt-4 mb-2'}`}
+                className={`${isXXS || isXS ? 'text-[12px] mt-3 mb-2' :isXL?"text-[18px] mb-2": 'text-[20px] mt-4 mb-2'}`}
               >
                 Follow us :
               </h3>
@@ -247,7 +248,7 @@ function Footer() {
             {/* Have a Query */}
             <div className="flex flex-col">
               <h3
-                className={`font-semibold ${isXXS || isXS ? 'text-[14px] mb-2' : 'text-[24px] mb-4'}`}
+                className={`font-semibold ${isXXS || isXS ? 'text-[14px] mb-2' : isXL?"text-[20px]": 'text-[24px] mb-4'}`}
               >
                 Have a Query ?
               </h3>
@@ -255,19 +256,19 @@ function Footer() {
                 className={`w-full border-t-[1.5px] border-[#8AFF84] ${isXXS || isXS ? 'my-3' : 'my-6'}`}
               ></div>
               <p
-                className={`${isXXS || isXS ? 'text-[12px] mb-2' : 'text-[20px] mb-4'}`}
+                className={`${isXXS || isXS ? 'text-[12px] mb-2' : isXL?"text-[17px] mb-4": 'text-[20px] mb-4'}`}
               >
                 Contact us :
               </p>
               <a
                 href="tel:+917000515617"
-                className={`block ${isXXS || isXS ? 'text-[12px] mb-1' : isXL ? 'text-[20px] mb-2' : ''} hover:text-[#8AFF84] transition-colors duration-200`}
+                className={`block ${isXXS || isXS ? 'text-[12px] mb-1' : isXL ?"text-[17px] mb-2": 'text-[20px] mb-2'} hover:text-[#8AFF84] transition-colors duration-200`}
               >
                 +91-7000515617
               </a>
               <a
                 href="mailto:office.cognicode@gmail.com"
-                className={`block ${isXXS || isXS ? 'text-[12px]' : isXL ? 'text-[20px]':""} hover:text-[#8AFF84] transition-colors duration-200`}
+                className={`block ${isXXS || isXS ? 'text-[12px]' : isXL ?"text-[17px] mb-2": 'text-[20px]'} hover:text-[#8AFF84] transition-colors duration-200`}
               >
                 office.cognicode@gmail.com
               </a>
