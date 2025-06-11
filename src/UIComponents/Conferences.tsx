@@ -215,20 +215,11 @@ const Conferences: React.FC = () => {
               future with us.
             </div>
             <div
-              className={`bg-gradient-to-r text-black ${
-                isXXS || isXS
-                  ? "px-4 py-0.5 text-[10px]"
-                  : isSM
-                  ? "px-6 py-1 text-[14px]"
-                  : isMD
-                  ? "px-8 py-1 text-[14px]"
-                  : isLG
-                  ? "px-10 py-1.5 text-[16px]"
-                  : "px-14 py-2 text-lg sm:text-[20px]"
-              } rounded-xl cursor-pointer mt-3 shadow-[0px_4px_16px_rgba(138,255,132,0.2),0px_4px_16px_rgba(44,107,193,0.2)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
-            >
-              Join Us
-            </div>
+            // className={styles.homeBannerConnectText}
+            className={` bg-gradient-to-r text-black roboto-regular ${isXXS || isXS ? 'px-4 py-0.5 text-[10px]' : isSM ? 'px-6 py-1 text-[12px]' : isMD ? 'px-8 py-1 text-[14px]' : isLG ? 'px-10 py-1.5 text-[16px]' : 'px-14 py-2 text-lg sm:text-[20px]'} rounded-xl cursor-pointer shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+          >
+            Join Us
+          </div>
           </div>
           <div className="w-full flex border-t-3 border-[#8AFF84] mt-0 flex-col items-center">
             <div className="w-[90%] md:w-[83%] flex flex-col">

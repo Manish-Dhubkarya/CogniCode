@@ -70,24 +70,43 @@ const AboutUs = () => {
     <section className="flex flex-col items-center md:items-start text-center md:text-start">
       <div className="text-[20px] font-bold mb-3">{content.aboutUs.title}</div>
       <div className="text-[12px] leading-tight max-w-[626px] mb-6">{content.aboutUs.description}</div>
-      <div className={`bg-gradient-to-r text-black roboto-regular px-14 py-2 rounded-xl cursor-pointer ${isXXS || isXS ? 'px-4 py-0.5 text-[10px]' : isSM && 'px-6 py-1 text-[12px]'} shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}>{content.aboutUs.buttonText}</div>
+      <div className={`bg-gradient-to-r text-black roboto-regular rounded-xl cursor-pointer ${isXXS || isXS ? 'px-4 py-0.5 text-[10px]' : isSM && 'px-6 py-1 text-[14px]'} shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}>{content.aboutUs.buttonText}</div>
     </section>
   </div>
   </div>:
  isMD?
- <div className='text-red-300 text-[20px] mt-20'>isMD about us</div>:
- isLG?
- <div className='text-red-300 text-[20px] mt-20'> isLG about us</div>:
-  isXL?
-  <div className='text-red-300 text-[20px] mt-20'>isXL of about us</div>:
-<div className="flex flex-col md:flex-row mt-30 pt-10 px-4 py-10 md:px-8 lg:px-[97px] items-center md:items-start justify-between">
+ <div  style={{ backgroundImage: `url(${AboutBack})`}} className='flex bg-center bg-cover space-y-5 items-center justify-center mt-12 my-8'>
+    <div className="flex flex-col md:flex-row pt-10 py-10 px-10 items-center md:items-start justify-between">
+    <section className="flex flex-col items-start text-start">
+      <div className="text-[30px] font-bold mb-3">{content.aboutUs.title}</div>
+      <div className="text-[15px] leading-tight max-w-[626px] mb-6">{content.aboutUs.description}</div>
+     <div className='flex w-full justify-center'>
+      <div className={`bg-gradient-to-r  text-black roboto-regular rounded-xl cursor-pointer ${ isMD && 'px-6 py-1 text-[15px]'} shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}>{content.aboutUs.buttonText}</div>
+    </div>
+    </section>
+  </div>
+  </div>:
+ isLG || isXL?
+ <div  style={{ backgroundImage: `url(${AboutBack})`}} className='flex bg-center bg-cover space-y-7 items-center justify-center mt-15 my-15'>
+    <div className="flex flex-col md:flex-row pt-10 py-10 px-10 items-center justify-between">
+    <section className="flex flex-col items-center text-start">
+      <div className="text-[40px] font-bold mb-7">{content.aboutUs.title}</div>
+      <div className="text-[20px] leading-tight mb-10">{content.aboutUs.description}</div>
+     <div className='flex w-full justify-center'>
+      <div className={`bg-gradient-to-r  text-black roboto-regular rounded-xl cursor-pointer px-9 py-2 text-[18px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}>{content.aboutUs.buttonText}</div>
+    </div>
+    </section>
+  </div>
+  </div>:
+
+<div className="flex mt-30  pt-10 py-10 px-25 items-center md:items-start justify-between">
     <section className="flex flex-col items-center md:items-start text-center md:text-start">
-      <div className="text-4xl md:text-[64px] font-bold mb-8">{content.aboutUs.title}</div>
-      <div className="text-lg md:text-[20px] leading-tight max-w-[626px] mb-8">{content.aboutUs.description}</div>
+      <div className="text-[64px] font-bold mb-8">{content.aboutUs.title}</div>
+      <div className="text-[20px] leading-tight max-w-[626px] mb-8">{content.aboutUs.description}</div>
       <div className="bg-gradient-to-r text-black roboto-regular px-14 py-2 rounded-xl cursor-pointer text-lg sm:text-[20px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold">{content.aboutUs.buttonText}</div>
     </section>
     <div className='mt-5 md:mt-0'>
-      <img className="w-full max-w-[520px] h-auto" src={AboutBack} alt={content.aboutUs.imageAlt} />
+      <img className="w-[27.08vw] h-[32.04vh]" src={AboutBack} alt={content.aboutUs.imageAlt} />
     </div>
   </div>
   }
@@ -98,7 +117,7 @@ const AboutUs = () => {
       <div className="text-[20px] font-bold mb-5">{content.achievements.title}</div>
 <div className="flex justify-center gap-5">
         {content.achievements.items.map((item, index) => (
-          <div key={index} className={`bg-gray-300 ${isXXS || isXS?"h-[170px] w-[90px]": isSM?"h-[190px] w-[80px]":""} rounded-lg`}>
+          <div key={index} className={`bg-gray-300 w-[25vw] ${isXXS || isXS?"h-[18vh]": isSM?"h-[20vh]":""} rounded-lg`}>
             <div className="p-4 text-center">{item.description}</div>
           </div>
         ))}
@@ -106,22 +125,47 @@ const AboutUs = () => {
   </div>
   :
   isMD?
-  <div>
-
+   <div className='flex flex-col items-center justify-center'>
+      <div className="text-[30px] w-full px-[10vw] text-start font-bold mb-7">{content.achievements.title}</div>
+<div className="flex justify-center gap-7">
+        {content.achievements.items.map((item, index) => (
+          <div key={index} className={`bg-gray-300 w-[25vw] ${isMD?"h-[25vh]":""} rounded-lg`}>
+            <div className="p-4 text-center">{item.description}</div>
+          </div>
+        ))}
+      </div>
   </div>:
    isLG?
-   <div></div>:
+   <div className='flex flex-col items-center justify-center'>
+      <div className="text-[30px] w-full px-[10vw] text-start font-bold mb-7">{content.achievements.title}</div>
+<div className="flex justify-center gap-7">
+        {content.achievements.items.map((item, index) => (
+          <div key={index} className={`bg-gray-300 w-[25vw] ${isLG?"h-[25vh]":""} rounded-lg`}>
+            <div className="p-4 text-center">{item.description}</div>
+          </div>
+        ))}
+      </div>
+  </div>:
     isXL?
-   <div></div>:
-   <div className="flex flex-col md:flex-row py-12 px-4 md:px-8 lg:px-[97px] items-center md:items-start justify-between">
+   <div className='flex flex-col items-center justify-center'>
+      <div className="text-[40px] w-full px-[10vw] text-end font-bold mb-7">{content.achievements.title}</div>
+<div className="flex justify-center gap-7">
+        {content.achievements.items.map((item, index) => (
+          <div key={index} className={`bg-gray-300 w-[25vw] ${isXL?"h-[25vh]":""} rounded-lg`}>
+            <div className="p-4 text-center">{item.description}</div>
+          </div>
+        ))}
+      </div>
+  </div>:
+   <div className="flex flex-col md:flex-row py-12 px-[6vw] items-center md:items-start justify-between">
     <div className='mt-15 md:mb-0'>
-      <img src={AboutBack2} className='w-full max-w-[275px] h-[363px]' alt={content.achievements.imageAlt} />
+      <img src={AboutBack2} className='w-[18vw] h-[44vh]' alt={content.achievements.imageAlt} />
     </div>
     <section className="px-4 flex flex-col items-center md:items-end md:px-12 text-center md:text-end">
       <div className="text-4xl md:text-[64px] font-bold mb-15">{content.achievements.title}</div>
       <div className="flex flex-col md:flex-row justify-center gap-12">
         {content.achievements.items.map((item, index) => (
-          <div key={index} className="bg-gray-300 h-[364px] w-[247px] md:w-64 rounded-lg">
+          <div key={index} className="bg-gray-300 h-[44vh] w-[18.86vw] rounded-lg">
             <div className="p-4 text-center">{item.description}</div>
           </div>
         ))}
@@ -131,25 +175,102 @@ const AboutUs = () => {
 }
 
   {/* Future Aims Section */}
-  <div className="flex flex-col md:flex-row py-20 px-8 items-center md:items-start justify-between">
-    <section className="flex flex-col items-center md:items-start lg:px-16 text-center md:text-start">
+  {isXXS || isXS || isSM?
+  <div className='py-7 flex flex-col justify-center items-start px-4'>
+      <div className="text-[20px] font-bold mb-2">{content.futureAims.title}</div>
+      <div className="text-[12px] text-start leading-tight tracking-[1%] mb-4">{content.futureAims.description}</div>
+<div className='text-end'>
+          <div className="text-[15px] font-semibold mb-1">{content.futureAims.commitment.title}</div>
+          <div className='w-full flex'>
+          <div className="text-[12px] text-end leading-tight tracking-[1%] mb-4">{content.futureAims.commitment.description}</div>
+</div>
+</div>
+<div className='text-start'>
+          <div className="text-[15px] font-semibold mb-1">{content.futureAims.belief.title}</div>
+          <div className='w-full flex'>
+          <div className="text-[12px] text-start leading-tight tracking-[1%] mb-4">{content.futureAims.belief.description}</div>
+</div>
+</div>
+  </div>:
+  isMD?<div className='py-7 flex flex-col justify-center items-center px-4'>
+      <div className="text-[30px] font-bold mb-5">{content.futureAims.title}</div>
+     
+      <div className="text-[15px] text-start leading-tight tracking-[1%] mb-7">{content.futureAims.description}</div>
+ <div className='grid grid-cols-2 justify-between w-full gap-8'>
+<div className='text-start'>
+          <div className="text-[20px] font-semibold mb-1">{content.futureAims.commitment.title}</div>
+          <div className='w-full flex'>
+          <div className="text-[15px] text-start leading-tight tracking-[1%] mb-4">{content.futureAims.commitment.description}</div>
+</div>
+</div>
+<div className='text-end'>
+          <div className="text-[20px] font-semibold mb-1">{content.futureAims.belief.title}</div>
+          <div className='w-full flex'>
+          <div className="text-[15px] text-end leading-tight tracking-[1%] mb-4">{content.futureAims.belief.description}</div>
+</div>
+</div>
+</div>
+  </div>:
+  isLG?
+  <div className='py-10 flex flex-col justify-center items-start px-15'>
+      <div className="text-[30px] font-bold mb-5">{content.futureAims.title}</div>
+     
+      <div className="text-[20px] text-start leading-tight tracking-[1%] mb-10">{content.futureAims.description}</div>
+ <div className='grid grid-cols-2 justify-between w-full gap-8'>
+<div className='text-start'>
+          <div className="text-[25px] font-semibold mb-4">{content.futureAims.commitment.title}</div>
+          <div className='w-full flex'>
+          <div className="text-[20px] text-start leading-tight tracking-[1%] mb-4">{content.futureAims.commitment.description}</div>
+</div>
+</div>
+<div className='text-start'>
+          <div className="text-[25px] font-semibold mb-4">{content.futureAims.belief.title}</div>
+          <div className='w-full flex'>
+          <div className="text-[20px] text-start leading-tight tracking-[1%] mb-4">{content.futureAims.belief.description}</div>
+</div>
+</div>
+</div>
+  </div>:
+  isXL?
+  <div className='py-15 flex flex-col justify-center items-start px-15'>
+      <div className="text-[40px] font-bold mb-5">{content.futureAims.title}</div>
+     
+      <div className="text-[25px] text-start leading-tight tracking-[1%] mb-15">{content.futureAims.description}</div>
+ <div className='grid grid-cols-2 justify-between w-full gap-8'>
+<div className='text-start'>
+          <div className="text-[30px] font-semibold mb-4">{content.futureAims.commitment.title}</div>
+          <div className='w-full flex'>
+          <div className="text-[25px] text-start leading-tight tracking-[1%] mb-4">{content.futureAims.commitment.description}</div>
+</div>
+</div>
+<div className='text-start'>
+          <div className="text-[30px] font-semibold mb-4">{content.futureAims.belief.title}</div>
+          <div className='w-full flex'>
+          <div className="text-[25px] text-start leading-tight tracking-[1%] mb-4">{content.futureAims.belief.description}</div>
+</div>
+</div>
+</div>
+  </div>:
+  
+  <div className="flex flex-col md:flex-row py-20 px-[6vw] items-center md:items-start justify-between">
+    <section className="flex flex-col items-center md:items-start text-center md:text-start">
       <div className="text-4xl md:text-[64px] font-bold mb-10">{content.futureAims.title}</div>
       <div className="text-lg md:text-[20px] leading-tight tracking-[1%] max-w-[696px] mb-8">{content.futureAims.description}</div>
       <div className="flex flex-col md:flex-row mt-15 justify-start gap-15">
-        <div className="md:w-[380px]">
-          <div className="text-xl md:text-[32px] font-semibold mb-4">{content.futureAims.commitment.title}</div>
+        <div className="w-[380px]">
+          <div className="text-[32px] font-semibold mb-4">{content.futureAims.commitment.title}</div>
           <div className={s.subText}>{content.futureAims.commitment.description}</div>
         </div>
-        <div className="md:w-[382px]">
-          <div className="text-[20px] leading-snug">{content.futureAims.belief.title}</div>
+        <div className="w-[382px]">
+          <div className="text-[32px] font-semibold mb-4">{content.futureAims.belief.title}</div>
           <div className="text-[20px] leading-snug">{content.futureAims.belief.description}</div>
         </div>
       </div>
     </section>
-    <div className='mt-8 md:mt-0 pr-0 md:pr-[115px]'>
-      <img src={AboutBack2} className='w-full max-w-[275px] h-auto' alt={content.futureAims.imageAlt} />
+    <div className='mt-8 mr-13'>
+      <img src={AboutBack2} className='w-[18vw] h-[44vh]' alt={content.futureAims.imageAlt} />
     </div>
-  </div>
+  </div>}
 
   {/* Bottom */}
   <div className="w-full flex flex-col items-center">
@@ -220,20 +341,11 @@ const AboutUs = () => {
               future with us.
             </div>
             <div
-              className={`bg-gradient-to-r text-black ${
-                isXXS || isXS
-                  ? "px-4 py-0.5 text-[10px]"
-                  : isSM
-                  ? "px-6 py-1 text-[14px]"
-                  : isMD
-                  ? "px-8 py-1 text-[14px]"
-                  : isLG
-                  ? "px-10 py-1.5 text-[16px]"
-                  : "px-14 py-2 text-lg sm:text-[20px]"
-              } rounded-xl cursor-pointer mt-3 shadow-[0px_4px_16px_rgba(138,255,132,0.2),0px_4px_16px_rgba(44,107,193,0.2)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
-            >
-              Join Us
-            </div>
+            // className={styles.homeBannerConnectText}
+            className={` bg-gradient-to-r text-black roboto-regular ${isXXS || isXS ? 'px-4 py-0.5 text-[10px]' : isSM ? 'px-6 py-1 text-[12px]' : isMD ? 'px-8 py-1 text-[14px]' : isLG ? 'px-10 py-1.5 text-[16px]' : 'px-14 py-2 text-lg sm:text-[20px]'} rounded-xl cursor-pointer shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+          >
+            Join Us
+          </div>
           </div>
     <div className="w-full flex border-t-3 border-[#8AFF84] mt-0 flex-col items-center"></div>
     <div className="w-[90%] md:w-[83%] flex flex-col">
