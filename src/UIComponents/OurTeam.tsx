@@ -5,10 +5,10 @@ import Twinkle_Varma from "../assets/TeamMemberPics/Twinkle_Verma.png";
 import Neha_Verma from "../assets/TeamMemberPics/Neha_Verma.png";
 import Ajay_Singh from "../assets/TeamMemberPics/Ajay_Karan_Singh_Rajpoot.png";
 import Vishal_Verma from "../assets/TeamMemberPics/Vishal_Verma.png";
-import Manish_Dhubkarya from "../assets/TeamMemberPics/Manish_Dhubkarya.jpg";
+// import Manish_Dhubkarya from "../assets/TeamMemberPics/Manish_Dhubkarya.jpg";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import Footer from "./Footer";
-import { OurTeamStyles as styles } from "../UIComponentCSS/OurTeamCss";
+// import { OurTeamStyles as styles } from "../UIComponentCSS/OurTeamCss";
 import { useEffect, useState } from "react";
 interface TeamMember {
   name: string;
@@ -61,11 +61,11 @@ const OurTeam = () => {
     },
     { name: "Rinky Kushwah", designation: "Content Writer" },
     { pic: Dheer_Verma, name: "Dheer Verma", designation: "UI Design Head" },
-    {
-      pic: Manish_Dhubkarya,
-      name: "Manish Dhubkarya",
-      designation: "Full Stack Developer",
-    },
+    // {
+    //   pic: Manish_Dhubkarya,
+    //   name: "Manish Dhubkarya",
+    //   designation: "Full Stack Developer",
+    // },
   ];
   return (
     <div className={`flex flex-col mb-10 items-center ${isXXS || isXS || isSM?"gap-y-10":isMD?"gap-y-14": isLG?"gap-y-17":isXL?"gap-y-18":"gap-y-20"}  inter-custom justify-center`}>
@@ -73,7 +73,7 @@ const OurTeam = () => {
       {/* Header */}
 
       {isXXS || isXS || isSM ? (
-        <div className="flex mt-20 justify-center items-center flex-col">
+        <div className="flex mt-15 justify-center items-center flex-col">
             <div className="text-[20px] space-x-2 font-bold flex">
               <span className="capitalize">turning</span>
               <span className="text-[#8AFF84] uppercase">visions</span>
@@ -87,9 +87,9 @@ const OurTeam = () => {
               <br />
               services.
             </div>
-            <div className="flex justify-evenly mt-5 items-center">
-                <div className="w-[28vw] h-[28vw] bg-white rounded-full"></div>
-               <div className="text-[18px] leading-snug ml-[11.2vw] roboto-regular">
+            <div className="justify-center flex flex-col mt-5 space-y-2 items-center">
+                <div className="w-[50vw] h-[50vw] bg-white rounded-full"></div>
+               <div className="text-[20px] leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
                 Chief Executive Officer
@@ -98,40 +98,112 @@ const OurTeam = () => {
             </div>
         </div>
       ) : isMD ? (
-        <div></div>
-      ) : isLG ? (
-        <div></div>
-      ) : isXL ? (
-        <div></div>
-      ) : (
-        <div className="w-full flex justify-evenly mt-35 p-6">
-          <div className="flex w-full flex-col items-start">
-            <div className="w-full justify-evenly items-center flex">
-              <div className="w-[28vw] h-[28vw] bg-white rounded-full mb-7"></div>
-
-              <div>
-                <div className="text-[40px] space-x-3 font-bold flex">
-                  <span className="capitalize">turning</span>
-                  <span className="text-[#8AFF84] uppercase">visions</span>
-                  <span className="lowercase">INTO</span>
-                  <span className="text-[#1B7BFF]">REALITY</span>
-                </div>
-                <div className="mt-10 text-[18px] font-medium leading-snug">
-                  We are present in the industry since 2021 and have
-                  <br />
-                  delivered our clients with top notch quality work and
-                  <br />
-                  services.
-                </div>
-              </div>
+        <div className="flex w-full mt-15 justify-center items-center flex-row-reverse">
+            <div className="flex flex-col w-[65%] justify-center items-center">
+            <div className="text-[18px] space-x-2 font-bold flex">
+              <span className="capitalize">turning</span>
+              <span className="text-[#8AFF84] uppercase">visions</span>
+              <span className="lowercase">INTO</span>
+              <span className="text-[#1B7BFF]">REALITY</span>
             </div>
-            <div className="text-[32px] leading-snug ml-[11.2vw] roboto-regular">
+            <div className="mt-5 w-full text-[12px] font-medium leading-snug">
+              We are present in the industry since 2021 and have
+              <br />
+              delivered our clients with top notch quality work and
+              <br />
+              services.
+            </div>
+            </div>
+            <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-2 items-center">
+                <div className="w-[25vw] h-[25vw] bg-white rounded-full"></div>
+               <div className="text-[18px] leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
                 Chief Executive Officer
               </div>
             </div>
-          </div>
+            </div>
+        </div>
+      ) : isLG ? (
+        <div className="flex w-full mt-20 justify-center items-center flex-row-reverse">
+            <div className="flex flex-col w-[65%] justify-center items-center">
+            <div className="text-[28px] space-x-2 font-bold flex">
+              <span className="capitalize">turning</span>
+              <span className="text-[#8AFF84] uppercase">visions</span>
+              <span className="lowercase">INTO</span>
+              <span className="text-[#1B7BFF]">REALITY</span>
+            </div>
+            <div className="mt-4 w-full text-[15px] font-medium leading-snug">
+              We are present in the industry since 2021 and have
+              <br />
+              delivered our clients with top notch quality work and
+              <br />
+              services.
+            </div>
+            </div>
+            <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
+                <div className="w-[30vw] h-[30vw] bg-white rounded-full"></div>
+               <div className="text-[22px] leading-snug roboto-regular">
+              <div className="font-normal">Himanshu Verma</div>
+              <div className="font-medium capitalize">
+                Chief Executive Officer
+              </div>
+            </div>
+            </div>
+        </div>
+      ) : isXL ? (
+        <div className="flex w-full mt-25 justify-center items-center flex-row-reverse">
+            <div className="flex flex-col w-[65%] justify-center items-center">
+            <div className="text-[34px] space-x-2 font-bold flex">
+              <span className="capitalize">turning</span>
+              <span className="text-[#8AFF84] uppercase">visions</span>
+              <span className="lowercase">INTO</span>
+              <span className="text-[#1B7BFF]">REALITY</span>
+            </div>
+            <div className="mt-4 w-full text-[18px] font-medium leading-snug">
+              We are present in the industry since 2021 and have
+              <br />
+              delivered our clients with top notch quality work and
+              <br />
+              services.
+            </div>
+            </div>
+            <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
+                <div className="w-[30vw] h-[30vw] bg-white rounded-full"></div>
+               <div className="text-[28px] leading-snug roboto-regular">
+              <div className="font-normal">Himanshu Verma</div>
+              <div className="font-medium capitalize">
+                Chief Executive Officer
+              </div>
+            </div>
+            </div>
+        </div>
+      ) : (
+       <div className="flex w-[90%] mt-25 justify-center items-center flex-row-reverse">
+            <div className="flex flex-col w-[65%] mb-10 justify-center items-center">
+            <div className="text-[40px] space-x-2 font-bold flex">
+              <span className="capitalize">turning</span>
+              <span className="text-[#8AFF84] uppercase">visions</span>
+              <span className="lowercase">INTO</span>
+              <span className="text-[#1B7BFF]">REALITY</span>
+            </div>
+            <div className="mt-8 w-full text-[18px] font-medium leading-snug">
+              We are present in the industry since 2021 and have
+              <br />
+              delivered our clients with top notch quality work and
+              <br />
+              services.
+            </div>
+            </div>
+            <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
+                <div className="w-[27vw] h-[27vw] bg-white rounded-full"></div>
+               <div className="text-[32px] mt-4 leading-snug roboto-regular">
+              <div className="font-normal">Himanshu Verma</div>
+              <div className="font-medium capitalize">
+                Chief Executive Officer
+              </div>
+            </div>
+            </div>
         </div>
       )}
 
@@ -157,13 +229,67 @@ const OurTeam = () => {
         ))}
       </div>  :
     isMD?
-    <div></div>:
+    <div className="grid w-[90%] grid-cols-3 gap-y-10 justify-items-center">
+        {TeamData.map((team, index) => (
+          <div key={index} className="w-auto flex flex-col items-center">
+            {!team.pic ? (
+              <div className="w-[22vw] h-[160px] bg-white rounded-[5px]" />
+            ) : (
+              <img
+                className="w-[22vw] h-[160px] rounded-[5px] object-cover"
+                src={team.pic}
+                alt={team.name}
+              />
+            )}
+            <div className="text-center leading-tight mt-3 text-[14px]">
+              <div className="font-normal">{team.name}</div>
+              <div className="font-medium w-full">{team.designation}</div>
+            </div>
+          </div>
+        ))}
+      </div>:
     isLG?
-    <div></div>:
+    <div className="grid w-[90%] grid-cols-3 gap-y-10 justify-items-center">
+        {TeamData.map((team, index) => (
+          <div key={index} className="w-auto flex flex-col items-center">
+            {!team.pic ? (
+              <div className="w-[22vw] h-[230px] bg-white rounded-[5px]" />
+            ) : (
+              <img
+                className="w-[22vw] h-[230px] rounded-[5px] object-cover"
+                src={team.pic}
+                alt={team.name}
+              />
+            )}
+            <div className="text-center leading-normal mt-5 text-[18px]">
+              <div className="font-normal">{team.name}</div>
+              <div className="font-medium w-full">{team.designation}</div>
+            </div>
+          </div>
+        ))}
+      </div>:
     isXL?
-    <div></div>:
+    <div className="grid w-[85%] grid-cols-3 gap-y-10 justify-items-center">
+        {TeamData.map((team, index) => (
+          <div key={index} className="w-auto flex flex-col items-center">
+            {!team.pic ? (
+              <div className="w-[22vw] h-[300px] bg-white rounded-[5px]" />
+            ) : (
+              <img
+                className="w-[22vw] h-[300px] rounded-[5px] object-cover"
+                src={team.pic}
+                alt={team.name}
+              />
+            )}
+            <div className="text-center leading-normal mt-7 text-[20px]">
+              <div className="font-normal">{team.name}</div>
+              <div className="font-medium w-full">{team.designation}</div>
+            </div>
+          </div>
+        ))}
+      </div>:
 
-      <div className="grid w-[77%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-12 justify-items-center">
+      <div className="grid w-[79%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-12 justify-items-center">
         {TeamData.map((team, index) => (
           <div key={index} className="w-auto flex flex-col items-center">
             {!team.pic ? (
