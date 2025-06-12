@@ -8,7 +8,7 @@ import Conferences from './UIComponents/Conferences';
 import AboutUs from './UIComponents/AboutUs';
 import OurServices from './UIComponents/OurServices';
 import Home from './UIComponents/Home';
-import ChatSupportMainScreen from './Models/ChatSupportModel/ChatSupportMainScreen';
+// import ChatSupportMainScreen from './Models/ChatSupportModel/ChatSupportMainScreen';
 function App() {
   const ThesisWritingServices = [
     "Data Mining Thesis Writing Service",
@@ -41,7 +41,7 @@ function App() {
         </div>
         {/* <div className='px-6 py-1 bg-[#131313] cursor-pointer roboto-regular2 font-normal md:text-[20px] text-[15px] rounded-t-[10px] fixed right-4 md:top-100 top-50 translate-x-1/2 z-50 rotate-270'>Contact Us</div> */}
         <Routes>
-          <Route path="/landing" element={<Home />} />
+          <Route path="" element={<Home />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/thesiswriting" element={<WritingComponent mainHeading='Thesis Writing' services={ThesisWritingServices} />} />
           <Route path="/dissertationswriting" element={<WritingComponent mainHeading='Dissertations Writing' services={ThesisWritingServices} />} />

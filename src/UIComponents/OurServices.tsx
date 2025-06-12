@@ -71,7 +71,7 @@ const OurServices: React.FC = () => {
         className={`w-full ${
           isLG?"grid grid-cols-4 gap-x-50  overflow-x-auto":
           isXL?"grid grid-cols-4  overflow-x-auto gap-x-26":
-        
+          
         is2XL || is3XL
             ? "grid grid-cols-4  overflow-x-auto gap-x-20"
             : "flex overflow-x-auto gap-x-4 snap-x snap-mandatory"
@@ -83,7 +83,7 @@ const OurServices: React.FC = () => {
             className={`flex p-1 flex-col items-center justify-between snap-start flex-shrink-0 ${
               isXXS ? "w-[80px] h-[160px]" :
               isXS ? "w-[90px] h-[200px]" :
-              isSM ? "w-[120px] h-[200px]" :
+              isSM ? "w-[120px] h-[220px]" :
               isMD ? "w-[140px] h-[260px]" :
               isLG ? "w-[180px] h-[320px]" :
               isXL ? "w-[200px] h-[350px]" :
