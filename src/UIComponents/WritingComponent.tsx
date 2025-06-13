@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import NavigationComponent from "./NavigationComponent";
 import ScrollingFooter from "./ScrollingFooter";
@@ -10,6 +11,7 @@ interface WritingComponentProps {
 
 const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeading }) => {
   const [width, setWidth] = useState(window.innerWidth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -25,6 +27,12 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
   const isLG = width > 700 && width <= 900;
   const isXL = width > 900 && width <= 1200;
   const is2XL = width > 1200 && width <= 1600;
+
+  // Handle click to navigate to ServiceDetailComponent
+  const handleServiceClick = (service: string) => {
+     navigate("/contactus", { state: { selectedService: service } });
+  };
+
   return (
     <div className="flex flex-col roboto-regular my-4 items-center justify-center">
       <NavigationComponent />
@@ -75,7 +83,7 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
               ? "flex flex-col items-center w-full mx-2"
               : isMD || isLG
               ? "columns-2 gap-4 mx-4"
-              : "columns-3 gap-8 mx-6"
+              : "columns-3 gap-8 mx-auto"
           }
         >
           {services.map((service, index) => (
@@ -97,9 +105,12 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
                   : "px-8 text-[16px]"
               }`}
             >
-              <span>
+              <div
+                className="cursor-pointer inline-block transition-transform duration-500 ease-out hover:scale-125 hover:text-gray-400  hover:text-shadow-blowout"
+                onClick={() => handleServiceClick(service)}
+              >
                 {index + 1}. {service}
-              </span>
+              </div>
             </li>
           ))}
         </ul>
@@ -122,7 +133,7 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
         }`}
       >
         <div
-          className={`flex text-[#AFACAC] font-semibold justify-between items-center flex-row ${
+          className={`flex text-[#AFACAC]  font-semibold justify-between items-center flex-row ${
             isXXS || isXS
               ? "w-[90%] text-[10px]"
               : isSM
@@ -138,11 +149,24 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
               : "w-[50%] text-[20px]"
           }`}
         >
-          <div>Writing Services</div>
-          <div>IT Solutions</div>
-          <div>AI Services</div>
+          <div className="hover:text-white" style={{ fontFamily: "Roboto", fontWeight: 600 }}>
+            Writing Services
+          </div>
+          <div className="hover:text-white">IT Solutions</div>
+          <div className="hover:text-white">AI Services</div>
         </div>
-        <div className={`${isXXS || isXS || isSM?"w-full":isMD || isLG?"w-[90%]":isXL?"w-[85%]": " w-[80%]"} border-t-1 mt-4 border-[#8AFF84]`}></div>
+        <div
+          className={`${
+            isXXS || isXS || isSM
+              ? "w-full"
+              : isMD || isLG
+              ? "w-[90%]"
+              : isXL
+              ? "w-[85%]"
+              : "w-[80%]"
+          } border-t mt-4 border-[#8AFF84]"
+        `}
+        ></div>
       </div>
       <div
         className={`${
@@ -163,7 +187,7 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
       >
         <ScrollingFooter />
       </div>
-      <div className="w-full flex border-t-3 border-[#8AFF84] mt-0 flex-col items-center">
+      <div className="w-full flex border-t border-[#8AFF84] mt-0 flex-col items-center">
         <div
           className={`flex flex-col ${
             isXXS || isXS

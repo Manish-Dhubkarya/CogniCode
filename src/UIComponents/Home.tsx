@@ -262,7 +262,7 @@ function Home() {
               </div>
               <div
                 // className={styles.homeBannerVisionText}
-                className={`uppercase ${isMD ? 'text-[64px] leading-16' : isLG ? 'text-[80px] leading-20' : isXL?"text-[90px] leading-25": 'text-[128px] leading-28'} tracking-tight`}
+                className={`uppercase ${isMD ? 'text-[64px] leading-16' : isLG ? 'text-[80px] leading-20' : isXL?"text-[90px] leading-25": 'text-[128px] font-bold leading-28'} tracking-tight`}
                 style={{
                   backgroundImage: 'linear-gradient(180deg, #8AFF84 0%, #97BBCB 55.5%, #004EB9 100%)',
                   WebkitBackgroundClip: 'text',
@@ -279,7 +279,7 @@ function Home() {
               </div>
               <div
                 // className={styles.homeBannerRealityText}
-                className={`uppercase ${isMD ? 'text-[64px] leading-16' : isLG ? 'text-[80px] leading-20' : isXL?"text-[90px] leading-25" : 'text-[128px] leading-28'} tracking-tight`}
+                className={`uppercase ${isMD ? 'text-[64px] leading-16' : isLG ? 'text-[80px] leading-20' : isXL?"text-[90px] leading-25" : 'text-[128px] font-bold leading-28'} tracking-tight`}
                 style={{
                   backgroundImage: 'linear-gradient(180deg, #8AFF84 0%, #97BBCB 55.5%, #004EB9 100%)',
                   WebkitBackgroundClip: 'text',
@@ -447,7 +447,7 @@ style={{
             >
               Create what the world needs not what you are capable of
             </div>
-            <div>- Dheer Verma</div>
+            <div className={`${isXXS || isXS ? 'text-[10px]' : isSM ? 'text-[10px]' : isMD ? 'text-[14px]' : isLG ? 'text-[16px]': isXL?"text-[22px]" : 'text-[32px]'}`}>- Dheer Verma</div>
           </div>
           <div
             // className={styles.connectListMain}

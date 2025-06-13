@@ -5,7 +5,7 @@ import Twinkle_Varma from "../assets/TeamMemberPics/Twinkle_Verma.png";
 import Neha_Verma from "../assets/TeamMemberPics/Neha_Verma.png";
 import Ajay_Singh from "../assets/TeamMemberPics/Ajay_Karan_Singh_Rajpoot.png";
 import Vishal_Verma from "../assets/TeamMemberPics/Vishal_Verma.png";
-// import Manish_Dhubkarya from "../assets/TeamMemberPics/Manish_Dhubkarya.jpg";
+import Manish_Dhubkarya from "../assets/TeamMemberPics/Manish_Dhubkarya.jpg";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import Footer from "./Footer";
 // import { OurTeamStyles as styles } from "../UIComponentCSS/OurTeamCss";
@@ -61,11 +61,11 @@ const OurTeam = () => {
     },
     { name: "Rinky Kushwah", designation: "Content Writer" },
     { pic: Dheer_Verma, name: "Dheer Verma", designation: "UI Design Head" },
-    // {
-    //   pic: Manish_Dhubkarya,
-    //   name: "Manish Dhubkarya",
-    //   designation: "Full Stack Developer",
-    // },
+    {
+      pic: Manish_Dhubkarya,
+      name: "Manish Dhubkarya",
+      designation: "Full Stack Developer",
+    },
   ];
   return (
     <div className={`flex flex-col mb-10 items-center ${isXXS || isXS || isSM?"gap-y-10":isMD?"gap-y-14": isLG?"gap-y-17":isXL?"gap-y-18":"gap-y-20"}  inter-custom justify-center`}>

@@ -1,12 +1,18 @@
+import { useEffect, useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import ContactUsBannerBack from "../assets/ContactUsBannerBack.gif";
 import { LuPlus } from "react-icons/lu";
 import Footer from "./Footer";
 import ScrollingFooter from "./ScrollingFooter";
 import NavigationComponent from "./NavigationComponent";
 import { contactUsStyles as styles } from "../UIComponentCSS/ContactUsCss";
-import { useEffect, useState } from "react";
+import { postData } from "../services/FetchBackendServices";
+import { FaCircleCheck } from "react-icons/fa6";
 
 export default function ContactUs() {
+  const { state } = useLocation();
+  const { selectedService = "No service selected" } = state || {};
+
   const ConnectByList = [
     "Enquire about price as per services",
     "Looking for a career change",
@@ -16,16 +22,48 @@ export default function ContactUs() {
     "New business collaboration",
   ];
   const UserDetails = [
+    "Inquiry Type*",
     "First name*",
-    "Last name*",
+    "Last name",
     "Email address*",
     "Phone Number*",
     "How can we help you?*",
   ];
 
   const [width, setWidth] = useState(window.innerWidth);
-  const [inputValues, setInputValues] = useState(Array(UserDetails.length).fill(""));
+  const [inputValues, setInputValues] = useState([
+    selectedService !== "No service selected" ? selectedService : "",
+    ...Array(UserDetails.length - 1).fill(""),
+  ]);
+  const [fieldErrors, setFieldErrors] = useState<string[]>(Array(UserDetails.length).fill(""));
+  const [successMessage, setSuccessMessage] = useState<string>("");
 
+  // Ref for Inquiry Type input
+  const inquiryTypeRef = useRef<HTMLInputElement>(null);
+
+  // Scroll to Inquiry Type on mount
+  useEffect(() => {
+    if (inquiryTypeRef.current && selectedService !== "No service selected") {
+      inquiryTypeRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [selectedService]);
+
+  // Debug logs
+  useEffect(() => {
+    console.log("Selected Service:", selectedService);
+    console.log("Input Values:", inputValues);
+    console.log("Field Errors:", fieldErrors);
+  }, [selectedService, inputValues, fieldErrors]);
+
+  // Auto-dismiss success message
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => setSuccessMessage(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
+
+  // Resize handler
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -41,15 +79,100 @@ export default function ContactUs() {
   const isXL = width > 900 && width <= 1200;
 
   // Handle input changes
-  const handleInputChange = (index:any, value:any) => {
+  const handleInputChange = (index: number, value: string) => {
     const newValues = [...inputValues];
     newValues[index] = value;
     setInputValues(newValues);
+    const newErrors = [...fieldErrors];
+    newErrors[index] = "";
+    setFieldErrors(newErrors);
+  };
+
+  // Validation functions
+  const isValidName = (value: string) => /^[a-zA-Z\s]+$/.test(value.trim());
+  const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+  const isValidPhone = (value: string) => /^\d{10}$/.test(value.trim());
+
+  // Handle form submission
+  const handleInquirySubmit = async () => {
+    const newErrors = Array(UserDetails.length).fill("");
+    let hasError = false;
+
+    // Check mandatory fields (exclude Last name, index 2)
+    const mandatoryIndices = [0, 1, 3, 4, 5];
+    mandatoryIndices.forEach((index) => {
+      if (!inputValues[index].trim()) {
+        newErrors[index] = `Please fill in the "${UserDetails[index]}" field.`;
+        hasError = true;
+      }
+    });
+
+    // Validate First name format
+    if (inputValues[1].trim() && !isValidName(inputValues[1])) {
+      newErrors[1] = "Please enter a valid first name (only letters and spaces allowed).";
+      hasError = true;
+    }
+
+    // Validate Email format
+    if (inputValues[3].trim() && !isValidEmail(inputValues[3])) {
+      newErrors[3] = "Please enter a valid email address.";
+      hasError = true;
+    }
+
+    // Validate Phone format
+    if (inputValues[4].trim() && !isValidPhone(inputValues[4])) {
+      newErrors[4] = "Please enter a valid 10-digit phone number.";
+      hasError = true;
+    }
+
+    if (hasError) {
+      setFieldErrors(newErrors);
+      return;
+    }
+
+    // Populate body with input values
+    const body = {
+      inquiryType: inputValues[0],
+      firstName: inputValues[1],
+      lastName: inputValues[2],
+      email: inputValues[3],
+      phone: inputValues[4],
+      howToHelp: inputValues[5],
+    };
+
+    try {
+      const response = await postData("clientInquiry/submit_client_inquiry", body);
+      if (response && response.message) {
+        setSuccessMessage(response.message);
+        setInputValues(Array(UserDetails.length).fill(""));
+        setFieldErrors(Array(UserDetails.length).fill(""));
+      } else {
+        setFieldErrors([..."Submission failed. Please try again."]);
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setFieldErrors([..."An error occurred. Please try again later."]);
+    }
   };
 
   return (
     <div className={styles.container}>
       <NavigationComponent />
+
+      {/* Success Popover */}
+      {successMessage && (
+       <div className="fixed inset-0 flex items-center justify-center z-50">
+  {/* Glassy Overlay */}
+  <div className="absolute inset-0 bg-white/10 backdrop-blur-sm animate-[fadeIn_0.5s_ease-out_forwards]"></div>
+
+  {/* Message Box with glass effect and animation */}
+  <div className="relative bg-white/20 backdrop-blur-lg  px-6 py-4 rounded-xl shadow-2xl border border-white/30 animate-[slideUpFade_0.5s_ease-out_forwards] max-w-sm text-center">
+    <h2 className="text-xl font-bold mb-1 tracking-wide text-[#16ff03] flex items-center gap-3 drop-shadow"><FaCircleCheck color="#16ff03" /> Success</h2>
+    <p className="text-sm font-medium tracking-tight drop-shadow">{successMessage}</p>
+  </div>
+</div>
+
+      )}
 
       {/* Banner */}
       <div
@@ -133,7 +256,7 @@ export default function ContactUs() {
                 }`}
               >
                 <div>{item}</div>
-                <LuPlus size={isXXS || isXS || isSM ?14 : isMD?16: isLG?18 :20} />
+                <LuPlus size={isXXS || isXS || isSM ? 14 : isMD ? 16 : isLG ? 18 : 20} />
               </div>
               <div className="w-full border-t-1 border-[#8AFF84]"></div>
             </div>
@@ -169,24 +292,6 @@ export default function ContactUs() {
             <div
               className={`${
                 isXXS || isXS
-                  ? "text-[15px]"
-                  : isSM
-                  ? "text-[16px]"
-                  : isMD
-                  ? "text-[18px]"
-                  : isLG
-                  ? "text-[21px]"
-                  : isXL
-                  ? "text-[26px]"
-                  : "text-[32px]"
-              }`}
-            >
-              Inquiry Type*
-            </div>
-            <div className={styles.aboutLine}></div>
-            <div
-              className={`${
-                isXXS || isXS
                   ? "text-[15px] font-semibold"
                   : isSM
                   ? "text-[16px] font-semibold"
@@ -201,21 +306,25 @@ export default function ContactUs() {
             >
               About You
             </div>
+            <div className={styles.aboutLine}></div>
           </div>
           {UserDetails.map((item, index) => (
-            <div key={index} className="flex items-start flex-col gap-y-6 w-[90%] max-w-full">
+            <div key={index} className="flex items-start flex-col gap-y-2 w-[90%] max-w-full">
               <div
                 className={`relative flex flex-col items-start w-full ${
                   isXXS || isXS || isSM ? "h-10" : isMD ? "h-12" : isLG ? "h-14" : "h-16"
                 }`}
               >
                 <input
-                  type="text"
+                  type={index === 3 ? "email" : index === 4 ? "tel" : "text"}
                   id={`input-${index}`}
                   placeholder=" "
-                  value={inputValues[index]}
+                  value={inputValues[index] || ""}
                   onChange={(e) => handleInputChange(index, e.target.value)}
-                  className={`${styles.inputField} peer`}
+                  className={`${styles.inputField} peer ${
+                    fieldErrors[index] ? "border-red-500" : ""
+                  }`}
+                  ref={index === 0 ? inquiryTypeRef : null}
                 />
                 <label
                   htmlFor={`input-${index}`}
@@ -229,8 +338,27 @@ export default function ContactUs() {
                 </label>
                 <div className={styles.inputUnderline} />
               </div>
+              {fieldErrors[index] && (
+                <div className="text-red-500 text-xs md:text-sm">{fieldErrors[index]}</div>
+              )}
             </div>
           ))}
+          <div
+            onClick={handleInquirySubmit}
+            className={`bg-gradient-to-r mt-4 text-white ${
+              isXXS || isXS
+                ? "px-3.5 py-0.5 text-[9px]"
+                : isSM
+                ? "px-5 py-1 text-[10px]"
+                : isMD
+                ? "px-7 py-1 text-[12px]"
+                : isLG
+                ? "px-8 py-1.5 text-[14px]"
+                : "px-10 py-2 text-lg sm:text-[17px]"
+            } rounded-xl cursor-pointer shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-semibold`}
+          >
+            Submit
+          </div>
         </div>
       </div>
 
@@ -243,6 +371,21 @@ export default function ContactUs() {
           <Footer />
         </div>
       </div>
+
+      {/* Tailwind Animation */}
+      <style>
+        {`
+          @keyframes fade-in-out {
+            0% { opacity: 0; transform: translateY(-10px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+          }
+          .animate-fade-in-out {
+            animation: fade-in-out 3s ease-in-out forwards;
+          }
+        `}
+      </style>
     </div>
   );
 }

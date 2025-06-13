@@ -4,19 +4,6 @@ import { MdArrowDropDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 export default function NavigationComponent() {
-  /**
-    
-  <Route path="/landing" element={<Home />} />
-          <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/thesiswriting" element={<WritingComponent mainHeading='Thesis Writing' services={ThesisWritingServices} />} />
-          <Route path="/dissertationswriting" element={<WritingComponent mainHeading='Dissertations Writing' services={ThesisWritingServices} />} />
-          <Route path="/paperwriting" element={<WritingComponent mainHeading='Paper Writing' services={PaperWritingServices} />} />
-          <Route path="/ourteam" element={<OurTeam />} />
-          <Route path="/publications" element={<Publications />} />
-          <Route path="/conferences" element={<Conferences />} />
-          <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/services" element={<OurServices />} />
-   */
   const Headings = [["About Us", "/aboutus"], ["Services", "/services"], ["Conferences", "/conferences"], ["Publications", "/publications"], ["Careers", "/contactus"]];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);

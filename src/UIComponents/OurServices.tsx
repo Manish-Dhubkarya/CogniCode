@@ -12,9 +12,11 @@ import ScalableAIServices from "../assets/ServicesCSS/Scalable_AI_services.png";
 import MLModel from "../assets/ServicesCSS/Machine_learning_models.png";
 import ScrollingFooter from "./ScrollingFooter";
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
 const OurServices: React.FC = () => {
   const [width, setWidth] = useState(window.innerWidth);
+  const navigate=useNavigate()
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -32,28 +34,28 @@ const OurServices: React.FC = () => {
   const is3XL = width > 1600;
 
   const WritingServices = [
-    { title: "Thesis Writing", back: ThesisBack },
-    { title: "Dissertation Writing", back: DissertationBack },
-    { title: "Paper Writing", back: PaperBack },
-    { title: "Plagarism Removal", back: PaperBack },
+    { title: "Thesis Writing", back: ThesisBack, navigation:"/thesiswriting" },
+    { title: "Dissertation Writing", back: DissertationBack, navigation:"/dissertationswriting" },
+    { title: "Paper Writing", back: PaperBack, navigation:"/paperwriting" },
+    { title: "Plagarism Removal", back: PaperBack, navigation:"" },
   ];
 
   const ITServices = [
-    { title: "Data Science Services", back: DSBack },
-    { title: "Python Programming Services", back: PythonBack },
+    { title: "Data Science Services", back: DSBack, navigation:"" },
+    { title: "Python Programming Services", back: PythonBack, navigation:"" },
   ];
 
   const AIservices = [
-    { title: "Predictive Analytics", back: PredictiveAnalytics },
-    { title: "Intelligent Automation", back: IntelligentAutomation },
-    { title: "NLP Solutions", back: NLP_Solutions },
-    { title: "Scalable AI Services", back: ScalableAIServices },
-    { title: "Machine Learning Models", back: MLModel },
+    { title: "Predictive Analytics", back: PredictiveAnalytics, navigation:"" },
+    { title: "Intelligent Automation", back: IntelligentAutomation, navigation:"" },
+    { title: "NLP Solutions", back: NLP_Solutions, navigation:"" },
+    { title: "Scalable AI Services", back: ScalableAIServices, navigation:"" },
+    { title: "Machine Learning Models", back: MLModel, navigation:"" },
   ];
 
   const renderSection = (
     title: string,
-    services: { title: string; back: string }[]
+    services: { title: string; back: string, navigation:string }[]
   ) => (
     <div className="w-full mb-10">
       <div className={`${
@@ -74,7 +76,7 @@ const OurServices: React.FC = () => {
           
         is2XL || is3XL
             ? "grid grid-cols-4  overflow-x-auto gap-x-20"
-            : "flex overflow-x-auto gap-x-4 snap-x snap-mandatory"
+            : `flex overflow-x-auto ${services === ITServices ? "gap-x-10" : "gap-x-4"}  snap-x snap-mandatory`
         } scrollbar-none`}
       >
         {services.map((item, index) => (
@@ -90,8 +92,9 @@ const OurServices: React.FC = () => {
               "w-[240px] h-[460px]"
             }`}
           >
-            <div className="w-full flex flex-col items-center justify-center">
+            <div className="w-full cursor-pointer flex flex-col items-center justify-center">
               <div
+              onClick={()=>navigate(item.navigation)}
                 className={`rounded-[7px] w-full ${
                   isXXS ? "h-[100px]" :
                   isXS ? "h-[110px]" :
@@ -130,7 +133,7 @@ const OurServices: React.FC = () => {
   );
 
   return (
-    <div className="flex flex-col roboto-regular mt-15 mb-10 text-white">
+    <div className={`flex flex-col roboto-regular ${isXXS || isXS || isSM?"mt-7":isMD?"mt-8":isLG?"mt-12": "mt-15"}  mb-10 text-white`}>
       <NavigationComponent />
 
       <div className={`px-4 ${

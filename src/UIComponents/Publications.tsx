@@ -532,7 +532,7 @@ const Publications: React.FC = () => {
             <label className="flex items-start text-start space-x-6">
               <span className={`${isXXS || isXS ? "text-[12px]" : isSM ? "text-[13px]" : "text-[15px]"} font-semibold`}>Show titles in top 10 percent</span>
             </label>
-            <label className="flex items-start text-start space-x-6 mt-2">
+            {/* <label className="flex items-start text-start space-x-6 mt-2">
               <input
                 type="checkbox"
                 checked={pendingFilters.highestPercentile}
@@ -540,7 +540,7 @@ const Publications: React.FC = () => {
                 className="rounded-full text-blue-500 focus:ring-blue-500 w-4 h-4"
               />
               <span className={`${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : "text-[12px]"}`}>Top 10%</span>
-            </label>
+            </label> */}
             {!pendingFilters.highestPercentile && (
               <div className={`mt-4 ${isXXS || isXS || isSM ? "space-y-3" : isMD || isLG ? "space-y-4" : "space-y-7"}`}>
                 <label className="flex items-start text-start space-x-6">
