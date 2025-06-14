@@ -8,7 +8,6 @@ import Vishal_Verma from "../assets/TeamMemberPics/Vishal_Verma.png";
 import Manish_Dhubkarya from "../assets/TeamMemberPics/Manish_Dhubkarya.jpg";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import Footer from "./Footer";
-// import { OurTeamStyles as styles } from "../UIComponentCSS/OurTeamCss";
 import { useEffect, useState } from "react";
 interface TeamMember {
   name: string;

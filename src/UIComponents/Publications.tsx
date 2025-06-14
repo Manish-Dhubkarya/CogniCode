@@ -4,18 +4,8 @@ import { IoIosArrowBack, IoIosArrowForward, IoMdCloseCircle } from "react-icons/
 import React, { useEffect, useState } from "react";
 import Footer from "./Footer";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
-import { CustomStyle } from "../UIComponentCSS/PublicationsCss";
 import { IoFilter } from "react-icons/io5";
-
-interface Publication {
-  id: number;
-  sourceTitle: string;
-  citeScore: number;
-  percentile: number;
-  citations: number;
-  documents: number;
-  citedPercentage: number;
-}
+import { getData } from "../services/FetchBackendServices";
 
 interface Filters {
   openAccess: boolean;
@@ -30,190 +20,202 @@ interface Filters {
   quartile4: boolean;
 }
 
-const TABLE_DATA: Publication[] = [
-  {
-    id: 1,
-    sourceTitle: "Journal of Advanced Medicine",
-    citeScore: 12.5,
-    percentile: 95,
-    citations: 780432,
-    documents: 142,
-    citedPercentage: 92,
-  },
-  {
-    id: 2,
-    sourceTitle: "Global Medical Innovations",
-    citeScore: 8.7,
-    percentile: 88,
-    citations: 450123,
-    documents: 98,
-    citedPercentage: 85,
-  },
-  {
-    id: 3,
-    sourceTitle: "Biomedical Engineering Review",
-    citeScore: 6.3,
-    percentile: 75,
-    citations: 320987,
-    documents: 76,
-    citedPercentage: 78,
-  },
-  {
-    id: 4,
-    sourceTitle: "Clinical Trials and Insights",
-    citeScore: 15.2,
-    percentile: 98,
-    citations: 950234,
-    documents: 165,
-    citedPercentage: 94,
-  },
-  {
-    id: 5,
-    sourceTitle: "Neuroscience Advances",
-    citeScore: 10.1,
-    percentile: 90,
-    citations: 620543,
-    documents: 112,
-    citedPercentage: 89,
-  },
-  {
-    id: 6,
-    sourceTitle: "Public Health Perspectives",
-    citeScore: 4.8,
-    percentile: 65,
-    citations: 210456,
-    documents: 54,
-    citedPercentage: 70,
-  },
-  {
-    id: 7,
-    sourceTitle: "Cardiology Research Journal",
-    citeScore: 9.4,
-    percentile: 87,
-    citations: 510789,
-    documents: 103,
-    citedPercentage: 86,
-  },
-  {
-    id: 8,
-    sourceTitle: "Environmental Health Studies",
-    citeScore: 7.2,
-    percentile: 80,
-    citations: 390654,
-    documents: 88,
-    citedPercentage: 82,
-  },
-  {
-    id: 9,
-    sourceTitle: "Genomics and Proteomics",
-    citeScore: 11.8,
-    percentile: 93,
-    citations: 720321,
-    documents: 134,
-    citedPercentage: 91,
-  },
-  {
-    id: 10,
-    sourceTitle: "Immunology Today",
-    citeScore: 5.9,
-    percentile: 70,
-    citations: 280987,
-    documents: 67,
-    citedPercentage: 75,
-  },
-  {
-    id: 11,
-    sourceTitle: "Pediatric Research Journal",
-    citeScore: 8.1,
-    percentile: 85,
-    citations: 430876,
-    documents: 95,
-    citedPercentage: 84,
-  },
-  {
-    id: 12,
-    sourceTitle: "Molecular Biology Insights",
-    citeScore: 13.6,
-    percentile: 96,
-    citations: 890123,
-    documents: 150,
-    citedPercentage: 93,
-  },
-  {
-    id: 13,
-    sourceTitle: "Infectious Disease Reports",
-    citeScore: 6.7,
-    percentile: 78,
-    citations: 350432,
-    documents: 80,
-    citedPercentage: 79,
-  },
-  {
-    id: 14,
-    sourceTitle: "Cancer Therapy Advances",
-    citeScore: 14.3,
-    percentile: 97,
-    citations: 910654,
-    documents: 160,
-    citedPercentage: 95,
-  },
-  {
-    id: 15,
-    sourceTitle: "Neurology Frontiers",
-    citeScore: 9.8,
-    percentile: 89,
-    citations: 570987,
-    documents: 108,
-    citedPercentage: 87,
-  },
-  {
-    id: 16,
-    sourceTitle: "Pharmacology Reviews",
-    citeScore: 7.2,
-    percentile: 82,
-    citations: 410321,
-    documents: 90,
-    citedPercentage: 83,
-  },
-  {
-    id: 17,
-    sourceTitle: "Bioinformatics Journal",
-    citeScore: 10.5,
-    percentile: 91,
-    citations: 650432,
-    documents: 120,
-    citedPercentage: 90,
-  },
-  {
-    id: 18,
-    sourceTitle: "Endocrinology Studies",
-    citeScore: 5.4,
-    percentile: 68,
-    citations: 260789,
-    documents: 60,
-    citedPercentage: 72,
-  },
-  {
-    id: 19,
-    sourceTitle: "Surgical Innovations",
-    citeScore: 8.9,
-    percentile: 86,
-    citations: 480123,
-    documents: 100,
-    citedPercentage: 85,
-  },
-  {
-    id: 20,
-    sourceTitle: "Epidemiology Trends",
-    citeScore: 6.1,
-    percentile: 73,
-    citations: 300654,
-    documents: 70,
-    citedPercentage: 76,
-  },
-];
+interface PublicationRow {
+  publicationId: number;
+  sourceTitle: string;
+  citeScore: number;
+  hPercentile: string; // Kept as string per backend
+  citations: number;
+  documents: number;
+  cited: number;
+}
 
 const Publications: React.FC = () => {
+  const CustomStyle = () => {
+  return (
+    <style>
+      {`
+                  .custom-row {
+                    display: flex;
+                    align-items: flex-start;
+                    min-height: 48px;
+                  }
+                  .custom-row-content {
+                    display: flex;
+                    align-items: flex-start;
+                    min-height: 48px;
+                  }
+                  .custom-content-wrapper {
+                    display: flex;
+                    flex: 1;
+                    border-bottom: 1px solid #1B7BFF;
+                    margin-left: 0;
+                    padding-left: 0;
+                  }
+                  .custom-content-wrapper > div {
+                    display: flex;
+                    align-items: flex-start;
+                    padding: 12px 16px;
+                    margin-top: 24px;
+                    white-space: normal;
+                  }
+                  .custom-content-wrapper > div.long-word {
+                    word-break: break-all;
+                  }
+                  .custom-content-wrapper > div.source-title {
+                    padding-left: 0;
+                    text-align: left;
+                    justify-content: flex-start;
+                  }
+                  .custom-content-wrapper > div:not(.source-title) {
+                    justify-content: center;
+                    text-align: center;
+                  }
+                  .custom-checkbox {
+                    width: 40px;
+                    padding: 7px 10px 7px 9px;
+                    display: flex;
+                    align-items: flex-start;
+                  }
+                  .custom-header {
+                    background-color: #f5f5f5;
+                    min-height: 48px;
+                  }
+                  .custom-header > div {
+                    display: flex;
+                    align-items: center;
+                    padding: 12px 16px;
+                    white-space: normal;
+                  }
+                  .custom-header > div.source-title {
+                    padding-left: 0;
+                    text-align: left;
+                    justify-content: flex-start;
+                  }
+                  .custom-header > div:not(.source-title) {
+                    justify-content: center;
+                    text-align: center;
+                  }
+                  .pagination-button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    border: 1px solid #e5e7eb;
+                    border-radius: 50%;
+                    transition: border-color 0.3s, color 0.3s, background-color 0.3s;
+                    cursor: pointer;
+                    touch-action: manipulation;
+                  }
+                  .pagination-button:hover:not(.disabled) {
+                    border-color: #a855f7;
+                    color: #3b82f6;
+                    background-color: #f3f4f6;
+                  }
+                  .pagination-button.disabled {
+                    color: #f87171;
+                    cursor: not-allowed;
+                  }
+                  .pagination-button > * {
+                    pointer-events: none;
+                  }
+
+                  /* Responsive Styles */
+                  @media (max-width: 1440px) {
+                    .custom-content-wrapper > div {
+                      padding: 10px 14px;
+                      font-size: 16px;
+                    }
+                    .custom-header > div {
+                      padding: 10px 14px;
+                      font-size: 15px;
+                    }
+                    .custom-checkbox {
+                      width: 38px;
+                      padding: 7px 9px;
+                    }
+                    .pagination-button {
+                      width: 38px;
+                      height: 38px;
+                    }
+                  }
+
+                  @media (max-width: 1024px) {
+                    .custom-content-wrapper > div {
+                      padding: 8px 12px;
+                      font-size: 15px;
+                    }
+                    .custom-header > div {
+                      padding: 8px 12px;
+                      font-size: 14px;
+                    }
+                    .custom-checkbox {
+                      width: 36px;
+                      padding: 7px 8px;
+                    }
+                    .pagination-button {
+                      width: 36px;
+                      height: 36px;
+                    }
+                    .pagination-button svg {
+                      width: 18px;
+                      height: 18px;
+                    }
+                  }
+
+                  @media (max-width: 768px) {
+                    .custom-content-wrapper > div {
+                      padding: 6px 10px;
+                      font-size: 14px;
+                    }
+                    .custom-header > div {
+                      padding: 6px 10px;
+                      font-size: 13px;
+                    }
+                    .custom-checkbox {
+                      width: 34px;
+                      padding: 7px 7px;
+                    }
+                    .pagination-button {
+                      width: 34px;
+                      height: 34px;
+                    }
+                    .pagination-button svg {
+                      width: 16px;
+                      height: 16px;
+                    }
+                  }
+
+                  @media (max-width: 480px) {
+                    .custom-content-wrapper > div {
+                      padding: 5px 8px;
+                      font-size: 12px;
+                    }
+                    .custom-header > div {
+                      padding: 5px 8px;
+                      font-size: 12px;
+                    }
+                    .custom-checkbox {
+                      width: 32px;
+                      padding: 7px 6px;
+                    }
+                    .custom-content-wrapper > div.source-title {
+                      width: 200px;
+                    }
+                    .pagination-button {
+                      width: 32px;
+                      height: 32px;
+                    }
+                    .pagination-button svg {
+                      width: 14px;
+                      height: 14px;
+                    }
+                  }
+                `}
+    </style>
+  )
+}
   const [filters, setFilters] = useState<Filters>({
     openAccess: false,
     timeframe: false,
@@ -228,11 +230,53 @@ const Publications: React.FC = () => {
   });
   const [width, setWidth] = useState(window.innerWidth);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [tableData, setTableData] = useState<Publication[]>(TABLE_DATA);
+  const [publicationList, setPublicationList] = useState<PublicationRow[]>([]);
+  const [tableData, setTableData] = useState<PublicationRow[]>(publicationList);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true); // Added for backend feedback
+  const [error, setError] = useState<string | null>(null); // Added for backend feedback
+
+  // Fetch all publication table data
+  const fetchAllPublications = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const response = await getData("publications/display_all_publications");
+      console.log("Backend Response:", response); // Debug log
+      if (response && response.data) {
+        // Map the response data to match the PublicationRow interface
+        const formattedData = response.data.map((item: any) => ({
+          publicationId: item.publicationId,
+          sourceTitle: String(item.sourceTitle),
+          citeScore: Number(item.citeScore),
+          hPercentile: String(item.highestPercentile), // Kept as string
+          citations: Number(item.citations),
+          documents: Number(item.documents),
+          cited: Number(item.cited),
+        }));
+        console.log("Formatted Data:", formattedData); // Debug log
+        setPublicationList(formattedData);
+      } else {
+        console.error("No data received from the backend");
+        setPublicationList([]);
+        setError("No publication data available.");
+      }
+    } catch (error) {
+      console.error("Error fetching publications:", error);
+      setPublicationList([]);
+      setError("Failed to load publications. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Fetch data on component mount
+  useEffect(() => {
+    fetchAllPublications();
+  }, []);
 
   // Handle window resize
   useEffect(() => {
@@ -240,6 +284,11 @@ const Publications: React.FC = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Update table data on publicationList, searchQuery, or filters change
+  useEffect(() => {
+    applyFilters(filters, searchQuery);
+  }, [publicationList, searchQuery, filters]); // Added publicationList
 
   // Breakpoints
   const isXXS = width <= 200;
@@ -252,22 +301,22 @@ const Publications: React.FC = () => {
   const is3XL = width > 1600;
 
   const TABLE_COLUMNS: {
-    key: keyof Publication;
+    key: keyof PublicationRow;
     label: string;
     render?: (value: any) => string;
     width: string;
   }[] = [
     { key: "sourceTitle", label: "Source Title", width: `${isXXS || isXS || isSM ? "min-w-[150px] w-[150px]" : isMD || isLG ? "min-w-[200px] w-[200px]" : "min-w-[300px] w-[300px]"}` },
     { key: "citeScore", label: "CiteScore", width: `${isXXS || isXS || isSM ? "min-w-[60px] w-[60px]" : isMD || isLG ? "min-w-[80px] w-[80px]" : "min-w-[90px] w-[90px]"}` },
-    { key: "percentile", label: "Highest Percentile", render: (value) => `${value}% Q${Math.ceil(value / 25)}`, width: `${isXXS || isXS || isSM ? "min-w-[90px] w-[90px]" : isMD || isLG ? "min-w-[110px] w-[110px]" : "min-w-[130px] w-[130px]"}` },
+    { key: "hPercentile", label: "Highest Percentile", render: (value) => `${value}`, width: `${isXXS || isXS || isSM ? "min-w-[90px] w-[90px]" : isMD || isLG ? "min-w-[110px] w-[110px]" : "min-w-[130px] w-[130px]"}` },
     { key: "citations", label: "Citations 2024-25", width: `${isXXS || isXS || isSM ? "min-w-[90px] w-[90px]" : isMD || isLG ? "min-w-[110px] w-[110px]" : "min-w-[130px] w-[130px]"}` },
     { key: "documents", label: "Documents 2024-25", width: `${isXXS || isXS || isSM ? "min-w-[100px] w-[100px]" : isMD || isLG ? "min-w-[120px] w-[120px]" : "min-w-[150px] w-[150px]"}` },
-    { key: "citedPercentage", label: "Cited", width: `${isXXS || isXS || isSM ? "min-w-[60px] w-[60px]" : isMD || isLG ? "min-w-[80px] w-[80px]" : "min-w-[100px] w-[100px]"}` },
+    { key: "cited", label: "Cited", width: `${isXXS || isXS || isSM ? "min-w-[60px] w-[60px]" : isMD || isLG ? "min-w-[80px] w-[80px]" : "min-w-[100px] w-[100px]"}` },
   ];
 
   // Apply filters
   const applyFilters = (filtersToApply: Filters, search: string = searchQuery) => {
-    let filteredData = [...TABLE_DATA];
+    let filteredData = [...publicationList];
 
     // Apply search filter
     if (search) {
@@ -295,14 +344,16 @@ const Publications: React.FC = () => {
     }
 
     if (filtersToApply.highestPercentile) {
-      filteredData = filteredData.filter((row) => row.percentile >= 90);
+      // filterr
+      filteredData = filteredData.filter((row) => row.citeScore >= 90);
     } else if (filtersToApply.quartile1 || filtersToApply.quartile2 || filtersToApply.quartile3 || filtersToApply.quartile4) {
       const selectedQuartiles: number[] = [];
       if (filtersToApply.quartile1) selectedQuartiles.push(1);
       if (filtersToApply.quartile2) selectedQuartiles.push(2);
       if (filtersToApply.quartile3) selectedQuartiles.push(3);
       if (filtersToApply.quartile4) selectedQuartiles.push(4);
-      filteredData = filteredData.filter((row) => selectedQuartiles.includes(Math.ceil(row.percentile / 25)));
+      // filterr
+      filteredData = filteredData.filter((row) => selectedQuartiles.includes(Math.ceil(row.citeScore / 25)));
     }
 
     setTableData(filteredData);
@@ -310,11 +361,6 @@ const Publications: React.FC = () => {
     setCurrentPage(1);
     setSelectedRows(new Set());
   };
-
-  // Update table data on search change
-  useEffect(() => {
-    applyFilters(filters, searchQuery);
-  }, [searchQuery, filters]);
 
   // Pagination
   const paginatedData = tableData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -667,15 +713,29 @@ const Publications: React.FC = () => {
                     </div>
                   ))}
                 </div>
-                {paginatedData.length > 0 ? (
+                {isLoading ? (
+                  <div className="custom-row-content flex text-gray-500 py-3 px-4">
+                    <div className="min-w-[15px]"></div>
+                    <div className="flex-1 px-2 text-center dm-sans-regular" style={{ fontWeight: 300, lineHeight: "1.2", letterSpacing: "-0.03em" }}>
+                      Loading publications...
+                    </div>
+                  </div>
+                ) : error ? (
+                  <div className="custom-row-content flex text-red-500 py-3 px-4">
+                    <div className="min-w-[15px]"></div>
+                    <div className="flex-1 px-2 text-center dm-sans-regular" style={{ fontWeight: 300, lineHeight: "1.2", letterSpacing: "-0.03em" }}>
+                      {error}
+                    </div>
+                  </div>
+                ) : paginatedData.length > 0 ? (
                   paginatedData.map((row, i) => (
-                    <div key={`${row.id}-${i}`} className={`custom-row-content w-fit flex text-black ${i === 0 ? "" : ""} pb-3 px-4`}>
+                    <div key={`${row.publicationId}-${i}`} className={`custom-row-content w-fit flex text-black ${i === 0 ? "" : ""} pb-3 px-4`}>
                       <div className="border-b flex pt-5 pb-3 border-[#1B7BFF] w-full">
                         <div className="min-w-[15px] flex items-center">
                           <input
                             type="checkbox"
-                            checked={selectedRows.has(row.id)}
-                            onChange={() => handleRowSelect(row.id)}
+                            checked={selectedRows.has(row.publicationId)}
+                            onChange={() => handleRowSelect(row.publicationId)}
                             className={`rounded text-blue-500 focus:ring-blue-500 ${isXXS || isXS ? "w-3 h-3" : "w-4 h-4"}`}
                           />
                         </div>
@@ -708,7 +768,9 @@ const Publications: React.FC = () => {
           </div>
         </div>
         <div className="w-full flex justify-end">
-          <div className={`${isXL ? "w-[60%]" : isXXS || isXS || isSM || isMD || isLG ? "w-[100%]" : "w-[70%]"} flex ${isXXS || isXS ? "flex-col" : "flex-row"} justify-between items-center mt-6 px-4`}>
+          <div
+            className={`${isXL ? "w-[60%]" : isXXS || isXS || isSM || isMD || isLG ? "w-[100%]" : "w-[70%]"} flex ${isXXS || isXS ? "flex-col" : "flex-row"} justify-between items-center mt-6 px-4`}
+          >
             <div className="flex items-center space-x-2">
               <span className={`text-black dm-sans-regular ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : isMD ? "text-[12px]" : isLG ? "text-[13px]" : "text-[14px]"}`}>
                 Rows per page:
@@ -759,89 +821,84 @@ const Publications: React.FC = () => {
         </div>
       </div>
       <div className="w-full flex flex-col items-center">
-              <div
-            style={{ backgroundImage: `url(${TeamBanner})` 
-                // backgroundImage: 'linear-gradient(180deg, #8AFF84 0%, #97BBCB 45.5%, #004EB9 100%)',
-          
-          }}
-            className={`bg-cover roboto-regular w-full flex flex-col gap-y-0 items-center justify-center
- ${
-  isXXS
-    ? "h-[180px]"
-    : isXS
-    ? "h-[210px]"
-    : isSM
-    ? "h-[240px]"
-    : isMD
-    ? "h-[300px]"
-    : isLG
-    ? "h-[360px]"
-    : isXL
-    ? "h-[420px]"
-    : is2XL
-    ? "h-[541px]"
-    : is3XL
-    ? "h-[560px]"
-    : ""
-}`}
+        <div
+          style={{ backgroundImage: `url(${TeamBanner})` }}
+          className={`bg-cover roboto-regular w-full flex flex-col gap-y-0 items-center justify-center ${
+            isXXS
+              ? "h-[180px]"
+              : isXS
+              ? "h-[210px]"
+              : isSM
+              ? "h-[240px]"
+              : isMD
+              ? "h-[300px]"
+              : isLG
+              ? "h-[360px]"
+              : isXL
+              ? "h-[420px]"
+              : is2XL
+              ? "h-[541px]"
+              : is3XL
+              ? "h-[560px]"
+              : ""
+          }`}
+        >
+          <div
+            className={`text-white ${
+              isXXS || isXS || isSM
+                ? "mb-2 text-[20px]"
+                : isMD
+                ? "mb-4 text-[30px]"
+                : isLG
+                ? "mb-5 text-[40px]"
+                : "mb-7 text-[64px]"
+            } text-center px-4 font-extrabold leading-tight dm-sans-regular`}
           >
-            <div
-              className={`text-white ${
-                isXXS || isXS || isSM
-                  ? "mb-2 text-[20px]"
-                  : isMD
-                  ? "mb-4 text-[30px]"
-                  : isLG
-                  ? "mb-5 text-[40px]"
-                  : "mb-7 text-[64px]"
-              } text-center px-4 font-extrabold leading-tight dm-sans-regular`}
-            >
-              Want to create FUTURE?
-            </div>
-            <div
-              className={`text-center px-2 ${
-                isXXS || isXS || isSM
-                  ? "mb-2"
-                  : isMD
-                  ? "mb-4"
-                  : isLG
-                  ? "mb-5"
-                  : "mb-7"
-              } ${
-                isXXS
-                  ? "text-[12px]"
-                  : isXS
-                  ? "text-[14px]"
-                  : isSM
-                  ? "text-[12px]"
-                  : isMD
-                  ? "text-[14px]"
-                  : isLG
-                  ? "text-[17px]"
-                  : isXL
-                  ? "text-[19px]"
-                  : "text-[20px]"
-              }`}
-            >
-              Explore new possibilities with us everyday. Create your mark on
-              future with us.
-            </div>
-            <div
-              className={`bg-gradient-to-r text-black ${
-                isXXS || isXS
-                  ? "px-4 py-0.5 text-[10px]"
-                  : isSM
-                  ? "px-6 py-1 text-[14px]"
-                  : isMD
-                  ? "px-8 py-1 text-[14px]"
-                  : isLG
-                  ? "px-10 py-1.5 text-[16px]"
-                  : "px-14 py-2 text-lg sm:text-[20px]"
-              } rounded-xl cursor-pointer mt-3 shadow-[0px_4px_16px_rgba(138,255,132,0.2),0px_4px_16px_rgba(44,107,193,0.2)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
-            >
-              Join Us
-            </div>
+            Want to create FUTURE?
           </div>
+          <div
+            className={`text-center px-2 ${
+              isXXS || isXS || isSM
+                ? "mb-2"
+                : isMD
+                ? "mb-4"
+                : isLG
+                ? "mb-5"
+                : "mb-7"
+            } ${
+              isXXS
+                ? "text-[12px]"
+                : isXS
+                ? "text-[14px]"
+                : isSM
+                ? "text-[12px]"
+                : isMD
+                ? "text-[14px]"
+                : isLG
+                ? "text-[17px]"
+                : isXL
+                ? "text-[19px]"
+                : "text-[20px]"
+            }`}
+          >
+            Explore new possibilities with us everyday. Create your mark on future with us.
+          </div>
+          <div
+            className={`bg-gradient-to-r text-black ${
+              isXXS || isXS
+                ? "px-4 py-0.5 text-[10px]"
+                : isSM
+                ? "px-6 py-1 text-[14px]"
+                : isMD
+                ? "px-8 py-1 text-[14px]"
+                : isLG
+                ? "px-10 py-1.5 text-[16px]"
+                : "px-14 py-2 text-lg sm:text-[20px]"
+            } rounded-xl cursor-pointer mt-3 shadow-[0px_4px_16px_rgba(138,255,132,0.2),0px_4px_16px_rgba(44,107,193,0.2)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+          >
+            Join Us
+          </div>
+        </div>
         <div className="w-full flex border-t-3 border-[#8AFF84] mt-0 flex-col items-center">
           <div className="w-[90%] md:w-[83%] flex flex-col">
             <Footer />

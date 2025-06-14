@@ -1,18 +1,17 @@
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ContactUsBannerBack from "../assets/ContactUsBannerBack.gif";
 import { LuPlus } from "react-icons/lu";
 import Footer from "./Footer";
 import ScrollingFooter from "./ScrollingFooter";
 import NavigationComponent from "./NavigationComponent";
-import { contactUsStyles as styles } from "../UIComponentCSS/ContactUsCss";
 import { postData } from "../services/FetchBackendServices";
 import { FaCircleCheck } from "react-icons/fa6";
 
 export default function ContactUs() {
   const { state } = useLocation();
   const { selectedService = "No service selected" } = state || {};
-
+  const navigate = useNavigate();
   const ConnectByList = [
     "Enquire about price as per services",
     "Looking for a career change",
@@ -41,10 +40,17 @@ export default function ContactUs() {
   // Ref for Inquiry Type input
   const inquiryTypeRef = useRef<HTMLInputElement>(null);
 
-  // Scroll to Inquiry Type on mount
+  // Sync inputValues[0] with selectedService and scroll to Inquiry Type
   useEffect(() => {
-    if (inquiryTypeRef.current && selectedService !== "No service selected") {
-      inquiryTypeRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (selectedService !== "No service selected") {
+      setInputValues((prevValues) => {
+        const newValues = [...prevValues];
+        newValues[0] = selectedService;
+        return newValues;
+      });
+      if (inquiryTypeRef.current) {
+        inquiryTypeRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
     }
   }, [selectedService]);
 
@@ -156,22 +162,23 @@ export default function ContactUs() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className="w-full min-h-screen flex flex-col mb-10 select-none">
       <NavigationComponent />
 
       {/* Success Popover */}
       {successMessage && (
-       <div className="fixed inset-0 flex items-center justify-center z-50">
-  {/* Glassy Overlay */}
-  <div className="absolute inset-0 bg-white/10 backdrop-blur-sm animate-[fadeIn_0.5s_ease-out_forwards]"></div>
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          {/* Glassy Overlay */}
+          <div className="absolute inset-0 bg-white/10 backdrop-blur-sm animate-[fadeIn_0.5s_ease-out_forwards]"></div>
 
-  {/* Message Box with glass effect and animation */}
-  <div className="relative bg-white/20 backdrop-blur-lg  px-6 py-4 rounded-xl shadow-2xl border border-white/30 animate-[slideUpFade_0.5s_ease-out_forwards] max-w-sm text-center">
-    <h2 className="text-xl font-bold mb-1 tracking-wide text-[#16ff03] flex items-center gap-3 drop-shadow"><FaCircleCheck color="#16ff03" /> Success</h2>
-    <p className="text-sm font-medium tracking-tight drop-shadow">{successMessage}</p>
-  </div>
-</div>
-
+          {/* Message Box with glass effect and animation */}
+          <div className="relative bg-white/20 backdrop-blur-lg px-6 py-4 rounded-xl shadow-2xl border border-white/30 animate-[slideUpFade_0.5s_ease-out_forwards] max-w-sm text-center">
+            <h2 className="text-xl font-bold mb-1 tracking-wide text-[#16ff03] flex items-center gap-3 drop-shadow">
+              <FaCircleCheck color="#16ff03" /> Success
+            </h2>
+            <p className="text-sm font-medium tracking-tight drop-shadow">{successMessage}</p>
+          </div>
+        </div>
       )}
 
       {/* Banner */}
@@ -218,7 +225,7 @@ export default function ContactUs() {
       </div>
 
       {/* Connect By */}
-      <div className={styles.connectWrapper}>
+      <div className="flex dm-sans-regular items-center justify-center w-full md:mt-20 mt-10 px-4">
         <div
           className={`w-full md:max-w-[70%] max-w-[90%] flex flex-col ${
             isXXS || isXS || isSM ? "gap-y-2" : isMD ? "gap-y-2" : isLG ? "gap-y-6" : isXL ? "gap-y-8" : "gap-y-10"
@@ -241,7 +248,8 @@ export default function ContactUs() {
               } w-full`}
             >
               <div
-                className={`flex justify-between items-center font-semibold ${
+                onClick={() => navigate("/contactus", { state: { selectedService: item } })}
+                className={`flex justify-between items-center font-semibold cursor-pointer ${
                   isXXS || isXS
                     ? "text-[10px]"
                     : isSM
@@ -270,7 +278,7 @@ export default function ContactUs() {
           isXXS || isXS || isSM ? "mt-8" : isMD ? "mt-12" : isLG ? "mt-14" : "mt-16"
         } px-4`}
       >
-        <div className={styles.inquiryInner}>
+        <div className="w-full md:max-w-[80%] max-w-[95%] flex flex-col gap-y-8 items-start">
           <div
             className={`${
               isXXS || isXS
@@ -288,7 +296,7 @@ export default function ContactUs() {
           >
             Please provide the following information and we’ll put you in touch with the right person.
           </div>
-          <div className={styles.aboutSection}>
+          <div className="w-[90%] items-start flex flex-col gap-5">
             <div
               className={`${
                 isXXS || isXS
@@ -306,7 +314,7 @@ export default function ContactUs() {
             >
               About You
             </div>
-            <div className={styles.aboutLine}></div>
+            <div className="w-full h-[1px] bg-[#ffffff]"></div>
           </div>
           {UserDetails.map((item, index) => (
             <div key={index} className="flex items-start flex-col gap-y-2 w-[90%] max-w-full">
@@ -321,7 +329,7 @@ export default function ContactUs() {
                   placeholder=" "
                   value={inputValues[index] || ""}
                   onChange={(e) => handleInputChange(index, e.target.value)}
-                  className={`${styles.inputField} peer ${
+                  className={`peer absolute bottom-0 w-full bg-transparent text-white text-base border-none focus:outline-none h-10 peer ${
                     fieldErrors[index] ? "border-red-500" : ""
                   }`}
                   ref={index === 0 ? inquiryTypeRef : null}
@@ -336,7 +344,7 @@ export default function ContactUs() {
                 >
                   {item}
                 </label>
-                <div className={styles.inputUnderline} />
+                <div className="absolute bottom-0 w-full h-[1px] bg-white" />
               </div>
               {fieldErrors[index] && (
                 <div className="text-red-500 text-xs md:text-sm">{fieldErrors[index]}</div>
@@ -363,11 +371,11 @@ export default function ContactUs() {
       </div>
 
       {/* Footer */}
-      <div className={styles.scrollingFooterWrapper}>
+      <div className="mt-20">
         <ScrollingFooter />
       </div>
-      <div className={styles.footerWrapper}>
-        <div className={styles.footerInner}>
+      <div className="w-full flex border-t-3 border-[#8AFF84] mt-0 flex-col items-center md:items-center">
+        <div className="w-[83%] flex flex-col">
           <Footer />
         </div>
       </div>
@@ -375,14 +383,13 @@ export default function ContactUs() {
       {/* Tailwind Animation */}
       <style>
         {`
-          @keyframes fade-in-out {
-            0% { opacity: 0; transform: translateY(-10px); }
-            10% { opacity: 1; transform: translateY(0); }
-            90% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-10px); }
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
           }
-          .animate-fade-in-out {
-            animation: fade-in-out 3s ease-in-out forwards;
+          @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
           }
         `}
       </style>

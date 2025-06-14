@@ -3,7 +3,6 @@ import Footer from './Footer';
 import AboutBack from "../assets/AboutBack.gif";
 import AboutBack2 from "../assets/AboutBack2.gif";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
-import { aboutUsStyles as s } from "../../src/UIComponentCSS/AboutUsCss";
 import { useEffect, useState } from 'react';
 const content = {
   aboutUs: {
@@ -259,7 +258,7 @@ const AboutUs = () => {
       <div className="flex flex-col md:flex-row mt-15 justify-start gap-15">
         <div className="w-[380px]">
           <div className="text-[32px] font-semibold mb-4">{content.futureAims.commitment.title}</div>
-          <div className={s.subText}>{content.futureAims.commitment.description}</div>
+          <div className="text-[20px] leading-snug">{content.futureAims.commitment.description}</div>
         </div>
         <div className="w-[382px]">
           <div className="text-[32px] font-semibold mb-4">{content.futureAims.belief.title}</div>

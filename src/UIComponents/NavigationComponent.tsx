@@ -63,11 +63,12 @@ export default function NavigationComponent() {
               {Headings.map((heading, index) => (
                 <li onClick={()=>navigate(heading[1])} key={index} className="flex items-center">
                   <a
-                    className="relative block py-2 px-3 text-sm text-white after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#0e86ff] after:w-0 after:transition-all after:duration-300 hover:after:w-full"
+                    className="relative flex gap-x-3 py-2 px-3 text-sm text-white after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#0e86ff] after:w-0 after:transition-all after:duration-300 hover:after:w-[95%]"
                   >
                     {heading[0]}
+                    <span><MdArrowDropDown size={isXL ? 18 : 20} /></span>
                   </a>
-                  <MdArrowDropDown size={isXL ? 18 : 20} color="#ffff" />
+                  
                 </li>
               ))}
             </ul>
