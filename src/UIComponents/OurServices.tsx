@@ -7,7 +7,7 @@ import DSBack from "../assets/ServicesCSS/DSBack.png";
 import PythonBack from "../assets/ServicesCSS/PythonBack.png";
 import PredictiveAnalytics from "../assets/ServicesCSS/Predictive_analytics.png";
 import IntelligentAutomation from "../assets/ServicesCSS/Intelligent_automation.png";
-import NLP_Solutions from "../assets/ServicesCSS/NLP_Solutions.png";
+import NLP_Solutions from "../assets/ServicesCSS/NLP_solutions.png";
 import ScalableAIServices from "../assets/ServicesCSS/Scalable_AI_services.png";
 import MLModel from "../assets/ServicesCSS/Machine_learning_models.png";
 import ScrollingFooter from "./ScrollingFooter";
