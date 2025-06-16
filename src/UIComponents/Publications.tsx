@@ -4,7 +4,7 @@ import { IoIosArrowBack, IoIosArrowForward, IoMdCloseCircle } from "react-icons/
 import React, { useEffect, useState } from "react";
 import Footer from "./Footer";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
-import { IoFilter } from "react-icons/io5";
+import { TbFilterBolt } from "react-icons/tb";
 import { getData } from "../services/FetchBackendServices";
 
 interface Filters {
@@ -469,11 +469,11 @@ const Publications: React.FC = () => {
 
     return (
       <>
-        <div className={`flex font-semibold justify-between flex-col text-black items-start ${isXL || is2XL || is3XL ? "" : "mt-5"} mb-4 px-4`}>
+        <div className={`flex font-semibold justify-between flex-col text-black items-start mb-4 px-4`}>
           <div className={`flex items-center justify-between w-full tracking-tight ${isXXS || isXS || isSM ? "text-[10px]" : isSM || isMD ? "text-[12px]" : isLG || isXL ? "text-[12px]" : "text-[16px]"}`}>
             Filter refine list
             {isXXS || isXS || isSM || isMD || isLG ? (
-              <IoMdCloseCircle size={20} color="#ff5e36" onClick={() => setIsFilterOpen(false)} />
+              <IoMdCloseCircle size={20} color="#000000" onClick={() => setIsFilterOpen(false)} />
             ) : null}
           </div>
           <div className={`space-x-4 ${isXXS || isXS || isSM ? "text-[10px]" : isSM || isMD ? "text-[12px]" : isLG || isXL ? "text-[12px]" : "text-[16px]"} items-center mt-2 flex`}>
@@ -654,7 +654,7 @@ const Publications: React.FC = () => {
           {(isXXS || isXS || isSM || isMD || isLG) && (
             <>
               <div className={`flex ${isXXS || isXS || isSM || isMD ? "w-full" : "w-[90%]"} items-center justify-between mb-4 gap-4`}>
-                <IoFilter className="ml-5" onClick={() => setIsFilterOpen(!isFilterOpen)} color="#3664ff" />
+                <TbFilterBolt size={20} className="ml-5" onClick={() => setIsFilterOpen(!isFilterOpen)} color="#3664ff" />
                 <div className={`${isXXS || isXS ? "w-[60%]" : isSM ? "w-[70%]" : isMD ? "w-[75%]" : "w-[80%]"} flex-1`}>
                   <label htmlFor="search-small" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                   <div className="relative">
@@ -673,7 +673,7 @@ const Publications: React.FC = () => {
                 </div>
               </div>
               <div
-                className={`flex-shrink-0 flex-col h-fit px-4 py-5 bg-white shadow-lg absolute -top-10 -left-5 rounded-[5px] transform transition-transform duration-300 ease-in-out ${isFilterOpen ? "translate-x-0" : "-translate-x-full"} ${isXXS ? "w-[240px]" : isXS ? "w-[240px]" : isSM ? "w-[290px]" : isMD ? "w-[320px]" : "w-[320px]"}`}
+                className={`flex-shrink-0 flex-col h-fit px-4 py-5 bg-white shadow-lg absolute ${isXXS || isXS || isSM?"-top-5":isMD?"-top-5":"-top-3"} -left-5 rounded-tl-[0px] rounded-[5px] transform transition-transform duration-300 ease-in-out ${isFilterOpen ? "translate-x-0" : "-translate-x-full"} ${isXXS ? "w-[240px]" : isXS ? "w-[240px]" : isSM ? "w-[290px]" : isMD ? "w-[320px]" : "w-[320px]"}`}
               >
                 <FilterPanelContent applyFilters={applyFilters} />
               </div>

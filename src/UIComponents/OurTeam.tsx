@@ -1,10 +1,11 @@
 import NavigationComponent from "./NavigationComponent";
-import Avinash_Mitahnia from "../assets/TeamMemberPics/Avinash_Mitahnia.png";
-import Dheer_Verma from "../assets/TeamMemberPics/Dheer_Verma.png";
-import Twinkle_Varma from "../assets/TeamMemberPics/Twinkle_Verma.png";
-import Neha_Verma from "../assets/TeamMemberPics/Neha_Verma.png";
-import Ajay_Singh from "../assets/TeamMemberPics/Ajay_Karan_Singh_Rajpoot.png";
-import Vishal_Verma from "../assets/TeamMemberPics/Vishal_Verma.png";
+import Avinash_Methania from "../assets/TeamMemberPics/Avinash_Methania.svg";
+import Dheer_Verma from "../assets/TeamMemberPics/Dheer_Verma.svg";
+import Twinkle_Varma from "../assets/TeamMemberPics/Twinkle_Verma.svg";
+import Neha_Verma from "../assets/TeamMemberPics/Neha_Verma.svg";
+import Ajay_Singh from "../assets/TeamMemberPics/Ajay_Singh.svg";
+import Vishal_Verma from "../assets/TeamMemberPics/Vishal_verma.svg";
+import Rinkey_Kushwah from "../assets/TeamMemberPics/Rinkey_Kushwah.svg"
 import Manish_Dhubkarya from "../assets/TeamMemberPics/Manish_Dhubkarya.jpg";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import Footer from "./Footer";
@@ -34,8 +35,8 @@ const OurTeam = () => {
 
   const TeamData: TeamMember[] = [
     {
-      pic: Avinash_Mitahnia,
-      name: "Avinash Metahnia",
+      pic: Avinash_Methania,
+      name: "Avinash Methania",
       designation: "Data Scientist",
     },
     {
@@ -58,7 +59,7 @@ const OurTeam = () => {
       name: "Ajay Karan Singh Rajpoot",
       designation: "Content Writer",
     },
-    { name: "Rinky Kushwah", designation: "Content Writer" },
+    { pic:Rinkey_Kushwah, name: "Rinky Kushwah", designation: "Content Writer" },
     { pic: Dheer_Verma, name: "Dheer Verma", designation: "UI Design Head" },
     {
       pic: Manish_Dhubkarya,
@@ -215,7 +216,7 @@ const OurTeam = () => {
               <div className="w-[32vw] h-[180px] bg-white rounded-[5px]" />
             ) : (
               <img
-                className="w-[32vw] h-[180px] rounded-[5px] object-cover"
+                className="w-[32vw] h-[180px] rounded-[5px] bg-cover object-cover"
                 src={team.pic}
                 alt={team.name}
               />

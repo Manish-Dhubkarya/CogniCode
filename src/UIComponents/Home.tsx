@@ -257,9 +257,9 @@ function Home() {
                 turning
               </div>
               <div
-                className={`uppercase ${isMD ? 'text-[64px] leading-16' : isLG ? 'text-[80px] leading-20' : isXL ? "text-[90px] leading-25" : 'text-[128px] font-bold leading-28'} tracking-tight`}
+                className={`uppercase ${isMD ? 'text-[64px] font-bold leading-16' : isLG ? 'text-[80px] font-bold leading-20' : isXL ? "text-[90px] font-bold leading-25" : 'text-[128px] font-bold leading-28'} tracking-tight`}
                 style={{
-                  backgroundImage: 'linear-gradient(180deg, #8AFF84 0%, #97BBCB 55.5%, #004EB9 100%)',
+                  backgroundImage: 'linear-gradient(180deg, #8AFF84 0%, #97BBCB 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                 }}
@@ -272,9 +272,9 @@ function Home() {
                 to
               </div>
               <div
-                className={`uppercase ${isMD ? 'text-[64px] leading-16' : isLG ? 'text-[80px] leading-20' : isXL ? "text-[90px] leading-25" : 'text-[128px] font-bold leading-28'} tracking-tight`}
+                className={`font-bold uppercase ${isMD ? 'text-[64px] leading-16' : isLG ? 'text-[80px] leading-20' : isXL ? "text-[90px] leading-25" : 'text-[128px] font-bold leading-28'} tracking-tight`}
                 style={{
-                  backgroundImage: 'linear-gradient(180deg, #8AFF84 0%, #97BBCB 55.5%, #004EB9 100%)',
+                  backgroundImage: 'linear-gradient(180deg, #97BBCB 0%, #004EB9 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                 }}
@@ -351,19 +351,20 @@ function Home() {
         backgroundPosition: "center",
         boxShadow: "2px 0px 4px #1B7BFF, 0px 2px 4px #8AFF84",
         position: "relative",
+        cursor:"pointer"
       }}
       className={`flex-col flex ${isXXS || isXS ? 'w-[140px] h-[210px]' : isSM ? 'w-[160px] h-[240px]' : isMD ? 'w-[180px] h-[270px]' : isLG ? 'w-[220px] h-[330px]' : 'w-[264px] h-[399px]'} items-start p-3 justify-start rounded-[10px] flex-shrink-0 transition-all duration-300`}
     >
       {/* Title */}
       <div
-        className={`uppercase ${isXXS || isXS ? 'text-[9px]' : isSM ? 'text-[10px]' : isMD ? 'text-[12px]' : isLG ? 'text-[14px]' : 'text-[16px]'} font-medium transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
+        className={`text-gray-300 uppercase ${isXXS || isXS ? 'text-[9px]' : isSM ? 'text-[10px]' : isMD ? 'text-[12px]' : isLG ? 'text-[14px]' : 'text-[16px]'} font-medium transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
       >
         {item.title}
       </div>
 
       {/* Heading */}
       <div
-        className={`${isXXS || isXS ? 'text-[12px]' : isSM ? 'text-[14px]' : isMD ? 'text-[16px]' : isLG ? 'text-[20px]' : 'text-[24px]'} font-semibold transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
+        className={` ${isXXS || isXS ? 'text-[12px]' : isSM ? 'text-[14px]' : isMD ? 'text-[16px]' : isLG ? 'text-[20px]' : 'text-[24px]'} font-semibold transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
       >
         {item.heading}
       </div>

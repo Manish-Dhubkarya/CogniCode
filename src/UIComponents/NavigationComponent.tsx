@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { IoMdMenu } from "react-icons/io";
 import { MdArrowDropDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import CogniCodeLogo from "../../src/assets/CogniCodeLogo.svg";
 
 export default function NavigationComponent() {
   const Headings = [["About Us", "/aboutus"], ["Services", "/services"], ["Conferences", "/conferences"], ["Publications", "/publications"], ["Careers", "/contactus"]];
@@ -48,7 +49,7 @@ export default function NavigationComponent() {
   return (
     <>
       <nav className="bg-custom-gradient-navigation fixed w-full z-50 top-0">
-        <div className="w-full max-w-[90%] mx-auto flex items-center justify-between p-4">
+        <div className="w-full max-w-[100%] pr-[4vw] mx-auto flex items-center justify-between px-4">
           {/* Mobile Menu Toggle */}
           <div className={`${isDesktop ? "hidden" : "flex"} justify-start`}>
             <IoMdMenu
@@ -57,6 +58,8 @@ export default function NavigationComponent() {
               onClick={toggleMenu}
             />
           </div>
+          {/* logo */}
+            <img onClick={()=>navigate("/")} className={`${isXXS || isXS|| isSM?"w-22 pt-3.75 pb-2.25":isMD?"w-22 pt-3.75 pb-2.25":isLG?"w-25 pt-4.5 pb-3":isXL?"w-30 pt-3.5 pb-2":"w-50 pt-1.5"} cursor-pointer h-fit`} src={CogniCodeLogo}/>
           {/* Desktop Menu */}
           <div className={`${isDesktop ? "flex" : "hidden"} items-center justify-center gap-x-6 w-full ${isXL ? "gap-x-8" : is2XL ? "gap-x-10" : "gap-x-12"}`}>
             <ul className={`flex flex-row font-medium ${isXL ? "space-x-6" : is2XL ? "space-x-8" : "space-x-10"}`}>

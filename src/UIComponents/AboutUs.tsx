@@ -98,14 +98,14 @@ const AboutUs = () => {
   </div>
   </div>:
 
-<div className="flex mt-30  pt-10 py-10 px-25 items-center md:items-start justify-between">
-    <section className="flex flex-col items-center md:items-start text-center md:text-start">
-      <div className="text-[64px] font-bold mb-8">{content.aboutUs.title}</div>
+<div className="flex mt-20 w-full py-10 px-25 items-center  justify-between">
+    <section className="flex w-[50%] flex-col justify-start items-start  text-start ">
+      <div className="text-[64px] font-bold mb-6">{content.aboutUs.title}</div>
       <div className="text-[20px] leading-tight max-w-[626px] mb-8">{content.aboutUs.description}</div>
       <div className="bg-gradient-to-r text-black roboto-regular px-14 py-2 rounded-xl cursor-pointer text-lg sm:text-[20px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold">{content.aboutUs.buttonText}</div>
     </section>
-    <div className='mt-5 md:mt-0'>
-      <img className="w-[27.08vw] h-[32.04vh]" src={AboutBack} alt={content.aboutUs.imageAlt} />
+    <div className='mt-5 w-[42%] '>
+      <img className="w-full h-full" src={AboutBack} alt={content.aboutUs.imageAlt} />
     </div>
   </div>
   }
