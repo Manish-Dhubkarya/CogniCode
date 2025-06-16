@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const serverURL = "https://cognicode-backend.onrender.com"
+const serverURL = "http://localhost:4000"
 const postData = async (url:any, body:any) => {
     try {
         const response = await axios.post(`${serverURL}/${url}`, body)
