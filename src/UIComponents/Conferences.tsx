@@ -30,7 +30,7 @@ const Conferences: React.FC = () => {
       const response = await getData("conferences/display_all_conferences");
       if (response && response.data) {
         // Map the response data to match the ConferenceRow interface
-        const formattedData = response.data.map((item: any, index: number) => ({
+        const formattedData = response.data.map((item: any) => ({
           conferenceID: String(item.conferenceId),
           publisher: String(item.publisher || ""),
           conferenceName: String(item.conferenceName || ""),
