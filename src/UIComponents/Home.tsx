@@ -48,8 +48,8 @@ function Home() {
   const isMD = width > 500 && width <= 700;
   const isLG = width > 700 && width <= 900;
   const isXL = width > 900 && width <= 1200;
-  const is2XL = width > 1200 && width <= 1600;
-  const is3XL = width > 1600;
+  // const is2XL = width > 1200 && width <= 1600;
+  // const is3XL = width > 1600;
 
   interface TypesCardData {
     title: string;
