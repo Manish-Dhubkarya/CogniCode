@@ -149,11 +149,11 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
               : "w-[50%] text-[20px]"
           }`}
         >
-          <div className="hover:text-white" style={{ fontFamily: "Roboto", fontWeight: 600 }}>
+          <div onClick={()=>navigate("/services", { state: { selectedService: "WRITING SERVICES" } })} className="hover:text-white cursor-pointer" style={{ fontFamily: "Roboto", fontWeight: 600 }}>
             Writing Services
           </div>
-          <div className="hover:text-white">IT Solutions</div>
-          <div className="hover:text-white">AI Services</div>
+          <div onClick={()=>navigate("/services", { state: { selectedService: "IT SOLUTIONS" } })} className="hover:text-white cursor-pointer">IT Solutions</div>
+          <div onClick={()=>navigate("/services", { state: { selectedService: "AI SERVICES" } })} className="hover:text-white cursor-pointer">AI Services</div>
         </div>
         <div
           className={`${

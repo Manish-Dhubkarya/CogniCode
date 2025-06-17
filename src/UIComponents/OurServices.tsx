@@ -333,9 +333,13 @@ const OurServices: React.FC = () => {
                 : "w-[50%] text-[20px]"
             }`}
           >
-            <div>Writing Services</div>
-            <div>IT Solutions</div>
-            <div>AI Services</div>
+            
+          <div onClick={()=>navigate("/services", { state: { selectedService: "WRITING SERVICES" } })} className="hover:text-white cursor-pointer" style={{ fontFamily: "Roboto", fontWeight: 600 }}>
+            Writing Services
+          </div>
+          <div onClick={()=>navigate("/services", { state: { selectedService: "IT SOLUTIONS" } })} className="hover:text-white cursor-pointer">IT Solutions</div>
+          <div onClick={()=>navigate("/services", { state: { selectedService: "AI SERVICES" } })} className="hover:text-white cursor-pointer">AI Services</div>
+
           </div>
           <div
             className={`${

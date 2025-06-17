@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const serverURL = "http://localhost:4000"
+const serverURL = import.meta.env.VITE_API_URL
 const postData = async (url:any, body:any) => {
     try {
         const response = await axios.post(`${serverURL}/${url}`, body)

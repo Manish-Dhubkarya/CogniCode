@@ -8,6 +8,7 @@ import { MdOutlinePublishedWithChanges } from "react-icons/md";
 import { HiTrendingUp } from "react-icons/hi";
 import { FaCircleInfo } from "react-icons/fa6";
 import { GiVideoConference } from "react-icons/gi";
+import { FaHome } from "react-icons/fa";
 
 export default function NavigationComponent() {
   interface HeadingProps{
@@ -15,7 +16,7 @@ export default function NavigationComponent() {
     path:string;
     icon:ReactNode;
   }
-  const Headings:HeadingProps[] = [{heading:"About Us", path:"/aboutus", icon:<FaCircleInfo size={20} color="#00ff00" />}, {heading:"Services", path:"/services", icon: <SiAmazonsimpleemailservice size={20} color="#00ff00" /> }, {heading:"Conferences", path:"/conferences", icon:<GiVideoConference size={20} color="#00ff00"  />}, {heading:"Publications", path:"/publications", icon:<MdOutlinePublishedWithChanges size={20} color="#00ff00" />}, {heading:"Careers", path:"/ourteam", icon:<HiTrendingUp size={20} color="#00ff00"  />}];
+  const Headings:HeadingProps[] = [{heading:"Home", path:"/", icon:<FaHome size={20} color="#00ff00" />}, {heading:"About Us", path:"/aboutus", icon:<FaCircleInfo size={20} color="#00ff00" />}, {heading:"Services", path:"/services", icon: <SiAmazonsimpleemailservice size={20} color="#00ff00" /> }, {heading:"Conferences", path:"/conferences", icon:<GiVideoConference size={20} color="#00ff00"  />}, {heading:"Publications", path:"/publications", icon:<MdOutlinePublishedWithChanges size={20} color="#00ff00" />}, {heading:"Careers", path:"/ourteam", icon:<HiTrendingUp size={20} color="#00ff00"  />}];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
 
