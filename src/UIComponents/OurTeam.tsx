@@ -10,18 +10,24 @@ import Manish_Dhubkarya from "../assets/TeamMemberPics/Manish_Dhubkarya.jpg";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import Footer from "./Footer";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 interface TeamMember {
   name: string;
   designation: string;
   pic?: string;
 }
 const OurTeam = () => {
+  const navigate=useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+    useEffect(() => {
+      window.scrollTo(0,0);
+  });
+  
 
   // Breakpoints
   const isXXS = width <= 200;
@@ -68,7 +74,7 @@ const OurTeam = () => {
     },
   ];
   return (
-    <div className={`flex flex-col mb-10 items-center ${isXXS || isXS || isSM?"gap-y-10":isMD?"gap-y-14": isLG?"gap-y-17":isXL?"gap-y-18":"gap-y-20"}  inter-custom justify-center`}>
+    <div className={`flex flex-col mb-5 items-center ${isXXS || isXS || isSM?"gap-y-10":isMD?"gap-y-14": isLG?"gap-y-17":isXL?"gap-y-18":"gap-y-20"}  inter-custom justify-center`}>
       <NavigationComponent />
       {/* Header */}
 
@@ -375,25 +381,25 @@ const OurTeam = () => {
             Explore new possibilities with us everyday. Create your mark on
             future with us.
           </div>
-          <div
-            // className={styles.homeBannerConnectText}
-            className={` bg-gradient-to-r text-black roboto-regular ${
-              isXXS || isXS
-                ? "px-4 py-0.5 text-[10px]"
-                : isSM
-                ? "px-6 py-1 text-[12px]"
-                : isMD
-                ? "px-8 py-1 text-[14px]"
-                : isLG
-                ? "px-10 py-1.5 text-[16px]"
-                : "px-14 py-2 text-lg sm:text-[20px]"
-            } rounded-xl cursor-pointer shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
-          >
-            Join Us
-          </div>
+           <div
+           onClick={()=>navigate("/contactus")}
+              className={`bg-gradient-to-r text-black roboto-regular ${
+                isXXS || isXS
+                  ? "px-4 py-0.5 text-[10px]"
+                  : isSM
+                  ? "px-6 py-1 text-[12px]"
+                  : isMD
+                  ? "px-8 py-1 text-[14px]"
+                  : isLG
+                  ? "px-10 py-1.5 text-[16px]"
+                  : "px-14 py-2 text-lg sm:text-[20px]"
+              } rounded-xl cursor-pointer shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+            >
+              Join Us
+            </div>
         </div>
-        <div className="w-full flex border-t-3 border-[#8AFF84] mt-0 flex-col items-center"></div>
-        <div className="w-[90%] md:w-[83%] flex flex-col">
+        <div className="w-full flex border-t-2 border-[#8AFF84] mt-0 flex-col items-center"></div>
+        <div className="w-[83%] md:w-[83%] flex flex-col">
           <Footer />
         </div>
       </div>

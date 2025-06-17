@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import { TbFilterBolt } from "react-icons/tb";
 import { getData } from "../services/FetchBackendServices";
+import { useNavigate } from "react-router-dom";
 
 interface Filters {
   openAccess: boolean;
@@ -238,7 +239,7 @@ const Publications: React.FC = () => {
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true); // Added for backend feedback
   const [error, setError] = useState<string | null>(null); // Added for backend feedback
-
+  const navigate=useNavigate()
   // Fetch all publication table data
   const fetchAllPublications = async () => {
     try {
@@ -642,7 +643,7 @@ const Publications: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen mt-15 mb-10 font-sans libre-franklin">
+    <div className="flex flex-col min-h-screen mt-15 mb-5 font-sans libre-franklin">
       <NavigationComponent />
       <div className="flex bg-gray-100 flex-col py-5 px-5 w-full max-w-[1600px] mx-auto">
         <div className={`relative flex ${isXXS || isXS || isSM || isMD || isLG ? "flex-col" : "flex-row"} gap-6 w-full`}>
@@ -884,23 +885,24 @@ const Publications: React.FC = () => {
             Explore new possibilities with us everyday. Create your mark on future with us.
           </div>
           <div
-            className={`bg-gradient-to-r text-black ${
-              isXXS || isXS
-                ? "px-4 py-0.5 text-[10px]"
-                : isSM
-                ? "px-6 py-1 text-[14px]"
-                : isMD
-                ? "px-8 py-1 text-[14px]"
-                : isLG
-                ? "px-10 py-1.5 text-[16px]"
-                : "px-14 py-2 text-lg sm:text-[20px]"
-            } rounded-xl cursor-pointer mt-3 shadow-[0px_4px_16px_rgba(138,255,132,0.2),0px_4px_16px_rgba(44,107,193,0.2)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
-          >
-            Join Us
-          </div>
+          onClick={()=>navigate("/contactus")}
+              className={`bg-gradient-to-r text-black roboto-regular ${
+                isXXS || isXS
+                  ? "px-4 py-0.5 text-[10px]"
+                  : isSM
+                  ? "px-6 py-1 text-[12px]"
+                  : isMD
+                  ? "px-8 py-1 text-[14px]"
+                  : isLG
+                  ? "px-10 py-1.5 text-[16px]"
+                  : "px-14 py-2 text-lg sm:text-[20px]"
+              } rounded-xl cursor-pointer shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+            >
+              Join Us
+            </div>
         </div>
-        <div className="w-full flex border-t-3 border-[#8AFF84] mt-0 flex-col items-center">
-          <div className="w-[90%] md:w-[83%] flex flex-col">
+        <div className="w-full flex border-t-2 border-[#8AFF84] mt-0 flex-col items-center">
+          <div className="w-[83%] md:w-[83%] flex flex-col">
             <Footer />
           </div>
         </div>

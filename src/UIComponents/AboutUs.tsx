@@ -4,6 +4,7 @@ import AboutBack from "../assets/AboutBack.gif";
 import AboutBack2 from "../assets/AboutBack2.gif";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const content = {
   aboutUs: {
     title: "ABOUT US",
@@ -41,12 +42,17 @@ const content = {
 };
 
 const AboutUs = () => {
+  const navigate=useNavigate()
    const [width, setWidth] = useState(window.innerWidth);
     useEffect(() => {
       const handleResize = () => setWidth(window.innerWidth);
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }, []);
+      useEffect(() => {
+        window.scrollTo(0,0);
+    });
+    
   
     // Breakpoints
     const isXXS = width <= 200;
@@ -59,7 +65,7 @@ const AboutUs = () => {
     const is3XL = width > 1600;
   
   return (
-   <div className="min-h-screen pb-15 roboto-regular flex flex-col">
+   <div className="min-h-screen pb-5 roboto-regular flex flex-col">
   <NavigationComponent />
 
   {/* About Us Section */}
@@ -69,7 +75,7 @@ const AboutUs = () => {
     <section className="flex flex-col items-center md:items-start text-center md:text-start">
       <div className="text-[20px] font-bold mb-3">{content.aboutUs.title}</div>
       <div className="text-[12px] leading-tight max-w-[626px] mb-6">{content.aboutUs.description}</div>
-      <div className={`bg-gradient-to-r text-black roboto-regular rounded-xl cursor-pointer ${isXXS || isXS ? 'px-4 py-0.5 text-[10px]' : isSM && 'px-6 py-1 text-[14px]'} shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}>{content.aboutUs.buttonText}</div>
+      <div onClick={()=>navigate("/contactus")} className={`bg-gradient-to-r text-black roboto-regular rounded-xl cursor-pointer ${isXXS || isXS ? 'px-4 py-0.5 text-[10px]' : isSM && 'px-6 py-1 text-[14px]'} shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}>{content.aboutUs.buttonText}</div>
     </section>
   </div>
   </div>:
@@ -80,7 +86,7 @@ const AboutUs = () => {
       <div className="text-[30px] font-bold mb-3">{content.aboutUs.title}</div>
       <div className="text-[15px] leading-tight max-w-[626px] mb-6">{content.aboutUs.description}</div>
      <div className='flex w-full justify-center'>
-      <div className={`bg-gradient-to-r  text-black roboto-regular rounded-xl cursor-pointer ${ isMD && 'px-6 py-1 text-[15px]'} shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}>{content.aboutUs.buttonText}</div>
+      <div onClick={()=>navigate("/contactus")} className={`bg-gradient-to-r  text-black roboto-regular rounded-xl cursor-pointer ${ isMD && 'px-6 py-1 text-[15px]'} shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}>{content.aboutUs.buttonText}</div>
     </div>
     </section>
   </div>
@@ -92,7 +98,7 @@ const AboutUs = () => {
       <div className="text-[40px] font-bold mb-7">{content.aboutUs.title}</div>
       <div className="text-[20px] leading-tight mb-10">{content.aboutUs.description}</div>
      <div className='flex w-full justify-center'>
-      <div className={`bg-gradient-to-r  text-black roboto-regular rounded-xl cursor-pointer px-9 py-2 text-[18px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}>{content.aboutUs.buttonText}</div>
+      <div onClick={()=>navigate("/contactus")} className={`bg-gradient-to-r  text-black roboto-regular rounded-xl cursor-pointer px-9 py-2 text-[18px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}>{content.aboutUs.buttonText}</div>
     </div>
     </section>
   </div>
@@ -102,7 +108,7 @@ const AboutUs = () => {
     <section className="flex w-[50%] flex-col justify-start items-start  text-start ">
       <div className="text-[64px] font-bold mb-6">{content.aboutUs.title}</div>
       <div className="text-[20px] leading-tight max-w-[626px] mb-8">{content.aboutUs.description}</div>
-      <div className="bg-gradient-to-r text-black roboto-regular px-14 py-2 rounded-xl cursor-pointer text-lg sm:text-[20px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold">{content.aboutUs.buttonText}</div>
+      <div onClick={()=>navigate("/contactus")} className="bg-gradient-to-r text-black roboto-regular px-14 py-2 rounded-xl cursor-pointer text-lg sm:text-[20px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold">{content.aboutUs.buttonText}</div>
     </section>
     <div className='mt-5 w-[42%] '>
       <img className="w-full h-full" src={AboutBack} alt={content.aboutUs.imageAlt} />
@@ -339,15 +345,25 @@ const AboutUs = () => {
               Explore new possibilities with us everyday. Create your mark on
               future with us.
             </div>
-            <div
-            // className={styles.homeBannerConnectText}
-            className={` bg-gradient-to-r text-black roboto-regular ${isXXS || isXS ? 'px-4 py-0.5 text-[10px]' : isSM ? 'px-6 py-1 text-[12px]' : isMD ? 'px-8 py-1 text-[14px]' : isLG ? 'px-10 py-1.5 text-[16px]' : 'px-14 py-2 text-lg sm:text-[20px]'} rounded-xl cursor-pointer shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
-          >
-            Join Us
+             <div
+             onClick={()=>navigate("/contactus")}
+              className={`bg-gradient-to-r text-black roboto-regular ${
+                isXXS || isXS
+                  ? "px-4 py-0.5 text-[10px]"
+                  : isSM
+                  ? "px-6 py-1 text-[12px]"
+                  : isMD
+                  ? "px-8 py-1 text-[14px]"
+                  : isLG
+                  ? "px-10 py-1.5 text-[16px]"
+                  : "px-14 py-2 text-lg sm:text-[20px]"
+              } rounded-xl cursor-pointer shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+            >
+              Join Us
+            </div>
           </div>
-          </div>
-    <div className="w-full flex border-t-3 border-[#8AFF84] mt-0 flex-col items-center"></div>
-    <div className="w-[90%] md:w-[83%] flex flex-col">
+    <div className="w-full flex border-t-2 border-[#8AFF84] mt-0 flex-col items-center"></div>
+    <div className="w-[83%] md:w-[83%] flex flex-col">
       <Footer />
     </div>
   </div>

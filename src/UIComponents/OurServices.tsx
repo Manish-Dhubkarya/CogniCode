@@ -30,6 +30,11 @@ const OurServices: React.FC = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  useEffect(() => {
+  if (selectedService === "No service selected") {
+    window.scrollTo(0,0);
+  }
+}, [selectedService]);
 
   // Scroll to the appropriate section based on selectedService
   useEffect(() => {
@@ -277,7 +282,7 @@ const OurServices: React.FC = () => {
           : isLG
           ? "mt-12"
           : "mt-15"
-      } mb-10 text-white`}
+      } mb-5 text-white`}
     >
       <NavigationComponent />
       <div
@@ -364,13 +369,13 @@ const OurServices: React.FC = () => {
       >
         <ScrollingFooter />
       </div>
-      <div className="w-full flex border-t-3 border-[#8AFF84] flex-col items-center">
+      <div className="w-full flex border-t-2 border-[#8AFF84] flex-col items-center">
         <div
           className={`flex flex-col ${
             isXXS || isXS
-              ? "w-[95%]"
+              ? "w-[83%]"
               : isSM
-              ? "w-[90%]"
+              ? "w-[83%]"
               : isMD
               ? "w-[88%]"
               : isLG

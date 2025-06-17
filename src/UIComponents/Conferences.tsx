@@ -3,6 +3,7 @@ import NavigationComponent from "./NavigationComponent";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import { useEffect, useState } from "react";
 import { getData } from "../services/FetchBackendServices";
+import { useNavigate } from "react-router-dom";
 
 // Interface matching backend response
 interface ConferenceRow {
@@ -21,7 +22,7 @@ const Conferences: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [width, setWidth] = useState(window.innerWidth);
-
+  const navigate=useNavigate()
   // Fetch conference table
   const fetchAllConferences = async () => {
     try {
@@ -59,6 +60,10 @@ const Conferences: React.FC = () => {
   useEffect(() => {
     fetchAllConferences();
   }, []);
+    useEffect(() => {
+      window.scrollTo(0,0);
+  });
+  
 
   // Handle window resize
   useEffect(() => {
@@ -90,7 +95,7 @@ const Conferences: React.FC = () => {
 
   return (
     <div
-      className={`w-full flex flex-col items-center justify-center mb-10 roboto-regular ${
+      className={`w-full flex flex-col items-center justify-center mb-5 roboto-regular ${
         isXXS || isXS || isSM ? "mt-16" : isMD || isLG || isXL ? "mt-22" : "mt-30"
       }`}
     >
@@ -244,6 +249,7 @@ const Conferences: React.FC = () => {
               Explore new possibilities with us everyday. Create your mark on future with us.
             </div>
             <div
+            onClick={()=>navigate("/contactus")}
               className={`bg-gradient-to-r text-black roboto-regular ${
                 isXXS || isXS
                   ? "px-4 py-0.5 text-[10px]"
@@ -259,8 +265,8 @@ const Conferences: React.FC = () => {
               Join Us
             </div>
           </div>
-          <div className="w-full flex border-t-3 border-[#8AFF84] mt-0 flex-col items-center">
-            <div className="w-[90%] md:w-[83%] flex flex-col">
+          <div className="w-full flex border-t-2 border-[#8AFF84] mt-0 flex-col items-center">
+            <div className="w-[83%] md:w-[83%] flex flex-col">
               <Footer />
             </div>
           </div>

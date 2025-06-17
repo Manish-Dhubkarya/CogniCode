@@ -2,11 +2,12 @@ import InstaLogo from "../assets/InstaLogo.png";
 import LinkedinLogo from "../assets/LinkedInLogo.png";
 import FbLogo from "../assets/FbLogo.png";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Footer() {
-  const QuickLinks = ["Thesis Writing", "IT solutions", "Ai solutions", "Article Writing", "Graphic Designing", "Plagiarism Check"];
+  const QuickLinks = ["Plagiarism Check", "Thesis Writing",   "IT solutions", "AI solutions",  "Article Writing",    "Graphic Designing"];
   const MeetUs = ["B/2, Mahesh Nagar,", "Tulsi Vihar Colony", "Gwalior, M.P 474002"];
-
+  const navigate=useNavigate()
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -20,30 +21,23 @@ function Footer() {
   const isSM = width > 300 && width <= 500;
   const isMD = width > 500 && width <= 700;
   const isLG = width > 700 && width <= 900;
-  const isXL = width > 900 && width <= 1200;
+  const isXL = width > 900;
 
   return (
     <div className="libre-franklin text-white">
-      <div
-        className={`flex ${
-          isXXS || isXS ? 'flex-col items-start text-left gap-5 py-4' : 
-          isSM ? 'flex-col items-start text-left gap-5 py-4' : 
-          isMD || isLG ? 'flex-col items-center gap-6 py-6 px-4' : 
-          'flex-row justify-between md:items-start gap-8 py-8 px-6'} mt-6`}
-      >
-        {/* For XXS, XS, SM: Single column layout with left alignment */}
-        {(isXXS || isXS || isSM) && (
-          <>
+      <div className="mt-6">
+        {/* XXS Layout */}
+        {isXXS && (
+          <div className="flex flex-col items-start text-left gap-5 py-4">
             {/* Quick Links */}
             <div className="flex flex-col">
-              <h3 className={`font-semibold ${isXXS || isXS ? 'text-[14px] mb-2' : 'text-[16px] mb-3'} text-left`}>
-                Quick Links
-              </h3>
+              <h3 className="font-semibold text-[14px] mb-2 text-left">Quick Links</h3>
               {QuickLinks.map((item, index) => (
                 <a
+      onClick={() => navigate("/services")}
+
                   key={index}
-                  href="#"
-                  className={`block ${isXXS || isXS ? 'text-[12px] mb-1' : 'text-[14px] mb-1'} hover:text-[#8AFF84] transition-colors duration-200 text-left`}
+                  className="block text-[12px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
                 >
                   {item}
                 </a>
@@ -52,195 +46,402 @@ function Footer() {
 
             {/* Have a Query */}
             <div className="flex flex-col">
-              <h3 className={`font-semibold ${isXXS || isXS ? 'text-[14px] mb-2' : 'text-[16px] mb-3'} text-left`}>
-                Have a Query ?
-              </h3>
-              <div className={`w-[70%] border-t-[1.5px] border-[#8AFF84] ${isXXS || isXS ? 'my-3' : 'mb-4'}`}></div>
-              <p className={`${isXXS || isXS ? 'text-[12px] mb-2' : 'text-[14px] mb-2'} text-left`}>
-                Contact us :
-              </p>
+              <h3 className="font-semibold text-[14px] mb-2 text-left">Have a Query?</h3>
+              <div className="w-[70%] border-t-[1.5px] border-[#8AFF84] my-3"></div>
+              <p className="text-[12px] mb-2 text-left">Contact us:</p>
               <a
                 href="tel:+917000515617"
-                className={`block ${isXXS || isXS ? 'text-[12px] mb-1' : 'text-[14px] mb-1'} hover:text-[#8AFF84] transition-colors duration-200 text-left`}
-              >
-                +91-7000515617
-              </a>
-              <a
-                href="mailto:codeocogni@gmail.com"
-                className={`block ${isXXS || isXS ? 'text-[12px]' : 'text-[14px]'} hover:text-[#8AFF84] transition-colors duration-200 text-left`}
-              >
-                codeocogni@gmail.com
-              </a>
-            </div>
-
-            {/* Meet Us */}
-            <div className="flex flex-col">
-              <h3 className={`font-semibold ${isXXS || isXS ? 'text-[14px] mb-2' : 'text-[16px] mb-3'} text-left`}>
-                Meet us :
-              </h3>
-              {MeetUs.map((item, index) => (
-                <p key={index} className={`${isXXS || isXS ? 'text-[12px] mb-1' : 'text-[14px] mb-1'} text-left`}>
-                  {item}
-                </p>
-              ))}
-              <h3 className={`${isXXS || isXS ? 'text-[12px] mt-3 mb-2' : 'text-[14px] mt-3 mb-2'} text-left`}>
-                Follow us :
-              </h3>
-              <div className={`flex justify-start`}>
-                <a href="#" className="hover:scale-105 transition-transform duration-200">
-                  <img className={`${isXXS || isXS ? 'w-[25px]' : 'w-[30px]'}`} src={InstaLogo} alt="Instagram" />
-                </a>
-                <a href="#" className="hover:scale-105 transition-transform duration-200">
-                  <img className={`${isXXS || isXS ? 'w-[25px]' : 'w-[30px]'}`} src={LinkedinLogo} alt="LinkedIn" />
-                </a>
-                <a href="#" className="hover:scale-105 transition-transform duration-200">
-                  <img className={`${isXXS || isXS ? 'w-[25px]' : 'w-[30px]'}`} src={FbLogo} alt="Facebook" />
-                </a>
-              </div>
-            </div>
-          </>
-        )}
-
-        {/* For MD and LG: Meet us and Have a Query at the top */}
-        {(isMD || isLG) && (
-          <div className="flex flex-row justify-between items-start w-full gap-6">
-            {/* Meet Us */}
-            <div className="flex flex-col">
-              <h3 className={`font-semibold ${isMD ? 'text-[18px] mb-3' : 'text-[20px] mb-4'} text-left`}>
-                Meet us :
-              </h3>
-              {MeetUs.map((item, index) => (
-                <p key={index} className={`${isMD || isLG ? 'text-[16px] mb-1.5' : ''} text-left`}>
-                  {item}
-                </p>
-              ))}
-              <h3 className={`${isMD || isLG ? 'text-[16px] mt-4 mb-2' : ''} text-left`}>
-                Follow us :
-              </h3>
-              <div className={`flex justify-start ${isMD || isLG ? 'gap-3' : ''}`}>
-                <a href="#" className="hover:scale-105 transition-transform duration-200">
-                  <img className={`${isMD || isLG ? 'w-[40px]' : ''}`} src={InstaLogo} alt="Instagram" />
-                </a>
-                <a href="#" className="hover:scale-105 transition-transform duration-200">
-                  <img className={`${isMD || isLG ? 'w-[41px]' : ''}`} src={LinkedinLogo} alt="LinkedIn" />
-                </a>
-                <a href="#" className="hover:scale-105 transition-transform duration-200">
-                  <img className={`${isMD || isLG ? 'w-[40px]' : ''}`} src={FbLogo} alt="Facebook" />
-                </a>
-              </div>
-            </div>
-
-            {/* Have a Query */}
-            <div className="flex flex-col">
-              <h3 className={`font-semibold ${isMD ? 'text-[18px] mb-3' : 'text-[20px] mb-4'} text-right`}>
-                Have a Query ?
-              </h3>
-              <div className={`w-full border-t-[1.5px] border-[#8AFF84] ${isMD || isLG ? 'my-5' : ''}`}></div>
-              <p className={`${isMD || isLG ? 'text-[16px] mb-3' : ''} text-right`}>
-                Contact us :
-              </p>
-              <a
-                href="tel:+917000515617"
-                className={`block ${isMD || isLG ? 'text-[16px] mb-1.5' : ''} hover:text-[#8AFF84] transition-colors duration-200 text-right`}
+                className="block text-[12px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
               >
                 +91-7000515617
               </a>
               <a
                 href="mailto:office.cognicode@gmail.com"
-                className={`block ${isMD || isLG ? 'text-[16px]' : ''} hover:text-[#8AFF84] transition-colors duration-200 text-right`}
+                className="block text-[12px] hover:text-[#8AFF84] transition-colors duration-200 text-left"
               >
                 office.cognicode@gmail.com
               </a>
+            </div>
+
+            {/* Meet Us */}
+            <div className="flex flex-col">
+              <h3 className="font-semibold text-[14px] mb-2 text-left">Meet us:</h3>
+              {MeetUs.map((item, index) => (
+                <p key={index} className="text-[12px] mb-1 text-left">{item}</p>
+              ))}
+              <h3 className="text-[12px] mt-3 mb-2 text-left">Follow us:</h3>
+              <div className="flex justify-start">
+                <a href="#" className="hover:scale-105 transition-transform duration-200">
+                  <img className="w-[25px]" src={InstaLogo} alt="Instagram" />
+                </a>
+                <a href="#" className="hover:scale-105 transition-transform duration-200">
+                  <img className="w-[25px]" src={LinkedinLogo} alt="LinkedIn" />
+                </a>
+                <a href="#" className="hover:scale-105 transition-transform duration-200">
+                  <img className="w-[25px]" src={FbLogo} alt="Facebook" />
+                </a>
+              </div>
             </div>
           </div>
         )}
 
-        {/* For Other Breakpoints (XL): Default Layout */}
-        {!(isSM || isMD || isLG) && (
-          <>
+        {/* XS Layout */}
+        {isXS && (
+          <div className="flex flex-col items-start text-left gap-5 py-4">
             {/* Quick Links */}
             <div className="flex flex-col">
-              <h3 className={`font-semibold ${isXXS || isXS ? 'text-[14px] mb-2' : isXL ? 'text-[20px] mb-3' : 'text-[24px] mb-4'}`}>
-                Quick Links
-              </h3>
+              <h3 className="font-semibold text-[14px] mb-2 text-left">Quick Links</h3>
               {QuickLinks.map((item, index) => (
                 <a
+      onClick={() => navigate("/services")}
+
                   key={index}
-                  href="#"
-                  className={`block ${isXXS || isXS ? 'text-[12px] mb-1' : isXL ? 'text-[18px]' : 'text-[20px] leading-tight mb-2'} hover:text-[#8AFF84] transition-colors duration-200`}
+                  className="block text-[12px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
                 >
                   {item}
                 </a>
               ))}
             </div>
 
-            {/* Meet Us */}
-            <div className="flex flex-col">
-              <h3 className={`font-semibold ${isXXS || isXS ? 'text-[14px] mb-2' : isXL ? 'text-[20px] mb-3' : 'text-[24px] mb-4'}`}>
-                Meet us :
-              </h3>
-              {MeetUs.map((item, index) => (
-                <p key={index} className={`${isXXS || isXS ? 'text-[12px] mb-1' : isXL ? 'text-[20px] mb-3' : 'text-[24px] mb-2'}`}>
-                  {item}
-                </p>
-              ))}
-              <h3 className={`${isXXS || isXS ? 'text-[12px] mt-3 mb-2' : isXL ? 'text-[18px] mb-2' : 'text-[20px] mt-4 mb-2'}`}>
-                Follow us :
-              </h3>
-              <div className={`flex justify-center ${isXXS || isXS ? 'gap-2' : 'gap-3'}`}>
-                <a href="#" className="hover:scale-105 transition-transform duration-200">
-                  <img className={`${isXXS || isXS ? 'w-[30px]' : isXL ? 'w-[53px]' : 'w-[53px]'}`} src={InstaLogo} alt="Instagram" />
-                </a>
-                <a href="#" className="hover:scale-105 transition-transform duration-200">
-                  <img className={`${isXXS || isXS ? 'w-[31px]' : isXL ? 'w-[54px]' : 'w-[53px]'}`} src={LinkedinLogo} alt="LinkedIn" />
-                </a>
-                <a href="#" className="hover:scale-105 transition-transform duration-200">
-                  <img className={`${isXXS || isXS ? 'w-[30px]' : isXL ? 'w-[53px]' : 'w-[53px]'}`} src={FbLogo} alt="Facebook" />
-                </a>
-              </div>
-            </div>
-
             {/* Have a Query */}
             <div className="flex flex-col">
-              <h3 className={`font-semibold ${isXXS || isXS ? 'text-[14px] mb-2' : isXL ? 'text-[20px]' : 'text-[24px] mb-4'}`}>
-                Have a Query ?
-              </h3>
-              <div className={`w-full border-t-[1.5px] border-[#8AFF84] ${isXXS || isXS ? 'my-3' : 'my-6'}`}></div>
-              <p className={`${isXXS || isXS ? 'text-[12px] mb-2' : isXL ? 'text-[17px] mb-4' : 'text-[20px] mb-4'}`}>
-                Contact us :
-              </p>
+              <h3 className="font-semibold text-[14px] mb-2 text-left">Have a Query?</h3>
+              <div className="w-[70%] border-t-[1.5px] border-[#8AFF84] my-3"></div>
+              <p className="text-[12px] mb-2 text-left">Contact us:</p>
               <a
                 href="tel:+917000515617"
-                className={`block ${isXXS || isXS ? 'text-[12px] mb-1' : isXL ? 'text-[17px] mb-2' : 'text-[20px] mb-2'} hover:text-[#8AFF84] transition-colors duration-200`}
+                className="block text-[12px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
               >
                 +91-7000515617
               </a>
               <a
                 href="mailto:office.cognicode@gmail.com"
-                className={`block ${isXXS || isXS ? 'text-[12px]' : isXL ? 'text-[17px] mb-2' : 'text-[20px]'} hover:text-[#8AFF84] transition-colors duration-200`}
+                className="block text-[12px] hover:text-[#8AFF84] transition-colors duration-200 text-left"
               >
                 office.cognicode@gmail.com
               </a>
             </div>
-          </>
+
+            {/* Meet Us */}
+            <div className="flex flex-col">
+              <h3 className="font-semibold text-[14px] mb-2 text-left">Meet us:</h3>
+              {MeetUs.map((item, index) => (
+                <p key={index} className="text-[12px] mb-1 text-left">{item}</p>
+              ))}
+              <h3 className="text-[12px] mt-3 mb-2 text-left">Follow us:</h3>
+              <div className="flex justify-start">
+                <a href="#" className="hover:scale-105 transition-transform duration-200">
+                  <img className="w-[25px]" src={InstaLogo} alt="Instagram" />
+                </a>
+                <a href="#" className="hover:scale-105 transition-transform duration-200">
+                  <img className="w-[25px]" src={LinkedinLogo} alt="LinkedIn" />
+                </a>
+                <a href="#" className="hover:scale-105 transition-transform duration-200">
+                  <img className="w-[25px]" src={FbLogo} alt="Facebook" />
+                </a>
+              </div>
+            </div>
+          </div>
         )}
 
-        {/* Quick Links: Centered Below for MD and LG */}
-        {(isMD || isLG) && (
-          <div className="flex flex-col mt-6">
-            <h3 className={`font-semibold ${isMD ? 'text-[18px] mb-3' : 'text-[20px] mb-4'} text-center`}>
-              Quick Links
-            </h3>
-            <div className="flex flex-row justify-center gap-4 flex-wrap whitespace-nowrap">
+        {/* SM Layout */}
+        {isSM && (
+          <div className="flex flex-col items-start text-left gap-5 py-4">
+            {/* Quick Links */}
+            <div className="flex flex-col">
+              <h3 className="font-semibold text-[16px] mb-3 text-left">Quick Links</h3>
               {QuickLinks.map((item, index) => (
                 <a
+      onClick={() => navigate("/services")}
+
                   key={index}
-                  href="#"
-                  className={`block ${isMD || isLG ? 'text-[16px] mx-2' : ''} hover:text-[#8AFF84] transition-colors duration-200`}
+                  className="block text-[14px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
                 >
                   {item}
                 </a>
               ))}
+            </div>
+
+            {/* Have a Query */}
+            <div className="flex flex-col">
+              <h3 className="font-semibold text-[16px] mb-3 text-left">Have a Query?</h3>
+              <div className="w-[70%] border-t-[1.5px] border-[#8AFF84] mb-4"></div>
+              <p className="text-[14px] mb-2 text-left">Contact us:</p>
+              <a
+                href="tel:+917000515617"
+                className="block text-[14px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
+              >
+                +91-7000515617
+              </a>
+              <a
+                href="mailto:office.cognicode@gmail.com"
+                className="block text-[14px] hover:text-[#8AFF84] transition-colors duration-200 text-left"
+              >
+                office.cognicode@gmail.com
+              </a>
+            </div>
+
+            {/* Meet Us */}
+            <div className="flex flex-col">
+              <h3 className="font-semibold text-[16px] mb-3 text-left">Meet us:</h3>
+              {MeetUs.map((item, index) => (
+                <p key={index} className="text-[14px] mb-1 text-left">{item}</p>
+              ))}
+              <h3 className="text-[14px] mt-3 mb-2 text-left">Follow us:</h3>
+              <div className="flex justify-start">
+                <a href="#" className="hover:scale-105 transition-transform duration-200">
+                  <img className="w-[30px]" src={InstaLogo} alt="Instagram" />
+                </a>
+                <a href="#" className="hover:scale-105 transition-transform duration-200">
+                  <img className="w-[30px]" src={LinkedinLogo} alt="LinkedIn" />
+                </a>
+                <a href="#" className="hover:scale-105 transition-transform duration-200">
+                  <img className="w-[30px]" src={FbLogo} alt="Facebook" />
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* MD Layout */}
+        {isMD && (
+          <div className="flex flex-col items-center gap-6 py-6 px-4">
+            <div className="flex flex-row justify-between items-start w-full gap-6">
+              {/* Meet Us */}
+              <div className="flex flex-col">
+                <h3 className="font-semibold text-[18px] mb-3 text-left">Meet us:</h3>
+                {MeetUs.map((item, index) => (
+                  <p key={index} className="text-[16px] mb-1.5 text-left">{item}</p>
+                ))}
+                <h3 className="text-[16px] mt-4 mb-2 text-left">Follow us:</h3>
+                <div className="flex justify-start gap-3">
+                  <a href="#" className="hover:scale-105 transition-transform duration-200">
+                    <img className="w-[40px]" src={InstaLogo} alt="Instagram" />
+                  </a>
+                  <a href="#" className="hover:scale-105 transition-transform duration-200">
+                    <img className="w-[41px]" src={LinkedinLogo} alt="LinkedIn" />
+                  </a>
+                  <a href="#" className="hover:scale-105 transition-transform duration-200">
+                    <img className="w-[40px]" src={FbLogo} alt="Facebook" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Have a Query */}
+              <div className="flex flex-col">
+                <h3 className="font-semibold text-[18px] mb-3 text-right">Have a Query?</h3>
+                <div className="w-full border-t-[1.5px] border-[#8AFF84] my-5"></div>
+                <p className="text-[16px] mb-3 text-right">Contact us:</p>
+                <a
+                  href="tel:+917000515617"
+                  className="block text-[16px] mb-1.5 hover:text-[#8AFF84] transition-colors duration-200 text-right"
+                >
+                  +91-7000515617
+                </a>
+                <a
+                  href="mailto:office.cognicode@gmail.com"
+                  className="block text-[16px] hover:text-[#8AFF84] transition-colors duration-200 text-right"
+                >
+                  office.cognicode@gmail.com
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div className="flex flex-col mt-6">
+              <h3 className="font-semibold text-[18px] mb-3 text-center">Quick Links</h3>
+              <div className="flex flex-row justify-center gap-4 flex-wrap whitespace-nowrap">
+                {QuickLinks.map((item, index) => (
+                  <a
+      onClick={() => navigate("/services")}
+
+                    key={index}
+                    className="block text-[16px] mx-2 hover:text-[#8AFF84] transition-colors duration-200"
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* LG Layout */}
+        {isLG && (
+          <div className="flex flex-col items-center gap-6 py-6 px-4">
+            <div className="flex flex-row justify-between items-start w-full gap-6">
+              {/* Meet Us */}
+              <div className="flex flex-col">
+                <h3 className="font-semibold text-[20px] mb-4 text-left">Meet us:</h3>
+                {MeetUs.map((item, index) => (
+                  <p key={index} className="text-[16px] mb-1.5 text-left">{item}</p>
+                ))}
+                <h3 className="text-[16px] mt-4 mb-2 text-left">Follow us:</h3>
+                <div className="flex justify-start gap-3">
+                  <a href="#" className="hover:scale-105 transition-transform duration-200">
+                    <img className="w-[40px]" src={InstaLogo} alt="Instagram" />
+                  </a>
+                  <a href="#" className="hover:scale-105 transition-transform duration-200">
+                    <img className="w-[41px]" src={LinkedinLogo} alt="LinkedIn" />
+                  </a>
+                  <a href="#" className="hover:scale-105 transition-transform duration-200">
+                    <img className="w-[40px]" src={FbLogo} alt="Facebook" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Have a Query */}
+              <div className="flex flex-col">
+                <h3 className="font-semibold text-[20px] mb-4 text-right">Have a Query?</h3>
+                <div className="w-full border-t-[1.5px] border-[#8AFF84] my-5"></div>
+                <p className="text-[16px] mb-3 text-right">Contact us:</p>
+                <a
+                  href="tel:+917000515617"
+                  className="block text-[16px] mb-1.5 hover:text-[#8AFF84] transition-colors duration-200 text-right"
+                >
+                  +91-7000515617
+                </a>
+                <a
+                  href="mailto:office.cognicode@gmail.com"
+                  className="block text-[16px] hover:text-[#8AFF84] transition-colors duration-200 text-right"
+                >
+                  office.cognicode@gmail.com
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div className="flex flex-col mt-6">
+              <h3 className="font-semibold text-[20px] mb-4 text-center">Quick Links</h3>
+              <div className="flex flex-row justify-center gap-4 flex-wrap whitespace-nowrap">
+                {QuickLinks.map((item, index) => (
+                  <a
+      onClick={() => navigate("/services")}
+
+                    key={index}
+                    className="block text-[16px] mx-2 hover:text-[#8AFF84] transition-colors duration-200"
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* XL Layout */}
+        {isXL && (
+          // <div className="flex flex-row justify-between md:items-start gap-8 py-8 px-6">
+          //   {/* Quick Links */}
+          //   <div className="flex flex-col">
+          //     <h3 className="font-semibold text-[24px] mb-4">Quick Links</h3>
+          //     {QuickLinks.map((item, index) => (
+          //       <a
+          //         key={index}
+          //         className="block text-[20px] leading-tight mb-2 hover:text-[#8AFF84] transition-colors duration-200"
+          //       >
+          //         {item}
+          //       </a>
+          //     ))}
+          //   </div>
+
+          //   {/* Meet Us */}
+          //   <div className="flex flex-col">
+          //     <h3 className="font-semibold text-[24px] mb-4">Meet us:</h3>
+          //     {MeetUs.map((item, index) => (
+          //       <p key={index} className="text-[24px] mb-2">{item}</p>
+          //     ))}
+          //     <h3 className="text-[20px] mt-4 mb-2">Follow us:</h3>
+          //     <div className="flex justify-center gap-3">
+          //       <a href="#" className="hover:scale-105 transition-transform duration-200">
+          //         <img className="w-[53px]" src={InstaLogo} alt="Instagram" />
+          //       </a>
+          //       <a href="#" className="hover:scale-105 transition-transform duration-200">
+          //         <img className="w-[54px]" src={LinkedinLogo} alt="LinkedIn" />
+          //       </a>
+          //       <a href="#" className="hover:scale-105 transition-transform duration-200">
+          //         <img className="w-[53px]" src={FbLogo} alt="Facebook" />
+          //       </a>
+          //     </div>
+          //   </div>
+
+          //   {/* Have a Query */}
+          //   <div className="flex flex-col">
+          //     <h3 className="font-semibold text-[24px] mb-4">Have a Query?</h3>
+          //     <div className="w-full border-t-[1.5px] border-[#8AFF84] my-6"></div>
+          //     <p className="text-[20px] mb-4">Contact us:</p>
+          //     <a
+          //       href="tel:+917000515617"
+          //       className="block text-[20px] mb-2 hover:text-[#8AFF84] transition-colors duration-200"
+          //     >
+          //       +91-7000515617
+          //     </a>
+          //     <a
+          //       href="mailto:office.cognicode@gmail.com"
+          //       className="block text-[20px] hover:text-[#8AFF84] transition-colors duration-200"
+          //     >
+          //       office.cognicode@gmail.com
+          //     </a>
+          //   </div>
+          // </div>
+
+          // New XL Flow//
+          <div className="flex flex-col items-center gap-6 py-6 ">
+            <div className="flex flex-row justify-between items-start w-full gap-6">
+              {/* Meet Us */}
+              <div className="flex flex-col">
+                <h3 className="font-semibold text-[24px] mb-4 text-left">Meet us:</h3>
+                {MeetUs.map((item, index) => (
+                  <p key={index} className="text-[20px] mb-1.5 text-left">{item}</p>
+                ))}
+                <h3 className="text-[20px] mt-4 mb-2 text-left">Follow us:</h3>
+                <div className="flex justify-start gap-3">
+                  <a href="#" className="hover:scale-105 transition-transform duration-200">
+                    <img className="w-[40px]" src={InstaLogo} alt="Instagram" />
+                  </a>
+                  <a href="#" className="hover:scale-105 transition-transform duration-200">
+                    <img className="w-[41px]" src={LinkedinLogo} alt="LinkedIn" />
+                  </a>
+                  <a href="#" className="hover:scale-105 transition-transform duration-200">
+                    <img className="w-[40px]" src={FbLogo} alt="Facebook" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Have a Query */}
+              <div className="flex flex-col">
+                <h3 className="font-semibold text-[24px] mb-4 text-right">Have a Query?</h3>
+                <div className="w-full border-t-[1.5px] border-[#8AFF84] my-2"></div>
+                <p className="text-[20px] mb-3 text-right">Contact us:</p>
+                <a
+                  href="tel:+917000515617"
+                  className="block text-[18px] mb-1.5 hover:text-[#8AFF84] transition-colors duration-200 text-right"
+                >
+                  +91-7000515617
+                </a>
+                <a
+                  href="mailto:office.cognicode@gmail.com"
+                  className="block text-[18px] hover:text-[#8AFF84] transition-colors duration-200 text-right"
+                >
+                  office.cognicode@gmail.com
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div className="flex flex-col mt-0">
+              <h3 className="font-semibold text-[24px] mb-4 text-center">Quick Links</h3>
+              <div className="flex flex-row justify-center gap-4 flex-wrap whitespace-nowrap">
+                {QuickLinks.map((item, index) => (
+                  <a
+      onClick={() => navigate("/services")}
+                    key={index}
+                    className="block text-[20px] mx-2 hover:text-[#8AFF84] transition-colors duration-200"
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         )}
@@ -248,10 +449,11 @@ function Footer() {
 
       <div
         className={`text-white inria-sans-bold-italic text-center ${
-          isXXS || isXS ? 'text-[12px] pt-4' : 
-          isSM ? 'text-[14px] pt-5' : 
-          isMD || isLG ? 'text-[18px] pt-6' : 
-          'text-[24px] pt-8'}`}
+          isXXS || isXS ? 'text-[12px] pt-4' :
+          isSM ? 'text-[14px] pt-5' :
+          isMD || isLG ? 'text-[18px] pt-6' :
+          'text-[24px] pt-8'
+        }`}
       >
         Copyright © 2025 CogniCode | Powered By CogniCode
       </div>

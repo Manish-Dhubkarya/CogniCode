@@ -15,7 +15,7 @@ export default function NavigationComponent() {
     path:string;
     icon:ReactNode;
   }
-  const Headings:HeadingProps[] = [{heading:"About Us", path:"/aboutus", icon:<FaCircleInfo size={20} color="#00ff00" />}, {heading:"Services", path:"/services", icon: <SiAmazonsimpleemailservice size={20} color="#00ff00" /> }, {heading:"Conferences", path:"/conferences", icon:<GiVideoConference size={20} color="#00ff00"  />}, {heading:"Publications", path:"/publications", icon:<MdOutlinePublishedWithChanges size={20} color="#00ff00" />}, {heading:"Careers", path:"/contactus", icon:<HiTrendingUp size={20} color="#00ff00"  />}];
+  const Headings:HeadingProps[] = [{heading:"About Us", path:"/aboutus", icon:<FaCircleInfo size={20} color="#00ff00" />}, {heading:"Services", path:"/services", icon: <SiAmazonsimpleemailservice size={20} color="#00ff00" /> }, {heading:"Conferences", path:"/conferences", icon:<GiVideoConference size={20} color="#00ff00"  />}, {heading:"Publications", path:"/publications", icon:<MdOutlinePublishedWithChanges size={20} color="#00ff00" />}, {heading:"Careers", path:"/ourteam", icon:<HiTrendingUp size={20} color="#00ff00"  />}];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
 

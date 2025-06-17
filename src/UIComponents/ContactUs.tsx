@@ -162,7 +162,7 @@ export default function ContactUs() {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col mb-10 select-none">
+    <div className="w-full min-h-screen flex flex-col mb-5 select-none">
       <NavigationComponent />
 
       {/* Success Popover */}
@@ -199,20 +199,25 @@ export default function ContactUs() {
         } pt-[64px]`}
       >
         <div
-          className={`bg-gradient-to-r text-black ${
-            isXXS || isXS
-              ? "px-4 py-0.5 text-[10px]"
-              : isSM
-              ? "px-6 py-1 text-[12px]"
-              : isMD
-              ? "px-8 py-1 text-[14px]"
-              : isLG
-              ? "px-10 py-1.5 text-[16px]"
-              : "px-14 py-2 text-lg sm:text-[20px]"
-          } rounded-xl cursor-pointer mt-3 shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
-        >
-          Send Message
-        </div>
+  className={`bg-gradient-to-r text-black ${
+    isXXS || isXS
+      ? "px-4 py-0.5 text-[10px]"
+      : isSM
+      ? "px-6 py-1 text-[12px]"
+      : isMD
+      ? "px-8 py-1 text-[14px]"
+      : isLG
+      ? "px-10 py-1.5 text-[16px]"
+      : "px-14 py-2 text-lg sm:text-[20px]"
+  } rounded-xl cursor-pointer mt-3 shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+  onClick={() => {
+    if (inquiryTypeRef.current) {
+      inquiryTypeRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }}
+>
+  Send Message
+</div>
         <div
           className={`text-white text-center px-4 ${
             isXXS || isXS ? "text-[12px]" : isSM ? "text-[13px]" : isMD ? "text-[18px]" : isLG ? "text-[25px]" : isXL ? "text-[30px]" : "text-[36px]"
@@ -243,30 +248,16 @@ export default function ContactUs() {
           {ConnectByList.map((item, index) => (
             <div
               key={index}
-              className={`flex flex-col ${
-                isXXS || isXS || isSM ? "gap-y-2" : isMD ? "gap-y-4" : isLG ? "gap-y-5" : "gap-y-7"
-              } w-full`}
+              className={`flex flex-col ${isXXS || isXS ? 'gap-y-2' : isSM ? 'gap-y-3' : isMD ? 'gap-y-4' : isLG ? 'gap-y-5' : 'gap-y-7'} w-full dm-sans-regular`}
             >
               <div
+                className={`flex justify-between items-center ${isXXS || isXS ? 'text-[10px]' : isSM ? 'text-[12px]' : isMD ? 'text-[14px]' : isLG ? 'text-[16px]' : 'text-[18px]'} font-semibold cursor-pointer`}
                 onClick={() => navigate("/contactus", { state: { selectedService: item } })}
-                className={`flex justify-between items-center font-semibold cursor-pointer ${
-                  isXXS || isXS
-                    ? "text-[10px]"
-                    : isSM
-                    ? "text-[11px]"
-                    : isMD
-                    ? "text-[15px]"
-                    : isLG
-                    ? "text-[16px]"
-                    : isXL
-                    ? "text-[17px]"
-                    : "text-[18px]"
-                }`}
               >
                 <div>{item}</div>
-                <LuPlus size={isXXS || isXS || isSM ? 14 : isMD ? 16 : isLG ? 18 : 20} />
+                <LuPlus size={isXXS || isXS ? 12 : isSM ? 14 : isMD ? 16 : isLG ? 18 : 20} />
               </div>
-              <div className="w-full border-t-1 border-[#8AFF84]"></div>
+              <div className='w-full mb-1 border-t-1 border-[#8AFF84]'></div>
             </div>
           ))}
         </div>
@@ -374,7 +365,7 @@ export default function ContactUs() {
       <div className="mt-20">
         <ScrollingFooter />
       </div>
-      <div className="w-full flex border-t-3 border-[#8AFF84] mt-0 flex-col items-center md:items-center">
+      <div className="w-full flex border-t-2 border-[#8AFF84] mt-0 flex-col items-center md:items-center">
         <div className="w-[83%] flex flex-col">
           <Footer />
         </div>

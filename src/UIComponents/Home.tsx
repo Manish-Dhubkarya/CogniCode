@@ -40,6 +40,9 @@ function Home() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
 
   // Breakpoints
   const isXXS = width <= 200;
@@ -223,7 +226,7 @@ function Home() {
 
   return (
     <div
-      className={`w-full ${isSM ? "mt-10" : isMD ? "mt-14" : "mt-17"} mb-10 flex roboto-regular flex-col items-center justify-center`}
+      className={`w-full ${isSM ? "mt-10" : isMD ? "mt-14" : "mt-17"} mb-5 flex roboto-regular flex-col items-center justify-center`}
     >
       <NavigationComponent />
       <div
@@ -257,7 +260,7 @@ function Home() {
                 turning
               </div>
               <div
-                className={`uppercase ${isMD ? 'text-[64px] font-bold leading-16' : isLG ? 'text-[80px] font-bold leading-20' : isXL ? "text-[90px] font-bold leading-25" : 'text-[128px] font-bold leading-28'} tracking-tight`}
+                className={`uppercase ${isMD ? 'text-[64px] leading-16' : isLG ? 'text-[80px] leading-20' : isXL ? "text-[90px] leading-25" : 'text-[128px] leading-28'} font-bold tracking-tight`}
                 style={{
                   backgroundImage: 'linear-gradient(180deg, #8AFF84 0%, #97BBCB 100%)',
                   WebkitBackgroundClip: 'text',
@@ -285,7 +288,7 @@ function Home() {
           )}
         </div>
         <div
-          className={`${isXXS || isXS || isSM ? 'w-fit mt-2 gap-y-4' : isMD ? "gap-y-2 w-[50%]" : isLG ? "gap-y-5 w-[50%]" : isXL?"gap-y-15 w-[50%]": 'w-[50%] mt-9 gap-y-16.5'} flex justify-center text-center font-medium flex-col items-center`}
+          className={`${isXXS || isXS || isSM ? 'w-fit mt-2 gap-y-4' : isMD ? "gap-y-6 w-[50%]" : isLG ? "gap-y-5 w-[50%]" : isXL?"gap-y-15 w-[50%]": 'w-[50%] mt-9 gap-y-16.5'} flex justify-center text-center font-medium flex-col items-center`}
         >
           <div
             className={`${isXXS || isXS ? 'w-[95%] text-[10px]' : isSM ? 'w-[90%] text-[12px]' : isMD ? 'w-[80%] text-[13px]' : isLG ? 'w-[70%] text-[16px]' : isXL ? 'w-[85%] text-[16px]' : 'w-[510px] text-[18px]'} inter-custom leading-tight`}
@@ -293,6 +296,7 @@ function Home() {
             We are present in the industry since 2021 and have delivered our clients with top notch quality work and services. Connect with us for further discussions
           </div>
           <div
+          onClick={()=>navigate("/contactus")}
             className={`bg-gradient-to-r text-black roboto-regular ${isXXS || isXS ? 'px-4 py-0.5 text-[10px]' : isSM ? 'px-6 py-1 text-[12px]' : isMD ? 'px-8 py-1 text-[14px]' : isLG ? 'px-10 py-1.5 text-[16px]' : 'px-14 py-2 text-lg sm:text-[20px]'} rounded-xl cursor-pointer shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
           >
             Connect
@@ -440,7 +444,8 @@ function Home() {
             Bring your Ingenuity, Curiosity and Big ideas.
           </div>
           <div
-            className={`bg-gradient-to-r text-black ${isXXS || isXS ? 'px-4 py-0.5 text-[10px]' : isSM ? 'px-6 py-1 text-[12px]' : isMD ? 'px-8 py-1 text-[14px]' : isLG ? 'px-10 py-1.5 text-[16px]' : 'px-14 py-2 text-lg sm:text-[20px]'} rounded-xl cursor-pointer mt-3 shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+          onClick={()=>navigate("/contactus")}
+            className={`bg-gradient-to-r text-black ${isXXS || isXS ? 'px-4 py-0.5 text-[10px]' : isSM ? 'px-5 py-1 text-[12px]' : isMD ? 'px-7 py-1 text-[14px]' : isLG ? 'px-8 py-1.5 text-[16px]' : 'px-10 py-1.5 text-lg sm:text-[20px]'} rounded-2xl cursor-pointer mt-3 shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
           >
             Join Us
           </div>
@@ -478,10 +483,10 @@ function Home() {
           ))}
         </div>
         <div
-          className={`w-full ${isXXS || isXS ? 'mt-6' : isSM ? 'mt-8' : isMD ? 'mt-10' : isLG ? 'mt-12' : 'mt-30'} flex border-t-3 border-[#8AFF84] flex-col items-center md:items-center`}
+          className={`w-full ${isXXS || isXS ? 'mt-6' : isSM ? 'mt-8' : isMD ? 'mt-10' : isLG ? 'mt-12' : 'mt-30'} flex border-t-2 border-[#8AFF84] flex-col items-center md:items-center`}
         >
           <div
-            className={`${isXXS || isXS || isSM ? 'w-[95%]' : isMD || isLG ? 'w-[90%]' : isXL ? "w-[95%]" : 'w-[83%]'} flex flex-col`}
+            className={`${isXXS || isXS || isSM ? 'w-[83%]' : isMD || isLG ? 'w-[90%]' : isXL ? "w-[95%]" : 'w-[83%]'} flex flex-col`}
           >
             <Footer />
           </div>

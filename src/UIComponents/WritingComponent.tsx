@@ -34,7 +34,7 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
   };
 
   return (
-    <div className="flex flex-col roboto-regular my-4 items-center justify-center">
+    <div className="flex flex-col roboto-regular mt-4 mb-5 items-center justify-center">
       <NavigationComponent />
       <div
         className={`text-[#C9C9C9] font-bold roboto-regular ${
@@ -187,13 +187,13 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
       >
         <ScrollingFooter />
       </div>
-      <div className="w-full flex border-t border-[#8AFF84] mt-0 flex-col items-center">
+      <div className="w-full flex border-t-2 border-[#8AFF84] mt-0 flex-col items-center">
         <div
           className={`flex flex-col ${
             isXXS || isXS
-              ? "w-[95%]"
+              ? "w-[83%]"
               : isSM
-              ? "w-[90%]"
+              ? "w-[83%]"
               : isMD
               ? "w-[88%]"
               : isLG
