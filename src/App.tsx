@@ -145,7 +145,8 @@ function MainContent() {
 
 function App() {
   return (
-    <Router basename="/CogniCode">
+    // basename
+    <Router>
       <MainContent />
     </Router>
   );
