@@ -5,29 +5,32 @@ import Twinkle_Varma from "../assets/TeamMemberPics/Twinkle_Verma.svg";
 import Neha_Verma from "../assets/TeamMemberPics/Neha_Verma.svg";
 import Ajay_Singh from "../assets/TeamMemberPics/Ajay_Singh.svg";
 import Vishal_Verma from "../assets/TeamMemberPics/Vishal_verma.svg";
-import Rinkey_Kushwah from "../assets/TeamMemberPics/Rinkey_Kushwah.svg"
+import Rinkey_Kushwah from "../assets/TeamMemberPics/Rinkey_Kushwah.svg";
 import Manish_Dhubkarya from "../assets/TeamMemberPics/Manish_Dhubkarya.jpg";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import Footer from "./Footer";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 interface TeamMember {
   name: string;
   designation: string;
   pic?: string;
 }
+
 const OurTeam = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
+
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-    useEffect(() => {
-      window.scrollTo(0,0);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   });
-  
 
   // Breakpoints
   const isXXS = width <= 200;
@@ -65,7 +68,7 @@ const OurTeam = () => {
       name: "Ajay Karan Singh Rajpoot",
       designation: "Content Writer",
     },
-    { pic:Rinkey_Kushwah, name: "Rinky Kushwah", designation: "Content Writer" },
+    { pic: Rinkey_Kushwah, name: "Rinky Kushwah", designation: "Content Writer" },
     { pic: Dheer_Verma, name: "Dheer Verma", designation: "UI Design Head" },
     {
       pic: Manish_Dhubkarya,
@@ -73,39 +76,51 @@ const OurTeam = () => {
       designation: "Full Stack Developer",
     },
   ];
+
   return (
-    <div className={`flex flex-col mb-5 items-center ${isXXS || isXS || isSM?"gap-y-10":isMD?"gap-y-14": isLG?"gap-y-17":isXL?"gap-y-18":"gap-y-20"}  inter-custom justify-center`}>
+    <div
+      className={`flex flex-col mb-5 items-center ${
+        isXXS || isXS || isSM
+          ? "gap-y-10"
+          : isMD
+          ? "gap-y-14"
+          : isLG
+          ? "gap-y-17"
+          : isXL
+          ? "gap-y-18"
+          : "gap-y-20"
+      } inter-custom justify-center`}
+    >
       <NavigationComponent />
       {/* Header */}
-
       {isXXS || isXS || isSM ? (
         <div className="flex mt-15 justify-center items-center flex-col">
-            <div className="text-[20px] space-x-2 font-bold flex">
-              <span className="capitalize">turning</span>
-              <span className="text-[#8AFF84] uppercase">visions</span>
-              <span className="lowercase">INTO</span>
-              <span className="text-[#1B7BFF]">REALITY</span>
-            </div>
-            <div className="mt-5 text-[14px] font-medium leading-snug">
-              We are present in the industry since 2021 and have
-              <br />
-              delivered our clients with top notch quality work and
-              <br />
-              services.
-            </div>
-            <div className="justify-center flex flex-col mt-5 space-y-2 items-center">
-                <div className="w-[50vw] h-[50vw] bg-white rounded-full"></div>
-               <div className="text-[20px] leading-snug roboto-regular">
+          <div className="text-[20px] space-x-2 font-bold flex">
+            <span className="capitalize">turning</span>
+            <span className="text-[#8AFF84] uppercase">visions</span>
+            <span className="lowercase">INTO</span>
+            <span className="text-[#1B7BFF]">REALITY</span>
+          </div>
+          <div className="mt-5 text-[14px] font-medium leading-snug">
+            We are present in the industry since 2021 and have
+            <br />
+            delivered our clients with top notch quality work and
+            <br />
+            services.
+          </div>
+          <div className="justify-center flex flex-col mt-5 space-y-2 items-center">
+            <div className="w-[50vw] h-[50vw] bg-white rounded-full"></div>
+            <div className="text-[20px] leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
                 Chief Executive Officer
               </div>
             </div>
-            </div>
+          </div>
         </div>
       ) : isMD ? (
         <div className="flex w-full mt-15 justify-center items-center flex-row-reverse">
-            <div className="flex flex-col w-[65%] justify-center items-center">
+          <div className="flex flex-col w-[65%] justify-center items-center">
             <div className="text-[18px] space-x-2 font-bold flex">
               <span className="capitalize">turning</span>
               <span className="text-[#8AFF84] uppercase">visions</span>
@@ -119,20 +134,20 @@ const OurTeam = () => {
               <br />
               services.
             </div>
-            </div>
-            <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-2 items-center">
-                <div className="w-[25vw] h-[25vw] bg-white rounded-full"></div>
-               <div className="text-[18px] leading-snug roboto-regular">
+          </div>
+          <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-2 items-center">
+            <div className="w-[25vw] h-[25vw] bg-white rounded-full"></div>
+            <div className="text-[18px] leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
                 Chief Executive Officer
               </div>
             </div>
-            </div>
+          </div>
         </div>
       ) : isLG ? (
         <div className="flex w-full mt-20 justify-center items-center flex-row-reverse">
-            <div className="flex flex-col w-[65%] justify-center items-center">
+          <div className="flex flex-col w-[65%] justify-center items-center">
             <div className="text-[28px] space-x-2 font-bold flex">
               <span className="capitalize">turning</span>
               <span className="text-[#8AFF84] uppercase">visions</span>
@@ -146,20 +161,20 @@ const OurTeam = () => {
               <br />
               services.
             </div>
-            </div>
-            <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
-                <div className="w-[30vw] h-[30vw] bg-white rounded-full"></div>
-               <div className="text-[22px] leading-snug roboto-regular">
+          </div>
+          <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
+            <div className="w-[30vw] h-[30vw] bg-white rounded-full"></div>
+            <div className="text-[22px] leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
                 Chief Executive Officer
               </div>
             </div>
-            </div>
+          </div>
         </div>
       ) : isXL ? (
         <div className="flex w-full mt-25 justify-center items-center flex-row-reverse">
-            <div className="flex flex-col w-[65%] justify-center items-center">
+          <div className="flex flex-col w-[65%] justify-center items-center">
             <div className="text-[34px] space-x-2 font-bold flex">
               <span className="capitalize">turning</span>
               <span className="text-[#8AFF84] uppercase">visions</span>
@@ -173,20 +188,20 @@ const OurTeam = () => {
               <br />
               services.
             </div>
-            </div>
-            <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
-                <div className="w-[30vw] h-[30vw] bg-white rounded-full"></div>
-               <div className="text-[28px] leading-snug roboto-regular">
+          </div>
+          <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
+            <div className="w-[30vw] h-[30vw] bg-white rounded-full"></div>
+            <div className="text-[28px] leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
                 Chief Executive Officer
               </div>
             </div>
-            </div>
+          </div>
         </div>
       ) : (
-       <div className="flex w-[90%] mt-25 justify-center items-center flex-row-reverse">
-            <div className="flex flex-col w-[65%] mb-10 justify-center items-center">
+        <div className="flex w-[90%] mt-25 justify-center items-center flex-row-reverse">
+          <div className="flex flex-col w-[65%] mb-10 justify-center items-center">
             <div className="text-[40px] space-x-2 font-bold flex">
               <span className="capitalize">turning</span>
               <span className="text-[#8AFF84] uppercase">visions</span>
@@ -200,120 +215,141 @@ const OurTeam = () => {
               <br />
               services.
             </div>
-            </div>
-            <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
-                <div className="w-[27vw] h-[27vw] bg-white rounded-full"></div>
-               <div className="text-[32px] mt-4 leading-snug roboto-regular">
+          </div>
+          <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
+            <div className="w-[27vw] h-[27vw] bg-white rounded-full"></div>
+            <div className="text-[32px] mt-4 leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
                 Chief Executive Officer
               </div>
             </div>
-            </div>
+          </div>
         </div>
       )}
 
       {/* Team Members */}
-      {isXXS || isXS || isSM?
-    <div className="grid w-[90%] grid-cols-2 gap-y-10 justify-items-center">
-        {TeamData.map((team, index) => (
-          <div key={index} className="w-auto flex flex-col items-center">
-            {!team.pic ? (
-              <div className="w-[32vw] h-[180px] bg-white rounded-[5px]" />
-            ) : (
-              <img
-                className="w-[32vw] h-[180px] rounded-[5px] bg-cover object-cover"
-                src={team.pic}
-                alt={team.name}
-              />
-            )}
-            <div className="text-center leading-tight mt-3 text-[14px]">
-              <div className="font-normal">{team.name}</div>
-              <div className="font-medium w-full">{team.designation}</div>
+      {isXXS || isXS || isSM ? (
+        <div className="grid w-[90%] grid-cols-2 gap-10 justify-items-center">
+          {TeamData.map((team, index) => (
+            <div key={index} className="w-auto flex flex-col items-center">
+              {!team.pic ? (
+                <div className="w-[32vw] aspect-[3/4] bg-white rounded-[5px]" />
+              ) : (
+                <img
+                  loading="lazy"
+                  className="w-[32vw] aspect-[3/4] rounded-[5px] object-cover"
+                  src={team.pic}
+                  alt={team.name}
+                  onError={() =>
+                    console.error(`Failed to load image for ${team.name}`)
+                  }
+                />
+              )}
+              <div className="text-center leading-tight mt-3 text-[14px]">
+                <div className="font-normal">{team.name}</div>
+                <div className="font-medium w-full">{team.designation}</div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>  :
-    isMD?
-    <div className="grid w-[90%] grid-cols-3 gap-y-10 justify-items-center">
-        {TeamData.map((team, index) => (
-          <div key={index} className="w-auto flex flex-col items-center">
-            {!team.pic ? (
-              <div className="w-[22vw] h-[160px] bg-white rounded-[5px]" />
-            ) : (
-              <img
-                className="w-[22vw] h-[160px] rounded-[5px] object-cover"
-                src={team.pic}
-                alt={team.name}
-              />
-            )}
-            <div className="text-center leading-tight mt-3 text-[14px]">
-              <div className="font-normal">{team.name}</div>
-              <div className="font-medium w-full">{team.designation}</div>
+          ))}
+        </div>
+      ) : isMD ? (
+        <div className="grid w-[90%] grid-cols-3 gap-10 justify-items-center">
+          {TeamData.map((team, index) => (
+            <div key={index} className="w-auto flex flex-col items-center">
+              {!team.pic ? (
+                <div className="w-[22vw] aspect-[3/4] bg-white rounded-[5px]" />
+              ) : (
+                <img
+                  loading="lazy"
+                  className="w-[22vw] aspect-[3/4] rounded-[5px] object-cover"
+                  src={team.pic}
+                  alt={team.name}
+                  onError={() =>
+                    console.error(`Failed to load image for ${team.name}`)
+                  }
+                />
+              )}
+              <div className="text-center leading-tight mt-3 text-[14px]">
+                <div className="font-normal">{team.name}</div>
+                <div className="font-medium w-full">{team.designation}</div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>:
-    isLG?
-    <div className="grid w-[90%] grid-cols-3 gap-y-10 justify-items-center">
-        {TeamData.map((team, index) => (
-          <div key={index} className="w-auto flex flex-col items-center">
-            {!team.pic ? (
-              <div className="w-[22vw] h-[230px] bg-white rounded-[5px]" />
-            ) : (
-              <img
-                className="w-[22vw] h-[230px] rounded-[5px] object-cover"
-                src={team.pic}
-                alt={team.name}
-              />
-            )}
-            <div className="text-center leading-normal mt-5 text-[18px]">
-              <div className="font-normal">{team.name}</div>
-              <div className="font-medium w-full">{team.designation}</div>
+          ))}
+        </div>
+      ) : isLG ? (
+        <div className="grid w-[90%] grid-cols-3 gap-10 justify-items-center">
+          {TeamData.map((team, index) => (
+            <div key={index} className="w-auto flex flex-col items-center">
+              {!team.pic ? (
+                <div className="w-[22vw] aspect-[3/4] bg-white rounded-[5px]" />
+              ) : (
+                <img
+                  loading="lazy"
+                  className="w-[22vw] aspect-[3/4] rounded-[5px] object-cover"
+                  src={team.pic}
+                  alt={team.name}
+                  onError={() =>
+                    console.error(`Failed to load image for ${team.name}`)
+                  }
+                />
+              )}
+              <div className="text-center leading-normal mt-5 text-[18px]">
+                <div className="font-normal">{team.name}</div>
+                <div className="font-medium w-full">{team.designation}</div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>:
-    isXL?
-    <div className="grid w-[85%] grid-cols-3 gap-y-10 justify-items-center">
-        {TeamData.map((team, index) => (
-          <div key={index} className="w-auto flex flex-col items-center">
-            {!team.pic ? (
-              <div className="w-[22vw] h-[300px] bg-white rounded-[5px]" />
-            ) : (
-              <img
-                className="w-[22vw] h-[300px] rounded-[5px] object-cover"
-                src={team.pic}
-                alt={team.name}
-              />
-            )}
-            <div className="text-center leading-normal mt-7 text-[20px]">
-              <div className="font-normal">{team.name}</div>
-              <div className="font-medium w-full">{team.designation}</div>
+          ))}
+        </div>
+      ) : isXL ? (
+        <div className="grid w-[85%] grid-cols-3 gap-10 justify-items-center">
+          {TeamData.map((team, index) => (
+            <div key={index} className="w-auto flex flex-col items-center">
+              {!team.pic ? (
+                <div className="w-[22vw] aspect-[3/4] bg-white rounded-[5px]" />
+              ) : (
+                <img
+                  loading="lazy"
+                  className="w-[22vw] aspect-[3/4] rounded-[5px] object-cover"
+                  src={team.pic}
+                  alt={team.name}
+                  onError={() =>
+                    console.error(`Failed to load image for ${team.name}`)
+                  }
+                />
+              )}
+              <div className="text-center leading-normal mt-7 text-[20px]">
+                <div className="font-normal">{team.name}</div>
+                <div className="font-medium w-full">{team.designation}</div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>:
-
-      <div className="grid w-[79%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-12 justify-items-center">
-        {TeamData.map((team, index) => (
-          <div key={index} className="w-auto flex flex-col items-center">
-            {!team.pic ? (
-              <div className="w-[216px] h-[265px] bg-white rounded-[5px]" />
-            ) : (
-              <img
-                className="w-[216px] h-[265px] rounded-[5px] object-cover"
-                src={team.pic}
-                alt={team.name}
-              />
-            )}
-            <div className="text-center leading-tight mt-6 text-[20px]">
-              <div className="font-normal">{team.name}</div>
-              <div className="font-medium w-full">{team.designation}</div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid w-[79%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 justify-items-center">
+          {TeamData.map((team, index) => (
+            <div key={index} className="w-auto flex flex-col items-center">
+              {!team.pic ? (
+                <div className="w-[216px] aspect-[3/4] bg-white rounded-[5px]" />
+              ) : (
+                <img
+                  loading="lazy"
+                  className="w-[216px] aspect-[3/4] rounded-[5px] object-cover"
+                  src={team.pic}
+                  alt={team.name}
+                  onError={() =>
+                    console.error(`Failed to load image for ${team.name}`)
+                  }
+                />
+              )}
+              <div className="text-center leading-tight mt-6 text-[20px]">
+                <div className="font-normal">{team.name}</div>
+                <div className="font-medium w-full">{team.designation}</div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>}
+          ))}
+        </div>
+      )}
 
       {/* Bottom Banner */}
       <div className="w-full flex flex-col items-center">
@@ -381,22 +417,22 @@ const OurTeam = () => {
             Explore new possibilities with us everyday. Create your mark on
             future with us.
           </div>
-           <div
-           onClick={()=>navigate("/contactus")}
-              className={`bg-gradient-to-r text-black roboto-regular ${
-                isXXS || isXS
-                  ? "px-4 py-0.5 text-[10px]"
-                  : isSM
-                  ? "px-6 py-1 text-[12px]"
-                  : isMD
-                  ? "px-8 py-1 text-[14px]"
-                  : isLG
-                  ? "px-10 py-1.5 text-[16px]"
-                  : "px-14 py-2 text-lg sm:text-[20px]"
-              } rounded-xl cursor-pointer shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
-            >
-              Join Us
-            </div>
+          <div
+            onClick={() => navigate("/contactus")}
+            className={`bg-gradient-to-r text-black roboto-regular ${
+              isXXS || isXS
+                ? "px-4 py-0.5 text-[10px]"
+                : isSM
+                ? "px-6 py-1 text-[12px]"
+                : isMD
+                ? "px-8 py-1 text-[14px]"
+                : isLG
+                ? "px-10 py-1.5 text-[16px]"
+                : "px-14 py-2 text-lg sm:text-[20px]"
+            } rounded-xl cursor-pointer shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+          >
+            Join Us
+          </div>
         </div>
         <div className="w-full flex border-t-2 border-[#8AFF84] mt-0 flex-col items-center"></div>
         <div className="w-[83%] md:w-[83%] flex flex-col">

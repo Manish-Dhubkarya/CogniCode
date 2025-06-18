@@ -10,6 +10,7 @@ import IntelligentAutomation from "../assets/ServicesCSS/Intelligent_automation.
 import NLP_Solutions from "../assets/ServicesCSS/NLP_solutions.png";
 import ScalableAIServices from "../assets/ServicesCSS/Scalable_AI_services.png";
 import MLModel from "../assets/ServicesCSS/Machine_learning_models.png";
+import PlagarismRemovel from "../assets/ServicesCSS/PlagarismRemoval.png"
 import ScrollingFooter from "./ScrollingFooter";
 import Footer from "./Footer";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -83,7 +84,7 @@ const OurServices: React.FC = () => {
     { title: "Paper Writing", back: PaperBack, navigation: "/paperwriting" },
     {
       title: "Plagiarism Removal",
-      back: PaperBack,
+      back: PlagarismRemovel,
       navigation: {
         pathname: "/contactus",
         state: { selectedService: "Plagiarism Removal" },

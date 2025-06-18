@@ -74,7 +74,7 @@ export default function NavigationComponent() {
           </div>
           {/* Desktop Menu */}
           <div className={`${isDesktop ? "flex" : "hidden"} items-center justify-center gap-x-6 w-full ${isXL ? "gap-x-8" : is2XL ? "gap-x-10" : "gap-x-12"}`}>
-            <ul className={`flex flex-row font-medium ${isXL ? "space-x-6" : is2XL ? "space-x-8" : "space-x-10"}`}>
+            <ul className={`flex flex-row font-medium ${isXL ? "space-x-4" : is2XL ? "space-x-8" : "space-x-10"}`}>
               {Headings.map((item, index) => (
                 <li onClick={()=>navigate(item.path)} key={index} className="flex cursor-pointer items-center">
                   <a
