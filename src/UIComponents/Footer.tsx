@@ -3,7 +3,7 @@ import LinkedinLogo from "../assets/LinkedInLogo.png";
 import FbLogo from "../assets/FbLogo.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import FooterAnimation from "../assets/FooterAnimation.gif"
 function Footer() {
   const QuickLinks = ["Plagiarism Check", "Thesis Writing",   "IT solutions", "AI solutions",  "Article Writing",    "Graphic Designing"];
   const MeetUs = ["B/2, Mahesh Nagar,", "Tulsi Vihar Colony", "Gwalior, M.P 474002"];
@@ -82,11 +82,13 @@ function Footer() {
                 </a>
               </div>
             </div>
+            <img src={FooterAnimation}/>
           </div>
         )}
 
         {/* XS Layout */}
         {isXS && (
+          <div className="flex">
           <div className="flex flex-col items-start text-left gap-5 py-4">
             {/* Quick Links */}
             <div className="flex flex-col">
@@ -141,11 +143,14 @@ function Footer() {
                 </a>
               </div>
             </div>
+            </div>
+             <img className="" src={FooterAnimation}/>
           </div>
         )}
 
         {/* SM Layout */}
         {isSM && (
+          <div className="flex">
           <div className="flex flex-col items-start text-left gap-5 py-4">
             {/* Quick Links */}
             <div className="flex flex-col">
@@ -201,6 +206,8 @@ function Footer() {
               </div>
             </div>
           </div>
+             <img className="" src={FooterAnimation}/>
+          </div>
         )}
 
         {/* MD Layout */}
@@ -250,8 +257,9 @@ function Footer() {
             {/* Quick Links */}
             <div className="flex flex-col mt-6">
               <h3 className="font-semibold text-[18px] mb-3 text-center">Quick Links</h3>
-              <div className="flex flex-row justify-center gap-4 flex-wrap whitespace-nowrap">
+              <div className="flex flex-row justify-center gap-x-3 gap-y-2 flex-wrap whitespace-nowrap">
                 {QuickLinks.map((item, index) => (
+                  
                   <a
       onClick={() => navigate("/services")}
 

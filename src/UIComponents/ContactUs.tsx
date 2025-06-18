@@ -209,7 +209,7 @@ export default function ContactUs() {
       : isLG
       ? "px-10 py-1.5 text-[16px]"
       : "px-14 py-2 text-lg sm:text-[20px]"
-  } rounded-xl cursor-pointer mt-3 shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+  } rounded-xl cursor-pointer mt-0 shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
   onClick={() => {
     if (inquiryTypeRef.current) {
       inquiryTypeRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
