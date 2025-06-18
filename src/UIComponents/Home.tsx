@@ -1,7 +1,7 @@
 import NavigationComponent from './NavigationComponent';
 import HomeBack from "../assets/HomeBack.gif";
 import ITSolutionsBack from "../assets/ITSolutionsBack.png";
-import ThesisWritingBack from "../assets/ITSolutionsBack.png";
+import ThesisWritingBack from "../assets/ThesisWritingBack.png";
 import AIServices from "../assets/AIServicesBack.png";
 import NewEvents from "../assets/NewEventsBack.gif";
 import ScrollingFooter from './ScrollingFooter';
@@ -243,7 +243,7 @@ useEffect(() => {
         >
           {isXXS || isXS || isSM ? (
             <div
-              className={`uppercase ${isXXS ? 'text-[18px] mt-2' : isXS ? 'text-[18px] mt-2' : 'text-[18px] mt-2'} font-bold tracking-tight`}
+              className={`uppercase ${isXXS ? 'text-[18px] mt-4' : isXS ? 'text-[18px] mt-4' : 'text-[18px] mt-6'} font-bold tracking-tight`}
               style={{
                 backgroundImage: 'linear-gradient(180deg, #8AFF84 0%, #97BBCB 45.5%, #004EB9 100%)',
                 WebkitBackgroundClip: 'text',

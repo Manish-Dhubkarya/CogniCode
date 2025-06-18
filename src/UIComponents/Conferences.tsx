@@ -108,7 +108,7 @@ const Conferences: React.FC = () => {
             {tableHeaders.map((header) => (
               <div
                 key={header}
-                className={`border border-white px-4 py-3 flex items-center justify-center text-[16px] md:text-[20px] font-normal tracking-[0%] leading-snug roboto-regular text-center ${
+                className={`border border-white px-4 py-3 flex items-center justify-center text-[14px] md:text-[20px] font-normal tracking-[0%] leading-snug roboto-regular text-center ${
                   header === "Conference Name" ? "max-w-[300px] whitespace-normal break-words" : ""
                 }`}
               >
@@ -139,16 +139,16 @@ const Conferences: React.FC = () => {
           ) : (
             conferenceList.map((row, index) => (
               <div key={row.conferenceID} className="contents">
-                <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[14px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular">
+                <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[10px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular">
                   {index + 1}.
                 </div>
-                <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[14px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular">
+                <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[10px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular">
                   {row.publisher}
                 </div>
-                <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[14px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular max-w-[200px] whitespace-normal break-words">
+                <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[12px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular max-w-[200px] whitespace-normal break-words">
                   {row.conferenceName}
                 </div>
-                <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[14px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular">
+                <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[12px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular">
                   {row.area || row.subject ? `${row.area}${row.area && row.subject ? "/" : ""}${row.subject}` : ""}
                 </div>
                 <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[14px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular">

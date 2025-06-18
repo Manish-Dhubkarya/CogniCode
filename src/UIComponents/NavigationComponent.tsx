@@ -32,8 +32,8 @@ export default function NavigationComponent() {
   const isXS = width > 200 && width <= 300;
   const isSM = width > 300 && width <= 500;
   const isMD = width > 500 && width <= 700;
-  const isLG = width > 700 && width <= 900;
-  const isXL = width > 900 && width <= 1200;
+  const isLG = width > 700 && width <= 1000;
+  const isXL = width > 1000 && width <= 1200;
   const is2XL = width > 1200 && width <= 1600;
   const is3XL = width > 1600;
 
@@ -105,16 +105,17 @@ export default function NavigationComponent() {
   {Headings.map((item, index) => (
     <>
       <li onClick={()=>navigate(item.path)} key={index} className="flex w-full items-center">
+       <div className="px-4 flex justify-end items-center text-xl text-white">
+          {item.icon}
+        </div>
         <a
           href="#"
-          className={`w-[75%] block  text-sm text-end text-white hover:text-[#0e86ff] ${isXXS || isXS ? "text-xs" : ""}`}
+          className={` block  text-sm text-start text-white hover:text-[#0e86ff] ${isXXS || isXS ? "text-xs" : ""}`}
           onClick={() => setIsMenuOpen(false)}
         >
           {item.heading}
         </a>
-         <div className="w-[15%] flex justify-end items-center text-xl text-white">
-          {item.icon}
-        </div>
+         
       </li>
 
       {/* Separator */}
@@ -123,8 +124,10 @@ export default function NavigationComponent() {
   ))}
 </ul>
 
-          <div className={`z-5 top-120 ${isXXS || isXS?"text-[50px]":"text-[64px]"} absolute tracking-[20px] overflow-x-hidden saira-stencil-one-regular text-[#9fafc0] right-0 uppercase
-            opacity-20 overflow-hidden rotate-270 translate-x-1/2`}>cognicode</div>
+         <div className={`z-5 top-1/2 -translate-y-1/2 ${isXXS || isXS?"text-[50px]": isSM?"text-[55px] top-3/5": isMD?"text-[68px] tracking-[30px]":"text-[70px] tracking-[40px]"} absolute tracking-[20px] overflow-x-hidden saira-stencil-one-regular text-[#9fafc0] right-0 uppercase opacity-20 overflow-hidden rotate-270 translate-x-1/2`}>
+  cognicode
+</div>
+
         </div>
       </nav>
       {/* Background Overlay for Blur */}
