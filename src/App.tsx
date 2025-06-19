@@ -139,7 +139,6 @@ function MainContent() {
         <Route path="/conferences" element={<Conferences />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/services" element={<OurServices />} />
-        <Route path="/scroll" element={<ScrollingBanners />} />
       </Routes>
     </div>
   );
