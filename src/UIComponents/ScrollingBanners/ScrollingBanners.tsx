@@ -1,18 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import one from "../../assets/CommentsPics/1.png";
-import two from "../../assets/CommentsPics/2.png";
-import three from "../../assets/CommentsPics/3.png";
-import four from "../../assets/CommentsPics/4.png";
-import five from "../../assets/CommentsPics/5.png";
-import six from "../../assets/CommentsPics/6.png";
 import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
 
-const images = [one, two, three, four, five, six];
+interface ScrollingBannersProps {
+images: string[];
+}
 
-const ScrollingBanners: React.FC = () => {
+const ScrollingBanners: React.FC<ScrollingBannersProps> = ({ images }) => {
   const [current, setCurrent] = useState(0);
   const [isLocked, setIsLocked] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);

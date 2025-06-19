@@ -67,36 +67,36 @@ useEffect(() => {
     { title: "AI SERVICES", heading: "Mindset & Chipset", back: AIServices },
     { title: "NEW EVENTS", heading: "A Fresh Start 2025", back: NewEvents },
   ];
- const imageMap = import.meta.glob("../assets/CommentsPics/*.png", { eager: true });
+const imageMap = import.meta.glob("../assets/CommentsPics/*.png", { eager: true });
+const imageArray = Object.values(imageMap).map((module: any) => module.default as string);
 
-const imageArray = Object.values(imageMap).map((module:any) => module.default);
   // Comment Section
- const CommentReadSection: React.FC = () => {
-  return (
-    <div
-      className={`mt-12 ${
-        isXXS || isXS || isSM || isMD ? 'pt-0 max-h-[250px]' : isLG ? 'max-h-[400px] pt-0' : 'max-h-[497px] pt-30'
-      } overflow-y-auto scrollbar-none mr-6 pl-6`}
-    >
-      {/*  className={${isXXS || isXS || isSM || isMD ? "flex" : "grid"} 
-      gap-2 ${isXXS || isXS || isSM ? 'grid-cols-1' : isMD || isLG ? 'grid-cols-2' : 'grid-cols-3'}} */}
-      <div className={`${isXXS || isXS || isSM?"columns-2":isMD || isLG?"columns-2":"columns-3"} gap-3`}>
-        {imageArray.map((src, index) => (
-          <div
-            key={index}
-            className="mb-4 break-inside-avoid bg-white rounded-xl shadow-md p-4"
-          >
-            <img
-              src={src}
-              alt={`Image ${index + 1}`}
-              className="w-full h-auto object-cover"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+//  const CommentReadSection: React.FC = () => {
+//   return (
+//     <div
+//       className={`mt-12 ${
+//         isXXS || isXS || isSM || isMD ? 'pt-0 max-h-[250px]' : isLG ? 'max-h-[400px] pt-0' : 'max-h-[497px] pt-30'
+//       } overflow-y-auto scrollbar-none mr-6 pl-6`}
+//     >
+//       {/*  className={${isXXS || isXS || isSM || isMD ? "flex" : "grid"} 
+//       gap-2 ${isXXS || isXS || isSM ? 'grid-cols-1' : isMD || isLG ? 'grid-cols-2' : 'grid-cols-3'}} */}
+//       <div className={`${isXXS || isXS || isSM?"columns-2":isMD || isLG?"columns-2":"columns-3"} gap-3`}>
+//         {imageArray.map((src, index) => (
+//           <div
+//             key={index}
+//             className="mb-4 break-inside-avoid bg-white rounded-xl shadow-md p-4"
+//           >
+//             <img
+//               src={src}
+//               alt={`Image ${index + 1}`}
+//               className="w-full h-auto object-cover"
+//             />
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
 
   // Left to right animation
   const marqueeStyleLeftToRight = {
@@ -322,7 +322,7 @@ const imageArray = Object.values(imageMap).map((module:any) => module.default);
       >
         What our clients say !!!
       </div>
-      <ScrollingBanners/>
+      <ScrollingBanners images={imageArray}/>
       </div>
       <div
         className={`${isXXS || isXS || isSM ? "mt-10" : isMD ? "mt-10" : isLG?"mt-14":isXL?"mt-18": "mt-20"} w-full`}
