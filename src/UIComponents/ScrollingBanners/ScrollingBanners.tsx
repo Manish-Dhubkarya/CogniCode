@@ -111,7 +111,8 @@ const ScrollingBanners: React.FC = () => {
       onMouseUp={handleTouchEnd}
       onMouseLeave={handleTouchEnd}
     >
-<div className={`relative cursor-grab active:cursor-grabbing w-full max-w-7xl flex items-center justify-center perspective-[2000px] ${isXXS || isXS || isSM?"":""} h-[200px]`}>
+        {/* change */}
+<div className={`relative cursor-grab active:cursor-grabbing w-full max-w-7xl flex items-center justify-center  ${isXXS || isXS?"h-[180px] perspective-[200px]" : isSM?"h-[180px] perspective-[600px]": isMD?"h-[210px] perspective-[1000px]": isLG?"h-[270px] perspective-[1600px]":isXL?"h-[320px] perspective-[1800px]":"h-[370px] perspective-[2000px]"} `}>
         {images.map((src, i) => {
           const index = getRelativeIndex(i);
           let transform = "";
@@ -132,7 +133,7 @@ const ScrollingBanners: React.FC = () => {
             const dir = index === 1 ? 1 : -1;
             transform = `translateX(${dir * spacing1}px) scale(${scale1}) translateZ(-100px) rotateY(${dir * -15}deg)`;
             zIndex = 40;
-            opacity = 0.7;
+            opacity = 0.8;
           } else if (index === 2 || index === total - 2) {
             const dir = index === 2 ? 1 : -1;
             transform = `translateX(${dir * spacing2}px) scale(${scale2}) translateZ(-200px) rotateY(${dir * -30}deg)`;
@@ -150,7 +151,7 @@ const ScrollingBanners: React.FC = () => {
               alt={`Slide ${i}`}
               draggable={false}
               onDragStart={(e) => e.preventDefault()}
-              className="absolute transition-all duration-500 ease-in-out rounded-xl shadow-2xl select-none pointer-events-none"
+              className="absolute transition-all duration-500 ease-in-out rounded-xl select-none pointer-events-none"
               style={{
                 transform,
                 opacity,

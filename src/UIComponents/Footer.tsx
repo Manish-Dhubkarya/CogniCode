@@ -418,7 +418,7 @@ function Footer() {
 
               {/* Have a Query */}
               <div className="flex flex-col">
-                <h3 className="font-semibold text-[24px] mb-4 text-right">Have a Query?</h3>
+                <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold cursor-pointer hover:scale-110 transition-transform text-[24px] mb-4 text-right">Have a Query?</h3>
                 <div className="w-full border-t-[1.5px] border-[#8AFF84] my-2"></div>
                 <p className="text-[20px] mb-3 text-right">Contact us:</p>
                 <a

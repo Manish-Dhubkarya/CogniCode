@@ -316,11 +316,16 @@ const imageArray = Object.values(imageMap).map((module:any) => module.default);
       >
         <CommentReadSection />
       </div> */}
-      <div className="w-full">
+      <div className={`w-full ${isXXS || isXS ? "space-y-4" : isSM || isMD ? "space-y-3" : "space-y-8"}`}>
+        <div
+        className={`font-bold ${isXXS || isXS ? 'text-[18px] mt-4' : isSM ? 'text-[22px] mt-6' : isMD ? 'text-[28px] mt-8' : isLG ? 'text-[34px] mt-12' : 'text-[48px] mt-15'} text-center`}
+      >
+        What our clients say !!!
+      </div>
       <ScrollingBanners/>
       </div>
       <div
-        className={`${isXXS || isXS || isSM ? "mt-10" : isMD ? "mt-12" : "mt-40"} w-full`}
+        className={`${isXXS || isXS || isSM ? "mt-10" : isMD ? "mt-10" : isLG?"mt-14":isXL?"mt-18": "mt-20"} w-full`}
       >
         <div
           style={{
