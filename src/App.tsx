@@ -9,6 +9,7 @@ import AboutUs from './UIComponents/AboutUs';
 import OurServices from './UIComponents/OurServices';
 import Home from './UIComponents/Home';
 import { useEffect, useState } from 'react';
+import ScrollingBanners from './UIComponents/ScrollingBanners/ScrollingBanners';
 
 // Interface for route-specific top values
 interface TopValues {
@@ -138,6 +139,7 @@ function MainContent() {
         <Route path="/conferences" element={<Conferences />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/services" element={<OurServices />} />
+        <Route path="/scroll" element={<ScrollingBanners />} />
       </Routes>
     </div>
   );

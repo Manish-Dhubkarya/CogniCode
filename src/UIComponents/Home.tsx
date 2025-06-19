@@ -10,6 +10,7 @@ import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import { LuPlus } from 'react-icons/lu';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ScrollingBanners from './ScrollingBanners/ScrollingBanners';
 
 function Home() {
   const marqueeStyleBase = {
@@ -32,8 +33,9 @@ function Home() {
     `}
     </style>
 );
+const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
-  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -65,141 +67,36 @@ useEffect(() => {
     { title: "AI SERVICES", heading: "Mindset & Chipset", back: AIServices },
     { title: "NEW EVENTS", heading: "A Fresh Start 2025", back: NewEvents },
   ];
-  interface Comment {
-    id: number;
-    name: string;
-    message: string;
-    timeAgo: string;
-    likes: number;
-    dislikes: number;
-  }
+ const imageMap = import.meta.glob("../assets/CommentsPics/*.png", { eager: true });
 
-  const comments: Comment[] = [
-    {
-      id: 1,
-      name: "Akanksha Soni",
-      message: "Just awesome. The best coder I have found...",
-      timeAgo: "2 years ago",
-      likes: 6,
-      dislikes: 2,
-    },
-    {
-      id: 2,
-      name: "Ayush Gour",
-      message: "If you're seeking for quality work, this is the place...",
-      timeAgo: "1 year ago",
-      likes: 4,
-      dislikes: 1,
-    },
-    {
-      id: 3,
-      name: "Manas Dwivedi",
-      message: "I really appreciate the work done by the team...",
-      timeAgo: "2 years ago",
-      likes: 3,
-      dislikes: 0,
-    },
-    {
-      id: 4,
-      name: "Charlie MN",
-      message: "Very good service. Very frank and on-time delivery...",
-      timeAgo: "2 years ago",
-      likes: 5,
-      dislikes: 1,
-    },
-    {
-      id: 5,
-      name: "Bharat Verma",
-      message: "Fully satisfied with the services. Would highly recommend...",
-      timeAgo: "1 year ago",
-      likes: 7,
-      dislikes: 0,
-    },
-    {
-      id: 7,
-      name: "Ankur Yadav",
-      message: "Simply amazing, the best coder I’ve ever encountered...",
-      timeAgo: "2 years ago",
-      likes: 8,
-      dislikes: 1,
-    },
-    {
-      id: 8,
-      name: "Ankur Yadav",
-      message: "Simply amazing, the best coder I’ve ever encountered...",
-      timeAgo: "2 years ago",
-      likes: 8,
-      dislikes: 1,
-    },
-    {
-      id: 9,
-      name: "Ankur Yadav",
-      message: "Simply amazing, the best coder I’ve ever encountered...",
-      timeAgo: "2 years ago",
-      likes: 8,
-      dislikes: 1,
-    },
-    {
-      id: 10,
-      name: "Ankur Yadav",
-      message: "Simply amazing, the best coder I’ve ever encountered...",
-      timeAgo: "2 years ago",
-      likes: 8,
-      dislikes: 1,
-    },
-    {
-      id: 11,
-      name: "Ankur Yadav",
-      message: "Simply amazing, the best coder I’ve ever encountered...",
-      timeAgo: "2 years ago",
-      likes: 8,
-      dislikes: 1,
-    },
-    {
-      id: 12,
-      name: "Ankur Yadav",
-      message: "Simply amazing, the best coder I’ve ever encountered...",
-      timeAgo: "2 years ago",
-      likes: 8,
-      dislikes: 1,
-    },
-    {
-      id: 13,
-      name: "Ankur Yadav",
-      message: "Simply amazing, the best coder I’ve ever encountered...",
-      timeAgo: "2 years ago",
-      likes: 8,
-      dislikes: 1,
-    },
-  ];
-
+const imageArray = Object.values(imageMap).map((module:any) => module.default);
   // Comment Section
-  const CommentReadSection: React.FC = () => {
-    return (
-      <div
-        className={`mt-12 ${isXXS || isXS || isSM || isMD ? 'pt-0' : isLG ? 'max-h-[400px] pt-0' : 'max-h-[500px] pt-30'} overflow-y-auto scrollbar-none mr-6 pl-6`}
-      >
-        <div
-          className={`${isXXS || isXS || isSM || isMD ? "flex" : "grid"} gap-2 ${isXXS || isXS || isSM ? 'grid-cols-1' : isMD || isLG ? 'grid-cols-2' : 'grid-cols-3'}`}
-        >
-          {comments.map((comment) => (
-            <div
-              key={comment.id}
-              className='bg-white rounded-xl shadow-md p-4 text-gray-800 min-w-[200px]'
-            >
-              <div className='font-semibold mb-1'>{comment.name}</div>
-              <div className='text-sm text-gray-500 mb-2'>{comment.timeAgo}</div>
-              <p className='text-sm mb-4'>{comment.message}</p>
-              <div className='flex gap-4 text-sm text-gray-600'>
-                <span>👍 {comment.likes}</span>
-                <span>👎 {comment.dislikes}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+ const CommentReadSection: React.FC = () => {
+  return (
+    <div
+      className={`mt-12 ${
+        isXXS || isXS || isSM || isMD ? 'pt-0 max-h-[250px]' : isLG ? 'max-h-[400px] pt-0' : 'max-h-[497px] pt-30'
+      } overflow-y-auto scrollbar-none mr-6 pl-6`}
+    >
+      {/*  className={${isXXS || isXS || isSM || isMD ? "flex" : "grid"} 
+      gap-2 ${isXXS || isXS || isSM ? 'grid-cols-1' : isMD || isLG ? 'grid-cols-2' : 'grid-cols-3'}} */}
+      <div className={`${isXXS || isXS || isSM?"columns-2":isMD || isLG?"columns-2":"columns-3"} gap-3`}>
+        {imageArray.map((src, index) => (
+          <div
+            key={index}
+            className="mb-4 break-inside-avoid bg-white rounded-xl shadow-md p-4"
+          >
+            <img
+              src={src}
+              alt={`Image ${index + 1}`}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        ))}
       </div>
-    );
-  };
+    </div>
+  );
+};
 
   // Left to right animation
   const marqueeStyleLeftToRight = {
@@ -288,7 +185,7 @@ useEffect(() => {
           )}
         </div>
         <div
-          className={`${isXXS || isXS || isSM ? 'w-fit mt-2 gap-y-4' : isMD ? "gap-y-6 w-[50%]" : isLG ? "gap-y-5 w-[50%]" : isXL?"gap-y-15 w-[50%]": 'w-[50%] mt-9 gap-y-16.5'} flex justify-center text-center font-medium flex-col items-center`}
+          className={` ${isXXS || isXS || isSM ? 'w-fit mt-2 gap-y-4' : isMD ? "gap-y-6 w-[50%]" : isLG ? "gap-y-5 w-[50%]" : isXL?"gap-y-15 w-[50%]": 'w-[50%] mt-8.5 gap-y-16.5'} flex justify-center text-center font-medium flex-col items-center`}
         >
           <div
             className={`${isXXS || isXS ? 'w-[95%] text-[10px]' : isSM ? 'w-[90%] text-[12px]' : isMD ? 'w-[80%] text-[13px]' : isLG ? 'w-[70%] text-[16px]' : isXL ? 'w-[85%] text-[16px]' : 'w-[510px] text-[18px]'} inter-custom leading-tight`}
@@ -344,6 +241,7 @@ useEffect(() => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
+    <div className='w-full items-center justify-center flex'>
     <div
       onClick={() => navigate("/services", { state: { selectedService: item.title } })}
       key={item.title}
@@ -396,6 +294,7 @@ useEffect(() => {
         </div>
       </div>
     </div>
+    </div>
   );
 })}
 
@@ -411,10 +310,14 @@ useEffect(() => {
       >
         <ScrollingFooter />
       </div>
-      <div
+      {/* comment section: */}
+      {/* <div
         className={`${isXXS || isXS || isSM ? 'w-full h-auto' : isMD ? 'w-[90%]' : isLG ? 'w-[80%] h-[350px]' : isXL ? "w-[80%] h-[450px]" : 'w-[941px] h-[497px]'} mx-auto`}
       >
         <CommentReadSection />
+      </div> */}
+      <div className="w-full">
+      <ScrollingBanners/>
       </div>
       <div
         className={`${isXXS || isXS || isSM ? "mt-10" : isMD ? "mt-12" : "mt-40"} w-full`}
@@ -459,10 +362,11 @@ useEffect(() => {
             <div className='text-[#8AFF84]'>
               Create what the world needs not what you are capable of
             </div>
-            <div className={`${isXXS || isXS ? 'text-[10px]' : isSM ? 'text-[10px]' : isMD ? 'text-[14px]' : isLG ? 'text-[16px]' : isXL ? "text-[22px]" : 'text-[32px]'}`}>- Dheer Verma</div>
+            <div className={`${isXXS || isXS ? 'text-[10px]' : isSM ? 'text-[10px]' : isMD ? 'text-[14px]' : isLG ? 'text-[16px]' : isXL ? "text-[22px]" : 'text-[32px]'}`}>
+              - Dheer Verma</div>
           </div>
           <div
-            className={`${isXXS || isXS ? 'text-[12px]' : isSM ? 'text-[12px]' : isMD ? 'text-[18px]' : isLG ? 'text-[24px]' : isXL ? "text-[30px]" : 'text-[40px]'} leading-tight font-semibold libre-franklin text-center`}
+            className={`${isXXS || isXS ? 'text-[12px]' : isSM ? 'text-[12px]' : isMD ? 'text-[18px]' : isLG ? 'text-[24px]' : isXL ? "text-[30px]" : 'text-[40px] mt-2'} leading-tight font-semibold libre-franklin text-center`}
           >
             Frequently asked questions
           </div>

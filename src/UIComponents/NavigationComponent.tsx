@@ -14,9 +14,14 @@ export default function NavigationComponent() {
   interface HeadingProps{
     heading:string;
     path:string;
+  }
+  const Headings:HeadingProps[] = [{heading:"About Us", path:"/aboutus"}, {heading:"Services", path:"/services"}, {heading:"Conferences", path:"/conferences"}, {heading:"Publications", path:"/publications"}, {heading:"Careers", path:"/ourteam"}];
+interface HeadingProps2{
+    heading:string;
+    path:string;
     icon:ReactNode;
   }
-  const Headings:HeadingProps[] = [{heading:"Home", path:"/", icon:<FaHome size={20} color="#00ff00" />}, {heading:"About Us", path:"/aboutus", icon:<FaCircleInfo size={20} color="#00ff00" />}, {heading:"Services", path:"/services", icon: <SiAmazonsimpleemailservice size={20} color="#00ff00" /> }, {heading:"Conferences", path:"/conferences", icon:<GiVideoConference size={20} color="#00ff00"  />}, {heading:"Publications", path:"/publications", icon:<MdOutlinePublishedWithChanges size={20} color="#00ff00" />}, {heading:"Careers", path:"/ourteam", icon:<HiTrendingUp size={20} color="#00ff00"  />}];
+  const Headings_Mobile:HeadingProps2[] = [{heading:"Home", path:"/", icon:<FaHome size={20} color="#00ff00" />}, {heading:"About Us", path:"/aboutus", icon:<FaCircleInfo size={20} color="#00ff00" />}, {heading:"Services", path:"/services", icon: <SiAmazonsimpleemailservice size={20} color="#00ff00" /> }, {heading:"Conferences", path:"/conferences", icon:<GiVideoConference size={20} color="#00ff00"  />}, {heading:"Publications", path:"/publications", icon:<MdOutlinePublishedWithChanges size={20} color="#00ff00" />}, {heading:"Careers", path:"/ourteam", icon:<HiTrendingUp size={20} color="#00ff00"  />}];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -32,8 +37,8 @@ export default function NavigationComponent() {
   const isXS = width > 200 && width <= 300;
   const isSM = width > 300 && width <= 500;
   const isMD = width > 500 && width <= 700;
-  const isLG = width > 700 && width <= 1000;
-  const isXL = width > 1000 && width <= 1200;
+  const isLG = width > 700 && width <= 900;
+  const isXL = width > 900 && width <= 1200;
   const is2XL = width > 1200 && width <= 1600;
   const is3XL = width > 1600;
 
@@ -102,7 +107,7 @@ export default function NavigationComponent() {
           className={`${isDesktop ? "hidden" : "block"} fixed top-[57px] right-0 h-[calc(100vh-57px)] ${mobileMenuWidth} bg-custom-gradient backdrop-filter backdrop-blur-sm transition-transform duration-300 ease-in-out z-50 ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
         >
           <ul className={`flex flex-col items-center justify-center py-8 font-medium ${isXXS || isXS ? "space-y-4" : "space-y-4"}`}>
-  {Headings.map((item, index) => (
+  {Headings_Mobile.map((item, index) => (
     <>
       <li onClick={()=>navigate(item.path)} key={index} className="flex w-full items-center">
        <div className="px-4 flex justify-end items-center text-xl text-white">
