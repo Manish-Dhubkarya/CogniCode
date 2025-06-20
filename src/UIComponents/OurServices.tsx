@@ -46,7 +46,7 @@ const OurServices: React.FC = () => {
     const handleScroll = () => {
       if (stickyDivRef.current && placeholderRef.current) {
         const offsetTop = placeholderRef.current.getBoundingClientRect().top + window.scrollY;
-        const topPosition = 64; // Matches top-[64px]
+        const topPosition = 40; // Matches top-[64px]
         if (window.scrollY >= offsetTop - topPosition) {
           setIsFixed(true);
           placeholderRef.current.style.height = `${stickyDivRef.current.offsetHeight}px`;
@@ -210,16 +210,14 @@ const OurServices: React.FC = () => {
       </div>
 
       <div
-        className={`w-full ${
+        className={`w-full ${services==ITServices && (isXXS || isXS || isSM)? "gap-x-10": services==ITServices && isMD?"gap-x-15": services==ITServices && isLG?"gap-x-60": services==ITServices && isXL?"gap-x-65": services==ITServices && is2XL?"gap-x-60":""} gap-10 ${
           isLG
-            ? "grid grid-cols-4 gap-x-50 overflow-x-auto"
+            ? `grid grid-cols-5  gap-x-50 overflow-x-auto`
             : isXL
-            ? "grid grid-cols-4 overflow-x-auto gap-x-26"
+            ? "grid grid-cols-5 overflow-x-auto gap-x-56"
             : is2XL || is3XL
-            ? "grid grid-cols-4 overflow-x-auto gap-x-20"
-            : `flex overflow-x-auto ${
-                services === ITServices ? "gap-x-10" : "gap-x-4"
-              } snap-x snap-mandatory`
+            ? "grid grid-cols-4 overflow-x-auto gap-x-10"
+            : `flex overflow-x-auto snap-x snap-mandatory`
         } scrollbar-none`}
       >
         {services.map((item, index) => (
@@ -238,7 +236,7 @@ const OurServices: React.FC = () => {
                 ? "w-[180px] h-[320px]"
                 : isXL
                 ? "w-[200px] h-[350px]"
-                : "w-[240px] h-[460px]"
+                : "w-[223px] h-[435px]"
             }`}
           >
             <div className="w-full cursor-pointer flex flex-col items-center justify-center">
@@ -331,9 +329,9 @@ const OurServices: React.FC = () => {
         <div ref={placeholderRef} className="w-full"></div>
         <div
           ref={stickyDivRef}
-          className={`flex flex-col items-center w-full transition-all duration-150 ease-in-out ${
+          className={`flex flex-col items-center w-full transition-all duration-300 ease-in-out ${
             isFixed
-              ? "fixed top-[64px] left-0 z-50 px-4 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 border-2 border-blue-500"
+              ? `fixed pt-3 backdrop-blur-2xl bg-white/0 ${isXXS || isXS || isSM?"top-[30px]":isMD?"top-[25px]":isLG?"top-[26px]":isXL?"top-[0px]":is2XL?"top-[10px]": "top-[22px]"}  left-0 z-20 px-4 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32`
               : ""
           } ${
             isXXS || isXS
