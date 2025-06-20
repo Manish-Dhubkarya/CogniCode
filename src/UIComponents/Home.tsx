@@ -11,6 +11,7 @@ import { LuPlus } from 'react-icons/lu';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ScrollingBanners from './ScrollingBanners/ScrollingBanners';
+import { IoIosArrowDroprightCircle } from 'react-icons/io';
 
 function Home() {
   const marqueeStyleBase = {
@@ -233,8 +234,22 @@ const imageArray = Object.values(imageMap).map((module: any) => module.default a
           </div>
         </div>
       </div>
+
+      {/* put effect here */}
       <div
-        className={`w-[85%] flex flex-row ${isXXS || isXS || isSM ? "mt-0 gap-4" : isMD ? "mt-4 gap-6" : "mt-13 gap-10"} px-2 py-2 overflow-x-auto overflow-y-hidden scrollbar-none whitespace-nowrap`}
+  className={`w-full ${
+    isXXS || isXS || isSM ? "mb-0 mt-4" : isMD ? "mt-4 mb-0" : "mt-10"
+  }  justify-end px-[10vw] max-[1400px]:flex hidden`}
+>
+  <IoIosArrowDroprightCircle
+    size={30}
+    className="cursor-pointer hover:scale-110 transition-transform duration-300 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white flex items-center justify-center rounded-full"
+    color="#00ff00"
+  />
+</div>
+
+      <div
+        className={`w-[85%] flex flex-row min-[1400px]:mt-10 ${isXXS || isXS || isSM ? "gap-4" : isMD ? " gap-6" : "gap-10"} px-2 py-2 overflow-x-auto overflow-y-hidden scrollbar-none whitespace-nowrap`}
       >
         
 {CardsData.map((item) => {
@@ -242,6 +257,7 @@ const imageArray = Object.values(imageMap).map((module: any) => module.default a
 
   return (
     <div className='w-full items-center justify-center flex'>
+      
     <div
       onClick={() => navigate("/services", { state: { selectedService: item.title } })}
       key={item.title}

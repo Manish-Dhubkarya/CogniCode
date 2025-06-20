@@ -307,11 +307,11 @@ const Publications: React.FC = () => {
     render?: (value: any) => string;
     width: string;
   }[] = [
-    { key: "sourceTitle", label: "Source Title", width: `${isXXS || isXS || isSM ? "min-w-[150px] w-[150px]" : isMD || isLG ? "min-w-[200px] w-[200px]" : "min-w-[300px] w-[300px]"}` },
-    { key: "citeScore", label: "CiteScore", width: `${isXXS || isXS || isSM ? "min-w-[60px] w-[60px]" : isMD || isLG ? "min-w-[80px] w-[80px]" : "min-w-[90px] w-[90px]"}` },
-    { key: "hPercentile", label: "Highest Percentile", render: (value) => `${value}`, width: `${isXXS || isXS || isSM ? "min-w-[90px] w-[90px]" : isMD || isLG ? "min-w-[110px] w-[110px]" : "min-w-[130px] w-[130px]"}` },
-    { key: "citations", label: "Citations 2024-25", width: `${isXXS || isXS || isSM ? "min-w-[90px] w-[90px]" : isMD || isLG ? "min-w-[110px] w-[110px]" : "min-w-[130px] w-[130px]"}` },
-    { key: "documents", label: "Documents 2024-25", width: `${isXXS || isXS || isSM ? "min-w-[100px] w-[100px]" : isMD || isLG ? "min-w-[120px] w-[120px]" : "min-w-[150px] w-[150px]"}` },
+    { key: "sourceTitle", label: "Source Title", width: `${isXXS || isXS || isSM ? "min-w-[150px] w-[150px]" : isMD || isLG ? "min-w-[200px] w-[200px]" : isXL || is2XL? "min-w-[300px] w-[300px]":"min-w-[320px] w-[320px]"}` },
+    { key: "citeScore", label: "CiteScore", width: `${isXXS || isXS || isSM ? "min-w-[60px] w-[60px]" : isMD || isLG ? "min-w-[80px] w-[80px]" : isXL || is2XL? "min-w-[90px] w-[90px]":"min-w-[150px] w-[150px]"}` },
+    { key: "hPercentile", label: "Highest Percentile", render: (value) => `${value}`, width: `${isXXS || isXS || isSM ? "min-w-[90px] w-[90px]" : isMD || isLG ? "min-w-[110px] w-[110px]" : isXL || is2XL? "min-w-[130px] w-[130px]":"min-w-[220px] w-[220px]"}` },
+    { key: "citations", label: "Citations 2024-25", width: `${isXXS || isXS || isSM ? "min-w-[90px] w-[90px]" : isMD || isLG ? "min-w-[110px] w-[110px]" : isXL || is2XL? "min-w-[130px] w-[130px]":"min-w-[230px] w-[230px]"}` },
+    { key: "documents", label: "Documents 2024-25", width: `${isXXS || isXS || isSM ? "min-w-[100px] w-[100px]" : isMD || isLG ? "min-w-[120px] w-[120px]" :isXL || is2XL? "min-w-[150px] w-[150px]":"min-w-[250px] w-[250px]"}` },
     { key: "cited", label: "Cited", width: `${isXXS || isXS || isSM ? "min-w-[60px] w-[60px]" : isMD || isLG ? "min-w-[80px] w-[80px]" : "min-w-[100px] w-[100px]"}` },
   ];
 
@@ -645,7 +645,7 @@ const Publications: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen mt-15 mb-5 font-sans libre-franklin">
       <NavigationComponent />
-      <div className="flex bg-gray-100 flex-col py-5 px-5 w-full max-w-[1600px] mx-auto">
+      <div className="flex bg-gray-100 flex-col py-5 px-5 w-full max-w-full mx-auto">
         <div className={`relative flex ${isXXS || isXS || isSM || isMD || isLG ? "flex-col" : "flex-row"} gap-6 w-full`}>
           {(isXL || is2XL || is3XL) && (
             <div className="z-10 flex-shrink-0 flex-col h-fit pt-5 w-[300px] text-[12px]">
@@ -654,9 +654,9 @@ const Publications: React.FC = () => {
           )}
           {(isXXS || isXS || isSM || isMD || isLG) && (
             <>
-              <div className={`flex ${isXXS || isXS || isSM || isMD ? "w-full" : "w-[90%]"} items-center justify-between mb-4 gap-4`}>
-                <TbFilterBolt size={20} className="ml-5" onClick={() => setIsFilterOpen(!isFilterOpen)} color="#3664ff" />
-                <div className={`${isXXS || isXS ? "w-[60%]" : isSM ? "w-[70%]" : isMD ? "w-[75%]" : "w-[80%]"} flex-1`}>
+              <div className={`flex ${isXXS || isXS || isSM || isMD ? "w-[87vw]" : "w-[78vw]"} items-center justify-between mb-4 gap-[5vw]`}>
+                <TbFilterBolt size={20} className="ml-[4vw]" onClick={() => setIsFilterOpen(!isFilterOpen)} color="#3664ff" />
+                <div className={`${isXXS || isXS ? "w-[60%]" : isSM ? "w-[70%]" : isMD ? "w-[45%]" : "w-[80%]"} flex-1`}>
                   <label htmlFor="search-small" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 right-2 flex items-center pr-3 pointer-events-none">
@@ -682,8 +682,8 @@ const Publications: React.FC = () => {
           )}
           <div className={`flex-1 scrollbar-none ${isXXS || isXS || isSM || isMD || isLG ? "pt-0" : "pt-5"} overflow-x-auto`}>
             {(isXL || is2XL || is3XL) && (
-              <div className="flex justify-center mb-4">
-                <div className={`${isXL ? "w-[60%]" : "w-[50%]"}`}>
+              <div className="flex justify-start ml-[10vw] mb-4">
+                <div className={`${isXL?"w-[47vw]":is2XL?"w-[45vw]":"w-[50vw]"} `}>
                   <label htmlFor="search-large" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 right-2 flex items-center pr-3 pointer-events-none">
@@ -701,6 +701,8 @@ const Publications: React.FC = () => {
                 </div>
               </div>
             )}
+            <div className="flex flex-col h-[85%] items-center justify-between">
+            {/* Table Data: */}
             <div className="w-full">
               <div className={`${isXXS ? "min-w-[200px]" : isXS ? "min-w-[300px]" : isSM ? "min-w-[500px]" : isMD ? `min-w-[${getTableMinWidth()}px]` : isLG ? `min-w-[${getTableMinWidth()}px]` : isXL ? "min-w-[800px]" : "min-w-[1000px]"}`}>
                 <CustomStyle />
@@ -766,11 +768,10 @@ const Publications: React.FC = () => {
                 )}
               </div>
             </div>
-          </div>
-        </div>
-        <div className="w-full flex justify-end">
+          
+        <div className="w-full  flex justify-start">
           <div
-            className={`${isXL ? "w-[60%]" : isXXS || isXS || isSM || isMD || isLG ? "w-[100%]" : "w-[70%]"} flex ${isXXS || isXS ? "flex-col" : "flex-row"} justify-between items-center mt-6 px-4`}
+            className={`w-full flex ${isXXS || isXS ? "flex-col" : "flex-row"} justify-between items-center mt-6 `}
           >
             <div className="flex items-center space-x-2">
               <span className={`text-black dm-sans-regular ${isXXS || isXS ? "text-[10px]" : isSM ? "text-[11px]" : isMD ? "text-[12px]" : isLG ? "text-[13px]" : "text-[14px]"}`}>
@@ -787,7 +788,7 @@ const Publications: React.FC = () => {
                 <option value={20}>20</option>
               </select>
             </div>
-            <div className={`flex ${isXXS || isXS || isSM || isMD ? "mr-5" : "mr-30"} items-center space-x-4`}>
+            <div className={`flex ${isXXS || isXS || isSM || isMD ? "mr-[5vw]" : isLG?"mr-[14vw]": isXL?"mr-[7vw]": is2XL?"mr-[20vw]": "mr-[15vw]"} items-center space-x-4`}>
               {isXXS || isXS || isSM ? (
                 <IoIosArrowBack
                   className={`${currentPage === 1 ? "text-[#ff4200]" : "text-blue-700 cursor-pointer"} ${isXXS || isXS ? "text-[12px]" : isSM ? "text-[14px]" : "text-[16px]"}`}
@@ -819,6 +820,9 @@ const Publications: React.FC = () => {
               )}
             </div>
           </div>
+        </div>
+        </div>
+        </div>
         </div>
       </div>
       <div className="w-full flex flex-col items-center">

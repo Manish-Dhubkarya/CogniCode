@@ -46,7 +46,7 @@ function Footer() {
 
             {/* Have a Query */}
             <div className="flex flex-col">
-              <h3 className="font-semibold text-[14px] mb-2 text-left">Have a Query?</h3>
+              <h3  className="font-semibold text-[14px] mb-2 text-left">Have a Query?</h3>
               <div className="w-[70%] border-t-[1.5px] border-[#8AFF84] my-3"></div>
               <p className="text-[12px] mb-2 text-left">Contact us:</p>
               <a
@@ -107,7 +107,7 @@ function Footer() {
 
             {/* Have a Query */}
             <div className="flex flex-col">
-              <h3 className="font-semibold text-[14px] mb-2 text-left">Have a Query?</h3>
+              <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold text-[14px] mb-2 text-left">Have a Query?</h3>
               <div className="w-[70%] border-t-[1.5px] border-[#8AFF84] my-3"></div>
               <p className="text-[12px] mb-2 text-left">Contact us:</p>
               <a
@@ -169,7 +169,7 @@ function Footer() {
 
             {/* Have a Query */}
             <div className="flex flex-col">
-              <h3 className="font-semibold text-[16px] mb-3 text-left">Have a Query?</h3>
+              <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold text-[16px] mb-3 text-left">Have a Query?</h3>
               <div className="w-[70%] border-t-[1.5px] border-[#8AFF84] mb-4"></div>
               <p className="text-[14px] mb-2 text-left">Contact us:</p>
               <a
@@ -236,8 +236,10 @@ function Footer() {
 
               {/* Have a Query */}
               <div className="flex flex-col">
-                <h3 className="font-semibold text-[18px] mb-3 text-right">Have a Query?</h3>
-                <div className="w-full border-t-[1.5px] border-[#8AFF84] my-5"></div>
+                <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold  cursor-pointer hover:scale-110 transition-transform text-[18px]  text-right">Have a Query?</h3>
+               <div className="flex justify-end">
+                <div className="w-[70%] border-t-[1.5px]   border-[#8AFF84] my-3"></div>
+                </div>
                 <p className="text-[16px] mb-3 text-right">Contact us:</p>
                 <a
                   href="tel:+917000515617"
@@ -300,8 +302,10 @@ function Footer() {
 
               {/* Have a Query */}
               <div className="flex flex-col">
-                <h3 className="font-semibold text-[20px] mb-4 text-right">Have a Query?</h3>
-                <div className="w-full border-t-[1.5px] border-[#8AFF84] my-5"></div>
+                <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold cursor-pointer hover:scale-110 transition-transform text-[20px]  text-right">Have a Query?</h3>
+                <div className="flex justify-end">
+                <div className="w-[70%] border-t-[1.5px]   border-[#8AFF84] my-3"></div>
+                </div>
                 <p className="text-[16px] mb-3 text-right">Contact us:</p>
                 <a
                   href="tel:+917000515617"
@@ -418,8 +422,10 @@ function Footer() {
 
               {/* Have a Query */}
               <div className="flex flex-col">
-                <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold cursor-pointer hover:scale-110 transition-transform text-[24px] mb-4 text-right">Have a Query?</h3>
-                <div className="w-full border-t-[1.5px] border-[#8AFF84] my-2"></div>
+                <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold cursor-pointer hover:scale-110 transition-transform text-[24px] text-right">Have a Query?</h3>
+               <div className="flex justify-end">
+                <div className="w-[80%] border-t-[1.5px]   border-[#8AFF84] my-3"></div>
+                </div>
                 <p className="text-[20px] mb-3 text-right">Contact us:</p>
                 <a
                   href="tel:+917000515617"

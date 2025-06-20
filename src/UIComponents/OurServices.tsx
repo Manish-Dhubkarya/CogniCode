@@ -10,16 +10,19 @@ import IntelligentAutomation from "../assets/ServicesCSS/Intelligent_automation.
 import NLP_Solutions from "../assets/ServicesCSS/NLP_solutions.png";
 import ScalableAIServices from "../assets/ServicesCSS/Scalable_AI_services.png";
 import MLModel from "../assets/ServicesCSS/Machine_learning_models.png";
-import PlagarismRemovel from "../assets/ServicesCSS/PlagarismRemoval.png"
+import PlagarismRemovel from "../assets/ServicesCSS/PlagarismRemoval.png";
 import ScrollingFooter from "./ScrollingFooter";
 import Footer from "./Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const OurServices: React.FC = () => {
   const [width, setWidth] = useState(window.innerWidth);
+  const [isFixed, setIsFixed] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
   const { selectedService = "No service selected" } = state || {};
+  const stickyDivRef = useRef<HTMLDivElement>(null);
+  const placeholderRef = useRef<HTMLDivElement>(null);
 
   // Refs for section headings
   const writingServicesRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
@@ -31,11 +34,33 @@ const OurServices: React.FC = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   useEffect(() => {
-  if (selectedService === "No service selected") {
-    window.scrollTo(0,0);
-  }
-}, [selectedService]);
+    if (selectedService === "No service selected") {
+      window.scrollTo(0, 0);
+    }
+  }, [selectedService]);
+
+  // Handle scroll to toggle fixed position
+  useEffect(() => {
+    const handleScroll = () => {
+      if (stickyDivRef.current && placeholderRef.current) {
+        const offsetTop = placeholderRef.current.getBoundingClientRect().top + window.scrollY;
+        const topPosition = 64; // Matches top-[64px]
+        if (window.scrollY >= offsetTop - topPosition) {
+          setIsFixed(true);
+          placeholderRef.current.style.height = `${stickyDivRef.current.offsetHeight}px`;
+        } else {
+          setIsFixed(false);
+          placeholderRef.current.style.height = "0px";
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Scroll to the appropriate section based on selectedService
   useEffect(() => {
@@ -52,7 +77,6 @@ const OurServices: React.FC = () => {
           targetRef = aiServicesRef;
           break;
         case "NEW EVENTS":
-          // Optionally handle "NEW EVENTS" (e.g., scroll to top or do nothing)
           window.scrollTo({ top: 0, behavior: "smooth" });
           break;
         default:
@@ -74,7 +98,13 @@ const OurServices: React.FC = () => {
   const is2XL = width > 1200 && width <= 1600;
   const is3XL = width > 1600;
 
-  const WritingServices = [
+  interface Service {
+    title: string;
+    back: string;
+    navigation: string | { pathname: string; state?: { selectedService: string } };
+  }
+
+  const WritingServices: Service[] = [
     { title: "Thesis Writing", back: ThesisBack, navigation: "/thesiswriting" },
     {
       title: "Dissertation Writing",
@@ -92,7 +122,7 @@ const OurServices: React.FC = () => {
     },
   ];
 
-  const ITServices = [
+  const ITServices: Service[] = [
     {
       title: "Data Science Services",
       back: DSBack,
@@ -111,7 +141,7 @@ const OurServices: React.FC = () => {
     },
   ];
 
-  const AIservices = [
+  const AIservices: Service[] = [
     {
       title: "Predictive Analytics",
       back: PredictiveAnalytics,
@@ -156,11 +186,7 @@ const OurServices: React.FC = () => {
 
   const renderSection = (
     title: string,
-    services: {
-      title: string;
-      back: string;
-      navigation: string | { pathname: string; state?: any };
-    }[],
+    services: Service[],
     sectionRef: React.RefObject<HTMLDivElement>
   ) => (
     <div className="w-full mb-10">
@@ -288,7 +314,9 @@ const OurServices: React.FC = () => {
       <NavigationComponent />
       <div
         className={`px-4 ${
-          isMD
+          isXXS || isXS || isSM
+            ? "px-4"
+            : isMD
             ? "px-8"
             : isLG
             ? "px-12"
@@ -296,12 +324,18 @@ const OurServices: React.FC = () => {
             ? "px-16"
             : is2XL
             ? "px-24"
-            : "3xl:px-32"
+            : "px-32"
         } mt-10 text-left`}
       >
         {renderSection("Writing Services", WritingServices, writingServicesRef)}
+        <div ref={placeholderRef} className="w-full"></div>
         <div
-          className={`flex flex-col items-center w-full ${
+          ref={stickyDivRef}
+          className={`flex flex-col items-center w-full transition-all duration-150 ease-in-out ${
+            isFixed
+              ? "fixed top-[64px] left-0 z-50 px-4 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 border-2 border-blue-500"
+              : ""
+          } ${
             isXXS || isXS
               ? "my-4 px-0"
               : isSM
@@ -334,24 +368,34 @@ const OurServices: React.FC = () => {
                 : "w-[50%] text-[20px]"
             }`}
           >
-            
-          <div onClick={()=>navigate("/services", { state: { selectedService: "WRITING SERVICES" } })} className="hover:text-white cursor-pointer" style={{ fontFamily: "Roboto", fontWeight: 600 }}>
-            Writing Services
-          </div>
-          <div onClick={()=>navigate("/services", { state: { selectedService: "IT SOLUTIONS" } })} className="hover:text-white cursor-pointer">IT Solutions</div>
-          <div onClick={()=>navigate("/services", { state: { selectedService: "AI SERVICES" } })} className="hover:text-white cursor-pointer">AI Services</div>
-
+            <div
+              onClick={() =>
+                navigate("/services", { state: { selectedService: "Thesis Writing" } })
+              }
+              className="hover:text-white cursor-pointer"
+              style={{ fontFamily: "Roboto", fontWeight: 600 }}
+            >
+              Writing Services
+            </div>
+            <div
+              onClick={() =>
+                navigate("/services", { state: { selectedService: "IT SOLUTIONS" } })
+              }
+              className="hover:text-white cursor-pointer"
+            >
+              IT Solutions
+            </div>
+            <div
+              onClick={() =>
+                navigate("/services", { state: { selectedService: "AI SERVICES" } })
+              }
+              className="hover:text-white cursor-pointer"
+            >
+              AI Services
+            </div>
           </div>
           <div
-            className={`${
-              isXXS || isXS || isSM
-                ? "w-full"
-                : isMD || isLG
-                ? "w-full"
-                : isXL
-                ? "w-full"
-                : "w-full"
-            } border-t-1 mt-4 border-[#8AFF84]`}
+            className={`w-full border-t-1 mt-4 border-[#8AFF84]`}
           ></div>
         </div>
         {renderSection("IT Solutions", ITServices, itSolutionsRef)}

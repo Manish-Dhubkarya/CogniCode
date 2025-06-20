@@ -1,6 +1,5 @@
 import { useState, useEffect, ReactNode } from "react";
 import { IoMdMenu } from "react-icons/io";
-import { MdArrowDropDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import CogniCodeLogo from "../../src/assets/CogniCodeLogo.svg";
 import { SiAmazonsimpleemailservice } from "react-icons/si";
@@ -15,13 +14,13 @@ export default function NavigationComponent() {
     heading:string;
     path:string;
   }
-  const Headings:HeadingProps[] = [{heading:"About Us", path:"/aboutus"}, {heading:"Services", path:"/services"}, {heading:"Conferences", path:"/conferences"}, {heading:"Publications", path:"/publications"}, {heading:"Careers", path:"/ourteam"}];
+  const Headings:HeadingProps[] = [{heading:"About Us", path:"/aboutus"}, {heading:"Services", path:"/services"}, {heading:"Conferences", path:"/conferences"}, {heading:"Publications", path:"/publications"}, {heading:"Careers", path:"/contactus"}];
 interface HeadingProps2{
     heading:string;
     path:string;
     icon:ReactNode;
   }
-  const Headings_Mobile:HeadingProps2[] = [{heading:"Home", path:"/", icon:<FaHome size={20} color="#00ff00" />}, {heading:"About Us", path:"/aboutus", icon:<FaCircleInfo size={20} color="#00ff00" />}, {heading:"Services", path:"/services", icon: <SiAmazonsimpleemailservice size={20} color="#00ff00" /> }, {heading:"Conferences", path:"/conferences", icon:<GiVideoConference size={20} color="#00ff00"  />}, {heading:"Publications", path:"/publications", icon:<MdOutlinePublishedWithChanges size={20} color="#00ff00" />}, {heading:"Careers", path:"/ourteam", icon:<HiTrendingUp size={20} color="#00ff00"  />}];
+  const Headings_Mobile:HeadingProps2[] = [{heading:"Home", path:"/", icon:<FaHome size={20} color="#00ff00" />}, {heading:"About Us", path:"/aboutus", icon:<FaCircleInfo size={20} color="#00ff00" />}, {heading:"Services", path:"/services", icon: <SiAmazonsimpleemailservice size={20} color="#00ff00" /> }, {heading:"Conferences", path:"/conferences", icon:<GiVideoConference size={20} color="#00ff00"  />}, {heading:"Publications", path:"/publications", icon:<MdOutlinePublishedWithChanges size={20} color="#00ff00" />}, {heading:"Careers", path:"/contactus", icon:<HiTrendingUp size={20} color="#00ff00"  />}];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -65,12 +64,12 @@ interface HeadingProps2{
   return (
     <>
       <nav className="bg-custom-gradient-navigation fixed w-full z-50 top-0">
-        <div className="w-full max-w-[100%] pr-[4vw] mx-auto flex items-center justify-between px-4">
+        <div className="w-full max-w-[100%] pr-[10vw] mx-auto flex items-center justify-between px-4">
           {/* Mobile Menu Toggle */}
           
           {/* logo */}
             <img onClick={()=>navigate("/")} className={`${isXXS || isXS|| isSM?"w-22 pt-3.75 pb-2.25":isMD?"w-22 pt-3.75 pb-2.25":isLG?"w-25 pt-4.5 pb-3":isXL?"w-30 pt-3.5 pb-2":"w-50 pt-1.5"} cursor-pointer h-fit`} src={CogniCodeLogo}/>
-          <div className={`${isDesktop ? "hidden" : "flex"} justify-start`}>
+          <div className={`${isDesktop ? "hidden" : "flex"}  justify-start`}>
             <IoMdMenu
               className="text-white hover:text-[#0e86ff] cursor-pointer"
               size={isXXS || isXS ? 20 : isSM || isMD ? 22 : 25}
@@ -78,15 +77,14 @@ interface HeadingProps2{
             />
           </div>
           {/* Desktop Menu */}
-          <div className={`${isDesktop ? "flex" : "hidden"} items-center justify-center gap-x-6 w-full ${isXL ? "gap-x-8" : is2XL ? "gap-x-10" : "gap-x-12"}`}>
-            <ul className={`flex flex-row font-medium ${isXL ? "space-x-4" : is2XL ? "space-x-8" : "space-x-10"}`}>
+          <div className={`${isDesktop ? "flex" : "hidden"}  items-center justify-center gap-x-6 w-full ${isXL ? "gap-x-8" : is2XL ? "gap-x-10" : "gap-x-12"}`}>
+            <ul className={`flex flex-row font-medium ${isXL ? "space-x-4" : is2XL ? "space-x-15" : "space-x-18"}`}>
               {Headings.map((item, index) => (
                 <li onClick={()=>navigate(item.path)} key={index} className="flex cursor-pointer items-center">
                   <a
-                    className="relative flex gap-x-3 py-2 px-3 text-sm text-white after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#0e86ff] after:w-0 after:transition-all after:duration-300 hover:after:w-[95%]"
+                    className="relative flex gap-x-3 py-2 px-3 text-sm text-white after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#0e86ff] after:w-0 after:transition-all after:duration-300 hover:after:w-[100%]"
                   >
                     {item.heading}
-                    <span><MdArrowDropDown size={isXL ? 18 : 20} /></span>
                   </a>
                 </li>
             
@@ -94,7 +92,7 @@ interface HeadingProps2{
             </ul>
           </div>
           {/* Desktop Menu Toggle */}
-          <div className={`${isDesktop ? "flex" : "hidden"}`}>
+          <div className={` ${isDesktop ? "flex" : "hidden"} `}>
             <IoMdMenu
               className="text-white hover:text-[#0e86ff] cursor-pointer"
               size={isXL ? 22 : 25}

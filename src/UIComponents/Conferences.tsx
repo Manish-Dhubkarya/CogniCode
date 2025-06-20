@@ -120,13 +120,13 @@ const Conferences: React.FC = () => {
           {/* Data */}
           {isLoading ? (
             <div className="contents">
-              <div className="col-span-7 border border-white px-4 py-3 text-center text-[14px] md:text-[18px]">
+              <div className="col-span-7 border border-white px-4 py-3 text-start text-[14px] md:text-[18px]">
                 Loading conferences...
               </div>
             </div>
           ) : error ? (
             <div className="contents">
-              <div className="col-span-7 border border-white px-4 py-3 text-center text-[14px] md:text-[18px] text-red-500">
+              <div className="col-span-7 border border-white px-4 py-3 text-start text-[14px] md:text-[18px] text-red-500">
                 {error}
               </div>
             </div>
