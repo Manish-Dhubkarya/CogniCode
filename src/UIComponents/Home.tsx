@@ -8,7 +8,7 @@ import ScrollingFooter from './ScrollingFooter';
 import Footer from './Footer';
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import { LuPlus } from 'react-icons/lu';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ScrollingBanners from './ScrollingBanners/ScrollingBanners';
 import { IoIosArrowDroprightCircle } from 'react-icons/io';
@@ -121,7 +121,30 @@ const imageArray = Object.values(imageMap).map((module: any) => module.default a
     "What other services you provide",
     "How does your refund policy work",
   ];
+const scrollRef = useRef<HTMLDivElement>(null);
 
+   useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const trySmoothScroll = () => {
+      const scrollable = el.scrollWidth > el.clientWidth + 20;
+      if (scrollable) {
+        el.scrollBy({ left: 100, behavior: "smooth" });
+
+        setTimeout(() => {
+          el.scrollTo({ left: 0, behavior: "smooth" });
+        }, 1000); // wait before returning
+      }
+    };
+
+    // Wait until layout is painted and scroll width is known
+    const rafId = requestAnimationFrame(() => {
+      setTimeout(trySmoothScroll, 150); // small delay to stabilize
+    });
+
+    return () => cancelAnimationFrame(rafId);
+  }, []);
   return (
     <div
       className={`w-full ${isSM ? "mt-10" : isMD ? "mt-14" : "mt-17"} mb-5 flex roboto-regular flex-col items-center justify-center`}
@@ -248,12 +271,14 @@ const imageArray = Object.values(imageMap).map((module: any) => module.default a
   />
 </div>
 
-      <div
+      <div ref={scrollRef}
         className={`w-[85%] flex flex-row min-[1400px]:mt-10 ${isXXS || isXS || isSM ? "gap-4" : isMD ? " gap-6" : "gap-10"} px-2 py-2 overflow-x-auto overflow-y-hidden scrollbar-none whitespace-nowrap`}
       >
         
+        
 {CardsData.map((item) => {
   const [isHovered, setIsHovered] = useState(false);
+
 
   return (
     <div className='w-full items-center justify-center flex'>
