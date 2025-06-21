@@ -199,7 +199,7 @@ const OurTeam = () => {
             </div>
           </div>
         </div>
-      ) : (
+      ) : is2XL? (
         <div className="flex w-[90%] mt-25 justify-center items-center flex-row-reverse">
           <div className="flex flex-col w-[65%] mb-10 justify-center items-center">
             <div className="text-[40px] space-x-2 font-bold flex">
@@ -217,6 +217,35 @@ const OurTeam = () => {
             </div>
           </div>
           <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
+            <div className="w-[25vw] h-[25vw] bg-white rounded-full"></div>
+            <div className="text-[32px] mt-4 leading-snug roboto-regular">
+              <div className="font-normal">Himanshu Verma</div>
+              <div className="font-medium capitalize">
+                Chief Executive Officer
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    :
+    (
+        <div className="flex w-[90%] mt-25 justify-center items-center flex-row-reverse">
+          <div className="flex flex-col w-[65%] mb-10 justify-center items-center">
+            <div className="text-[50px] space-x-2 font-bold flex">
+              <span className="capitalize">turning</span>
+              <span className="text-[#8AFF84] uppercase">visions</span>
+              <span className="lowercase">INTO</span>
+              <span className="text-[#1B7BFF]">REALITY</span>
+            </div>
+            <div className="mt-8 w-full text-[24px] font-medium leading-snug">
+              We are present in the industry since 2021 and have
+              <br />
+              delivered our clients with top notch quality work and
+              <br />
+              services.
+            </div>
+          </div>
+          <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
             <div className="w-[27vw] h-[27vw] bg-white rounded-full"></div>
             <div className="text-[32px] mt-4 leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
@@ -226,7 +255,8 @@ const OurTeam = () => {
             </div>
           </div>
         </div>
-      )}
+      )
+    }
 
       {/* Team Members */}
       {isXXS || isXS || isSM ? (

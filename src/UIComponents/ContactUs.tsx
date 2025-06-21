@@ -36,7 +36,8 @@ export default function ContactUs() {
   ]);
   const [fieldErrors, setFieldErrors] = useState<string[]>(Array(UserDetails.length).fill(""));
   const [successMessage, setSuccessMessage] = useState<string>("");
-
+  const [errorMessage, setErrorMessage] = useState<string>("");
+const [isSubmitting, setIsSubmitting] = useState(false);
   // Ref for Inquiry Type input
   const inquiryTypeRef = useRef<HTMLInputElement>(null);
 
@@ -63,14 +64,16 @@ export default function ContactUs() {
 
   // Auto-dismiss success message
   useEffect(() => {
-    if (successMessage) {
-      const timer = setTimeout(() => setSuccessMessage(""), 3000);
+    if (successMessage || errorMessage) {
+      const timer = setTimeout(() => {setSuccessMessage(""), setErrorMessage("")}, 3000);
       return () => clearTimeout(timer);
     }
-  }, [successMessage]);
+  }, [successMessage, errorMessage]);
 
   // Resize handler
   useEffect(() => {
+    if(!selectedService){
+    window.scrollTo(0, 0);} // Scroll to top on component mount
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -101,6 +104,7 @@ export default function ContactUs() {
 
   // Handle form submission
   const handleInquirySubmit = async () => {
+    setIsSubmitting(true)
     const newErrors = Array(UserDetails.length).fill("");
     let hasError = false;
 
@@ -132,6 +136,7 @@ export default function ContactUs() {
     }
 
     if (hasError) {
+      setIsSubmitting(false)
       setFieldErrors(newErrors);
       return;
     }
@@ -153,11 +158,13 @@ export default function ContactUs() {
         setInputValues(Array(UserDetails.length).fill(""));
         setFieldErrors(Array(UserDetails.length).fill(""));
       } else {
-        setFieldErrors([..."Submission failed. Please try again."]);
+        setErrorMessage(response.message);
       }
-    } catch (error) {
+    } catch (error:any) {
       console.error("Submission error:", error);
-      setFieldErrors([..."An error occurred. Please try again later."]);
+      setErrorMessage("Error submitting inquiry. Please try again later.");
+    } finally{
+      setIsSubmitting(false);
     }
   };
 
@@ -177,6 +184,21 @@ export default function ContactUs() {
               <FaCircleCheck color="#16ff03" /> Success
             </h2>
             <p className="text-sm font-medium tracking-tight drop-shadow">{successMessage}</p>
+          </div>
+        </div>
+      )}
+      {/* Error Message */}
+      {errorMessage && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          {/* Glassy Overlay */}
+          <div className="absolute inset-0 bg-white/10 backdrop-blur-sm animate-[fadeIn_0.5s_ease-out_forwards]"></div>
+
+          {/* Message Box with glass effect and animation */}
+          <div className="relative bg-white/20 backdrop-blur-lg px-6 py-4 rounded-xl shadow-2xl border border-white/30 animate-[slideUpFade_0.5s_ease-out_forwards] max-w-sm text-center">
+            <h2 className="text-xl font-bold mb-1 tracking-wide text-[#f14730] flex items-center gap-3 drop-shadow">
+              <FaCircleCheck color="#f14730" /> Error
+            </h2>
+            <p className="text-sm font-medium tracking-tight drop-shadow">{errorMessage}</p>
           </div>
         </div>
       )}
@@ -338,6 +360,7 @@ export default function ContactUs() {
                 <div className="absolute bottom-0 w-full h-[1px] bg-white" />
               </div>
               {fieldErrors[index] && (
+                // error
                 <div className="text-red-500 text-xs md:text-sm">{fieldErrors[index]}</div>
               )}
             </div>
@@ -356,7 +379,8 @@ export default function ContactUs() {
                 : "px-10 py-2 text-lg sm:text-[17px]"
             } rounded-xl cursor-pointer shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-semibold`}
           >
-            Submit
+            {isSubmitting ? <div className={`loader ${isXXS || isXS?"w-[12px]":isSM?"w-[15px]":isMD?"w-[17px]":isLG?"w-[20px]":"w-[25px]"}`}></div> : "Submit"}
+            {/*  */}
           </div>
         </div>
       </div>

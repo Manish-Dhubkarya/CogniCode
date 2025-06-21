@@ -81,7 +81,7 @@ function MainContent() {
   '/dissertationswriting': { isLG: 'top-[190px]', isXL: 'top-[230px]', is2XL: 'top-[250px]', is3XL: 'top-[280px]' },
   '/paperwriting': { isLG: 'top-[170px]', isXL: 'top-[210px]', is2XL: 'top-[230px]', is3XL: 'top-[260px]' },
   '/ourteam': { isLG: 'top-[750px]', isXL: 'top-[1070px]', is2XL: 'top-[1070px]', is3XL: 'top-[1070px]' },
-  '/publications': { isLG: 'top-[600px]', isXL: 'top-[880px]', is2XL: 'top-[880px]', is3XL: 'top-[880px]' },
+  '/publications': { isLG: 'top-[600px]', isXL: 'top-[720px]', is2XL: 'top-[740px]', is3XL: 'top-[730px]' },
   '/conferences': { isLG: 'top-[950px]', isXL: 'top-[800px]', is2XL: 'top-[880px]', is3XL: 'top-[880px]' },
   '/aboutus': { isLG: 'top-[950px]', isXL: 'top-[1100px]', is2XL: 'top-[1000px]', is3XL: 'top-[1100px]' },
   '/services': { isLG: 'top-[700px]', isXL: 'top-[970px]', is2XL: 'top-[1030px]', is3XL: 'top-[1030px]' },

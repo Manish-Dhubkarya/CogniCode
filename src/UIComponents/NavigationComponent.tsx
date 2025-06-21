@@ -112,7 +112,6 @@ interface HeadingProps2{
           {item.icon}
         </div>
         <a
-          href="#"
           className={` block  text-sm text-start text-white hover:text-[#0e86ff] ${isXXS || isXS ? "text-xs" : ""}`}
           onClick={() => setIsMenuOpen(false)}
         >

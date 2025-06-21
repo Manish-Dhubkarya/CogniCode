@@ -29,6 +29,35 @@ const OurServices: React.FC = () => {
   const itSolutionsRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
   const aiServicesRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const scrollCycle = async () => {
+      // Make sure it's scrollable
+      if (el.scrollWidth <= el.clientWidth + 10) return;
+
+      // Perform the smooth scroll twice
+      for (let i = 0; i < 2; i++) {
+        el.scrollBy({ left: 100, behavior: "smooth" });
+        await wait(1000); // wait for scroll to complete
+
+        el.scrollTo({ left: 0, behavior: "smooth" });
+        await wait(1200); // wait before next cycle starts
+      }
+    };
+
+    // Delay start until layout fully settles
+    const raf = requestAnimationFrame(() => {
+      setTimeout(() => scrollCycle(), 300); // wait after mount
+    });
+
+    return () => cancelAnimationFrame(raf);
+  }, []);
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -191,6 +220,7 @@ const OurServices: React.FC = () => {
   ) => (
     <div className="w-full mb-10">
       <div
+
         ref={sectionRef}
         className={`${
           isXXS || isXS
@@ -210,7 +240,9 @@ const OurServices: React.FC = () => {
       </div>
 
       <div
-        className={`w-full ${services==ITServices && (isXXS || isXS || isSM)? "gap-x-10": services==ITServices && isMD?"gap-x-15": services==ITServices && isLG?"gap-x-60": services==ITServices && isXL?"gap-x-65": services==ITServices && is2XL?"gap-x-60":""} gap-10 ${
+      ref={services === WritingServices ? scrollRef : null}
+
+        className={`w-full ${services==ITServices && (isXXS || isXS || isSM)? "gap-x-10": services==ITServices && isMD?"gap-x-15": services==ITServices && isLG?"gap-x-60": services==ITServices && isXL?"gap-x-65": services==ITServices && is2XL?"gap-x-60":""} gap-5 ${
           isLG
             ? `grid grid-cols-5  gap-x-50 overflow-x-auto`
             : isXL

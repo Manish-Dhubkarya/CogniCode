@@ -11,7 +11,6 @@ import { LuPlus } from 'react-icons/lu';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ScrollingBanners from './ScrollingBanners/ScrollingBanners';
-import { IoIosArrowDroprightCircle } from 'react-icons/io';
 
 function Home() {
   const marqueeStyleBase = {
@@ -123,27 +122,32 @@ const imageArray = Object.values(imageMap).map((module: any) => module.default a
   ];
 const scrollRef = useRef<HTMLDivElement>(null);
 
-   useEffect(() => {
+  const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
-    const trySmoothScroll = () => {
-      const scrollable = el.scrollWidth > el.clientWidth + 20;
-      if (scrollable) {
-        el.scrollBy({ left: 100, behavior: "smooth" });
+    const scrollCycle = async () => {
+      // Make sure it's scrollable
+      if (el.scrollWidth <= el.clientWidth + 10) return;
 
-        setTimeout(() => {
-          el.scrollTo({ left: 0, behavior: "smooth" });
-        }, 1000); // wait before returning
+      // Perform the smooth scroll twice
+      for (let i = 0; i < 2; i++) {
+        el.scrollBy({ left: 100, behavior: "smooth" });
+        await wait(1000); // wait for scroll to complete
+
+        el.scrollTo({ left: 0, behavior: "smooth" });
+        await wait(1200); // wait before next cycle starts
       }
     };
 
-    // Wait until layout is painted and scroll width is known
-    const rafId = requestAnimationFrame(() => {
-      setTimeout(trySmoothScroll, 150); // small delay to stabilize
+    // Delay start until layout fully settles
+    const raf = requestAnimationFrame(() => {
+      setTimeout(() => scrollCycle(), 300); // wait after mount
     });
 
-    return () => cancelAnimationFrame(rafId);
+    return () => cancelAnimationFrame(raf);
   }, []);
   return (
     <div
@@ -160,7 +164,8 @@ const scrollRef = useRef<HTMLDivElement>(null);
         }}
       >
         <div
-          className={`${isXXS || isXS || isSM ? 'w-full text-center flex flex-row items-center justify-center gap-1' : 'w-[50%] leading-0 flex flex-col items-center'} ${isXXS || isXS || isSM ? 'mt-2' : 'mt-0'}`}
+        // point
+          className={`${isXXS || isXS || isSM ? 'text-center flex flex-row items-center justify-center gap-1' : 'leading-0 flex flex-col items-center'} ${isXXS || isXS || isSM?"w-full":isMD?"w-[48%]":isLG?"w-[45vw]":isXL?"w-[45%]":"w-[50%]"} ${isXXS || isXS || isSM ? 'mt-2' : 'mt-0'}`}
         >
           {isXXS || isXS || isSM ? (
             <div
@@ -209,10 +214,10 @@ const scrollRef = useRef<HTMLDivElement>(null);
           )}
         </div>
         <div
-          className={` ${isXXS || isXS || isSM ? 'w-fit mt-2 gap-y-4' : isMD ? "gap-y-6 w-[50%]" : isLG ? "gap-y-5 w-[50%]" : isXL?"gap-y-15 w-[50%]": 'w-[50%] mt-8.5 gap-y-16.5'} flex justify-center text-center font-medium flex-col items-center`}
+          className={` ${isXXS || isXS || isSM ? 'w-fit mt-2 gap-y-4' : isMD ? "gap-y-6 w-[50%]" : isLG ? "gap-y-10 w-[50%]" : isXL?"gap-y-15 w-[50%]": 'w-[50%] mt-8.5 gap-y-16.5'} flex justify-center text-center font-medium flex-col items-center`}
         >
           <div
-            className={`${isXXS || isXS ? 'w-[95%] text-[10px]' : isSM ? 'w-[90%] text-[12px]' : isMD ? 'w-[80%] text-[13px]' : isLG ? 'w-[70%] text-[16px]' : isXL ? 'w-[85%] text-[16px]' : 'w-[510px] text-[18px]'} inter-custom leading-tight`}
+            className={`${isXXS || isXS ? 'w-[95%] text-[10px]' : isSM ? 'w-[90%] text-[12px]' : isMD ? 'w-[90%] text-[13px]' : isLG ? 'w-[90%] text-[16px]' : isXL ? 'w-[75%] text-[16px]' : 'w-[510px] text-[18px]'} inter-custom leading-tight`}
           >
             We are present in the industry since 2021 and have delivered our clients with top notch quality work and services. Connect with us for further discussions
           </div>
@@ -227,13 +232,13 @@ const scrollRef = useRef<HTMLDivElement>(null);
 
       {/* What we provide */}
       <div
-        className={`text-white p-4 ${isXXS || isXS || isSM ? "leading-5" : isMD ? "leading-7" : isLG || isXL ? "leading-10" : "leading-12"}`}
+        className={`text-white p-4 ${isXXS || isXS || isSM ? "leading-4" : isMD ? "leading-6 mt-3" : isLG || isXL ? "leading-9 mt-4" : "leading-10 mt-5"}`}
       >
         <MarqueeStyles />
         <div style={{  overflow: "hidden",
         width: "100%",
         position: "relative",}}>
-          <div style={marqueeStyleLeftToRight}>
+          <div className='' style={marqueeStyleLeftToRight}>
             {repeatedText.map((text, index) => (
               <span
                 key={`top-${index}`}
@@ -259,20 +264,9 @@ const scrollRef = useRef<HTMLDivElement>(null);
       </div>
 
       {/* put effect here */}
-      <div
-  className={`w-full ${
-    isXXS || isXS || isSM ? "mb-0 mt-4" : isMD ? "mt-4 mb-0" : "mt-10"
-  }  justify-end px-[10vw] max-[1400px]:flex hidden`}
->
-  <IoIosArrowDroprightCircle
-    size={30}
-    className="cursor-pointer hover:scale-110 transition-transform duration-300 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white flex items-center justify-center rounded-full"
-    color="#00ff00"
-  />
-</div>
 
       <div ref={scrollRef}
-        className={`w-[85%] flex flex-row min-[1400px]:mt-10 ${isXXS || isXS || isSM ? "gap-4" : isMD ? " gap-6" : "gap-10"} px-2 py-2 overflow-x-auto overflow-y-hidden scrollbar-none whitespace-nowrap`}
+        className={`w-[85%] flex flex-row ${isXXS || isXS || isSM ? "gap-4" : isMD ? " gap-6" : "gap-10"} ${isXXS || isXS || isSM?"mt-2": isMD?"mt-4": isLG?"mt-6 ":isXL?"mt-8":"mt-10"} px-2 py-2 overflow-x-auto overflow-y-hidden scrollbar-none whitespace-nowrap`}
       >
         
         

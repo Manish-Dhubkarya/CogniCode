@@ -1,7 +1,7 @@
 import NavigationComponent from "./NavigationComponent";
 import SearchIcon from "../assets/SearchIcon.svg";
 import { IoIosArrowBack, IoIosArrowForward, IoMdCloseCircle } from "react-icons/io";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Footer from "./Footer";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import { TbFilterBolt } from "react-icons/tb";
@@ -32,6 +32,35 @@ interface PublicationRow {
 }
 
 const Publications: React.FC = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  
+    const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+  
+    useEffect(() => {
+      const el = scrollRef.current;
+      if (!el) return;
+  
+      const scrollCycle = async () => {
+        // Make sure it's scrollable
+        if (el.scrollWidth <= el.clientWidth + 10) return;
+  
+        // Perform the smooth scroll twice
+        for (let i = 0; i < 2; i++) {
+          el.scrollBy({ left: 100, behavior: "smooth" });
+          await wait(1000); // wait for scroll to complete
+  
+          el.scrollTo({ left: 0, behavior: "smooth" });
+          await wait(1200); // wait before next cycle starts
+        }
+      };
+  
+      // Delay start until layout fully settles
+      const raf = requestAnimationFrame(() => {
+        setTimeout(() => scrollCycle(), 300); // wait after mount
+      });
+  
+      return () => cancelAnimationFrame(raf);
+    }, []);
   const CustomStyle = () => {
   return (
     <style>
@@ -470,7 +499,7 @@ const Publications: React.FC = () => {
 
     return (
       <>
-        <div className={`flex font-semibold justify-between flex-col text-black items-start mb-4 px-4`}>
+        <div className={`flex font-semibold justify-between flex-col text-black items-start mb-4 pl-2`}>
           <div className={`flex items-center justify-between w-full tracking-tight ${isXXS || isXS || isSM ? "text-[10px]" : isSM || isMD ? "text-[12px]" : isLG || isXL ? "text-[12px]" : "text-[16px]"}`}>
             Filter refine list
             {isXXS || isXS || isSM || isMD || isLG ? (
@@ -674,13 +703,13 @@ const Publications: React.FC = () => {
                 </div>
               </div>
               <div
-                className={`flex-shrink-0 flex-col h-fit px-4 py-5 bg-white shadow-lg absolute ${isXXS || isXS || isSM?"-top-5":isMD?"-top-5":"-top-3"} -left-5 rounded-tl-[0px] rounded-[5px] transform transition-transform duration-300 ease-in-out ${isFilterOpen ? "translate-x-0" : "-translate-x-full"} ${isXXS ? "w-[240px]" : isXS ? "w-[240px]" : isSM ? "w-[290px]" : isMD ? "w-[320px]" : "w-[320px]"}`}
+                className={`flex-shrink-0 flex-col h-fit px-4 py-5 bg-white shadow-lg absolute ${isXXS || isXS || isSM?"-top-5":isMD?"-top-5":"-top-3"} -left-5 rounded-tl-[0px] rounded-[5px] transform transition-transform duration-300 ease-in-out ${isFilterOpen ? "translate-x-0" : "-translate-x-full"} ${isXXS ? "w-[240px]" : isXS ? "w-[240px]" : isSM ? "w-[315px]" : isMD ? "w-[330px]" : "w-[330px]"}`}
               >
                 <FilterPanelContent applyFilters={applyFilters} />
               </div>
             </>
           )}
-          <div className={`flex-1 scrollbar-none ${isXXS || isXS || isSM || isMD || isLG ? "pt-0" : "pt-5"} overflow-x-auto`}>
+          <div ref={scrollRef} className={`flex-1 scrollbar-none ${isXXS || isXS || isSM || isMD || isLG ? "pt-0" : "pt-5"} overflow-x-auto`}>
             {(isXL || is2XL || is3XL) && (
               <div className="flex justify-start ml-[10vw] mb-4">
                 <div className={`${isXL?"w-[47vw]":is2XL?"w-[45vw]":"w-[50vw]"} `}>

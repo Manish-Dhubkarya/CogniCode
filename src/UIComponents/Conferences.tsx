@@ -1,7 +1,7 @@
 import Footer from "./Footer";
 import NavigationComponent from "./NavigationComponent";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getData } from "../services/FetchBackendServices";
 import { useNavigate } from "react-router-dom";
 
@@ -23,6 +23,35 @@ const Conferences: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [width, setWidth] = useState(window.innerWidth);
   const navigate=useNavigate()
+  const scrollRef = useRef<HTMLDivElement>(null);
+  
+    const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+  
+    useEffect(() => {
+      const el = scrollRef.current;
+      if (!el) return;
+  
+      const scrollCycle = async () => {
+        // Make sure it's scrollable
+        if (el.scrollWidth <= el.clientWidth + 10) return;
+  
+        // Perform the smooth scroll twice
+        for (let i = 0; i < 2; i++) {
+          el.scrollBy({ left: 100, behavior: "smooth" });
+          await wait(1000); // wait for scroll to complete
+  
+          el.scrollTo({ left: 0, behavior: "smooth" });
+          await wait(1200); // wait before next cycle starts
+        }
+      };
+  
+      // Delay start until layout fully settles
+      const raf = requestAnimationFrame(() => {
+        setTimeout(() => scrollCycle(), 300); // wait after mount
+      });
+  
+      return () => cancelAnimationFrame(raf);
+    }, []);
   // Fetch conference table
   const fetchAllConferences = async () => {
     try {
@@ -101,7 +130,7 @@ const Conferences: React.FC = () => {
     >
       <NavigationComponent />
 
-      <div className="w-[87%] md:pb-2 pb-5 scrollbar-none overflow-x-auto">
+      <div ref={scrollRef} className="w-[87%] md:pb-2 pb-5 scrollbar-none overflow-x-auto">
         <div className="min-w-[1000px] grid grid-cols-[auto_1fr_1fr_1fr_1fr_1fr_1fr] rounded-[10px] overflow-hidden border border-white">
           {/* Header */}
           <div className="contents">
@@ -126,7 +155,7 @@ const Conferences: React.FC = () => {
             </div>
           ) : error ? (
             <div className="contents">
-              <div className="col-span-7 border border-white px-4 py-3 text-start text-[14px] md:text-[18px] text-red-500">
+              <div className={`col-span-7 border border-white px-4 ${isXL || is2XL?"py-[27vh]":"py-[17vh]"} text-start text-[14px] md:text-[18px] text-red-500`}>
                 {error}
               </div>
             </div>
