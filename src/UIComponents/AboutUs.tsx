@@ -70,7 +70,7 @@ const AboutUs = () => {
 
   {/* About Us Section */}
  {isXXS || isXS || isSM ?
-  <div  style={{ backgroundImage: `url(${AboutBack})`}} className='flex bg-center bg-cover space-y-5 items-center justify-center mt-12 my-7'>
+  <div  style={{ backgroundImage: `url(${AboutBack})`}} className='flex  pointer-events-none bg-center bg-cover space-y-5 items-center justify-center mt-12 my-7'>
     <div className="flex flex-col md:flex-row  pt-10 px-4 py-10 md:px-8 lg:px-[97px] items-center md:items-start justify-between">
     <section className="flex flex-col items-center md:items-start text-center md:text-start">
       <div className="text-[20px] font-bold mb-3">{content.aboutUs.title}</div>
@@ -80,7 +80,7 @@ const AboutUs = () => {
   </div>
   </div>:
  isMD?
- <div  style={{ backgroundImage: `url(${AboutBack})`}} className='flex bg-center bg-cover space-y-5 items-center justify-center mt-12 my-8'>
+ <div  style={{ backgroundImage: `url(${AboutBack})`}} className='flex pointer-events-none bg-center bg-cover space-y-5 items-center justify-center mt-12 my-8'>
     <div className="flex flex-col md:flex-row pt-10 py-10 px-10 items-center md:items-start justify-between">
     <section className="flex flex-col items-start text-start">
       <div className="text-[30px] font-bold mb-3">{content.aboutUs.title}</div>
@@ -92,7 +92,7 @@ const AboutUs = () => {
   </div>
   </div>:
  isLG || isXL?
- <div  style={{ backgroundImage: `url(${AboutBack})`}} className='flex bg-center bg-cover space-y-7 items-center justify-center mt-15 my-15'>
+ <div  style={{ backgroundImage: `url(${AboutBack})`}} className='flex pointer-events-none bg-center bg-cover space-y-7 items-center justify-center mt-15 my-15'>
     <div className="flex flex-col md:flex-row pt-10 py-10 px-10 items-center justify-between">
     <section className="flex flex-col items-center text-start">
       <div className="text-[40px] font-bold mb-7">{content.aboutUs.title}</div>
@@ -110,7 +110,7 @@ const AboutUs = () => {
       <div className="text-[20px] leading-tight max-w-[626px] mb-8">{content.aboutUs.description}</div>
       <div onClick={()=>navigate("/contactus")} className="bg-gradient-to-r text-black roboto-regular px-14 py-2 rounded-xl cursor-pointer text-lg sm:text-[20px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold">{content.aboutUs.buttonText}</div>
     </section>
-    <div className='mt-5 w-[42%] '>
+    <div className='mt-5 pointer-events-none w-[42%] '>
       <img className="w-full h-full" src={AboutBack} alt={content.aboutUs.imageAlt} />
     </div>
   </div>
@@ -122,7 +122,7 @@ const AboutUs = () => {
       <div className="text-[20px] font-bold mb-5">{content.achievements.title}</div>
 <div className="flex justify-center gap-5">
         {content.achievements.items.map((item, index) => (
-          <div key={index} className={`bg-gray-300 w-[25vw] ${isXXS || isXS?"h-[18vh]": isSM?"h-[20vh]":""} rounded-lg`}>
+          <div key={index} className={`bg-gray-300 w-[25vw] ${isXXS || isXS?"h-[180px]": isSM?"h-[180px] max-[460px]:h-[160px] max-[400px]:h-[150px] max-[370px]:h-[140px]":""} rounded-lg`}>
             <div className="p-4 text-center">{item.description}</div>
           </div>
         ))}
@@ -132,9 +132,9 @@ const AboutUs = () => {
   isMD?
    <div className='flex flex-col items-center justify-center'>
       <div className="text-[30px] w-full px-[10vw] text-start font-bold mb-7">{content.achievements.title}</div>
-<div className="flex justify-center gap-7">
+<div className="flex justify-between w-full px-[10vw] gap-7">
         {content.achievements.items.map((item, index) => (
-          <div key={index} className={`bg-gray-300 w-[25vw] ${isMD?"h-[25vh]":""} rounded-lg`}>
+          <div key={index} className={`bg-gray-300 w-[180px] ${isMD?"h-[220px] max-[630px]:h-[200px] max-[550px]:h-[180px]":""} rounded-lg`}>
             <div className="p-4 text-center">{item.description}</div>
           </div>
         ))}
@@ -143,9 +143,9 @@ const AboutUs = () => {
    isLG?
    <div className='flex flex-col items-center justify-center'>
       <div className="text-[30px] w-full px-[10vw] text-start font-bold mb-7">{content.achievements.title}</div>
-<div className="flex justify-center gap-7">
+<div className="flex justify-between px-[10vw] w-full gap-7">
         {content.achievements.items.map((item, index) => (
-          <div key={index} className={`bg-gray-300 w-[25vw] ${isLG?"h-[25vh]":""} rounded-lg`}>
+          <div key={index} className={`bg-gray-300 w-[200px] ${isLG?"h-[280px] max-[800px]:h-[250px] max-[800px]:w-[180px]":""} rounded-lg`}>
             <div className="p-4 text-center">{item.description}</div>
           </div>
         ))}
@@ -154,25 +154,33 @@ const AboutUs = () => {
     isXL?
    <div className='flex flex-col items-center justify-center'>
       <div className="text-[40px] w-full px-[10vw] text-end font-bold mb-7">{content.achievements.title}</div>
-<div className="flex justify-center gap-7">
+<div className="flex justify-between w-full px-[10vw] gap-10">
         {content.achievements.items.map((item, index) => (
-          <div key={index} className={`bg-gray-300 w-[25vw] ${isXL?"h-[25vh]":""} rounded-lg`}>
+          <div key={index} className={`bg-gray-300 w-[250px] ${isXL?"h-[350px] max-[1000px]:h-[300px] max-[1000px]:w-[220px]":""} rounded-lg`}>
             <div className="p-4 text-center">{item.description}</div>
           </div>
         ))}
       </div>
   </div>:
    <div className="flex flex-col md:flex-row py-12 px-[6vw] items-center md:items-start justify-between">
-    <div className='mt-15 md:mb-0'>
-      <img src={AboutBack2} className='w-[18vw] h-[44vh]' alt={content.achievements.imageAlt} />
+    <div className='mt-15 pointer-events-none md:mb-0'>
+      <img src={AboutBack2} className="h-[350px] w-[250px]
+             max-[1400px]:h-[300px] max-[1400px]:w-[220px]
+             max-[1024px]:h-[250px] max-[1024px]:w-[180px]" alt={content.achievements.imageAlt} />
     </div>
     <section className="px-4 flex flex-col items-center md:items-end md:px-12 text-center md:text-end">
       <div className="text-4xl md:text-[64px] font-bold mb-15">{content.achievements.title}</div>
       <div className="flex flex-col md:flex-row justify-center gap-12">
         {content.achievements.items.map((item, index) => (
-          <div key={index} className="bg-gray-300 h-[44vh] w-[18.86vw] rounded-lg">
-            <div className="p-4 text-center">{item.description}</div>
-          </div>
+         <div
+  key={index}
+  className="bg-gray-300 h-[350px] w-[250px] rounded-lg
+             max-[1400px]:h-[300px] max-[1400px]:w-[220px]
+             max-[1024px]:h-[250px] max-[1024px]:w-[180px]"
+>
+  <div className="p-4 text-center">{item.description}</div>
+</div>
+
         ))}
       </div>
     </section>
@@ -272,8 +280,10 @@ const AboutUs = () => {
         </div>
       </div>
     </section>
-    <div className='mt-8 mr-13'>
-      <img src={AboutBack2} className='w-[18vw] h-[44vh]' alt={content.futureAims.imageAlt} />
+    <div className='mt-8 mr-13 pointer-events-none'>
+      <img src={AboutBack2} className="h-[350px] w-[250px]
+             max-[1400px]:h-[300px] max-[1400px]:w-[220px]
+             max-[1024px]:h-[250px] max-[1024px]:w-[180px]" alt={content.futureAims.imageAlt} />
     </div>
   </div>}
 
