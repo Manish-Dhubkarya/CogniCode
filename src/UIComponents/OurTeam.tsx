@@ -1,4 +1,5 @@
 import NavigationComponent from "./NavigationComponent";
+import HimanshuSir from "../assets/TeamMemberPics/Himanshu_Sir.jpg"
 import Avinash_Methania from "../assets/TeamMemberPics/Avinash_Methania.svg";
 import Dheer_Verma from "../assets/TeamMemberPics/Dheer_Verma.svg";
 import Twinkle_Varma from "../assets/TeamMemberPics/Twinkle_Verma.svg";
@@ -109,7 +110,9 @@ const OurTeam = () => {
             services.
           </div>
           <div className="justify-center flex flex-col mt-5 space-y-2 items-center">
-            <div className="w-[50vw] h-[50vw] bg-white rounded-full"></div>
+            {HimanshuSir?
+           <img draggable={false} onContextMenu={(e) => e.preventDefault()} className="w-[50vw] h-[50vw] rounded-full" src={HimanshuSir}/>:
+            <div className="w-[50vw] h-[50vw] bg-white rounded-full"></div>}
             <div className="text-[20px] leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
@@ -136,7 +139,9 @@ const OurTeam = () => {
             </div>
           </div>
           <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-2 items-center">
-            <div className="w-[25vw] h-[25vw] bg-white rounded-full"></div>
+            {HimanshuSir?
+           <img draggable={false} onContextMenu={(e) => e.preventDefault()} className="w-[25vw] h-[25vw] rounded-full" src={HimanshuSir}/>:
+            <div className="w-[25vw] h-[25vw] bg-white rounded-full"></div>}
             <div className="text-[18px] leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
@@ -163,7 +168,9 @@ const OurTeam = () => {
             </div>
           </div>
           <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
-            <div className="w-[30vw] h-[30vw] bg-white rounded-full"></div>
+            {HimanshuSir?
+           <img draggable={false} onContextMenu={(e) => e.preventDefault()} className="w-[30vw] h-[30vw] rounded-full" src={HimanshuSir}/>:
+            <div className="w-[30vw] h-[30vw] bg-white rounded-full"></div>}
             <div className="text-[22px] leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
@@ -190,7 +197,9 @@ const OurTeam = () => {
             </div>
           </div>
           <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
-            <div className="w-[30vw] h-[30vw] bg-white rounded-full"></div>
+            {HimanshuSir?
+           <img draggable={false} onContextMenu={(e) => e.preventDefault()} className="w-[30vw] h-[30vw] rounded-full" src={HimanshuSir}/>:
+            <div className="w-[30vw] h-[30vw] bg-white rounded-full"></div>}
             <div className="text-[28px] leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
@@ -217,7 +226,9 @@ const OurTeam = () => {
             </div>
           </div>
           <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
-            <div className="w-[25vw] h-[25vw] bg-white rounded-full"></div>
+           {HimanshuSir?
+           <img draggable={false} onContextMenu={(e) => e.preventDefault()} className="w-[25vw]  h-[25vw] rounded-full" src={HimanshuSir}/>:
+            <div className="w-[25vw] h-[25vw] bg-white rounded-full"></div>}
             <div className="text-[32px] mt-4 leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
@@ -246,7 +257,9 @@ const OurTeam = () => {
             </div>
           </div>
           <div className="justify-between ml-[3vw] w-[35%] flex flex-col mt-5 space-y-5 items-center">
-            <div className="w-[27vw] h-[27vw] bg-white rounded-full"></div>
+           {HimanshuSir?
+           <img draggable={false} onContextMenu={(e) => e.preventDefault()} className="w-[27vw] h-[27vw] rounded-full" src={HimanshuSir}/>:
+            <div className="w-[27vw] h-[27vw] bg-white rounded-full"></div>}
             <div className="text-[32px] mt-4 leading-snug roboto-regular">
               <div className="font-normal">Himanshu Verma</div>
               <div className="font-medium capitalize">
@@ -267,6 +280,7 @@ const OurTeam = () => {
                 <div className="w-[32vw] aspect-[3/4] bg-white rounded-[5px]" />
               ) : (
                 <img
+                draggable={false} onContextMenu={(e) => e.preventDefault()}
                   loading="lazy"
                   className="w-[32vw] aspect-[3/4] rounded-[5px] object-cover"
                   src={team.pic}
@@ -291,6 +305,7 @@ const OurTeam = () => {
                 <div className="w-[22vw] aspect-[3/4] bg-white rounded-[5px]" />
               ) : (
                 <img
+                draggable={false} onContextMenu={(e) => e.preventDefault()}
                   loading="lazy"
                   className="w-[22vw] aspect-[3/4] rounded-[5px] object-cover"
                   src={team.pic}
@@ -315,6 +330,7 @@ const OurTeam = () => {
                 <div className="w-[22vw] aspect-[3/4] bg-white rounded-[5px]" />
               ) : (
                 <img
+                 draggable={false} onContextMenu={(e) => e.preventDefault()}
                   loading="lazy"
                   className="w-[22vw] aspect-[3/4] rounded-[5px] object-cover"
                   src={team.pic}
@@ -339,6 +355,7 @@ const OurTeam = () => {
                 <div className="w-[22vw] aspect-[3/4] bg-white rounded-[5px]" />
               ) : (
                 <img
+                draggable={false} onContextMenu={(e) => e.preventDefault()}
                   loading="lazy"
                   className="w-[22vw] aspect-[3/4] rounded-[5px] object-cover"
                   src={team.pic}
@@ -363,6 +380,7 @@ const OurTeam = () => {
                 <div className="w-[216px] aspect-[3/4] bg-white rounded-[5px]" />
               ) : (
                 <img
+                draggable={false} onContextMenu={(e) => e.preventDefault()}
                   loading="lazy"
                   className="w-[216px] aspect-[3/4] rounded-[5px] object-cover"
                   src={team.pic}
