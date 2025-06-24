@@ -1,7 +1,7 @@
 import NavigationComponent from './NavigationComponent';
 import Footer from './Footer';
 import AboutBack from "../assets/AboutBack.gif";
-import AboutBack2 from "../assets/AboutBack2.gif";
+// import AboutBack2 from "../assets/AboutBack2.gif";
 import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -70,18 +70,40 @@ const AboutUs = () => {
 
   {/* About Us Section */}
  {isXXS || isXS || isSM ?
-  <div  style={{ backgroundImage: `url(${AboutBack})`}} className='flex  pointer-events-none bg-center bg-cover space-y-5 items-center justify-center mt-12 my-7'>
-    <div className="flex flex-col md:flex-row  pt-10 px-4 py-10 md:px-8 lg:px-[97px] items-center md:items-start justify-between">
+  <div className="relative mt-12 my-7 flex items-center justify-center space-y-5">
+  {/* Background layer with opacity */}
+  <div
+    className="absolute inset-0 bg-center bg-cover opacity-50 pointer-events-none z-0"
+    style={{ backgroundImage: `url(${AboutBack})` }}
+  ></div>
+
+  {/* Foreground content */}
+  <div className="flex flex-col md:flex-row pt-10 px-4 py-10 md:px-8 lg:px-[97px] items-center md:items-start justify-between relative z-10">
     <section className="flex flex-col items-center md:items-start text-center md:text-start">
       <div className="text-[20px] font-bold mb-3">{content.aboutUs.title}</div>
       <div className="text-[12px] leading-tight max-w-[626px] mb-6">{content.aboutUs.description}</div>
-      <div onClick={()=>navigate("/contactus")} className={`bg-gradient-to-r text-black roboto-regular rounded-xl cursor-pointer ${isXXS || isXS ? 'px-4 py-0.5 text-[10px]' : isSM && 'px-6 py-1 text-[14px]'} shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}>{content.aboutUs.buttonText}</div>
+      <div
+        onClick={() => navigate("/contactus")}
+        className={`bg-gradient-to-r text-black roboto-regular rounded-xl cursor-pointer ${
+          isXXS || isXS
+            ? 'px-4 py-0.5 text-[10px]'
+            : isSM && 'px-6 py-1 text-[14px]'
+        } shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold`}
+      >
+        {content.aboutUs.buttonText}
+      </div>
     </section>
   </div>
-  </div>:
+</div>
+:
  isMD?
- <div  style={{ backgroundImage: `url(${AboutBack})`}} className='flex pointer-events-none bg-center bg-cover space-y-5 items-center justify-center mt-12 my-8'>
-    <div className="flex flex-col md:flex-row pt-10 py-10 px-10 items-center md:items-start justify-between">
+ <div className="relative mt-12 my-7 flex items-center justify-center space-y-5">
+  {/* Background layer with opacity */}
+  <div
+    className="absolute inset-0 bg-center bg-cover opacity-50 pointer-events-none z-0"
+    style={{ backgroundImage: `url(${AboutBack})` }}
+  ></div>
+      <div className="flex flex-col md:flex-row pt-10 py-10 px-10 items-center md:items-start justify-between z-10">
     <section className="flex flex-col items-start text-start">
       <div className="text-[30px] font-bold mb-3">{content.aboutUs.title}</div>
       <div className="text-[15px] leading-tight max-w-[626px] mb-6">{content.aboutUs.description}</div>
@@ -90,10 +112,16 @@ const AboutUs = () => {
     </div>
     </section>
   </div>
-  </div>:
+  </div>
+  
+  :
  isLG || isXL?
- <div  style={{ backgroundImage: `url(${AboutBack})`}} className='flex pointer-events-none bg-center bg-cover space-y-7 items-center justify-center mt-15 my-15'>
-    <div className="flex flex-col md:flex-row pt-10 py-10 px-10 items-center justify-between">
+ <div className="relative mt-12 my-7 flex items-center justify-center space-y-5">
+  {/* Background layer with opacity */}
+  <div
+    className="absolute inset-0 bg-center bg-cover opacity-50 pointer-events-none z-0"
+    style={{ backgroundImage: `url(${AboutBack})` }}
+  ></div>    <div className="flex flex-col md:flex-row pt-10 py-10 px-10 items-center justify-between z-10">
     <section className="flex flex-col items-center text-start">
       <div className="text-[40px] font-bold mb-7">{content.aboutUs.title}</div>
       <div className="text-[20px] leading-tight mb-10">{content.aboutUs.description}</div>
@@ -103,12 +131,25 @@ const AboutUs = () => {
     </section>
   </div>
   </div>:
+  is2XL?
 
 <div className="flex mt-20 w-full py-10 px-25 items-center  justify-between">
     <section className="flex w-[50%] flex-col justify-start items-start  text-start ">
       <div className="text-[64px] font-bold mb-6">{content.aboutUs.title}</div>
-      <div className="text-[20px] leading-tight max-w-[626px] mb-8">{content.aboutUs.description}</div>
-      <div onClick={()=>navigate("/contactus")} className="bg-gradient-to-r text-black roboto-regular px-14 py-2 rounded-xl cursor-pointer text-lg sm:text-[20px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold">{content.aboutUs.buttonText}</div>
+      <div className="text-[22px] leading-normal max-w-[626px] mb-8">{content.aboutUs.description}</div>
+      <div onClick={()=>navigate("/contactus")} className="bg-gradient-to-r text-black roboto-regular px-12 py-2 rounded-xl cursor-pointer text-lg sm:text-[20px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold">{content.aboutUs.buttonText}</div>
+    </section>
+    {/* opacity change */}
+    <div className='mt-5 opacity-50 pointer-events-none w-[42%] '>
+      <img className="w-full h-full" src={AboutBack} alt={content.aboutUs.imageAlt} />
+    </div>
+  </div>
+  :
+  <div className="flex mt-20 w-full py-10 px-25 items-center  justify-between">
+    <section className="flex w-[50%] flex-col justify-start items-start  text-start ">
+      <div className="text-[64px] font-bold mb-6">{content.aboutUs.title}</div>
+      <div className="text-[24px] leading-normal max-w-[850px] mb-8">{content.aboutUs.description}</div>
+      <div onClick={()=>navigate("/contactus")} className="bg-gradient-to-r text-black roboto-regular px-12 py-2 rounded-xl cursor-pointer text-lg sm:text-[20px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold">{content.aboutUs.buttonText}</div>
     </section>
     {/* opacity change */}
     <div className='mt-5 opacity-50 pointer-events-none w-[42%] '>
@@ -165,9 +206,9 @@ const AboutUs = () => {
   </div>:
    <div className="flex flex-col md:flex-row py-12 px-[6vw] items-center md:items-start justify-between">
     <div className='mt-15 pointer-events-none md:mb-0'>
-      <img src={AboutBack2} className="h-[350px] w-[250px]
+      {/* <img src={AboutBack2} className="h-[350px] w-[250px]
              max-[1400px]:h-[300px] max-[1400px]:w-[220px]
-             max-[1024px]:h-[250px] max-[1024px]:w-[180px]" alt={content.achievements.imageAlt} />
+             max-[1024px]:h-[250px] max-[1024px]:w-[180px]" alt={content.achievements.imageAlt} /> */}
     </div>
     <section className="px-4 flex flex-col items-center md:items-end md:px-12 text-center md:text-end">
       <div className="text-4xl md:text-[64px] font-bold mb-15">{content.achievements.title}</div>
@@ -265,26 +306,46 @@ const AboutUs = () => {
 </div>
 </div>
   </div>:
+  is2XL?
+  <div className='py-15 flex flex-col justify-center items-start px-15'>
+      <div className="text-[40px] font-bold mb-5">{content.futureAims.title}</div>
+     
+      <div className="text-[25px] w-[90%] text-start leading-normal tracking-[1%] mb-15">{content.futureAims.description}</div>
+ <div className='grid grid-cols-2 justify-between w-[90%] gap-8'>
+<div className='text-start'>
+          <div className="text-[30px] font-semibold mb-4">{content.futureAims.commitment.title}</div>
+          <div className='w-full flex'>
+          <div className="text-[22px] text-start leading-normal tracking-[1%] mb-4">{content.futureAims.commitment.description}</div>
+</div>
+</div>
+<div className='text-start'>
+          <div className="text-[30px] font-semibold mb-4">{content.futureAims.belief.title}</div>
+          <div className='w-full flex'>
+          <div className="text-[22px] text-start leading-normal tracking-[1%] mb-4">{content.futureAims.belief.description}</div>
+</div>
+</div>
+</div>
+  </div>:
   
   <div className="flex flex-col md:flex-row py-20 px-[6vw] items-center md:items-start justify-between">
     <section className="flex flex-col items-center md:items-start text-center md:text-start">
       <div className="text-4xl md:text-[64px] font-bold mb-10">{content.futureAims.title}</div>
-      <div className="text-lg md:text-[20px] leading-tight tracking-[1%] max-w-[696px] mb-8">{content.futureAims.description}</div>
+      <div className="text-lg md:text-[24px] leading-normal tracking-[1%] max-w-[850px] mb-8">{content.futureAims.description}</div>
       <div className="flex flex-col md:flex-row mt-15 justify-start gap-15">
         <div className="w-[380px]">
           <div className="text-[32px] font-semibold mb-4">{content.futureAims.commitment.title}</div>
-          <div className="text-[20px] leading-snug">{content.futureAims.commitment.description}</div>
+          <div className="text-[24px] leading-normal">{content.futureAims.commitment.description}</div>
         </div>
         <div className="w-[382px]">
           <div className="text-[32px] font-semibold mb-4">{content.futureAims.belief.title}</div>
-          <div className="text-[20px] leading-snug">{content.futureAims.belief.description}</div>
+          <div className="text-[24px] leading-normal">{content.futureAims.belief.description}</div>
         </div>
       </div>
     </section>
     <div className='mt-8 mr-13 pointer-events-none'>
-      <img src={AboutBack2} className="h-[350px] w-[250px]
+      {/* <img src={AboutBack2} className="h-[350px] w-[250px]
              max-[1400px]:h-[300px] max-[1400px]:w-[220px]
-             max-[1024px]:h-[250px] max-[1024px]:w-[180px]" alt={content.futureAims.imageAlt} />
+             max-[1024px]:h-[250px] max-[1024px]:w-[180px]" alt={content.futureAims.imageAlt} /> */}
     </div>
   </div>}
 

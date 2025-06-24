@@ -1,71 +1,70 @@
-
 const Ex = () => {
   return (
     <>
       <style>
         {`
-          .dots-container {
+          .scene {
+            width: 300px;
+            height: 475px;
+            perspective: 800px;
+            overflow: hidden;
             display: flex;
-            flex-direction: column;
-            animation: waveMove 4s linear infinite;
+            align-items: center;
+            justify-content: center;
+            background: black;
           }
 
-          .dot-line {
-            display: flex;
-            justify-content: center;
-            animation: waveShape 4s ease-in-out infinite alternate;
+          .grid {
+            position: relative;
+            width: 200px;
+            height: 400px;
+            transform-style: preserve-3d;
+            animation: rotateGrid 6s linear infinite;
           }
 
           .dot {
-            width: 2px;
-            height: 2px;
-            margin: 1px;
+            position: absolute;
+            width: 3px;
+            height: 3px;
             border-radius: 50%;
-            background-color: #3b82f6; /* Blue */
-            opacity: 0.5;
-            animation: pulse 2s infinite ease-in-out;
+            background: #3b82f6; /* blue */
+            opacity: 0.8;
           }
 
-          @keyframes waveMove {
+          @keyframes rotateGrid {
             0% {
-              transform: translateY(0%);
+              transform: rotateY(0deg);
             }
             100% {
-              transform: translateY(-50%);
-            }
-          }
-
-          @keyframes waveShape {
-            0%, 100% {
-              transform: scaleX(1);
-            }
-            50% {
-              transform: scaleX(0.3);
-            }
-          }
-
-          @keyframes pulse {
-            0%, 100% {
-              opacity: 0.4;
-              transform: scale(0.9);
-            }
-            50% {
-              opacity: 1;
-              transform: scale(1.2);
+              transform: rotateY(360deg);
             }
           }
         `}
       </style>
 
-      <div className="relative w-[300px] h-[475px] bg-transparent overflow-hidden flex items-center justify-center">
-        <div className="dots-container">
-          {[...Array(50)].map((_, i) => (
-            <div key={i} className="dot-line">
-              {[...Array(50)].map((_, j) => (
-                <div key={j} className="dot" />
-              ))}
-            </div>
-          ))}
+      <div className="scene">
+        <div className="grid">
+          {
+            [...Array(40)].map((_, i) => {
+              const y = (i - 20) * 10;
+              return [...Array(40)].map((_, j) => {
+                const angle = (j / 40) * 2 * Math.PI;
+                const radius = 80 * Math.cos((i / 40) * Math.PI);
+                const x = Math.cos(angle) * radius;
+                const z = Math.sin(angle) * radius;
+
+                return (
+                  <div
+                    key={`${i}-${j}`}
+                    className="dot"
+                    style={{
+                      transform: `translate3d(${x}px, ${y}px, ${z}px)`,
+                    }}
+                  />
+                );
+              });
+            })
+          }
         </div>
       </div>
     </>

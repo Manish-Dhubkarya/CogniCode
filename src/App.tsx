@@ -90,8 +90,9 @@ function MainContent() {
 };
 
   return (
-    <div className="min-h-screen overflow-hidden select-none relative w-screen overflow-x-hidden bg-custom-gradient">
-      {(isLG || isXL || is2XL || is3XL) && location.pathname !== '/' && location.pathname!=="/thesiswriting" && location.pathname!=="/dissertationswriting" && location.pathname!=="/paperwriting" && (
+<div className="min-h-screen relative w-screen overflow-x-hidden select-none">
+  <div className="fixed inset-0 z-[-1] bg-custom-gradient"></div>      
+  {(isLG || isXL || is2XL || is3XL) && location.pathname !== '/' && location.pathname!=="/thesiswriting" && location.pathname!=="/dissertationswriting" && location.pathname!=="/paperwriting" && (
         <div
           className={`
             z-5 absolute overflow-x-hidden saira-stencil-one-regular text-[#9fafc0] right-0 uppercase

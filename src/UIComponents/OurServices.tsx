@@ -267,8 +267,11 @@ const OurServices: React.FC = () => {
                 : isLG
                 ? "w-[180px] h-[320px]"
                 : isXL
-                ? "w-[200px] h-[350px]"
-                : "w-[223px] h-[435px]"
+                ? "w-[200px] h-[350px]":
+                is2XL?
+                "w-[18vw] h-[450px]"
+                
+                : "w-[18vw] h-[590px]"
             }`}
           >
             <div className="w-full cursor-pointer flex flex-col items-center justify-center">
@@ -292,8 +295,9 @@ const OurServices: React.FC = () => {
                     : isLG
                     ? "h-[250px]"
                     : isXL
-                    ? "h-[280px]"
-                    : "h-[350px]"
+                    ? "h-[280px]":
+                    is2XL?"h-[350px]"
+                    : "h-[480px]"
                 } flex items-center justify-center`}
                 style={{
                   backgroundImage: `url(${item.back})`,

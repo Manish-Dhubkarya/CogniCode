@@ -53,8 +53,8 @@ useEffect(() => {
   const isMD = width > 500 && width <= 700;
   const isLG = width > 700 && width <= 900;
   const isXL = width > 900 && width <= 1200;
-  // const is2XL = width > 1200 && width <= 1600;
-  // const is3XL = width > 1600;
+  const is2XL = width > 1200 && width <= 1600;
+  const is3XL = width > 1600;
 
   interface TypesCardData {
     title: string;
@@ -165,7 +165,7 @@ const scrollRef = useRef<HTMLDivElement>(null);
       >
         <div
         // point
-          className={`${isXXS || isXS || isSM ? 'text-center flex flex-row items-center justify-center gap-1' : 'leading-0 flex flex-col items-center'} ${isXXS || isXS || isSM?"w-full":isMD?"w-[48%]":isLG?"w-[45vw]":isXL?"w-[45%]":"w-[50%]"} ${isXXS || isXS || isSM ? 'mt-2' : 'mt-0'}`}
+          className={` ${isXXS || isXS || isSM ? 'text-center flex flex-row items-center justify-center gap-1' : 'leading-0 flex flex-col mt-7 items-center'} ${isXXS || isXS || isSM?"w-full":isMD?"w-[48%]":isLG?"w-[45vw]":isXL?"w-[45%]":"w-[50%]"} ${isXXS || isXS || isSM ? 'mt-2' : 'mt-0'}`}
         >
           {isXXS || isXS || isSM ? (
             <div
@@ -214,10 +214,10 @@ const scrollRef = useRef<HTMLDivElement>(null);
           )}
         </div>
         <div
-          className={` ${isXXS || isXS || isSM ? 'w-fit mt-2 gap-y-4' : isMD ? "gap-y-6 w-[50%]" : isLG ? "gap-y-10 w-[50%]" : isXL?"gap-y-15 w-[50%]": 'w-[50%] mt-8.5 gap-y-16.5'} flex justify-center text-center font-medium flex-col items-center`}
+          className={` ${isXXS || isXS || isSM ? 'w-fit mt-2 gap-y-4' : isMD ? "gap-y-6 mt-4 w-[50%]" : isLG ? "gap-y-9 mt-10 w-[50%]" : isXL?"gap-y-10 mt-12 w-[50%]": 'w-[50%] mt-15.5 gap-y-16.5'} flex justify-center text-center font-medium flex-col items-center`}
         >
           <div
-            className={`${isXXS || isXS ? 'w-[95%] text-[10px]' : isSM ? 'w-[90%] text-[12px]' : isMD ? 'w-[90%] text-[13px]' : isLG ? 'w-[90%] text-[16px]' : isXL ? 'w-[75%] text-[16px]' : 'w-[510px] text-[18px]'} inter-custom leading-tight`}
+            className={`${isXXS || isXS ? 'w-[95%] text-[10px]' : isSM ? 'w-[90%] text-[12px]' : isMD ? 'w-[90%] text-[13px]' : isLG ? 'w-[90%] text-[16px]' : isXL ? 'w-[80%] text-[16px]' : 'w-[510px] text-[18px]'} inter-custom leading-tight`}
           >
             We are present in the industry since 2021 and have delivered our clients with top notch quality work and services. Connect with us for further discussions
           </div>
@@ -290,7 +290,7 @@ const scrollRef = useRef<HTMLDivElement>(null);
         position: "relative",
         cursor:"pointer"
       }}
-      className={`flex-col flex ${isXXS || isXS ? 'w-[140px] h-[210px]' : isSM ? 'w-[160px] h-[240px]' : isMD ? 'w-[180px] h-[270px]' : isLG ? 'w-[220px] h-[330px]' : 'w-[264px] h-[399px]'} items-start p-3 justify-start rounded-[10px] flex-shrink-0 transition-all duration-300`}
+      className={`flex-col flex ${isXXS || isXS ? 'w-[140px] h-[210px]' : isSM ? 'w-[160px] h-[240px]' : isMD ? 'w-[180px] h-[270px]' : isLG ? 'w-[220px] h-[330px]' : isXL?"w-[240px] h-[360px]": is2XL? 'w-[264px] h-[399px]':"w-[320px] h-[470px]"} items-start p-3 justify-start rounded-[10px] flex-shrink-0 transition-all duration-300`}
     >
       {/* Title */}
       <div
@@ -369,10 +369,10 @@ const scrollRef = useRef<HTMLDivElement>(null);
             backgroundPosition: "center, center",
             backgroundRepeat: "no-repeat, no-repeat",
           }}
-          className={`roboto-regular flex-col w-full flex sm:gap-y-0.5 md:gap-y-3 lg:gap-y-5 items-center justify-center ${isXXS || isXS ? 'h-[28vh] min-h-[160px] max-h-[220px]' : isSM ? 'h-[30vh] min-h-[180px] max-h-[260px]' : isMD ? 'h-[35vh] min-h-[220px] max-h-[320px]' : isLG ? 'h-[45vh] min-h-[280px] max-h-[380px]' : 'h-[60vh] min-h-[360px] max-h-[456px]'} pb-4 bg-cover bg-center`}
+          className={`roboto-regular flex-col w-full flex items-center justify-center ${isXXS || isXS ? 'h-[28vh] min-h-[160px] max-h-[220px]' : isSM ? 'h-[30vh] min-h-[180px] max-h-[260px]' : isMD ? 'h-[35vh] min-h-[220px] max-h-[320px] gap-y-2' : isLG ? 'h-[45vh] min-h-[280px] max-h-[380px] gap-y-4' : isXL ? 'h-[50vh] min-h-[430px] max-h-[430px] gap-y-6': is2XL?'h-[55vh] min-h-[530px] gap-y-8 max-h-[530px]': 'h-[60vh] gap-y-10 min-h-[570px] max-h-[570px]'} pb-4 bg-cover bg-center`}
         >
           <div
-            className={`text-white mb-3 text-center px-4 ${isXXS || isXS ? 'text-[12px]' : isSM ? 'text-[14px]' : isMD ? 'text-[16px]' : isLG ? 'text-[22px]' : isXL ? "text-[30px]" : 'text-xl sm:text-2xl md:text-[36px]'} font-semibold leading-tight dm-sans-regular`}
+            className={`text-white mb-3 text-center px-4 ${isXXS || isXS ? 'text-[12px]' : isSM ? 'text-[14px] mt-2' : isMD ? 'text-[16px]' : isLG ? 'text-[22px]' : isXL ? "text-[30px]" : 'text-xl sm:text-2xl md:text-[36px]'} font-semibold leading-tight dm-sans-regular`}
           >
             Careers
           </div>
