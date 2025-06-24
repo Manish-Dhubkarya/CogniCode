@@ -110,7 +110,8 @@ const AboutUs = () => {
       <div className="text-[20px] leading-tight max-w-[626px] mb-8">{content.aboutUs.description}</div>
       <div onClick={()=>navigate("/contactus")} className="bg-gradient-to-r text-black roboto-regular px-14 py-2 rounded-xl cursor-pointer text-lg sm:text-[20px] shadow-[0px_4px_6px_rgba(138,255,132,0.6),0px_4px_6px_rgba(44,107,193,0.6)] from-[#8AFF84] to-[#2C6BC1] font-bold">{content.aboutUs.buttonText}</div>
     </section>
-    <div className='mt-5 pointer-events-none w-[42%] '>
+    {/* opacity change */}
+    <div className='mt-5 opacity-50 pointer-events-none w-[42%] '>
       <img className="w-full h-full" src={AboutBack} alt={content.aboutUs.imageAlt} />
     </div>
   </div>

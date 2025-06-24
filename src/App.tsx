@@ -9,6 +9,7 @@ import AboutUs from './UIComponents/AboutUs';
 import OurServices from './UIComponents/OurServices';
 import Home from './UIComponents/Home';
 import { useEffect, useState } from 'react';
+import Ex from './UIComponents/Ex';
 // Interface for route-specific top values
 interface TopValues {
   isLG: string;
@@ -137,6 +138,7 @@ function MainContent() {
         <Route path="/conferences" element={<Conferences />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/services" element={<OurServices />} />
+        <Route path="/ex" element={<Ex />} />
       </Routes>
     </div>
   );

@@ -84,7 +84,7 @@ function Footer() {
                 </a>
               </div>
             </div>
-            <img src={FooterAnimation}/>
+            <img  src={FooterAnimation}/>
           </div>
         )}
 
@@ -212,7 +212,7 @@ function Footer() {
               </div>
             </div>
           </div>
-             <img className="" src={FooterAnimation}/>
+             <img className="opacity-60" src={FooterAnimation}/>
           </div>
         )}
 
