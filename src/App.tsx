@@ -82,8 +82,8 @@ function MainContent() {
   '/dissertationswriting': { isLG: 'top-[190px]', isXL: 'top-[230px]', is2XL: 'top-[250px]', is3XL: 'top-[280px]' },
   '/paperwriting': { isLG: 'top-[170px]', isXL: 'top-[210px]', is2XL: 'top-[230px]', is3XL: 'top-[260px]' },
   '/ourteam': { isLG: 'top-[750px]', isXL: 'top-[1070px]', is2XL: 'top-[1070px]', is3XL: 'top-[1070px]' },
-  '/publications': { isLG: 'top-[600px]', isXL: 'top-[720px]', is2XL: 'top-[740px]', is3XL: 'top-[730px]' },
-  '/conferences': { isLG: 'top-[950px]', isXL: 'top-[800px]', is2XL: 'top-[880px]', is3XL: 'top-[880px]' },
+  '/publications': { isLG: 'top-[600px]', isXL: 'top-[620px]', is2XL: 'top-[740px]', is3XL: 'top-[730px]' },
+  '/conferences': { isLG: 'top-[600px]', isXL: 'top-[750px]', is2XL: 'top-[880px]', is3XL: 'top-[780px]' },
   '/aboutus': { isLG: 'top-[950px]', isXL: 'top-[1100px]', is2XL: 'top-[1000px]', is3XL: 'top-[1100px]' },
   '/services': { isLG: 'top-[700px]', isXL: 'top-[970px]', is2XL: 'top-[1030px]', is3XL: 'top-[1030px]' },
   'default': { isLG: 'top-[180px]', isXL: 'top-[220px]', is2XL: 'top-[240px]', is3XL: 'top-[270px]' },
@@ -92,7 +92,7 @@ function MainContent() {
   return (
 <div className="min-h-screen relative w-screen overflow-x-hidden select-none">
   <div className="fixed inset-0 z-[-1] bg-custom-gradient"></div>      
-  {(isLG || isXL || is2XL || is3XL) && location.pathname !== '/' && location.pathname!=="/thesiswriting" && location.pathname!=="/dissertationswriting" && location.pathname!=="/paperwriting" && (
+  {(isLG || isXL || is2XL || is3XL) &&  location.pathname !== '/' && location.pathname!=="/thesiswriting" && location.pathname!=="/dissertationswriting" && location.pathname!=="/paperwriting" && (
         <div
           className={`
             z-5 absolute overflow-x-hidden saira-stencil-one-regular text-[#9fafc0] right-0 uppercase
@@ -104,7 +104,7 @@ function MainContent() {
                 ? 'text-[120px] tracking-[7rem]'
                 : is2XL
                 ? 'text-[170px] tracking-[5rem]'
-                : 'text-[200px] tracking-[4.5rem]'
+                : 'text-[200px] tracking-[4rem]'
             }
             translate-x-1/2 ${getTopValue()}
           `}

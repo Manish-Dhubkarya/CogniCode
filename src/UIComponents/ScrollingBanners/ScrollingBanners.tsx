@@ -166,13 +166,13 @@ const ScrollingBanners: React.FC<ScrollingBannersProps> = ({ images }) => {
           <IoIosArrowDropleftCircle
             size={40}
             onClick={prev}
-            className="cursor-pointer hover:scale-110 transition-transform duration-300 absolute left-8 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white flex items-center justify-center rounded-full z-50"
+            className="cursor-pointer hover:scale-110 transition-transform duration-300 absolute left-8 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white flex items-center justify-center rounded-full z-20"
             color="#cddefc"
           />
           <IoIosArrowDroprightCircle
             size={40}
             onClick={next}
-            className="cursor-pointer hover:scale-110 transition-transform duration-300 absolute right-8 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white flex items-center justify-center rounded-full z-50"
+            className="cursor-pointer hover:scale-110 transition-transform duration-300 absolute right-8 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white flex items-center justify-center rounded-full z-20"
             color="#cddefc"
           />
         </>

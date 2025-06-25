@@ -131,7 +131,7 @@ const Conferences: React.FC = () => {
       <NavigationComponent />
 
       <div ref={scrollRef} className="w-[87%] md:pb-2 pb-5 scrollbar-none overflow-x-auto">
-        <div className="min-w-[1000px] grid grid-cols-[auto_1fr_1fr_1fr_1fr_1fr_1fr] rounded-[10px] overflow-hidden border border-white">
+        <div className="min-w-[1000px] grid grid-cols-[auto_1fr_1fr_1fr_1fr_1fr_1fr] rounded-[10px] overflow-hidden  border-[2px] border-white">
           {/* Header */}
           <div className="contents">
             {tableHeaders.map((header) => (
@@ -155,7 +155,7 @@ const Conferences: React.FC = () => {
             </div>
           ) : error ? (
             <div className="contents">
-              <div className={`col-span-7 border border-white px-4 ${isXL || is2XL?"py-[17vh]":"py-[17vh]"} text-start text-[14px] md:text-[18px] text-red-500`}>
+              <div className={`col-span-7 border border-white px-4 ${isXXS || isXS || isSM?"py-[5vh]": isMD?"py-[9vh]": isLG?"py-[12vh]":isXL?"py-[18vh]": is2XL?"py-[20vh]":"py-[17vh]"} text-start text-[14px] md:text-[18px] text-red-500`}>
                 {error}
               </div>
             </div>
@@ -174,7 +174,7 @@ const Conferences: React.FC = () => {
                 <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[10px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular">
                   {row.publisher}
                 </div>
-                <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[10px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular max-w-[400px] whitespace-normal break-words">
+                <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[10px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular whitespace-normal break-words">
                   {row.conferenceName}
                 </div>
                 <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[10px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular">
@@ -229,11 +229,11 @@ const Conferences: React.FC = () => {
                 : isLG
                 ? "h-[360px]"
                 : isXL
-                ? "h-[500px]"
+                ? "h-[420px]"
                 : is2XL
                 ? "h-[541px]"
                 : is3XL
-                ? "h-[650px]"
+                ? "h-[560px]"
                 : ""
             }`}
           >
