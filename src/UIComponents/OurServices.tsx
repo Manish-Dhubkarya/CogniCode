@@ -429,7 +429,7 @@ const OurServices: React.FC = () => {
             </div>
           </div>
           <div
-            className={`w-full border-t-1 mt-4 border-[#8AFF84]`}
+            className={`w-[95%] border-t-1 mt-4 border-[#8AFF84]`}
           ></div>
         </div>
         {renderSection("IT Solutions", ITServices, itSolutionsRef)}

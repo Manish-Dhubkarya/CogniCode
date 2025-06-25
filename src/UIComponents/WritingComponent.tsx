@@ -77,13 +77,13 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
           className={
             mainHeading === "Paper Writing"
               ? `flex flex-col items-start w-full ${
-                  isXXS || isXS || isSM || isMD || isLG ? "mx-4" : isXL ? "mx-9" : "mx-6"
+                  isXXS || isXS || isSM || isMD || isLG ? "mx-4" : isXL ? "mx-9" : "mx-[2.5vw]"
                 }`
               : isXXS || isXS || isSM
               ? "flex flex-col items-center w-full mx-2"
               : isMD || isLG
               ? "columns-2 gap-4 mx-4"
-              : "columns-3 gap-8 mx-auto"
+              : "columns-3 gap-[2vw] mx-auto"
           }
         >
           {services.map((service, index) => (
