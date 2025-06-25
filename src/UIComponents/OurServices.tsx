@@ -274,15 +274,15 @@ const OurServices: React.FC = () => {
                 : "w-[18vw] h-[590px]"
             }`}
           >
-            <div className="w-full cursor-pointer flex flex-col items-center justify-center">
-              <div
-                onClick={() =>
+            <div  onClick={() =>
                   typeof item.navigation === "string"
                     ? navigate(item.navigation)
                     : navigate(item.navigation.pathname, {
                         state: item.navigation.state,
                       })
-                }
+                } className="w-full cursor-pointer flex flex-col items-center justify-center">
+              <div
+               
                 className={`rounded-[7px] w-full ${
                   isXXS
                     ? "h-[100px]"

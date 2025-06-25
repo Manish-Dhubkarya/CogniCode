@@ -70,7 +70,7 @@ const AboutUs = () => {
 
   {/* About Us Section */}
  {isXXS || isXS || isSM ?
-  <div className="relative mt-12 my-7 flex items-center justify-center space-y-5">
+  <div className="relative mt-7 my-7 flex items-center justify-center space-y-5">
   {/* Background layer with opacity */}
   <div
     className="absolute inset-0 bg-center bg-cover opacity-50 pointer-events-none z-0"
@@ -97,7 +97,7 @@ const AboutUs = () => {
 </div>
 :
  isMD?
- <div className="relative mt-12 my-7 flex items-center justify-center space-y-5">
+ <div className="relative mt-7 my-7 flex items-center justify-center space-y-5">
   {/* Background layer with opacity */}
   <div
     className="absolute inset-0 bg-center bg-cover opacity-50 pointer-events-none z-0"
