@@ -674,7 +674,7 @@ const Publications: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen mt-15 mb-5 font-sans libre-franklin">
       <NavigationComponent />
-      <div className="flex bg-gray-100 flex-col py-5 px-5 w-full max-w-full mx-auto">
+      <div className="flex bg-gray-100 flex-col py-5 px-5 w-full max-w-full  mx-auto">
         <div className={`relative flex ${isXXS || isXS || isSM || isMD || isLG ? "flex-col" : "flex-row"} gap-6 w-full`}>
           {(isXL || is2XL || is3XL) && (
             <div className="z-10 flex-shrink-0 flex-col h-fit pt-5 w-[300px] text-[12px]">
@@ -709,7 +709,7 @@ const Publications: React.FC = () => {
               </div>
             </>
           )}
-          <div ref={scrollRef} className={`flex-1 scrollbar-none ${isXXS || isXS || isSM || isMD || isLG ? "pt-0" : "pt-5"} overflow-x-auto`}>
+          <div ref={scrollRef} className={`flex-1 scrollbar-none ${isXXS || isXS || isSM || isMD || isLG ? "pt-0 min-h-[500px]" : "pt-5 min-h-[900px]"}  overflow-x-auto`}>
             {(isXL || is2XL || is3XL) && (
               <div className="flex justify-start ml-[10vw] mb-4">
                 <div className={`${isXL?"w-[47vw]":is2XL?"w-[45vw]":"w-[50vw]"} `}>

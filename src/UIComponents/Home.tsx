@@ -36,7 +36,6 @@ function Home() {
 const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
   
-
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);

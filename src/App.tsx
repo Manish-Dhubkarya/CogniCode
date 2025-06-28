@@ -77,16 +77,12 @@ function MainContent() {
     return routeConfig.is3XL;
   };
   const routeTopValues: RouteTopValues = {
-  '/contactus': { isLG: 'top-[750px]', isXL: 'top-[1100px]', is2XL: 'top-[1100px]', is3XL: 'top-[1100px]' },
-  '/thesiswriting': { isLG: 'top-[180px]', isXL: 'top-[220px]', is2XL: 'top-[240px]', is3XL: 'top-[270px]' },
-  '/dissertationswriting': { isLG: 'top-[190px]', isXL: 'top-[230px]', is2XL: 'top-[250px]', is3XL: 'top-[280px]' },
-  '/paperwriting': { isLG: 'top-[170px]', isXL: 'top-[210px]', is2XL: 'top-[230px]', is3XL: 'top-[260px]' },
-  '/ourteam': { isLG: 'top-[750px]', isXL: 'top-[1070px]', is2XL: 'top-[1070px]', is3XL: 'top-[1070px]' },
-  '/publications': { isLG: 'top-[600px]', isXL: 'top-[620px]', is2XL: 'top-[740px]', is3XL: 'top-[730px]' },
-  '/conferences': { isLG: 'top-[600px]', isXL: 'top-[750px]', is2XL: 'top-[880px]', is3XL: 'top-[780px]' },
-  '/aboutus': { isLG: 'top-[950px]', isXL: 'top-[1100px]', is2XL: 'top-[1000px]', is3XL: 'top-[1100px]' },
-  '/services': { isLG: 'top-[700px]', isXL: 'top-[970px]', is2XL: 'top-[1030px]', is3XL: 'top-[1030px]' },
-  'default': { isLG: 'top-[180px]', isXL: 'top-[220px]', is2XL: 'top-[240px]', is3XL: 'top-[270px]' },
+  '/contactus': { isLG: 'top-[900px] tracking-[110px]', isXL: 'top-[1050px] tracking-[110px]', is2XL: 'top-[1200px] tracking-[70px]', is3XL: 'top-[1120px] tracking-[70px]' },
+    '/ourteam': { isLG: 'top-[900px] tracking-[130px]', isXL: 'top-[1100px] tracking-[140px]', is2XL: 'top-[1150px] tracking-[120px]', is3XL: 'top-[1350px] tracking-[90px]' },
+  '/publications': { isLG: 'top-[500px] tracking-[50px]', isXL: 'top-[600px] tracking-[70px]', is2XL: 'top-[650px] tracking-[50px]', is3XL: 'top-[650px] tracking-[30px]' },
+  '/conferences': { isLG: 'top-[520px] tracking-[70px]', isXL: 'top-[600px] tracking-[60px]', is2XL: 'top-[600px] tracking-[50px]', is3XL: 'top-[700px] tracking-[40px]' },
+  '/aboutus': { isLG: 'top-[800px] tracking-[90px]', isXL: 'top-[900px] tracking-[90px]', is2XL: 'top-[1100px] tracking-[100px]', is3XL: 'top-[1100px] tracking-[130px]' },
+  '/services': { isLG: 'top-[650px] tracking-[70px]', isXL: 'top-[750px] tracking-[60px]', is2XL: 'top-[1100px] tracking-[120px]', is3XL: 'top-[1300px] tracking-[160px]' },
 };
 
   return (
@@ -95,16 +91,16 @@ function MainContent() {
   {(isLG || isXL || is2XL || is3XL) &&  location.pathname !== '/' && location.pathname!=="/thesiswriting" && location.pathname!=="/dissertationswriting" && location.pathname!=="/paperwriting" && (
         <div
           className={`
-            z-5 absolute overflow-x-hidden saira-stencil-one-regular text-[#9fafc0] right-0 uppercase
+            z-5 absolute overflow-x-hidden saira-stencil-one-regular text-[#7f7f7f] right-0 uppercase
             opacity-20 overflow-hidden rotate-270
             ${
               isLG
-                ? 'text-[80px] tracking-[5rem]'
+                ? 'text-[80px] '
                 : isXL
-                ? 'text-[120px] tracking-[7rem]'
+                ? 'text-[120px] '
                 : is2XL
-                ? 'text-[170px] tracking-[5rem]'
-                : 'text-[200px] tracking-[4rem]'
+                ? 'text-[170px] '
+                : 'text-[200px]'
             }
             translate-x-1/2 ${getTopValue()}
           `}

@@ -4,6 +4,7 @@ import TeamBanner from "../assets/TeamMemberPics/TeamBanner.gif";
 import { useEffect, useRef, useState } from "react";
 import { getData } from "../services/FetchBackendServices";
 import { useNavigate } from "react-router-dom";
+import ScrollingFooter from "./ScrollingFooter";
 
 // Interface matching backend response
 interface ConferenceRow {
@@ -155,7 +156,7 @@ const Conferences: React.FC = () => {
             </div>
           ) : error ? (
             <div className="contents">
-              <div className={`col-span-7 border border-white px-4 ${isXXS || isXS || isSM?"py-[5vh]": isMD?"py-[9vh]": isLG?"py-[12vh]":isXL?"py-[18vh]": is2XL?"py-[20vh]":"py-[17vh]"} text-start text-[14px] md:text-[18px] text-red-500`}>
+              <div className={`col-span-7 border border-white px-4 ${isXXS || isXS || isSM?"py-[10vh] text-start": isMD?"py-[25vh] text-start": isLG?"py-[30vh] text-start":isXL?"py-[35vh] text-center": is2XL?"py-[35vh] text-center":"py-[35vh] text-center"}  text-[14px] md:text-[18px] text-red-500`}>
                 {error}
               </div>
             </div>
@@ -168,7 +169,7 @@ const Conferences: React.FC = () => {
           ) : (
             conferenceList.map((row, index) => (
               <div key={row.conferenceID} className="contents">
-                <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[10px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular">
+                <div className="border flex items-center justify-center border-white px-4 py-15 text-center align-middle text-[10px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular">
                   {index + 1}.
                 </div>
                 <div className="border flex items-center justify-center border-white px-4 py-3 text-center align-middle text-[10px] md:text-[18px] font-normal tracking-[0%] leading-normal roboto-regular">
@@ -205,6 +206,7 @@ const Conferences: React.FC = () => {
           )}
         </div>
       </div>
+      
 
       {/* Banner Section */}
       <div
@@ -294,6 +296,9 @@ const Conferences: React.FC = () => {
               Join Us
             </div>
           </div>
+          <div className="mt-15">
+            <ScrollingFooter/>
+</div>
           <div className="w-full flex border-t-2 border-[#8AFF84] mt-0 flex-col items-center">
             <div className="w-[83%] md:w-[83%] flex flex-col">
               <Footer />
@@ -301,6 +306,7 @@ const Conferences: React.FC = () => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 };

@@ -1,5 +1,4 @@
 function ScrollingFooter() {
-
   const containerStyle: React.CSSProperties = {
     overflow: "hidden",
     width: "100%",
@@ -10,10 +9,12 @@ function ScrollingFooter() {
     display: "inline-flex",
     whiteSpace: "nowrap",
     fontFamily: "Saira Stencil One, sans-serif",
-    animation: "scroll 8s ease-in-out infinite", // Original duration and easing
+    animation: "scroll 5s linear infinite",
   };
 
   const ScrollingText = ["360 Vision", "100% Accuracy", "1200+ Projects"];
+  // Duplicate text enough times to ensure no gaps (increased for wide screens)
+  const repeatCount = 6; // Adjust based on content length and screen size
 
   return (
     <div style={containerStyle}>
@@ -23,45 +24,29 @@ function ScrollingFooter() {
             0% {
               transform: translateX(0);
             }
-            50% {
-              transform: translateX(50%);
-            }
             100% {
-              transform: translateX(0);
+              transform: translateX(-${100 / repeatCount}%); // Adjust translation based on repeat count
             }
           }
         `}
       </style>
       <div style={innerMarqueeStyle}>
-        {/* Duplicate text first for seamless looping */}
-        {ScrollingText.map((text, index) => (
-          <span
-            key={`text-duplicate-${index}`}
-            className={"inline-block mr-15 md:mr-25 lg:mr-35 xl:mr-35 md:text-[96px] sm:text-[75px] text-[50px] font-bold text-transparent bg-clip-text"}
-            style={{
-              backgroundImage: "linear-gradient(180deg, #8AFF84 0%, #C0F9BD 50.5%, #1B7BFF 200%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              paddingRight: "35px",
-            }}
-          >
-            {text}
-          </span>
-        ))}
-        {ScrollingText.map((text, index) => (
-          <span
-            key={`text-${index}`}
-            className={"inline-block mr-15 md:mr-25 lg:mr-35 xl:mr-35 md:text-[96px] sm:text-[75px] text-[50px] font-bold text-transparent bg-clip-text"}
-            style={{
-              backgroundImage: "linear-gradient(180deg, #8AFF84 0%, #C0F9BD 50.5%, #1B7BFF 200%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              paddingRight: "35px",
-            }}
-          >
-            {text}
-          </span>
-        ))}
+        {[...Array(repeatCount)].flatMap((_, i) =>
+          ScrollingText.map((text, index) => (
+            <span
+              key={`text-${i}-${index}`}
+             className="inline-block mr-2 sm:mr-6 md:mr-9 lg:mr-15 xl:mr-30 sm:text-[50px] md:text-[56px] lg:text-[70px] text-[30px] font-bold text-transparent bg-clip-text"
+              style={{
+                backgroundImage: "linear-gradient(180deg, #8AFF84 0%, #C0F9BD 50.5%, #1B7BFF 200%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                paddingRight: "35px",
+              }}
+            >
+              {text}
+            </span>
+          ))
+        )}
       </div>
     </div>
   );

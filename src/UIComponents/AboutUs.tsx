@@ -210,13 +210,13 @@ const AboutUs = () => {
              max-[1400px]:h-[300px] max-[1400px]:w-[220px]
              max-[1024px]:h-[250px] max-[1024px]:w-[180px]" alt={content.achievements.imageAlt} /> */}
     </div>
-    <section className="px-4 flex flex-col items-center md:items-end md:px-12 text-center md:text-end">
+    <section className="px-4 w-full flex flex-col items-center md:px-12 text-center md:text-end">
       <div className="text-4xl md:text-[64px] font-bold mb-15">{content.achievements.title}</div>
-      <div className="flex flex-col md:flex-row justify-center gap-12">
+      <div className="flex w-full justify-evenly gap-12">
         {content.achievements.items.map((item, index) => (
          <div
   key={index}
-  className="bg-gray-300 h-[350px] w-[250px] rounded-lg
+  className="bg-gray-300 h-[25vw] w-[18vw] rounded-lg
              max-[1400px]:h-[300px] max-[1400px]:w-[220px]
              max-[1024px]:h-[250px] max-[1024px]:w-[180px]"
 >

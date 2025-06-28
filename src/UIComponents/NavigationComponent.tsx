@@ -63,7 +63,7 @@ interface HeadingProps2{
 
   return (
     <>
-      <nav className="bg-custom-gradient-navigation fixed w-full z-50 top-0">
+      <nav className="bg-[#000000] fixed w-full z-50 top-0">
         <div className="w-full max-w-[100%] pr-[10vw] mx-auto flex items-center justify-between px-4">
           {/* Mobile Menu Toggle */}
           
@@ -96,7 +96,6 @@ interface HeadingProps2{
             <IoMdMenu
               className="text-white hover:text-[#0e86ff] cursor-pointer"
               size={isXL ? 22 : 25}
-              onClick={toggleMenu}
             />
           </div>
         </div>
