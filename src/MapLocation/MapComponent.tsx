@@ -92,7 +92,7 @@ const MapComponent: React.FC<LocationMapProps> = ({ googleMapsApiKey }) => {
   };
 
   return (
-    <div className="w-full  mx-auto p-4 bg-white shadow-lg rounded-lg">
+    <div className="w-full  mx-auto lg:p-4 md:p-3  p-2  bg-white shadow-lg rounded-lg">
       {!googleMapsApiKey ? (
         <div className="relative overflow-hidden rounded-lg">
           <iframe
