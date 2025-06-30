@@ -11,6 +11,7 @@ import { LuPlus } from 'react-icons/lu';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ScrollingBanners from './ScrollingBanners/ScrollingBanners';
+import MarqueeDual from './MarqueeDual';
 
 function Home() {
   const marqueeStyleBase = {
@@ -230,37 +231,7 @@ const scrollRef = useRef<HTMLDivElement>(null);
       </div>
 
       {/* What we provide */}
-      <div
-        className={`text-white p-4 ${isXXS || isXS || isSM ? "leading-4" : isMD ? "leading-6 mt-3" : isLG || isXL ? "leading-9 mt-4" : "leading-10 mt-5"}`}
-      >
-        <MarqueeStyles />
-        <div style={{  overflow: "hidden",
-        width: "100%",
-        position: "relative",}}>
-          <div className='' style={marqueeStyleLeftToRight}>
-            {repeatedText.map((text, index) => (
-              <span
-                key={`top-${index}`}
-                className={`inline-block ${isXXS || isXS ? 'mx-2 text-[10px]' : isSM ? 'mx-3 text-[12px]' : isMD ? 'mx-4 text-[14px]' : isLG ? 'mx-6 text-[16px]' : 'mx-12 text-[18px]'} font-light`}
-              >
-                {text}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div style={{ overflow: "hidden", width: "100%", position: "relative"}}>
-          <div style={marqueeStyleRightToLeft}>
-            {repeatedText.map((text, index) => (
-              <span
-                key={`bottom-${index}`}
-                className={`inline-block ${isXXS || isXS ? 'mx-2 text-[10px]' : isSM ? 'mx-3 text-[12px]' : isMD ? 'mx-4 text-[14px]' : isLG ? 'mx-6 text-[16px]' : 'mx-12 text-[18px]'} font-light`}
-              >
-                {text}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
+      <MarqueeDual/>
 
       {/* put effect here */}
 
