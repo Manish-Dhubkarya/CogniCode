@@ -4,6 +4,7 @@ import FbLogo from "../assets/FbLogo.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FooterAnimation from "../assets/FooterAnimation.gif"
+import MapComponent from "../MapLocation/MapComponent";
 function Footer() {
   const QuickLinks = ["Plagiarism Check", "Thesis Writing",   "IT solutions", "AI solutions",  "Article Writing",    "Graphic Designing"];
   const MeetUs = ["B/2, Mahesh Nagar,", "Tulsi Vihar Colony", "Gwalior, M.P 474002"];
@@ -411,12 +412,36 @@ function Footer() {
           <div className="flex flex-col items-center gap-6 py-6 ">
             <div className="flex flex-row justify-between items-start w-full gap-6">
               {/* Meet Us */}
-              <div className="flex flex-col">
+              <div className="flex items-start flex-col  w-[50%]">
                 <h3 className="font-semibold text-[24px] mb-4 text-left">Meet us:</h3>
-                {MeetUs.map((item, index) => (
-                  <p key={index} className="text-[20px] mb-1.5 text-left">{item}</p>
+                {/* {MeetUs.map((item, index) => (
+                  <p key={index} className="text-[20px] mb-1.5 leading-tight text-left">{item}</p>
                 ))}
-                <h3 className="text-[20px] mt-4 mb-2 text-left">Follow us:</h3>
+                <a
+                  href="tel:+917000515617"
+                  className="block text-[18px] mt-1.5 hover:text-[#8AFF84] transition-colors duration-200 text-left"
+                >
+                  +91-7000515617
+                </a>
+                <a
+                  href="mailto:office.cognicode@gmail.com"
+                  className="block text-[18px] hover:text-[#8AFF84] transition-colors duration-200 text-left"
+                >
+                  office.cognicode@gmail.com
+                </a> */}
+                <div className=" flex w-full justify-center items-start ">
+              <MapComponent/>
+              </div>
+              </div>
+              
+
+              {/* Have a Query */}
+              <div className="flex flex-col">
+                <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold cursor-pointer hover:scale-110 transition-transform text-[24px] text-right">Have a Query?</h3>
+               <div className="flex">
+                <div className="w-[100%] border-t-[1.5px]   border-[#8AFF84] mt-8 mb-7"></div>
+                </div>
+               <h3 className="text-[20px] mt-4 mb-2 ">Follow us:</h3>
                 <div className="flex justify-start select-none gap-3">
                   <a onContextMenu={(e) => e.preventDefault()} href={InstaLogo.startsWith("http") ? InstaLogo : `https://www.instagram.com/cognicodethesiswriting/?igsh=Y2M4anR2NWxtdXZi`}
                       target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
@@ -429,27 +454,6 @@ function Footer() {
                     <img className="w-[40px]" src={FbLogo} alt="Facebook" />
                   </a>
                 </div>
-              </div>
-
-              {/* Have a Query */}
-              <div className="flex flex-col">
-                <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold cursor-pointer hover:scale-110 transition-transform text-[24px] text-right">Have a Query?</h3>
-               <div className="flex justify-end">
-                <div className="w-[80%] border-t-[1.5px]   border-[#8AFF84] my-3"></div>
-                </div>
-                <p className="text-[20px] mb-3 text-right">Contact us:</p>
-                <a
-                  href="tel:+917000515617"
-                  className="block text-[18px] mb-1.5 hover:text-[#8AFF84] transition-colors duration-200 text-right"
-                >
-                  +91-7000515617
-                </a>
-                <a
-                  href="mailto:office.cognicode@gmail.com"
-                  className="block text-[18px] hover:text-[#8AFF84] transition-colors duration-200 text-right"
-                >
-                  office.cognicode@gmail.com
-                </a>
               </div>
             </div>
 

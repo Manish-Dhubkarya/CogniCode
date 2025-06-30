@@ -10,6 +10,7 @@ import OurServices from './UIComponents/OurServices';
 import Home from './UIComponents/Home';
 import { useEffect, useState } from 'react';
 import Ex from './UIComponents/Ex';
+import MapComponent from './MapLocation/MapComponent';
 // Interface for route-specific top values
 interface TopValues {
   isLG: string;
@@ -88,7 +89,7 @@ function MainContent() {
   return (
 <div className="min-h-screen relative w-screen overflow-x-hidden select-none">
   <div className="fixed inset-0 z-[-1] bg-custom-gradient"></div>      
-  {(isLG || isXL || is2XL || is3XL) &&  location.pathname !== '/' && location.pathname!=="/thesiswriting" && location.pathname!=="/dissertationswriting" && location.pathname!=="/paperwriting" && (
+  {(isLG || isXL || is2XL || is3XL) && location.pathname!=="/maplocation" &&  location.pathname !== '/' && location.pathname!=="/thesiswriting" && location.pathname!=="/dissertationswriting" && location.pathname!=="/paperwriting" && (
         <div
           className={`
             z-5 absolute overflow-x-hidden saira-stencil-one-regular text-[#7f7f7f] right-0 uppercase
@@ -136,6 +137,7 @@ function MainContent() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/services" element={<OurServices />} />
         <Route path="/ex" element={<Ex />} />
+        <Route path="/maplocation" element={<MapComponent />} />
       </Routes>
     </div>
   );
