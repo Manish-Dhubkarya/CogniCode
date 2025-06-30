@@ -155,17 +155,18 @@ function Footer() {
 
         {/* SM Layout */}
         {isSM && (
-          <div className="flex">
+          <>
+          <div className="flex justify-between">
           <div className="flex flex-col items-start text-left gap-5 py-4">
             {/* Quick Links */}
             <div className="flex flex-col">
-              <h3 className="font-semibold text-[16px] mb-3 text-left">Quick Links</h3>
+              <h3 className="font-semibold text-[20px] mb-3 text-left">Quick Links</h3>
               {QuickLinks.map((item, index) => (
                 <a
       onClick={() => navigate("/services")}
 
                   key={index}
-                  className="block text-[14px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
+                  className="block text-[16px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
                 >
                   {item}
                 </a>
@@ -174,18 +175,18 @@ function Footer() {
 
             {/* Have a Query */}
             <div className="flex flex-col">
-              <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold text-[16px] mb-3 text-left">Have a Query?</h3>
+              <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold text-[20px] mb-3 text-left">Have a Query?</h3>
               <div className="w-[70%] border-t-[1.5px] border-[#8AFF84] mb-4"></div>
-              <p className="text-[14px] mb-2 text-left">Contact us:</p>
+              <p className="text-[18px] mb-2 text-left">Contact us:</p>
               <a
                 href="tel:+917000515617"
-                className="block text-[14px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
+                className="block text-[16px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
               >
                 +91-7000515617
               </a>
               <a
                 href="mailto:office.cognicode@gmail.com"
-                className="block text-[14px] hover:text-[#8AFF84] transition-colors duration-200 text-left"
+                className="block text-[16px] hover:text-[#8AFF84] transition-colors duration-200 text-left"
               >
                 office.cognicode@gmail.com
               </a>
@@ -193,9 +194,9 @@ function Footer() {
 
             {/* Meet Us */}
             <div className="flex flex-col">
-              <h3 className="font-semibold text-[16px] mb-3 text-left">Meet us:</h3>
+              <h3 className="font-semibold text-[20px] mb-3 text-left">Meet us:</h3>
               {MeetUs.map((item, index) => (
-                <p key={index} className="text-[14px] mb-1 text-left">{item}</p>
+                <p key={index} className="text-[16px] mb-1 text-left">{item}</p>
               ))}
               <h3 className="text-[14px] mt-3 mb-2 text-left">Follow us:</h3>
               <div className="flex select-none justify-start">
@@ -213,93 +214,122 @@ function Footer() {
               </div>
             </div>
           </div>
+          
              <img className="opacity-60" src={FooterAnimation}/>
-          </div>
+             </div>
+             <MapComponent/>
+             </>
         )}
 
         {/* MD Layout */}
-        {isMD && (
-          <div className="flex flex-col items-center gap-6 py-6 px-4">
-            <div className="flex flex-row justify-between items-start w-full gap-6">
-              {/* Meet Us */}
-              <div className="flex flex-col">
-                <h3 className="font-semibold text-[18px] mb-3 text-left">Meet us:</h3>
-                {MeetUs.map((item, index) => (
-                  <p key={index} className="text-[16px] mb-1.5 text-left">{item}</p>
-                ))}
-                <h3 className="text-[16px] mt-4 mb-2 text-left">Follow us:</h3>
-                <div className="flex select-none justify-start gap-3">
-                  <a onContextMenu={(e) => e.preventDefault()}  href={InstaLogo.startsWith("http") ? InstaLogo : `https://www.instagram.com/cognicodethesiswriting?igsh=Y2M4anR2NWxtdXZi`}
-                      target="_blank"
-                      rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
-                    <img className="w-[40px]" src={InstaLogo} alt="Instagram" />
-                  </a>
-                  <a onContextMenu={(e) => e.preventDefault()} href={LinkedinLogo.startsWith("http") ? LinkedinLogo : `https://www.linkedin.com/company/cognicodindia/`} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
-                    <img className="w-[41px]" src={LinkedinLogo} alt="LinkedIn" />
-                  </a>
-                  <a onContextMenu={(e) => e.preventDefault()} href="#" className="hover:scale-105 transition-transform duration-200">
-                    <img className="w-[40px]" src={FbLogo} alt="Facebook" />
-                  </a>
-                </div>
-              </div>
-
-              {/* Have a Query */}
-              <div className="flex flex-col">
-                <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold  cursor-pointer hover:scale-110 transition-transform text-[18px]  text-right">Have a Query?</h3>
-               <div className="flex justify-end">
-                <div className="w-[70%] border-t-[1.5px]   border-[#8AFF84] my-3"></div>
-                </div>
-                <p className="text-[16px] mb-3 text-right">Contact us:</p>
-                <a
-                  href="tel:+917000515617"
-                  className="block text-[16px] mb-1.5 hover:text-[#8AFF84] transition-colors duration-200 text-right"
-                >
-                  +91-7000515617
-                </a>
-                <a
-                  href="mailto:office.cognicode@gmail.com"
-                  className="block text-[16px] hover:text-[#8AFF84] transition-colors duration-200 text-right"
-                >
-                  office.cognicode@gmail.com
-                </a>
-              </div>
-            </div>
-
+        { isMD && (
+          <>
+          <div className="flex justify-between">
+          <div className="flex flex-col items-start text-left gap-5 py-4">
             {/* Quick Links */}
-            <div className="flex flex-col mt-6">
-              <h3 className="font-semibold text-[18px] mb-3 text-center">Quick Links</h3>
-              <div className="flex flex-row justify-center gap-x-3 gap-y-2 flex-wrap whitespace-nowrap">
-                {QuickLinks.map((item, index) => (
-                  
-                  <a
+            <div className="flex flex-col">
+              <h3 className="font-semibold text-[20px] mb-3 text-left">Quick Links</h3>
+              {QuickLinks.map((item, index) => (
+                <a
       onClick={() => navigate("/services")}
 
-                    key={index}
-                    className="block text-[16px] mx-2 hover:text-[#8AFF84] transition-colors duration-200"
-                  >
-                    {item}
-                  </a>
-                ))}
+                  key={index}
+                  className="block text-[16px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+
+            {/* Have a Query */}
+            <div className="flex flex-col">
+              <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold text-[20px] mb-3 text-left">Have a Query?</h3>
+              <div className="w-[70%] border-t-[1.5px] border-[#8AFF84] mb-4"></div>
+              <p className="text-[18px] mb-2 text-left">Contact us:</p>
+              <a
+                href="tel:+917000515617"
+                className="block text-[16px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
+              >
+                +91-7000515617
+              </a>
+              <a
+                href="mailto:office.cognicode@gmail.com"
+                className="block text-[16px] hover:text-[#8AFF84] transition-colors duration-200 text-left"
+              >
+                office.cognicode@gmail.com
+              </a>
+            </div>
+
+            {/* Meet Us */}
+            <div className="flex flex-col">
+              <h3 className="font-semibold text-[20px] mb-3 text-left">Meet us:</h3>
+              {MeetUs.map((item, index) => (
+                <p key={index} className="text-[16px] mb-1 text-left">{item}</p>
+              ))}
+              <h3 className="text-[14px] mt-3 mb-2 text-left">Follow us:</h3>
+              <div className="flex select-none justify-start">
+                <a onContextMenu={(e) => e.preventDefault()} href={InstaLogo.startsWith("http") ? InstaLogo : `https://www.instagram.com/cognicodethesiswriting?igsh=Y2M4anR2NWxtdXZi`}
+                      target="_blank"
+                      rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
+                  <img className="w-[30px]" src={InstaLogo} alt="Instagram" />
+                </a>
+                <a onContextMenu={(e) => e.preventDefault()} href={LinkedinLogo.startsWith("http") ? LinkedinLogo : `https://www.linkedin.com/company/cognicodindia/`} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
+                  <img className="w-[30px]" src={LinkedinLogo} alt="LinkedIn" />
+                </a>
+                <a onContextMenu={(e) => e.preventDefault()} href="#" className="hover:scale-105 transition-transform duration-200">
+                  <img className="w-[30px]" src={FbLogo} alt="Facebook" />
+                </a>
               </div>
             </div>
           </div>
+          
+             <img className="opacity-60" src={FooterAnimation}/>
+             </div>
+             <MapComponent/>
+             </>
         )}
 
         {/* LG Layout */}
         {isLG && (
-          <div className="flex flex-col items-center gap-6 py-6 px-4">
-            <div className="flex flex-row justify-between items-start w-full gap-6">
+          <div className="flex flex-col items-center gap-6 py-6 px-0">
+              <div className="flex flex-row justify-between items-center w-full">
               {/* Meet Us */}
-              <div className="flex flex-col">
-                <h3 className="font-semibold text-[20px] mb-4 text-left">Meet us:</h3>
+              <div className="flex items-start w-[25%] flex-col">
+                <h3 className="font-semibold text-[18px] mb-4 text-left">Meet us:</h3>
                 {MeetUs.map((item, index) => (
-                  <p key={index} className="text-[16px] mb-1.5 text-left">{item}</p>
+                  <p key={index} className="text-[15px] mb-1.5 leading-tight text-left">{item}</p>
                 ))}
-                <h3 className="text-[16px] mt-4 mb-2 text-left">Follow us:</h3>
-                <div className="flex select-none justify-start gap-3">
-                  <a onContextMenu={(e) => e.preventDefault()} href={InstaLogo.startsWith("http") ? InstaLogo : `https://www.instagram.com/cognicodethesiswriting?igsh=Y2M4anR2NWxtdXZi`}
-                      target="_blank"
-                      rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
+                <a
+                  href="tel:+917000515617"
+                  className="block text-[15px] mt-1.5 hover:text-[#8AFF84] transition-colors duration-200 text-left"
+                >
+                  +91-7000515617
+                </a>
+                <a
+                  href="mailto:office.cognicode@gmail.com"
+                  className="block text-[15px] hover:text-[#8AFF84] transition-colors duration-200 text-left"
+                >
+                  office.cognicode@gmail.com
+                </a>
+                
+              </div>
+              
+<div className=" flex w-[60%] px-15 justify-start items-start ">
+              <MapComponent/>
+              </div>
+              {/* Have a Query */}
+              <div className="flex w-[25%] items-end flex-col">
+                <div className="w-fit">
+                <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold cursor-pointer hover:scale-110 transition-transform text-[18px] text-right">Have a Query?</h3>
+               <div className="flex justify-end">
+                <div className="border-t-[1.5px] w-full  border-[#8AFF84] mt-8 mb-7"></div>
+                </div>
+
+                
+               <h3 className="text-[18px] mt-4 mb-2">Follow us:</h3>
+                <div className="flex justify-center select-none gap-2">
+                  <a onContextMenu={(e) => e.preventDefault()} href={InstaLogo.startsWith("http") ? InstaLogo : `https://www.instagram.com/cognicodethesiswriting/?igsh=Y2M4anR2NWxtdXZi`}
+                      target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
                     <img className="w-[40px]" src={InstaLogo} alt="Instagram" />
                   </a>
                   <a onContextMenu={(e) => e.preventDefault()} href={LinkedinLogo.startsWith("http") ? LinkedinLogo : `https://www.linkedin.com/company/cognicodindia/`} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
@@ -310,26 +340,6 @@ function Footer() {
                   </a>
                 </div>
               </div>
-
-              {/* Have a Query */}
-              <div className="flex flex-col">
-                <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold cursor-pointer hover:scale-110 transition-transform text-[20px]  text-right">Have a Query?</h3>
-                <div className="flex justify-end">
-                <div className="w-[70%] border-t-[1.5px]   border-[#8AFF84] my-3"></div>
-                </div>
-                <p className="text-[16px] mb-3 text-right">Contact us:</p>
-                <a
-                  href="tel:+917000515617"
-                  className="block text-[16px] mb-1.5 hover:text-[#8AFF84] transition-colors duration-200 text-right"
-                >
-                  +91-7000515617
-                </a>
-                <a
-                  href="mailto:office.cognicode@gmail.com"
-                  className="block text-[16px] hover:text-[#8AFF84] transition-colors duration-200 text-right"
-                >
-                  office.cognicode@gmail.com
-                </a>
               </div>
             </div>
 
@@ -409,12 +419,12 @@ function Footer() {
           // </div>
 
           // New XL Flow//
-          <div className="flex flex-col items-center gap-6 py-6 ">
-            <div className="flex flex-row justify-between items-start w-full gap-6">
+          <div className="flex flex-col items-center py-6 ">
+            <div className="flex flex-row justify-between items-center w-full">
               {/* Meet Us */}
-              <div className="flex items-start flex-col  w-[50%]">
+              <div className="flex items-start w-[25%] flex-col">
                 <h3 className="font-semibold text-[24px] mb-4 text-left">Meet us:</h3>
-                {/* {MeetUs.map((item, index) => (
+                {MeetUs.map((item, index) => (
                   <p key={index} className="text-[20px] mb-1.5 leading-tight text-left">{item}</p>
                 ))}
                 <a
@@ -428,21 +438,24 @@ function Footer() {
                   className="block text-[18px] hover:text-[#8AFF84] transition-colors duration-200 text-left"
                 >
                   office.cognicode@gmail.com
-                </a> */}
-                <div className=" flex w-full justify-center items-start ">
-              <MapComponent/>
-              </div>
+                </a>
+                
               </div>
               
-
+<div className=" flex w-[60%] justify-start px-20 items-start ">
+              <MapComponent/>
+              </div>
               {/* Have a Query */}
-              <div className="flex flex-col">
+              <div className="flex w-[25%] items-end flex-col">
+                <div className="w-fit">
                 <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold cursor-pointer hover:scale-110 transition-transform text-[24px] text-right">Have a Query?</h3>
-               <div className="flex">
-                <div className="w-[100%] border-t-[1.5px]   border-[#8AFF84] mt-8 mb-7"></div>
+               <div className="flex justify-end">
+                <div className="border-t-[1.5px] w-full  border-[#8AFF84] mt-8 mb-7"></div>
                 </div>
-               <h3 className="text-[20px] mt-4 mb-2 ">Follow us:</h3>
-                <div className="flex justify-start select-none gap-3">
+
+                
+               <h3 className="text-[20px] mt-4 mb-2">Follow us:</h3>
+                <div className="flex justify-center select-none gap-3">
                   <a onContextMenu={(e) => e.preventDefault()} href={InstaLogo.startsWith("http") ? InstaLogo : `https://www.instagram.com/cognicodethesiswriting/?igsh=Y2M4anR2NWxtdXZi`}
                       target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
                     <img className="w-[40px]" src={InstaLogo} alt="Instagram" />
@@ -455,10 +468,11 @@ function Footer() {
                   </a>
                 </div>
               </div>
+              </div>
             </div>
 
             {/* Quick Links */}
-            <div className="flex flex-col mt-0">
+            <div className="flex flex-col mt-10">
               <h3 className="font-semibold text-[24px] mb-4 text-center">Quick Links</h3>
               <div className="flex flex-row justify-center gap-4 flex-wrap whitespace-nowrap">
                 {QuickLinks.map((item, index) => (

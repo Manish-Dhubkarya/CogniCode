@@ -367,7 +367,7 @@ const OurServices: React.FC = () => {
           ref={stickyDivRef}
           className={`flex flex-col items-center w-full transition-all duration-300 ease-in-out ${
             isFixed
-              ? `fixed pt-3 backdrop-blur-2xl bg-white/0 ${isXXS || isXS || isSM?"top-[30px]":isMD?"top-[25px]":isLG?"top-[26px]":isXL?"top-[0px]":is2XL?"top-[10px]": "top-[22px]"}  left-0 z-20 px-4 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32`
+              ? `fixed pt-3 backdrop-blur-2xl bg-white/0 ${isXXS || isXS || isSM?"top-[28px]":isMD?"top-[23px]":isLG?"top-[24px]":isXL?"top-[0px]":is2XL?"top-[8px]": "top-[20px]"}  left-0 z-20 px-4 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32`
               : ""
           } ${
             isXXS || isXS

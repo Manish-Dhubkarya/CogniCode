@@ -98,7 +98,7 @@ const MapComponent: React.FC<LocationMapProps> = ({ googleMapsApiKey }) => {
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3133.1220568569615!2d78.19462374388186!3d26.209732757213843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3976c79950bebf03%3A0xaf58ba499a8e966e!2sCogniCode%20IT%20Solutions%20and%20Thesis%20Writing%20Services!5e0!3m2!1sen!2sin!4v1751194656271!5m2!1sen!2sin"
             width="100%"
-            height="300"
+            height="200"
             style={{ border: 0 }}
             allowFullScreen
             loading="lazy"
