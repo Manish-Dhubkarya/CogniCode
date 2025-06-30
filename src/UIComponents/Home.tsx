@@ -14,26 +14,7 @@ import ScrollingBanners from './ScrollingBanners/ScrollingBanners';
 import MarqueeDual from './MarqueeDual';
 
 function Home() {
-  const marqueeStyleBase = {
-    whiteSpace: "nowrap",
-    display: "inline-block",
-    fontSize: "24px",
-    fontFamily: "Roboto, sans-serif",
-};
-  const MarqueeStyles = () => (
-    <style>
-        {`
-      @keyframes marqueeLeftToRight {
-        0% { transform: translateX(0%); }
-        100% { transform: translateX(-50%); }
-      }
-      @keyframes marqueeRightToLeft {
-        0% { transform: translateX(-50%); }
-        100% { transform: translateX(0%); }
-      }
-    `}
-    </style>
-);
+
 const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
   
@@ -97,22 +78,6 @@ const imageArray = Object.values(imageMap).map((module: any) => module.default a
 //     </div>
 //   );
 // };
-
-  // Left to right animation
-  const marqueeStyleLeftToRight = {
-    ...marqueeStyleBase,
-    animation: `marqueeLeftToRight ${isXXS || isXS || isSM ? '15s' : isMD || isLG ? '20s' : '30s'} linear infinite`,
-  };
-
-  // Right to left animation
-  const marqueeStyleRightToLeft = {
-    ...marqueeStyleBase,
-    animation: `marqueeRightToLeft ${isXXS || isXS || isSM ? '15s' : isMD || isLG ? '20s' : '30s'} linear infinite`,
-  };
-
-  // Text content for scrolling
-  const ScrollingText = ["IT Solutions", "Thesis Writing", "AI Services", "UI Designing", "Careers"];
-  const repeatedText = [...ScrollingText, ...ScrollingText, ...ScrollingText, ...ScrollingText, ...ScrollingText, ...ScrollingText, ...ScrollingText, ...ScrollingText];
 
   const ConnectByList = [
     "How do you help in thesis writing",
