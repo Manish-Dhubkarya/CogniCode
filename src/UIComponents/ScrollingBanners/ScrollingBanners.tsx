@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   IoIosArrowBack,
-  IoIosArrowDropleftCircle,
-  IoIosArrowDroprightCircle,
   IoIosArrowForward,
 } from "react-icons/io";
 
