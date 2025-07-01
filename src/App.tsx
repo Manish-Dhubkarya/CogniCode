@@ -10,6 +10,8 @@ import OurServices from './UIComponents/OurServices';
 import Home from './UIComponents/Home';
 import { useEffect, useState } from 'react';
 import MapComponent from './MapLocation/MapComponent';
+import { MdOutlineArrowCircleUp } from "react-icons/md";
+
 // Interface for route-specific top values
 interface TopValues {
   isLG: string;
@@ -115,6 +117,13 @@ function MainContent() {
       >
         Contact Us
       </div>
+{(isXXS || isXS || isSM || isMD) && (
+      <div
+        onClick={()=>navigate("/contactus")}
+        className={`${isXXS || isXS || isSM?"bottom-[10vh]":isMD?"bottom-[10vh]":""}  p-2  animate-bounce cursor-pointer roboto-regular2 font-normal md:text-[20px] text-[12px] fixed md:right-4 right-3  z-50 transition-transform duration-500 ease-out hover:scale-125 text-gray-200 hover:text-white  hover:text-shadow-blowout`}
+      >
+       <MdOutlineArrowCircleUp size={isXXS || isXS || isSM? 20:25}/>
+      </div>)}
       <Routes>
         <Route path="" element={<Home />} />
         <Route path="/contactus" element={<ContactUs />} />

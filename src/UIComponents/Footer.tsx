@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FooterAnimation from "../assets/FooterAnimation.gif"
 import MapComponent from "../MapLocation/MapComponent";
+import { MdOutlineArrowCircleUp } from "react-icons/md";
 function Footer() {
   const QuickLinks = ["Plagiarism Check", "Thesis Writing",   "IT solutions", "AI solutions",  "Article Writing",    "Graphic Designing"];
   const MeetUs = ["B/2, Mahesh Nagar,", "Tulsi Vihar Colony", "Gwalior, M.P 474002"];
@@ -200,17 +201,17 @@ function Footer() {
                 <p key={index} className="text-[16px] mb-1 text-left">{item}</p>
               ))}
               <h3 className="text-[14px] mt-3 mb-2 text-left">Follow us:</h3>
-              <div className="flex select-none justify-start">
+              <div className="flex select-none justify-start gap-x-3">
                 <a onContextMenu={(e) => e.preventDefault()} href={InstaLogo.startsWith("http") ? InstaLogo : `https://www.instagram.com/cognicodethesiswriting?igsh=Y2M4anR2NWxtdXZi`}
                       target="_blank"
                       rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
-                  <img className="w-[30px]" src={InstaLogo} alt="Instagram" />
+                  <img className="w-[25px]" src={InstaLogo} alt="Instagram" />
                 </a>
                 <a onContextMenu={(e) => e.preventDefault()} href={LinkedinLogo.startsWith("http") ? LinkedinLogo : `https://www.linkedin.com/company/cognicodindia/`} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
-                  <img className="w-[30px]" src={LinkedinLogo} alt="LinkedIn" />
+                  <img className="w-[25px]" src={LinkedinLogo} alt="LinkedIn" />
                 </a>
                 <a onContextMenu={(e) => e.preventDefault()} href="#" className="hover:scale-105 transition-transform duration-200">
-                  <img className="w-[30px]" src={FbLogo} alt="Facebook" />
+                  <img className="w-[25px]" src={FbLogo} alt="Facebook" />
                 </a>
               </div>
             </div>
@@ -268,17 +269,17 @@ function Footer() {
                 <p key={index} className="text-[16px] mb-1 text-left">{item}</p>
               ))}
               <h3 className="text-[14px] mt-3 mb-2 text-left">Follow us:</h3>
-              <div className="flex select-none justify-start">
+              <div className="flex select-none justify-start gap-x-3">
                 <a onContextMenu={(e) => e.preventDefault()} href={InstaLogo.startsWith("http") ? InstaLogo : `https://www.instagram.com/cognicodethesiswriting?igsh=Y2M4anR2NWxtdXZi`}
                       target="_blank"
                       rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
-                  <img className="w-[30px]" src={InstaLogo} alt="Instagram" />
+                  <img className="w-[25px]" src={InstaLogo} alt="Instagram" />
                 </a>
                 <a onContextMenu={(e) => e.preventDefault()} href={LinkedinLogo.startsWith("http") ? LinkedinLogo : `https://www.linkedin.com/company/cognicodindia/`} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
-                  <img className="w-[30px]" src={LinkedinLogo} alt="LinkedIn" />
+                  <img className="w-[25px]" src={LinkedinLogo} alt="LinkedIn" />
                 </a>
                 <a onContextMenu={(e) => e.preventDefault()} href="#" className="hover:scale-105 transition-transform duration-200">
-                  <img className="w-[30px]" src={FbLogo} alt="Facebook" />
+                  <img className="w-[25px]" src={FbLogo} alt="Facebook" />
                 </a>
               </div>
             </div>
@@ -327,19 +328,39 @@ function Footer() {
                 </div>
 
                 
-               <h3 className="text-[18px] mt-4 mb-2">Follow us:</h3>
-                <div className="flex justify-center select-none gap-2">
+               <h3 className="text-[18px] text-start mb-2">Follow us:</h3>
+                <div className="flex justify-start select-none gap-4">
                   <a onContextMenu={(e) => e.preventDefault()} href={InstaLogo.startsWith("http") ? InstaLogo : `https://www.instagram.com/cognicodethesiswriting/?igsh=Y2M4anR2NWxtdXZi`}
                       target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
-                    <img className="w-[40px]" src={InstaLogo} alt="Instagram" />
+                    <img className="w-[30px]" src={InstaLogo} alt="Instagram" />
                   </a>
                   <a onContextMenu={(e) => e.preventDefault()} href={LinkedinLogo.startsWith("http") ? LinkedinLogo : `https://www.linkedin.com/company/cognicodindia/`} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
-                    <img className="w-[41px]" src={LinkedinLogo} alt="LinkedIn" />
+                    <img className="w-[30px]" src={LinkedinLogo} alt="LinkedIn" />
                   </a>
                   <a onContextMenu={(e) => e.preventDefault()} href="#" className="hover:scale-105 transition-transform duration-200">
-                    <img className="w-[40px]" src={FbLogo} alt="Facebook" />
+                    <img className="w-[30px]" src={FbLogo} alt="Facebook" />
                   </a>
                 </div>
+                 <div
+      onClick={()=> window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className="flex cursor-pointer justify-start items-center space-x-3 mt-7 group"
+    >
+      <div
+        className="text-[15px] mb-2 text-start text-white 
+        group-hover:text-[#0e86ff] 
+        transition duration-300 ease-in-out 
+        group-hover:drop-shadow-[0_0_1px_#0e86ff]"
+      >
+        Back to top
+      </div>
+      <MdOutlineArrowCircleUp
+        size={24}
+        className="mb-1.5 text-white transition duration-300 ease-in-out 
+        group-hover:text-[#0e86ff] 
+        group-hover:drop-shadow-[0_0_6px_#0e86ff] 
+        animate-bounce"
+      />
+    </div>
               </div>
               </div>
             </div>
@@ -397,23 +418,43 @@ function Footer() {
                 <div className="w-fit">
                 <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className={`font-semibold cursor-pointer hover:scale-110 transition-transform text-[22px] text-right`}>Have a Query?</h3>
                <div className="flex justify-end">
-                <div className="border-t-[1.5px] w-full  border-[#8AFF84] mt-8 mb-7"></div>
+                <div className="border-t-[1.5px] w-full  border-[#8AFF84] mt-5 mb-4"></div>
                 </div>
 
                 
-               <h3 className="text-[18px] mt-4 mb-2">Follow us:</h3>
-                <div className="flex justify-center select-none gap-3">
+               <h3 className="text-[18px] text-start mt-4 mb-2">Follow us:</h3>
+                <div className="flex justify-start select-none gap-4">
                   <a onContextMenu={(e) => e.preventDefault()} href={InstaLogo.startsWith("http") ? InstaLogo : `https://www.instagram.com/cognicodethesiswriting/?igsh=Y2M4anR2NWxtdXZi`}
                       target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
-                    <img className="w-[40px]" src={InstaLogo} alt="Instagram" />
+                    <img className="w-[35px]" src={InstaLogo} alt="Instagram" />
                   </a>
                   <a onContextMenu={(e) => e.preventDefault()} href={LinkedinLogo.startsWith("http") ? LinkedinLogo : `https://www.linkedin.com/company/cognicodindia/`} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
-                    <img className="w-[41px]" src={LinkedinLogo} alt="LinkedIn" />
+                    <img className="w-[35px]" src={LinkedinLogo} alt="LinkedIn" />
                   </a>
                   <a onContextMenu={(e) => e.preventDefault()} href="#" className="hover:scale-105 transition-transform duration-200">
-                    <img className="w-[40px]" src={FbLogo} alt="Facebook" />
+                    <img className="w-[35px]" src={FbLogo} alt="Facebook" />
                   </a>
                 </div>
+                 <div
+      onClick={()=> window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className="flex cursor-pointer justify-start items-center space-x-3 mt-7 group"
+    >
+      <div
+        className="text-[15px] mb-2 text-start text-white 
+        group-hover:text-[#0e86ff] 
+        transition duration-300 ease-in-out 
+        group-hover:drop-shadow-[0_0_1px_#0e86ff]"
+      >
+        Back to top
+      </div>
+      <MdOutlineArrowCircleUp
+        size={24}
+        className="mb-1.5 text-white transition duration-300 ease-in-out 
+        group-hover:text-[#0e86ff] 
+        group-hover:drop-shadow-[0_0_6px_#0e86ff] 
+        animate-bounce"
+      />
+    </div>
               </div>
               </div>
             </div>
@@ -432,6 +473,7 @@ function Footer() {
                   </a>
                 ))}
               </div>
+              
             </div>
           </div>
 
@@ -492,7 +534,7 @@ function Footer() {
           //   </div>
           // </div>
 
-          // New XL Flow//
+          // New XXL Flow//
           <div className="flex flex-col items-center py-6 ">
             <div className="flex flex-row justify-between items-start w-full">
               {/* Meet Us */}
@@ -524,25 +566,46 @@ function Footer() {
                 <div className="w-fit">
                 <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className={`font-semibold cursor-pointer hover:scale-110 transition-transform text-[24px] text-right`}>Have a Query?</h3>
                <div className="flex justify-end">
-                <div className="border-t-[1.5px] w-full  border-[#8AFF84] mt-8 mb-7"></div>
+                <div className="border-t-[1.5px] w-full  border-[#8AFF84] mt-7 mb-8"></div>
                 </div>
 
                 
-               <h3 className="text-[20px] mt-4 mb-2">Follow us:</h3>
-                <div className="flex justify-center select-none gap-3">
+               <h3 className="text-[20px]  mb-2 text-start">Follow us:</h3>
+                <div className="flex justify-start select-none gap-5">
                   <a onContextMenu={(e) => e.preventDefault()} href={InstaLogo.startsWith("http") ? InstaLogo : `https://www.instagram.com/cognicodethesiswriting/?igsh=Y2M4anR2NWxtdXZi`}
-                      target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
-                    <img className="w-[40px]" src={InstaLogo} alt="Instagram" />
+                      target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200">
+                    <img className="w-[35px]" src={InstaLogo} alt="Instagram" />
                   </a>
-                  <a onContextMenu={(e) => e.preventDefault()} href={LinkedinLogo.startsWith("http") ? LinkedinLogo : `https://www.linkedin.com/company/cognicodindia/`} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200">
-                    <img className="w-[41px]" src={LinkedinLogo} alt="LinkedIn" />
+                  <a onContextMenu={(e) => e.preventDefault()} href={LinkedinLogo.startsWith("http") ? LinkedinLogo : `https://www.linkedin.com/company/cognicodindia/`} target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200">
+                    <img className="w-[35px]" src={LinkedinLogo} alt="LinkedIn" />
                   </a>
-                  <a onContextMenu={(e) => e.preventDefault()} href="#" className="hover:scale-105 transition-transform duration-200">
-                    <img className="w-[40px]" src={FbLogo} alt="Facebook" />
+                  <a onContextMenu={(e) => e.preventDefault()} href="#" className="hover:scale-110 transition-transform duration-200">
+                    <img className="w-[35px]" src={FbLogo} alt="Facebook" />
                   </a>
                 </div>
+                <div
+      onClick={()=> window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className="flex cursor-pointer justify-start items-center space-x-3 mt-7 group"
+    >
+      <div
+        className="text-[17px] mb-2 text-start text-white 
+        group-hover:text-[#0e86ff] 
+        transition duration-300 ease-in-out 
+        group-hover:drop-shadow-[0_0_1px_#0e86ff]"
+      >
+        Back to top
+      </div>
+      <MdOutlineArrowCircleUp
+        size={24}
+        className="mb-1.5 text-white transition duration-300 ease-in-out 
+        group-hover:text-[#0e86ff] 
+        group-hover:drop-shadow-[0_0_6px_#0e86ff] 
+        animate-bounce"
+      />
+    </div>
               </div>
               </div>
+              
             </div>
 
             {/* Quick Links */}

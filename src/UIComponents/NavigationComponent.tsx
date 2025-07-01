@@ -111,7 +111,8 @@ interface HeadingProps2{
           {/* Desktop Menu Toggle */}
           <div className={` ${isDesktop ? "flex" : "hidden"} `}>
             <FaHome
-              className="text-white hover:text-[#0e86ff] cursor-pointer"
+            onClick={()=>navigate("/")}
+              className={`${window.location.pathname==="/"?"text-[#0e86ff]":"text-white"} hover:text-[#0e86ff] cursor-pointer`}
               size={isXL ? 18 : 20}
             />
           </div>
