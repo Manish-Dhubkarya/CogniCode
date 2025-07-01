@@ -310,7 +310,7 @@ const AboutUs = () => {
   <div className='py-15 flex flex-col justify-center items-start px-15'>
       <div className="text-[40px] font-bold mb-5">{content.futureAims.title}</div>
      
-      <div className="text-[25px] w-[90%] text-start leading-normal tracking-[1%] mb-15">{content.futureAims.description}</div>
+      <div className="text-[25px] w-[93%] text-start leading-normal tracking-[1%] mb-15">{content.futureAims.description}</div>
  <div className='grid grid-cols-2 justify-between w-[90%] gap-8'>
 <div className='text-start'>
           <div className="text-[30px] font-semibold mb-4">{content.futureAims.commitment.title}</div>
@@ -330,13 +330,13 @@ const AboutUs = () => {
   <div className="flex flex-col md:flex-row py-20 px-[6vw] items-center md:items-start justify-between">
     <section className="flex flex-col items-center md:items-start text-center md:text-start">
       <div className="text-4xl md:text-[64px] font-bold mb-10">{content.futureAims.title}</div>
-      <div className="text-lg md:text-[24px] leading-normal tracking-[1%] max-w-[850px] mb-8">{content.futureAims.description}</div>
+      <div className="text-lg md:text-[24px] leading-normal tracking-[1%] max-w-[95%] mb-8">{content.futureAims.description}</div>
       <div className="flex flex-col md:flex-row mt-15 justify-start gap-15">
-        <div className="w-[380px]">
+        <div className="w-[45%]">
           <div className="text-[32px] font-semibold mb-4">{content.futureAims.commitment.title}</div>
           <div className="text-[24px] leading-normal">{content.futureAims.commitment.description}</div>
         </div>
-        <div className="w-[382px]">
+        <div className="w-[45%]">
           <div className="text-[32px] font-semibold mb-4">{content.futureAims.belief.title}</div>
           <div className="text-[24px] leading-normal">{content.futureAims.belief.description}</div>
         </div>

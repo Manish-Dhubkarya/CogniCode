@@ -179,7 +179,7 @@ const scrollRef = useRef<HTMLDivElement>(null);
           )}
         </div>
         <div
-          className={`${isXXS || isXS || isSM ? 'w-fit mt-2 gap-y-4' : isMD ? "gap-y-6 mt-6 w-[50%]" : isLG ? "gap-y-9 mt-6 w-[50%]" : isXL?"gap-y-10 mt-9 w-[50%]": 'w-[50%] mt-15.5 gap-y-16.5'} flex justify-center text-center font-medium flex-col items-center`}
+          className={`${isXXS || isXS || isSM ? 'w-fit mt-2 gap-y-4' : isMD ? "gap-y-6 mt-6 w-[50%]" : isLG ? "gap-y-6 mt-9 w-[50%]" : isXL?"gap-y-5 mt-14 w-[50%]": 'w-[50%] mt-21.5 gap-y-10'} flex justify-center text-center font-medium flex-col items-center`}
         >
           <div
             className={`${isXXS || isXS ? 'w-[95%] text-[10px]' : isSM ? 'w-[90%] text-[12px]' : isMD ? 'w-[90%] text-[13px] h-[70px]' : isLG ? 'w-[90%] text-[16px] h-[80px]' : isXL ? 'w-[80%] text-[16px] h-[80px]' : 'w-[510px] text-[18px]'} inter-custom leading-tight`}
