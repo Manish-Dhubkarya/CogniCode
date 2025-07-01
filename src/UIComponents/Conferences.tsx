@@ -218,6 +218,9 @@ const Conferences: React.FC = () => {
           <div
             style={{
               backgroundImage: `url(${TeamBanner})`,
+              backgroundSize: "cover, cover",
+            backgroundPosition: "center, center",
+            backgroundRepeat: "no-repeat, no-repeat",
             }}
             className={`bg-cover roboto-regular w-full flex flex-col gap-y-0 items-center justify-center ${
               isXXS

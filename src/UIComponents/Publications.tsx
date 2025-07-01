@@ -856,7 +856,11 @@ const Publications: React.FC = () => {
       </div>
       <div className="w-full flex flex-col items-center">
         <div
-          style={{ backgroundImage: `url(${TeamBanner})` }}
+          style={{ backgroundImage: `url(${TeamBanner})`,
+        backgroundSize: "cover, cover",
+            backgroundPosition: "center, center",
+            backgroundRepeat: "no-repeat, no-repeat",
+        }}
           className={`bg-cover roboto-regular w-full flex flex-col gap-y-0 items-center justify-center ${
             isXXS
               ? "h-[180px]"
