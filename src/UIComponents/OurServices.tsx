@@ -379,10 +379,10 @@ const OurServices: React.FC = () => {
               : isLG
               ? "my-10 px-0"
               : isXL
-              ? "my-17 px-0"
+              ? "my-16 px-0"
               : is2XL
-              ? "my-14 px-0"
-              : "my-12 px-0"
+              ? "my-15 px-0"
+              : "my-13  px-0"
           }`}
         >
           <div
