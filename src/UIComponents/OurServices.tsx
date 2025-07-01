@@ -438,16 +438,16 @@ const OurServices: React.FC = () => {
       <div
         className={`${
           isXXS || isXS
-            ? "mt-4"
+            ? "my-4"
             : isSM
-            ? "mt-6"
+            ? "my-6"
             : isMD
-            ? "mt-8"
+            ? "my-8"
             : isLG
-            ? "mt-10"
+            ? "my-10"
             : isXL
-            ? "mt-12"
-            : "mt-14"
+            ? "my-12"
+            : "my-14"
         }`}
       >
         <ScrollingFooter />

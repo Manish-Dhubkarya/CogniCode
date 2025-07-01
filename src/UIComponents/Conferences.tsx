@@ -296,7 +296,7 @@ const Conferences: React.FC = () => {
               Join Us
             </div>
           </div>
-          <div className="mt-15">
+          <div className="my-12">
             <ScrollingFooter/>
 </div>
           <div className="w-full flex border-t-2 border-[#8AFF84] mt-0 flex-col items-center">

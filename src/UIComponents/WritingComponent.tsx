@@ -171,18 +171,18 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
       <div
         className={`${
           isXXS || isXS
-            ? "mt-4"
+            ? "my-4"
             : isSM
-            ? "mt-6"
+            ? "my-6"
             : isMD
-            ? "mt-8"
+            ? "my-8"
             : isLG
-            ? "mt-10"
+            ? "my-10"
             : isXL
-            ? "mt-15"
+            ? "my-15"
             : is2XL
-            ? "mt-12"
-            : "mt-10"
+            ? "my-12"
+            : "my-10"
         }`}
       >
         <ScrollingFooter />

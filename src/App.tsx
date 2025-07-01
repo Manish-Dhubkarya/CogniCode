@@ -136,7 +136,6 @@ function MainContent() {
         <Route path="/conferences" element={<Conferences />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/services" element={<OurServices />} />
-        <Route path="/ex" element={<Ex />} />
         <Route path="/maplocation" element={<MapComponent />} />
       </Routes>
     </div>

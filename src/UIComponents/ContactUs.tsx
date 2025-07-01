@@ -386,7 +386,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
       </div>
 
       {/* Footer */}
-      <div className="mt-20">
+      <div className="my-15">
         <ScrollingFooter />
       </div>
       <div className="w-full flex border-t-2 border-[#8AFF84] mt-0 flex-col items-center md:items-center">

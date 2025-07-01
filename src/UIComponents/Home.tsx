@@ -130,7 +130,7 @@ const scrollRef = useRef<HTMLDivElement>(null);
       >
         <div
         // point
-          className={` ${isXXS || isXS || isSM ? 'text-center flex flex-row items-center justify-center gap-1' : 'leading-0 flex flex-col mt-7 items-center'} ${isXXS || isXS || isSM?"w-full":isMD?"w-[48%]":isLG?"w-[45vw]":isXL?"w-[45%]":"w-[50%]"} ${isXXS || isXS || isSM ? 'mt-2' : 'mt-0'}`}
+          className={`${isXXS || isXS || isSM ? 'text-center flex flex-row items-center justify-center gap-1' : 'leading-0 flex flex-col mt-7 items-center'} ${isXXS || isXS || isSM?"w-full":isMD?"w-[48%]":isLG?"w-[45vw]":isXL?"w-[45%]":"w-[50%]"} ${isXXS || isXS || isSM ? 'mt-2' : 'mt-0'}`}
         >
           {isXXS || isXS || isSM ? (
             <div
@@ -179,7 +179,7 @@ const scrollRef = useRef<HTMLDivElement>(null);
           )}
         </div>
         <div
-          className={`${isXXS || isXS || isSM ? 'w-fit mt-2 gap-y-4' : isMD ? "gap-y-6 mt-6 w-[50%]" : isLG ? "gap-y-6 mt-9 w-[50%]" : isXL?"gap-y-5 mt-14 w-[50%]": 'w-[50%] mt-21.5 gap-y-10'} flex justify-center text-center font-medium flex-col items-center`}
+          className={` ${isXXS || isXS || isSM ? 'w-fit mt-2 gap-y-4' : isMD ? "gap-y-6 mt-7 w-[50%]" : isLG ? "gap-y-6 mt-7 w-[50%]" : isXL?"gap-y-5 mt-7 w-[50%]": 'w-[50%] mt-7 gap-y-10'} flex justify-center text-center font-medium flex-col items-center`}
         >
           <div
             className={`${isXXS || isXS ? 'w-[95%] text-[10px]' : isSM ? 'w-[90%] text-[12px]' : isMD ? 'w-[90%] text-[13px] h-[70px]' : isLG ? 'w-[90%] text-[16px] h-[80px]' : isXL ? 'w-[80%] text-[16px] h-[80px]' : 'w-[510px] text-[18px]'} inter-custom leading-tight`}
@@ -288,7 +288,7 @@ const scrollRef = useRef<HTMLDivElement>(null);
       </div> */}
       <div className={`w-full ${isXXS || isXS ? "space-y-4" : isSM || isMD ? "space-y-3" : "space-y-8"}`}>
         <div
-        className={`font-bold ${isXXS || isXS ? 'text-[18px] mt-4' : isSM ? 'text-[22px] mt-6' : isMD ? 'text-[28px] mt-8' : isLG ? 'text-[34px] mt-12' : 'text-[48px] mt-15'} text-center`}
+        className={`font-bold ${isXXS || isXS ? 'text-[18px] mt-4' : isSM ? 'text-[22px] mt-4' : isMD ? 'text-[28px] mt-4' : isLG ? 'text-[34px] mt-10' : 'text-[48px] mt-10'} text-center`}
       >
         What our clients say !!!
       </div>
