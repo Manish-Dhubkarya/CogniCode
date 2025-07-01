@@ -9,7 +9,6 @@ import AboutUs from './UIComponents/AboutUs';
 import OurServices from './UIComponents/OurServices';
 import Home from './UIComponents/Home';
 import { useEffect, useState } from 'react';
-import Ex from './UIComponents/Ex';
 import MapComponent from './MapLocation/MapComponent';
 // Interface for route-specific top values
 interface TopValues {
