@@ -78,24 +78,41 @@ interface HeadingProps2{
           </div>
           {/* Desktop Menu */}
           <div className={`${isDesktop ? "flex" : "hidden"}  items-center justify-center gap-x-6 w-full ${isXL ? "gap-x-8" : is2XL ? "gap-x-10" : "gap-x-12"}`}>
-            <ul className={`flex flex-row font-medium ${isXL ? "space-x-4" : is2XL ? "space-x-15" : "space-x-18"}`}>
-              {Headings.map((item, index) => (
-                <li onClick={()=>navigate(item.path)} key={index} className="flex cursor-pointer items-center">
-                  <a
-                    className="relative flex gap-x-3 py-2 px-3 text-sm text-white after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#0e86ff] after:w-0 after:transition-all after:duration-300 hover:after:w-[100%]"
-                  >
-                    {item.heading}
-                  </a>
-                </li>
-            
-              ))}
-            </ul>
+            <ul
+  className={`flex flex-row font-medium ${
+    isXL ? "space-x-4" : is2XL ? "space-x-15" : "space-x-18"
+  }`}
+>
+  {Headings.map((item, index) => {
+    const isActive = window.location.pathname === item.path;
+
+    return (
+      <li
+        onClick={() => navigate(item.path)}
+        key={index}
+        className="flex cursor-pointer items-center"
+      >
+        <a
+          className={`relative text-red-500 flex gap-x-3 py-2 px-3 text-sm ${
+            isActive ? "text-[#0e86ff]" : "text-white"
+          } after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#0e86ff] after:transition-all after:duration-300 ${
+            isActive ? "after:w-full" : "after:w-0 hover:after:w-full"
+          }`}
+        >
+          {item.heading}
+        </a>
+      </li>
+    );
+  })}
+</ul>
+
+
           </div>
           {/* Desktop Menu Toggle */}
           <div className={` ${isDesktop ? "flex" : "hidden"} `}>
-            <IoMdMenu
+            <FaHome
               className="text-white hover:text-[#0e86ff] cursor-pointer"
-              size={isXL ? 22 : 25}
+              size={isXL ? 18 : 20}
             />
           </div>
         </div>
