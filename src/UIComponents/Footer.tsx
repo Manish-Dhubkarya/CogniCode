@@ -3,11 +3,63 @@ import LinkedinLogo from "../assets/LinkedInLogo.png";
 import FbLogo from "../assets/FbLogo.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FooterAnimation from "../assets/FooterAnimation.gif"
+// import FooterAnimation from "../assets/FooterAnimation.gif"
 import MapComponent from "../MapLocation/MapComponent";
 import { MdOutlineArrowCircleUp } from "react-icons/md";
 function Footer() {
-  const QuickLinks = ["Plagiarism Check", "Thesis Writing",   "IT solutions", "AI solutions",  "Article Writing",    "Graphic Designing"];
+  interface QuickLinkProps {
+    title: string;
+    navigation: {
+      pathname: string;
+      state?: { selectedService: string };
+    } | string;
+  }
+    
+  const QuickLinks:QuickLinkProps[] = [
+  {
+    title: "Plagiarism Check",
+    navigation: {
+      pathname: "/contactus",
+      state: { selectedService: "Plagiarism Check" },
+    },
+  },
+  {
+    title: "Thesis Writing",
+    navigation: {
+      pathname: "/thesiswriting",
+      state: { selectedService: "Thesis Writing" },
+    },
+  },
+  {
+    title: "IT Solutions",
+    navigation: {
+      pathname: "/services",
+      state: { selectedService: "IT SOLUTIONS" },
+    },
+  },
+  {
+    title: "AI Solutions",
+    navigation: {
+      pathname: "/services",
+      state: { selectedService: "AI SERVICES" },
+    },
+  },
+  {
+    title: "Article Writing",
+    navigation: {
+      pathname: "/contactus",
+      state: { selectedService: "Article Writing" },
+    },
+  },
+  {
+    title: "Graphic Designing",
+    navigation: {
+      pathname: "/contactus",
+      state: { selectedService: "Graphic Designing" },
+    },
+  },
+];
+
   const MeetUs = ["B/2, Mahesh Nagar,", "Tulsi Vihar Colony", "Gwalior, M.P 474002"];
   const navigate=useNavigate()
   const [width, setWidth] = useState(window.innerWidth);
@@ -37,12 +89,15 @@ function Footer() {
               <h3 className="font-semibold text-[14px] mb-2 text-left">Quick Links</h3>
               {QuickLinks.map((item, index) => (
                 <a
-      onClick={() => navigate("/services")}
+      onClick={() => typeof item.navigation === "string"?navigate(item.navigation)
+                    : navigate(item.navigation.pathname, {
+                        state: item.navigation.state,})}
+
 
                   key={index}
                   className="block text-[12px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
                 >
-                  {item}
+                  {item.title}
                 </a>
               ))}
             </div>
@@ -87,7 +142,7 @@ function Footer() {
                 </a>
               </div>
             </div>
-            <img  src={FooterAnimation}/>
+            {/* <img  src={FooterAnimation}/> */}
           </div>
         )}
 
@@ -100,12 +155,14 @@ function Footer() {
               <h3 className="font-semibold text-[14px] mb-2 text-left">Quick Links</h3>
               {QuickLinks.map((item, index) => (
                 <a
-      onClick={() => navigate("/services")}
+      onClick={() => typeof item.navigation === "string"?navigate(item.navigation)
+                    : navigate(item.navigation.pathname, {
+                        state: item.navigation.state,})}
 
                   key={index}
                   className="block text-[12px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
                 >
-                  {item}
+                  {item.title}
                 </a>
               ))}
             </div>
@@ -151,7 +208,7 @@ function Footer() {
               </div>
             </div>
             </div>
-             <img className="" src={FooterAnimation}/>
+             {/* <img className="" src={FooterAnimation}/> */}
           </div>
         )}
 
@@ -165,12 +222,15 @@ function Footer() {
               <h3 className="font-semibold text-[1.3rem] mb-3 text-left">Quick Links</h3>
               {QuickLinks.map((item, index) => (
                 <a
-      onClick={() => navigate("/services")}
+      onClick={() => typeof item.navigation === "string"?navigate(item.navigation)
+                    : navigate(item.navigation.pathname, {
+                        state: item.navigation.state,})}
+
 
                   key={index}
                   className="block text-[0.9rem] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
                 >
-                  {item}
+                  {item.title}
                 </a>
               ))}
             </div>
@@ -233,12 +293,15 @@ function Footer() {
               <h3 className="font-semibold text-[20px] mb-3 text-left">Quick Links</h3>
               {QuickLinks.map((item, index) => (
                 <a
-      onClick={() => navigate("/services")}
+      onClick={() => typeof item.navigation === "string"?navigate(item.navigation)
+                    : navigate(item.navigation.pathname, {
+                        state: item.navigation.state,})}
+
 
                   key={index}
                   className="block cursor-pointer text-[16px] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
                 >
-                  {item}
+                  {item.title}
                 </a>
               ))}
             </div>
@@ -285,7 +348,7 @@ function Footer() {
             </div>
           </div>
           
-             <img className="opacity-60" src={FooterAnimation}/>
+             {/* <img className="opacity-60" src={FooterAnimation}/> */}
              </div>
              <MapComponent/>
              </>
@@ -371,12 +434,15 @@ function Footer() {
               <div className="flex flex-row justify-center gap-4 flex-wrap whitespace-nowrap">
                 {QuickLinks.map((item, index) => (
                   <a
-      onClick={() => navigate("/services")}
+      onClick={() => typeof item.navigation === "string"?navigate(item.navigation)
+                    : navigate(item.navigation.pathname, {
+                        state: item.navigation.state,})}
+
 
                     key={index}
                     className="block cursor-pointer text-[16px] mx-2 hover:text-[#8AFF84] transition-colors duration-200"
                   >
-                    {item}
+                    {item.title}
                   </a>
                 ))}
               </div>
@@ -465,11 +531,14 @@ function Footer() {
               <div className="flex flex-row justify-center gap-4 flex-wrap whitespace-nowrap">
                 {QuickLinks.map((item, index) => (
                   <a
-      onClick={() => navigate("/services")}
+      onClick={() => typeof item.navigation === "string"?navigate(item.navigation)
+                    : navigate(item.navigation.pathname, {
+                        state: item.navigation.state,})}
+
                     key={index}
                     className="block cursor-pointer text-[18px] mx-2 hover:text-[#8AFF84] transition-colors duration-200"
                   >
-                    {item}
+                    {item.title}
                   </a>
                 ))}
               </div>
@@ -585,7 +654,7 @@ function Footer() {
                 </div>
                 <div
       onClick={()=> window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="flex cursor-pointer justify-start items-center space-x-3 mt-7 group"
+      className="flex cursor-pointer justify-start items-center space-x-3 mt-9 group"
     >
       <div
         className="text-[17px] mb-2 text-start text-white 
@@ -608,17 +677,21 @@ function Footer() {
               
             </div>
 
-            {/* Quick Links */}
+            {/* Quick Linksss */}
             <div className="flex flex-col mt-10">
               <h3 className="font-semibold text-[24px] mb-4 text-center">Quick Links</h3>
               <div className="flex flex-row justify-center gap-4 flex-wrap whitespace-nowrap">
                 {QuickLinks.map((item, index) => (
                   <a
-      onClick={() => navigate("/services")}
+                  // aaaa
+      onClick={() => typeof item.navigation === "string"?navigate(item.navigation)
+                    : navigate(item.navigation.pathname, {
+                        state: item.navigation.state,})}
+
                     key={index}
                     className="block cursor-pointer text-[20px] mx-2 hover:text-[#8AFF84] transition-colors duration-200"
                   >
-                    {item}
+                    {item.title}
                   </a>
                 ))}
               </div>

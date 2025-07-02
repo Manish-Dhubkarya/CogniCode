@@ -150,7 +150,8 @@ const Conferences: React.FC = () => {
           {/* Data */}
           {isLoading ? (
             <div className="contents">
-              <div className="col-span-7 border border-white px-4 py-3 text-start text-[14px] md:text-[18px]">
+              {/* loading data */}
+              <div className={`col-span-7 border border-white px-4 ${isXXS || isXS || isSM?"py-[10vh] text-start": isMD?"py-[25vh] text-start": isLG?"py-[30vh] text-start":isXL?"py-[35vh] text-center": is2XL?"py-[35vh] text-center":"py-[35vh] text-center"}  text-[14px] md:text-[18px] text-white-500`}>
                 Loading conferences...
               </div>
             </div>
