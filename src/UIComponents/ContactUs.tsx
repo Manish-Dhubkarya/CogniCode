@@ -72,8 +72,8 @@ const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Resize handler
   useEffect(() => {
-    if(!selectedService){
-    window.scrollTo(0, 0);} // Scroll to top on component mount
+    if(selectedService == "No service selected"){
+    scrollTo(0, 0)}
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -295,16 +295,16 @@ const [isSubmitting, setIsSubmitting] = useState(false);
           <div
             className={`${
               isXXS || isXS
-                ? "text-[15px]"
+                ? "text-[11px]"
                 : isSM
-                ? "text-[16px]"
+                ? "text-[15px]"
                 : isMD
-                ? "text-[18px]"
+                ? "text-[16px]"
                 : isLG
-                ? "text-[21px]"
+                ? "text-[17px]"
                 : isXL
-                ? "text-[26px]"
-                : "text-[32px]"
+                ? "text-[22px]"
+                : "text-[28px]"
             } font-normal text-left tracking-tight`}
           >
             Please provide the following information and we’ll put you in touch with the right person.
@@ -313,27 +313,26 @@ const [isSubmitting, setIsSubmitting] = useState(false);
             <div
               className={`${
                 isXXS || isXS
-                  ? "text-[15px] font-semibold"
+                  ? "text-[11px] font-semibold"
                   : isSM
-                  ? "text-[16px] font-semibold"
+                  ? "text-[15px] font-semibold"
                   : isMD
-                  ? "text-[18px] font-semibold"
+                  ? "text-[16px] font-semibold"
                   : isLG
-                  ? "text-[21px] font-semibold"
+                  ? "text-[19px] font-semibold"
                   : isXL
-                  ? "text-[26px] font-semibold"
-                  : "text-[32px] font-semibold"
+                  ? "text-[24px] font-semibold"
+                  : "text-[28px] font-semibold"
               }`}
             >
               About You
             </div>
-            <div className="w-full h-[1px] bg-[#ffffff]"></div>
           </div>
           {UserDetails.map((item, index) => (
-            <div key={index} className="flex items-start flex-col gap-y-2 w-[90%] max-w-full">
+            <div key={index} className={`flex items-start flex-col gap-y-0 ${isSM?"w-full":"w-[90%]"} max-w-full`}>
               <div
                 className={`relative flex flex-col items-start w-full ${
-                  isXXS || isXS || isSM ? "h-10" : isMD ? "h-12" : isLG ? "h-14" : "h-16"
+                  isXXS || isXS || isSM ? "h-8" : isMD ? "h-9" : isLG ? "h-10" : isXL? "h-12":"h-14"
                 }`}
               >
                 <input
@@ -352,7 +351,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
                   className={`absolute left-0 text-white transition-all duration-200 font-normal tracking-tight ${
                     inputValues[index]
                       ? "bottom-8 text-sm lg:bottom-10 lg:text-[20px]"
-                      : "bottom-2 text-base sm:text-lg md:text-xl lg:text-[32px] peer-focus:bottom-8 peer-focus:text-sm peer-focus:lg:bottom-10 peer-focus:lg:text-[20px]"
+                      : `bottom-2 text-base ${isXXS || isXS || isSM?"text-[16px]":isMD?"text-[18px]": isLG?"text-[20px]": isXL?"text-[21px]":"text-[22px]"} peer-focus:bottom-8 peer-focus:text-sm peer-focus:lg:bottom-10 peer-focus:lg:text-[20px]`
                   }`}
                 >
                   {item}

@@ -37,6 +37,7 @@ const Publications: React.FC = () => {
     const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
   
     useEffect(() => {
+      scrollTo(0, 0); 
       const el = scrollRef.current;
       if (!el) return;
   
@@ -508,14 +509,14 @@ const Publications: React.FC = () => {
           </div>
           <div className={`space-x-4 ${isXXS || isXS || isSM ? "text-[10px]" : isSM || isMD ? "text-[12px]" : isLG || isXL ? "text-[12px]" : "text-[16px]"} items-center mt-2 flex`}>
             <div
-              className={`${isXXS || isXS || isSM ? "px-2 py-1 rounded-[5px]" : "px-5 py-2 rounded-[10px]"} cursor-pointer hover:border-[1px] hover:border-[#8AFF84] border-[1px] border-purple-500 hover:text-blue-500`}
+              className={`${isXXS || isXS || isSM ? "px-2 py-1 rounded-[5px]" : "px-5 py-2 rounded-[10px]"} cursor-pointer hover:border-[1px] hover:border-[#8AFF84] border-[1px] border-[#1B7BFF] hover:text-blue-500`}
               onClick={() => applyFilters(pendingFilters)}
             >
               Apply
             </div>
             <span>/</span>
             <div
-              className={`${isXXS || isXS || isSM ? "px-2 py-1 rounded-[5px]" : "px-5 rounded-[10px] py-2"} cursor-pointer hover:border-[1px] hover:border-[#8AFF84] border-[1px] border-purple-500 hover:text-blue-500`}
+              className={`${isXXS || isXS || isSM ? "px-2 py-1 rounded-[5px]" : "px-5 rounded-[10px] py-2"} cursor-pointer hover:border-[1px] hover:border-[#8AFF84] border-[1px] border-[#1B7BFF] hover:text-blue-500`}
               onClick={clearFilters}
             >
               Clear filters

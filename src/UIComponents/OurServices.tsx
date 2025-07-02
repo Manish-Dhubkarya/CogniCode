@@ -222,7 +222,7 @@ const OurServices: React.FC = () => {
       <div
 
         ref={sectionRef}
-        className={`${
+        className={`scroll-mt-[190px] ${ 
           isXXS || isXS
             ? "text-[16px] mb-4"
             : isSM

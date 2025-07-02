@@ -14,9 +14,11 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on component mount
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+    
   }, []);
 
   // Breakpoints
@@ -34,14 +36,14 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
   };
 
   return (
-    <div className="flex flex-col roboto-regular mt-4 mb-5 items-center justify-center">
+    <div className="flex flex-col roboto-regular mt-6 mb-5 items-center justify-center">
       <NavigationComponent />
       <div
         className={`text-[#C9C9C9] font-bold roboto-regular ${
           isXXS || isXS
             ? "text-[16px] mt-8"
             : isSM
-            ? "text-[24px] mt-10"
+            ? "text-[24px] text-start w-full px-5 mt-10"
             : isMD
             ? "text-[26px] mt-12"
             : isLG
@@ -75,15 +77,12 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
       >
         <ul
           className={
-            mainHeading === "Paper Writing"
-              ? `flex flex-col items-start w-full ${
-                  isXXS || isXS || isSM || isMD || isLG ? "mx-4" : isXL ? "mx-9" : "mx-[2.5vw]"
-                }`
-              : isXXS || isXS || isSM
-              ? "flex flex-col items-center w-full mx-2"
+            
+             isXXS || isXS || isSM
+              ? "flex flex-col items-start w-full mx-2"
               : isMD || isLG
-              ? "columns-2 gap-4 mx-4"
-              : "columns-3 gap-[2vw] mx-auto"
+              ? "grid grid-cols-2 gap-x-[4vw] w-full mx-4"
+              : ` grid grid-cols-3 gapx-x-[2vw] w-full mx-[3vw]`
           }
         >
           {services.map((service, index) => (
@@ -116,58 +115,69 @@ const WritingComponent: React.FC<WritingComponentProps> = ({ services, mainHeadi
         </ul>
       </div>
       <div
-        className={`flex flex-col items-center w-full ${
-          isXXS || isXS
-            ? "mt-4"
-            : isSM
-            ? "mt-6"
-            : isMD
-            ? "mt-8"
-            : isLG
-            ? "mt-10"
-            : isXL
-            ? "mt-17"
-            : is2XL
-            ? "mt-14"
-            : "mt-12"
-        }`}
-      >
-        <div
-          className={`flex text-[#AFACAC]  font-semibold justify-between items-center flex-row ${
+          className={`flex flex-col items-center w-[90%] transition-all duration-300 ease-in-out ${
             isXXS || isXS
-              ? "w-[90%] text-[10px]"
+              ? "my-4 px-0"
               : isSM
-              ? "w-[80%] text-[14px]"
+              ? "my-6 px-0"
               : isMD
-              ? "w-[70%] text-[16px]"
+              ? "my-8 px-0"
               : isLG
-              ? "w-[60%] text-[18px]"
+              ? "my-10 px-0"
               : isXL
-              ? "w-[40%] text-[20px]"
+              ? "my-16 px-0"
               : is2XL
-              ? "w-[45%] text-[20px]"
-              : "w-[50%] text-[20px]"
+              ? "my-15 px-0"
+              : "my-13  px-0"
           }`}
         >
-          <div onClick={()=>navigate("/services", { state: { selectedService: "WRITING SERVICES" } })} className="hover:text-white cursor-pointer" style={{ fontFamily: "Roboto", fontWeight: 600 }}>
-            Writing Services
+          <div
+            className={`flex text-[#AFACAC] font-semibold justify-between items-center flex-row ${
+              isXXS || isXS
+                ? "w-[100%] text-[10px]"
+                : isSM
+                ? "w-[90%] text-[14px]"
+                : isMD
+                ? "w-[80%] text-[16px]"
+                : isLG
+                ? "w-[75%] text-[18px]"
+                : isXL
+                ? "w-[70%] text-[20px]"
+                : is2XL
+                ? "w-[45%] text-[20px]"
+                : "w-[50%] text-[20px]"
+            }`}
+          >
+            <div
+              onClick={() =>
+                navigate("/services", { state: { selectedService: "Thesis Writing" } })
+              }
+              className="hover:text-white cursor-pointer"
+              style={{ fontFamily: "Roboto", fontWeight: 600 }}
+            >
+              Writing Services
+            </div>
+            <div
+              onClick={() =>
+                navigate("/services", { state: { selectedService: "IT SOLUTIONS" } })
+              }
+              className="hover:text-white cursor-pointer"
+            >
+              IT Solutions
+            </div>
+            <div
+              onClick={() =>
+                navigate("/services", { state: { selectedService: "AI SERVICES" } })
+              }
+              className="hover:text-white cursor-pointer"
+            >
+              AI Services
+            </div>
           </div>
-          <div onClick={()=>navigate("/services", { state: { selectedService: "IT SOLUTIONS" } })} className="hover:text-white cursor-pointer">IT Solutions</div>
-          <div onClick={()=>navigate("/services", { state: { selectedService: "AI SERVICES" } })} className="hover:text-white cursor-pointer">AI Services</div>
+          <div
+            className={`w-[95%] border-t-1 mt-4 border-[#8AFF84]`}
+          ></div>
         </div>
-        <div
-          className={`${
-            isXXS || isXS || isSM
-              ? "w-full"
-              : isMD || isLG
-              ? "w-[90%]"
-              : isXL
-              ? "w-[85%]"
-              : "w-[80%]"
-          } border-t mt-4 border-[#8AFF84]"
-        `}
-        ></div>
-      </div>
       <div
         className={`${
           isXXS || isXS
