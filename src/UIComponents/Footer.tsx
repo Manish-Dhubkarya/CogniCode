@@ -217,7 +217,7 @@ function Footer() {
             </div>
           </div>
           
-             <img className="opacity-60 absolute left-40 bottom-95 mr-10" src={FooterAnimation}/>
+             {/* <img className="opacity-60 left-50 bottom-75 w-[70vw] h-[70vh] mr-10" src={FooterAnimation}/> */}
              </div>
              <MapComponent/>
              </>
@@ -628,9 +628,9 @@ function Footer() {
       </div>
 
       <div
-        className={`text-white inria-sans-bold-italic text-center ${
+        className={`text-white inria-sans-bold-italic w-full  text-center ${
           isXXS || isXS ? 'text-[12px] pt-4' :
-          isSM ? 'text-[14px] pt-5' :
+          isSM ? 'text-[12px] pt-5' :
           isMD || isLG ? 'text-[18px] pt-6' :
           'text-[24px] pt-8'
         }`}
