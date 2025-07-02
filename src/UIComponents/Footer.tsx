@@ -38,7 +38,7 @@ function Footer() {
     },
   },
   {
-    title: "AI Solutions",
+    title: "AI Services",
     navigation: {
       pathname: "/services",
       state: { selectedService: "AI SERVICES" },
@@ -219,7 +219,7 @@ function Footer() {
           <div className="flex flex-col items-start text-left gap-5 py-4">
             {/* Quick Links */}
             <div className="flex flex-col">
-              <h3 className="font-semibold text-[1.3rem] mb-3 text-left">Quick Links</h3>
+              <h3 className="font-semibold text-[1.1rem] mb-3 text-left">Quick Links</h3>
               {QuickLinks.map((item, index) => (
                 <a
       onClick={() => typeof item.navigation === "string"?navigate(item.navigation)
@@ -228,7 +228,7 @@ function Footer() {
 
 
                   key={index}
-                  className="block text-[0.9rem] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
+                  className="block text-[0.8rem] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
                 >
                   {item.title}
                 </a>
@@ -237,18 +237,18 @@ function Footer() {
 
             {/* Have a Query */}
             <div className="flex flex-col">
-              <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold text-[1.3rem] mb-3 text-left">Have a Query?</h3>
+              <h3 onClick={() => navigate("/contactus", { state: { selectedService: "General query" } })} className="font-semibold text-[1.1rem] mb-3 text-left">Have a Query?</h3>
               <div className="w-[70%] border-t-[1.5px] border-[#8AFF84] mb-4"></div>
-              <p className="text-[1rem] mb-2 text-left">Contact us:</p>
+              <p className="text-[0.9rem] mb-2 text-left">Contact us:</p>
               <a
                 href="tel:+917000515617"
-                className="block text-[0.9rem] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
+                className="block text-[0.8rem] mb-1 hover:text-[#8AFF84] transition-colors duration-200 text-left"
               >
                 +91-7000515617
               </a>
               <a
                 href="mailto:office.cognicode@gmail.com"
-                className="block text-[0.9rem] hover:text-[#8AFF84] transition-colors duration-200 text-left"
+                className="block text-[0.8rem] hover:text-[#8AFF84] transition-colors duration-200 text-left"
               >
                 office.cognicode@gmail.com
               </a>
@@ -256,11 +256,11 @@ function Footer() {
 
             {/* Meet Us */}
             <div className="flex flex-col">
-              <h3 className="font-semibold text-[1.3rem] mb-3 text-left">Meet us:</h3>
+              <h3 className="font-semibold text-[1.1rem] mb-3 text-left">Meet us:</h3>
               {MeetUs.map((item, index) => (
-                <p key={index} className="text-[0.9rem] mb-1 text-left">{item}</p>
+                <p key={index} className="text-[0.8rem] mb-1 text-left">{item}</p>
               ))}
-              <h3 className="text-[0.85rem] mt-3 mb-2 text-left">Follow us:</h3>
+              <h3 className="text-[0.8rem] mt-3 mb-2 text-left">Follow us:</h3>
               <div className="flex select-none justify-start gap-x-3">
                 <a onContextMenu={(e) => e.preventDefault()} href={InstaLogo.startsWith("http") ? InstaLogo : `https://www.instagram.com/cognicodethesiswriting?igsh=Y2M4anR2NWxtdXZi`}
                       target="_blank"
